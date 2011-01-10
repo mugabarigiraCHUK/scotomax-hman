@@ -88,7 +88,8 @@
 			       						<td>First name</td>
 			       						<td>
 			       							<input type="text" name="firstName" value="${person.firstName}" size="40" class="inputtext"/>
-			       							<input type="hidden" id="psid" name="psid" value="${person.id}"/>	
+			       							<input type="hidden" id="psid" name="psid" value="${person.id}"/>
+			       							<br/><span style="color:red;">* Required</span>
 			       						</td>
 			       						<td>Family name</td>
 			       						<td><input type="text" name="familyName" value="${person.familyName}" size="40" class="inputtext"/></td>
@@ -103,7 +104,9 @@
 			       						<td>Job Title</td>
 			       						<td><input type="text" name="jobTitle" value="${person.jobTitle}" size="35" class="inputtext"/></td>
 			       						<td>Position</td>
-			       						<td><input type="text" name="position" value="${person.position}" size="30" class="inputtext"/></td>
+			       						<td><input type="text" name="position" value="${person.position}" size="30" class="inputtext"/>
+			       							<br/><span style="color:red;">* Required</span>
+			       						</td>
 			       					</tr>
 			       					<tr>
 			       						<td>Work permit</td>
@@ -455,6 +458,7 @@
 								<td>
 									<textarea name="address" rows="5" cols="40" class="inputtext"></textarea>
 									<input type="hidden" id="psid1" name="psid" value="${person.id}"/>
+									<br/><span style="color:red;">* Required</span>
 								</td>
 							</tr>
 							<tr>
@@ -491,12 +495,14 @@
 								<td>
 									<input type="input" name="name" size="40" class="inputtext"/>
 									<input type="hidden" id="psid2" name="psid" value="${person.id}"/>
+									<br/><span style="color:red;">* Required</span>
 								</td>
 							</tr>
 							<tr>
 								<td>Degree</td>
 								<td>
 									<input type="input" name="degree" size="30" class="inputtext"/>
+									<br/><span style="color:red;">* Required</span>
 								</td>
 							</tr>
 							<tr>
@@ -509,6 +515,7 @@
 								<td>Organization</td>
 								<td>
 									<input type="input" name="organization" size="50" class="inputtext"/>
+									<br/><span style="color:red;">* Required</span>
 								</td>
 							</tr>
 							<tr>
@@ -521,6 +528,7 @@
 								<td>Course started</td>
 								<td>
 									<input type="input" id="datepicker1" name="dateStart" size="25" class="inputtext"/>
+									<br/><span style="color:red;">* Required</span>
 								</td>
 							</tr>
 							<tr>

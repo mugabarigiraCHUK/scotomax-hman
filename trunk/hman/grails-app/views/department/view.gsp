@@ -96,6 +96,7 @@
 									<td>
 										<input type="input" name="name" size="40" class="inputtext"/>
 										<input type="hidden" id="search0" name="search"/>
+										<br/><span style="color:red;">* Required</span>
 									</td>
 								</tr>
 								<tr>
@@ -125,6 +126,7 @@
 											<input type="input" name="name" size="40" value="${dept.name}" class="inputtext"/>
 											<input type="hidden" name="deptid" value="${dept.id}"/>
 											<input type="hidden" id="search1" name="search" value="${search}"/>
+											<br/><span style="color:red;">* Required</span>
 										</td>
 									</tr>
 									<tr>

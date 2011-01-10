@@ -20,7 +20,9 @@
 	       						<table class="panel">
 			       					<tr>
 			       						<td>First name</td>
-			       						<td><input type="text" name="firstName" value="${params.firstName}" size="40" class="inputtext"/></td>
+			       						<td><input type="text" name="firstName" value="${params.firstName}" size="40" class="inputtext"/>
+			       							<br/><span style="color:red;">* Required</span>	
+			       						</td>
 			       						<td>Family name</td>
 			       						<td><input type="text" name="familyName" value="${params.familyName}" size="40" class="inputtext"/></td>
 			       					</tr>
@@ -34,7 +36,9 @@
 			       						<td>Job Title</td>
 			       						<td><input type="text" name="jobTitle" value="${params.jobTitle}" size="35" class="inputtext"/></td>
 			       						<td>Position</td>
-			       						<td><input type="text" name="position" value="${params.position}" size="30" class="inputtext"/></td>
+			       						<td><input type="text" name="position" value="${params.position}" size="30" class="inputtext"/>
+			       							<br/><span style="color:red;">* Required</span>
+			       						</td>
 			       					</tr>
 			       					
 			       					<tr>
