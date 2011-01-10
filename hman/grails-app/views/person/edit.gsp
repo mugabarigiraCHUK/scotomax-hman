@@ -19,7 +19,7 @@
 
             func = {
 				back: function(){
-					window.location.href='view';
+					window.location.href='view?search=${search}';
 				},
 				rmAddr: function(addrid) {
 					$.prompt('Do you want to delete the address data?',

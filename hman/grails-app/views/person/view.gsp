@@ -26,6 +26,9 @@
 			},
 			create: function(){
 				window.location.href='create?search='+$('#search').val();
+			},
+			view: function(psid){
+				window.location.href='person?psid='+psid+'&search='+$('#search').val();
 			}
         };
         </script>
@@ -70,6 +73,9 @@
 	       						<th>&nbsp;</th>
 	       						<th>&nbsp;</th>
 	       						</g:if>
+	       						<g:else>
+	       						<th>&nbsp;</th>
+	       						</g:else>
 	       					</tr>
 	       					<g:each status="i" in="${persons}" var="ps">
 	       					<tr>
@@ -85,6 +91,9 @@
 	       						<td><input type="button" id="edit" value="Edit" class="command" onclick="func.edit('${ps.id}')"/></td>
 	       						<td><input type="button" id="delete" value="Delete" class="command" onclick="func.delete('${ps.id}')"/></td>
 	       						</g:if>
+	       						<g:else>
+	       						<td><input type="button" id="view" value="view" class="command" onclick="func.view('${ps.id}')"/></td>
+	       						</g:else>
 	       					</tr>
 	       					</g:each>
 	       				</table>
