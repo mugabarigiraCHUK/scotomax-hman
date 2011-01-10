@@ -53,7 +53,7 @@ grails.gorm.failOnError = true
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://office.mobile-technologies.com:6060/hman"
+        grails.serverURL = "http://office.mobile-technologies.com:6060/${appName}"
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
