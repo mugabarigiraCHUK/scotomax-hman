@@ -12,6 +12,7 @@
         <g:javascript library="jquery-1.4.4.min" />
         <g:javascript library="jquery-impromptu.3.1.min" />
         <g:javascript library="jquery-ui-1.8.7.custom.min" />
+        <g:javascript library="jquery.alphanumeric.pack" />
         <g:javascript library="main" />
         <g:javascript library="application" />
         

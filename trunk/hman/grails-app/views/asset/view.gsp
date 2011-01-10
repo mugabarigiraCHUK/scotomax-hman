@@ -11,6 +11,9 @@
 				// Date picker
 				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd' });
 				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' });
+
+				// Only numberic field
+				$('.numberic').numeric({allow:"."});
 	        });
 	
 	        var func = {
@@ -150,11 +153,11 @@
 								</tr>
 								<tr>
 									<td>Prices</td>
-									<td><input type="input" name="prices" size="30" class="inputtext"/></td>
+									<td><input type="input" name="prices" size="30" class="inputtext numberic"/></td>
 								</tr>
 								<tr>
 									<td>Piece</td>
-									<td><input type="input" name="piece" size="20" class="inputtext"/>
+									<td><input type="input" name="piece" size="20" class="inputtext numberic"/>
 										<br/><span style="color:red;">* Required</span>
 									</td>
 								</tr>
@@ -209,11 +212,11 @@
 									</tr>
 									<tr>
 										<td>Prices</td>
-										<td><input type="input" name="prices" size="30" class="inputtext" value="${asset.prices}"/></td>
+										<td><input type="input" name="prices" size="30" class="inputtext numberic" value="${asset.prices}"/></td>
 									</tr>
 									<tr>
 										<td>Piece</td>
-										<td><input type="input" name="piece" size="20" class="inputtext" value="${asset.piece}"/>
+										<td><input type="input" name="piece" size="20" class="inputtext  numberic" value="${asset.piece}"/>
 											<br/><span style="color:red;">* Required</span>
 										</td>
 									</tr>
