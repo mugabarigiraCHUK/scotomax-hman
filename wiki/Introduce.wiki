@@ -1,8 +1,7 @@
 #summary One-sentence summary of this page.
 
 = Introduction =
-I'm just Grails developer geeks, I try to design to project concern something useful for challenge myself in Grails term. The concern point is my office be deficient tools for resource management in a office. I got my requirement now.
-
+I'm just Grails developer geeks, I try to design the project concern something useful for challenge myself in Grails development plan. The concern point is my office be deficient tools for resource management. I got it my requirement now.
 
 = Details =
 
