@@ -548,7 +548,18 @@ class PersonController {
 								a.sickUsed = params.sickUsed?new Long(params.sickUsed):0
 								a.annualUsed = params.annualUsed?new Long(params.annualUsed):0
 								a.extraUsed = params.extraUsed?new Long(params.extraUsed):0
-								a.save()
+								
+								if (a.validate()) {
+									a.save()
+									flash.message = "The attendance data is updated successfully."
+								} else {
+									def msg = ""
+									a.errors.allErrors.each {
+										if (msg) msg += ", "+it
+										else msg = it
+									}
+									flash.message = a
+								}
 							}
 						} else {
 							def a = new Attendance()
@@ -560,7 +571,17 @@ class PersonController {
 							a.annualUsed = params.annualUsed?new Long(params.annualUsed):0
 							a.extraUsed = params.extraUsed?new Long(params.extraUsed):0
 							a.person = p
-							a.save()
+							if (a.validate()) {
+									a.save()
+									flash.message = "The attendance data is updated successfully."
+								} else {
+									def msg = ""
+									a.errors.allErrors.each {
+										if (msg) msg += ", "+it
+										else msg = it
+									}
+									flash.message = a
+								}
 						}
 					} else {
 						def idx = 0
@@ -575,7 +596,17 @@ class PersonController {
 									a.sickUsed = params.sickUsed[idx]?new Long(params.sickUsed[idx]):0
 									a.annualUsed = params.annualUsed[idx]?new Long(params.annualUsed[idx]):0
 									a.extraUsed = params.extraUsed[idx]?new Long(params.extraUsed[idx]):0
-									a.save()
+									if (a.validate()) {
+										a.save()
+										flash.message = "The attendance data is updated successfully."
+									} else {
+										def msg = ""
+										a.errors.allErrors.each {
+											if (msg) msg += ", "+it
+											else msg = it
+										}
+										flash.message = a
+									}
 								}
 							} else {
 								def a = new Attendance()
@@ -587,12 +618,21 @@ class PersonController {
 								a.annualUsed = params.annualUsed[idx]?new Long(params.annualUsed[idx]):0
 								a.extraUsed = params.extraUsed[idx]?new Long(params.extraUsed[idx]):0
 								a.person = p
-								a.save()
+								if (a.validate()) {
+									a.save()
+									flash.message = "The attendance data is updated successfully."
+								} else {
+									def msg = ""
+									a.errors.allErrors.each {
+										if (msg) msg += ", "+it
+										else msg = it
+									}
+									flash.message = a
+								}
 							}
 							idx++
 						}
 					}
-					flash.message = "The attendance data is updated successfully."
 				} else flash.message = "System could not found person data for saving."
 			} else flash.message = "System could not found id of person for data saving."
 		} catch (e) {
