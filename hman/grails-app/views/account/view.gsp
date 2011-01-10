@@ -123,7 +123,7 @@
 			<g:form name="acctForm2" action="save" method="post">
 				<table class="panel">
 	       			<tr>
-	       				<td>Full name</td>
+	       				<td><strong>Full name</strong></td>
 	       				<td>
 	       					<input type="text" id="fullname" name="fullname" size="40" class="inputtext" />
 	       					<input type="hidden" id="acctid0" name="acctid" />
@@ -132,26 +132,26 @@
 	       				</td>
 	       			</tr>
 	       			<tr>
-	       				<td>User name</td>
+	       				<td><strong>User name</strong></td>
 	       				<td><input type="text" name="username" size="25" class="inputtext" />
 	       					<br/><span style="color:red;">* Required</span>
 	       				</td>
 	       			</tr>
 	       			<tr>
-	       				<td>Password</td>
+	       				<td><strong>Password</strong></td>
 	       				<td><input type="password" id="password1" name="password" size="25" class="inputtext" />
 	       					<br/><span style="color:red;">* Required</span>
 	       				</td>
 	       			</tr>
 	       			<tr>
-	       				<td>Confirm</td>
+	       				<td><strong>Confirm</strong></td>
 	       				<td><input type="password" id="confirm1" name="confirm" size="25" class="inputtext" /><br/>
 	       					<span id="cfmlabel1" style="color: red;"></span>
 	       					<br/><span style="color:red;">* Required</span>
 	       				</td>
 	       			</tr>
 	       			<tr>
-	       				<td>Is Admin</td>
+	       				<td><strong>Is Admin</strong></td>
 	       				<td><input type="checkbox" name="isadmin" value="1" />
 	       					<br/><span style="color:red;">* Required</span>
 	       				</td>
@@ -175,7 +175,7 @@
 				<g:form name="acctForm3" action="update" method="post">
 					<table class="panel">
 		       			<tr>
-		       				<td>Full name</td>
+		       				<td><strong>Full name</strong></td>
 		       				<td>
 		       					<input type="text" id="fullname" name="fullname" size="40" class="inputtext" value="${account.fullname}" />
 		       					<input type="hidden" id="acctid1" name="acctid" value="${account.id}" />
@@ -184,20 +184,20 @@
 		       				</td>
 		       			</tr>
 		       			<tr>
-		       				<td>User name</td>
+		       				<td><strong>User name</strong></td>
 		       				<td><input type="text" name="username" size="25" class="inputtext" value="${account.username}" />
 		       					<br/><span style="color:red;">* Required</span>
 		       				</td>
 		       			</tr>
 		       			<tr>
-		       				<td>Is Admin</td>
+		       				<td><strong>Is Admin</strong></td>
 		       				<td><input type="checkbox" name="isadmin" value="1" ${account.isadmin?'checked=checked':''} /></td>
 		       			</tr>
 		       			<tr>
 		       				<td></td>
 		       				<td>
 		       					<input type="submit" value="Save" class="command" />
-		       					<input type="button" value="Cancel" class="command" onclick="$('#savedialog').dialog('close')" />
+		       					<input type="button" value="Cancel" class="command" onclick="$('#updatedialog').dialog('close')" />
 		       				</td>
 		       			</tr>
 		       		</table>
@@ -211,14 +211,14 @@
 			<g:form name="acctForm4" action="changepwd" method="post">
 				<table class="panel">
 	       			<tr>
-	       				<td>Password</td>
+	       				<td><strong>Password</strong></td>
 	       				<td><input type="password" id="password2" name="password" size="25" class="inputtext" />
 							<input type="hidden" id="acctid2" name="acctid" />
 							<input type="hidden" id="search2" name="search"/>	   
 					    </td>
 	       			</tr>
 	       			<tr>
-	       				<td>Confirm</td>
+	       				<td><strong>Confirm</strong></td>
 	       				<td><input type="password" id="confirm2" name="confirm" size="25" class="inputtext" /><br/>
 	       					<span id="cfmlabel2" style="color: red;"></span>
 	       				</td>

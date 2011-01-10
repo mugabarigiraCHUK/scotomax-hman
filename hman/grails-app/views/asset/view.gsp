@@ -136,7 +136,7 @@
 						<g:form name="assetForm2" action="save" method="post">
 							<table class="panel">
 								<tr>
-									<td>Name</td>
+									<td><strong>Name</strong></td>
 									<td>
 										<input type="input" name="name" size="40" class="inputtext"/>
 										<input type="hidden" id="search0" name="search"/>
@@ -144,36 +144,35 @@
 									</td>
 								</tr>
 								<tr>
-									<td>S/N number</td>
+									<td><strong>S/N number</strong></td>
 									<td><input type="input" name="snnumb" size="30" class="inputtext"/></td>
 								</tr>
 								<tr>
-									<td>Part number</td>
+									<td><strong>Part number</strong></td>
 									<td><input type="input" name="pnnumb" size="30" class="inputtext"/></td>
 								</tr>
 								<tr>
-									<td>Prices</td>
+									<td><strong>Prices</strong></td>
 									<td><input type="input" name="prices" size="30" class="inputtext numberic"/></td>
 								</tr>
 								<tr>
-									<td>Piece</td>
+									<td><strong>Piece</strong></td>
 									<td><input type="input" name="piece" size="20" class="inputtext numberic"/>
 										<br/><span style="color:red;">* Required</span>
 									</td>
 								</tr>
-								
 								<tr>
-									<td>vendor</td>
+									<td><strong>Vendor</strong></td>
 									<td><textarea name="vendor" rows="5" cols="40" class="inputtext"></textarea></td>
 								</tr>
 								
 								<tr>
-									<td>Brought date</td>
+									<td><strong>Brought date</strong></td>
 									<td><input type="input" id="datepicker1" name="datebrought" size="20" class="inputtext"/></td>
 								</tr>
 								
 								<tr>
-									<td>Description</td>
+									<td><strong>Description</strong></td>
 									<td><textarea name="desc" rows="5" cols="40" class="inputtext"></textarea></td>
 								</tr>
 								<tr>
@@ -194,7 +193,7 @@
 							<g:form name="assetForm3" action="update" method="post">
 								<table class="panel">
 									<tr>
-										<td>Name</td>
+										<td><strong>Name</strong></td>
 										<td>
 											<input type="input" name="name" size="40" value="${asset.name}" class="inputtext"/>
 											<input type="hidden" name="asid" value="${asset.id}"/>
@@ -203,36 +202,36 @@
 										</td>
 									</tr>
 									<tr>
-										<td>S/N number</td>
+										<td><strong>S/N number</strong></td>
 										<td><input type="input" name="snnumb" size="30" class="inputtext" value="${asset.snnumb}"/></td>
 									</tr>
 									<tr>
-										<td>Part number</td>
+										<td><strong>Part number</strong></td>
 										<td><input type="input" name="pnnumb" size="30" class="inputtext" value="${asset.pnnumb}"/></td>
 									</tr>
 									<tr>
-										<td>Prices</td>
+										<td><strong>Prices</strong></td>
 										<td><input type="input" name="prices" size="30" class="inputtext numberic" value="${asset.prices}"/></td>
 									</tr>
 									<tr>
-										<td>Piece</td>
+										<td><strong>Piece</strong></td>
 										<td><input type="input" name="piece" size="20" class="inputtext  numberic" value="${asset.piece}"/>
 											<br/><span style="color:red;">* Required</span>
 										</td>
 									</tr>
 									
 									<tr>
-										<td>vendor</td>
+										<td><strong>Vendor</strong></td>
 										<td><textarea name="vendor" rows="5" cols="40" class="inputtext">${asset.vendor}</textarea></td>
 									</tr>
 									
 									<tr>
-										<td>Brought date</td>
+										<td><strong>Brought date</strong></td>
 										<td><input type="input" id="datepicker2" name="datebrought" size="20" class="inputtext" value="${asset.dateBrought?String.format('%tF', asset.dateBrought):''}"/></td>
 									</tr>
 									
 									<tr>
-										<td>Description</td>
+										<td><strong>Description</strong></td>
 										<td><textarea name="desc" rows="5" cols="40" class="inputtext">${asset.description}</textarea></td>
 									</tr>
 									<tr>
@@ -253,7 +252,7 @@
 						<g:form name="assetForm3" action="assignowner" method="post">
 							<table class="panel">
 								<tr>
-									<td>Name</td>
+									<td><strong>Staff</strong></td>
 									<td>
 										<select name="pid">
 											<option value="-1"> - Unassign - </option>
