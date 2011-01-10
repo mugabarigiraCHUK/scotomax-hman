@@ -15,6 +15,8 @@
 				// Date picker
 				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd' });
 				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' });
+				// Only numberic field
+				$('.numberic').numeric({allow:"."});
             });
 
             func = {
@@ -267,11 +269,9 @@
 										
 										<table class="panel">
 					       					<tr>
-					       						<td>Photo<br/>
-					       							<g:if test="${person.photo}">
+					       						<td><g:if test="${person.photo}">
 					       								<img src="${createLink(action:'image', id:person.photo.id)}"/>
 					       							</g:if>
-					       							
 					       						</td>
 					       					</tr>
 					       					<tr>
@@ -288,7 +288,7 @@
 										
 										<table class="panel">
 					       					<tr>
-					       						<td>Department</td>
+					       						<td><strong>Department</strong></td>
 					       						<td>
 					       							<g:if test="${person.department}">
 					       								${person.department.name}
@@ -309,7 +309,7 @@
 										
 										<table class="panel">
 					       					<tr>
-					       						<td>Supervisor</td>
+					       						<td><strong>Supervisor</strong></td>
 					       						<td>
 					       							<g:if test="${person.leader}">
 					       								${person.leader.firstName} ${person.leader.familyName}
@@ -405,12 +405,12 @@
 											       							<input type="hidden" name="atteid" value="${atte.id}" size="15"/>
 											       							${atte.year}
 											       						</td>
-											       						<td><input type="text" name="sickCredit" value="${atte.sickCredit}" size="5"/></td>
-											       						<td><input type="text" name="annualCredit" value="${atte.annualCredit}" size="5"/></td>
-											       						<td><input type="text" name="extraCredit" value="${atte.extraCredit}" size="5"/></td>
-											       						<td><input type="text" name="sickUsed" value="${atte.sickUsed}" size="5"/></td>
-											       						<td><input type="text" name="annualUsed" value="${atte.annualUsed}" size="5"/></td>
-											       						<td><input type="text" name="extraUsed" value="${atte.extraUsed}" size="5"/></td>
+											       						<td><input type="text" name="sickCredit" value="${atte.sickCredit}" size="5" class="numberic" /></td>
+											       						<td><input type="text" name="annualCredit" value="${atte.annualCredit}" size="5" class="numberic" /></td>
+											       						<td><input type="text" name="extraCredit" value="${atte.extraCredit}" size="5" class="numberic" /></td>
+											       						<td><input type="text" name="sickUsed" value="${atte.sickUsed}" size="5" class="numberic" /></td>
+											       						<td><input type="text" name="annualUsed" value="${atte.annualUsed}" size="5" class="numberic" /></td>
+											       						<td><input type="text" name="extraUsed" value="${atte.extraUsed}" size="5" class="numberic" /></td>
 											       						<td><input type="button"" 
 											       								   value="Delete"
 											       								   onclick="func.deleteAtte('${atte.id}')"
@@ -424,12 +424,12 @@
 									       							<input type="text" name="year" size="15" />
 									       							<input type="hidden" name="atteid" />
 									       						</td>
-									       						<td><input type="text" name="sickCredit" value="0" size="5"/></td>
-									       						<td><input type="text" name="annualCredit" value="0" size="5"/></td>
-									       						<td><input type="text" name="extraCredit" value="0" size="5"/></td>
-									       						<td><input type="text" name="sickUsed" value="0" size="5"/></td>
-									       						<td><input type="text" name="annualUsed" value="0" size="5"/></td>
-									       						<td><input type="text" name="extraUsed" value="0" size="5"/></td>
+									       						<td><input type="text" name="sickCredit" value="0" size="5" class="numberic" /></td>
+									       						<td><input type="text" name="annualCredit" value="0" size="5" class="numberic" /></td>
+									       						<td><input type="text" name="extraCredit" value="0" size="5" class="numberic" /></td>
+									       						<td><input type="text" name="sickUsed" value="0" size="5" class="numberic" /></td>
+									       						<td><input type="text" name="annualUsed" value="0" size="5" class="numberic" /></td>
+									       						<td><input type="text" name="extraUsed" value="0" size="5" class="numberic" /></td>
 									       						<td>&nbsp;</td>
 									       					</tr>
 									       					<tr>
