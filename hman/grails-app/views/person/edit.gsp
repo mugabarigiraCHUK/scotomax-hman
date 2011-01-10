@@ -172,7 +172,7 @@
 									<li><a href="#tabs-4">Department</a></li>
 									<li><a href="#tabs-5">Supervisor</a></li>
 									<li><a href="#tabs-6">Documents</a></li>
-									<li><a href="#tabs-7">Vacation</a></li>
+									<li><a href="#tabs-7">Leave</a></li>
 								</ul>
 								<div id="tabs-1">
 									<p>
