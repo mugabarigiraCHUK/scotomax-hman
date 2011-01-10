@@ -92,7 +92,7 @@
 						<g:form name="deptForm2" action="save" method="post">
 							<table class="panel">
 								<tr>
-									<td>Name</td>
+									<td><strong>Name</strong></td>
 									<td>
 										<input type="input" name="name" size="40" class="inputtext"/>
 										<input type="hidden" id="search0" name="search"/>
@@ -100,7 +100,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td>Description</td>
+									<td><strong>Description</strong></td>
 									<td><textarea name="desc" rows="5" cols="40" class="inputtext"></textarea></td>
 								</tr>
 								<tr>
@@ -121,7 +121,7 @@
 							<g:form name="deptForm3" action="update" method="post">
 								<table class="panel">
 									<tr>
-										<td>Name</td>
+										<td><strong>Name</strong></td>
 										<td>
 											<input type="input" name="name" size="40" value="${dept.name}" class="inputtext"/>
 											<input type="hidden" name="deptid" value="${dept.id}"/>
@@ -130,7 +130,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td>Description</td>
+										<td><strong>Description</strong></td>
 										<td><textarea name="desc" rows="5" cols="40" class="inputtext">${dept.description}</textarea></td>
 									</tr>
 									<tr>

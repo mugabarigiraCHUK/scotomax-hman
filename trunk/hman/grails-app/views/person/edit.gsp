@@ -87,67 +87,71 @@
 	       						<legend>Information</legend>
 	       						<table class="panel">
 			       					<tr>
-			       						<td>First name</td>
+			       						<td><strong>First name</strong></td>
 			       						<td>
 			       							<input type="text" name="firstName" value="${person.firstName}" size="40" class="inputtext"/>
 			       							<input type="hidden" id="psid" name="psid" value="${person.id}"/>
 			       							<br/><span style="color:red;">* Required</span>
 			       						</td>
-			       						<td>Family name</td>
+			       						<td><strong>Family name</strong></td>
 			       						<td><input type="text" name="familyName" value="${person.familyName}" size="40" class="inputtext"/></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Middle name</td>
+			       						<td><strong>Middle name</strong></td>
 			       						<td><input type="text" name="middleName" value="${person.middleName}" size="40" class="inputtext"/></td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Job Title</td>
+			       						<td><strong>Job Title</strong></td>
 			       						<td><input type="text" name="jobTitle" value="${person.jobTitle}" size="35" class="inputtext"/></td>
-			       						<td>Position</td>
-			       						<td><input type="text" name="position" value="${person.position}" size="30" class="inputtext"/>
-			       							<br/><span style="color:red;">* Required</span>
+			       						<td><strong>Position</strong></td>
+			       						<td><select name="position">
+			       								<option value="Employee" ${person.position=='Employee'?'selected':''}>Employee</option>
+			       								<option value="Contract" ${person.position=='Contract'?'selected':''}>Contract</option>
+			       								<option value="Trainee" ${person.position=='Trainee'?'selected':''}>Trainee</option>
+			       								<option value="Candidate" ${person.position=='Candidate'?'selected':''}>Candidate</option>
+			       							</select>
 			       						</td>
 			       					</tr>
 			       					<tr>
-			       						<td>Work permit</td>
+			       						<td><strong>Work permit</strong></td>
 			       						<td><input type="checkbox" name="hasPermit" ${person.hasPermit?'checked':''}/> Passed</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Status</td>
+			       						<td><strong>Status</strong></td>
 			       						<td><input type="checkbox" name="hasMarried" ${person.hasMarried?'checked':''}/> Married</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Conscripted</td>
+			       						<td><strong>Conscripted</strong></td>
 			       						<td><input type="checkbox" name="hasConscripted" ${person.hasConscripted?'checked':''}/> Passed</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Phone</td>
+			       						<td><strong>Phone</strong></td>
 			       						<td><input type="text" name="phone" value="${person.phone}" size="25" class="inputtext"/></td>
-			       						<td>Mobile</td>
+			       						<td><strong>Mobile</strong></td>
 			       						<td><input type="text" name="mobile" value="${person.mobile}" size="25" class="inputtext"/></td>
 			       					</tr>
 			       					<tr>
-			       						<td>E-mail</td>
+			       						<td><strong>E-mail</strong></td>
 			       						<td><input type="text" name="email" value="${person.email}" size="40" class="inputtext"/></td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-										<td>Other contact</td>
+										<td><strong>Other contact</strong></td>
 										<td><textarea name="otherContact" rows="5" cols="40" class="inputtext">${person.otherContact}</textarea></td>
 										<td></td>
 			       						<td></td>
 									</tr>
 									<tr>
-										<td>Description</td>
+										<td><strong>Description</strong></td>
 										<td><textarea name="description" rows="5" cols="40" class="inputtext">${person.description}</textarea></td>
 										<td></td>
 			       						<td></td>

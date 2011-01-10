@@ -1,12 +1,6 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <script type="text/javascript">
-        	$(function(){
-				// Tabs
-				
-            });
-        </script>
     </head>
     <body>
         <div id="pageBody">
@@ -19,66 +13,70 @@
 	       						<legend>Information</legend>
 	       						<table class="panel">
 			       					<tr>
-			       						<td>First name</td>
+			       						<td><strong>First name</strong></td>
 			       						<td><input type="text" name="firstName" value="${params.firstName}" size="40" class="inputtext"/>
 			       							<br/><span style="color:red;">* Required</span>	
 			       						</td>
-			       						<td>Family name</td>
+			       						<td><strong>Family name</strong></td>
 			       						<td><input type="text" name="familyName" value="${params.familyName}" size="40" class="inputtext"/></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Middle name</td>
+			       						<td><strong>Middle name</strong></td>
 			       						<td><input type="text" name="middleName" value="${params.middleName}" size="40" class="inputtext"/></td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Job Title</td>
+			       						<td><strong>Job Title</strong></td>
 			       						<td><input type="text" name="jobTitle" value="${params.jobTitle}" size="35" class="inputtext"/></td>
-			       						<td>Position</td>
-			       						<td><input type="text" name="position" value="${params.position}" size="30" class="inputtext"/>
-			       							<br/><span style="color:red;">* Required</span>
+			       						<td><strong>Position</strong></td>
+			       						<td><select name="position">
+			       								<option value="Employee" ${params.position=='Employee'?'selected':''}>Employee</option>
+			       								<option value="Contract" ${params.position=='Contract'?'selected':''}>Contract</option>
+			       								<option value="Trainee" ${params.position=='Trainee'?'selected':''}>Trainee</option>
+			       								<option value="Candidate" ${params.position=='Candidate'?'selected':''}>Candidate</option>
+			       							</select>
 			       						</td>
 			       					</tr>
 			       					
 			       					<tr>
-			       						<td>Work permit</td>
+			       						<td><strong>Work permit</strong></td>
 			       						<td><input type="checkbox" name="hasPermit" ${params.hasPermit?'checked':''}/> Passed</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Status</td>
+			       						<td><strong>Status</strong></td>
 			       						<td><input type="checkbox" name="hasMarried" ${params.hasMarried?'checked':''}/> Married</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Conscripted</td>
+			       						<td><strong>Conscripted</strong></td>
 			       						<td><input type="checkbox" name="hasConscripted" ${params.hasConscripted?'checked':''}/> Passed</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Phone</td>
+			       						<td><strong>Phone</strong></td>
 			       						<td><input type="text" name="phone" value="${params.phone}" size="25" class="inputtext"/></td>
-			       						<td>Mobile</td>
+			       						<td><strong>Mobile</strong></td>
 			       						<td><input type="text" name="mobile" value="${params.mobile}" size="25" class="inputtext"/></td>
 			       					</tr>
 			       					<tr>
-			       						<td>E-mail</td>
+			       						<td><strong>E-mail</strong></td>
 			       						<td><input type="text" name="email" value="${params.email}" size="40" class="inputtext"/></td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-										<td>Other contact</td>
+										<td><strong>Other contac</strong>t</td>
 										<td><textarea name="otherContact" rows="5" cols="40" class="inputtext">${params.otherContact}</textarea></td>
 										<td></td>
 			       						<td></td>
 									</tr>
 									<tr>
-										<td>Description</td>
+										<td><strong>Description</strong></td>
 										<td><textarea name="description" rows="5" cols="40" class="inputtext">${params.description}</textarea></td>
 										<td></td>
 			       						<td></td>

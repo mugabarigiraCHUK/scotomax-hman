@@ -25,68 +25,62 @@
 	       						<legend>Information</legend>
 	       						<table class="panel">
 			       					<tr>
-			       						<td>First name</td>
-			       						<td>
-			       							<input type="text" name="firstName" value="${person.firstName}" size="40" class="inputtext"/>
-			       							<input type="hidden" id="psid" name="psid" value="${person.id}"/>
-			       							<br/><span style="color:red;">* Required</span>
-			       						</td>
-			       						<td>Family name</td>
-			       						<td><input type="text" name="familyName" value="${person.familyName}" size="40" class="inputtext"/></td>
+			       						<td><strong>First name</strong></td>
+			       						<td>${person.firstName}</td>
+			       						<td><strong>Family name</strong></td>
+			       						<td>${person.familyName}</td>
 			       					</tr>
 			       					<tr>
-			       						<td>Middle name</td>
-			       						<td><input type="text" name="middleName" value="${person.middleName}" size="40" class="inputtext"/></td>
+			       						<td><strong>Middle name</strong></td>
+			       						<td>${person.middleName}</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Job Title</td>
-			       						<td><input type="text" name="jobTitle" value="${person.jobTitle}" size="35" class="inputtext"/></td>
-			       						<td>Position</td>
-			       						<td><input type="text" name="position" value="${person.position}" size="30" class="inputtext"/>
-			       							<br/><span style="color:red;">* Required</span>
-			       						</td>
+			       						<td><strong>Job Title</strong></td>
+			       						<td>${person.jobTitle}</td>
+			       						<td><strong>Position</strong></td>
+			       						<td>${person.position}</td>
 			       					</tr>
 			       					<tr>
-			       						<td>Work permit</td>
-			       						<td><input type="checkbox" name="hasPermit" ${person.hasPermit?'checked':''}/> Passed</td>
-			       						<td></td>
-			       						<td></td>
-			       					</tr>
-			       					<tr>
-			       						<td>Status</td>
-			       						<td><input type="checkbox" name="hasMarried" ${person.hasMarried?'checked':''}/> Married</td>
+			       						<td><strong>Work permit</strong></td>
+			       						<td><input type="checkbox" name="hasPermit" ${person.hasPermit?'checked':''} disabled="disabled" /> Passed</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Conscripted</td>
-			       						<td><input type="checkbox" name="hasConscripted" ${person.hasConscripted?'checked':''}/> Passed</td>
+			       						<td><strong>Status</strong></td>
+			       						<td><input type="checkbox" name="hasMarried" ${person.hasMarried?'checked':''} disabled="disabled" /> Married</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-			       						<td>Phone</td>
-			       						<td><input type="text" name="phone" value="${person.phone}" size="25" class="inputtext"/></td>
-			       						<td>Mobile</td>
-			       						<td><input type="text" name="mobile" value="${person.mobile}" size="25" class="inputtext"/></td>
-			       					</tr>
-			       					<tr>
-			       						<td>E-mail</td>
-			       						<td><input type="text" name="email" value="${person.email}" size="40" class="inputtext"/></td>
+			       						<td><strong>Conscripted</strong></td>
+			       						<td><input type="checkbox" name="hasConscripted" ${person.hasConscripted?'checked':''} disabled="disabled" /> Passed</td>
 			       						<td></td>
 			       						<td></td>
 			       					</tr>
 			       					<tr>
-										<td>Other contact</td>
-										<td><textarea name="otherContact" rows="5" cols="40" class="inputtext">${person.otherContact}</textarea></td>
+			       						<td><strong>Phone</strong></td>
+			       						<td>${person.phone}</td>
+			       						<td><strong>Mobile</strong></td>
+			       						<td>${person.mobile}</td>
+			       					</tr>
+			       					<tr>
+			       						<td><strong>E-mail</strong></td>
+			       						<td>${person.email}</td>
+			       						<td></td>
+			       						<td></td>
+			       					</tr>
+			       					<tr>
+										<td><strong>Other contact</strong></td>
+										<td>${person.otherContact}</td>
 										<td></td>
 			       						<td></td>
 									</tr>
 									<tr>
-										<td>Description</td>
-										<td><textarea name="description" rows="5" cols="40" class="inputtext">${person.description}</textarea></td>
+										<td><strong>Description</strong></td>
+										<td>${person.description}</td>
 										<td></td>
 			       						<td></td>
 									</tr>
@@ -186,8 +180,7 @@
 										
 										<table class="panel">
 					       					<tr>
-					       						<td>Photo<br/>
-					       							<g:if test="${person.photo}">
+					       						<td><g:if test="${person.photo}">
 					       								<img src="${createLink(action:'image', id:person.photo.id)}"/>
 					       							</g:if>
 					       							
@@ -202,7 +195,7 @@
 										
 										<table class="panel">
 					       					<tr>
-					       						<td>Department</td>
+					       						<td><strong>Department</strong></td>
 					       						<td>
 					       							<g:if test="${person.department}">
 					       								${person.department.name}
@@ -218,7 +211,7 @@
 										
 										<table class="panel">
 					       					<tr>
-					       						<td>Supervisor</td>
+					       						<td><strong>Supervisor</strong></td>
 					       						<td>
 					       							<g:if test="${person.leader}">
 					       								${person.leader.firstName} ${person.leader.familyName}
@@ -271,7 +264,7 @@
 											<table class="panel">
 												<tr>
 													<td>
-													
+														<g:if test="${person.attendances}">
 														<table class="dataTable">
 									       					<tr>
 									       						<th rowspan="2">No.</th>
@@ -287,22 +280,20 @@
 									       						<th>Annual</th>
 									       						<th>Extra</th>
 									       					</tr>
-									       					<g:if test="${person.attendances}">
-										       					<g:each status="i" in="${person.attendances}" var="atte">
-											       					<tr>
-											       						<td align="center">${i+1}.</td>
-											       						<td>${atte.year}</td>
-											       						<td>${atte.sickCredit}</td>
-											       						<td>${atte.annualCredit}</td>
-											       						<td>${atte.extraCredit}</td>
-											       						<td>${atte.sickUsed}</td>
-											       						<td>${atte.annualUsed}</td>
-											       						<td>${atte.extraUsed}</td>
-											       					</tr>
-										       					</g:each>
-									       					</g:if>
+									       					<g:each status="i" in="${person.attendances}" var="atte">
+										       					<tr>
+										       						<td align="center">${i+1}.</td>
+										       						<td>${atte.year}</td>
+										       						<td>${atte.sickCredit}</td>
+										       						<td>${atte.annualCredit}</td>
+										       						<td>${atte.extraCredit}</td>
+										       						<td>${atte.sickUsed}</td>
+										       						<td>${atte.annualUsed}</td>
+										       						<td>${atte.extraUsed}</td>
+										       					</tr>
+									       					</g:each>
 									       				</table>
-									       			
+									       				</g:if>
 													</td>
 												</tr>
 											</table>
