@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title><g:layoutTitle default="MT - Resource Management" /></title>
+        <title><g:layoutTitle default="Human Resource Management" /></title>
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
         <!-- CSS -->
        
@@ -88,7 +88,7 @@
 			</tr> 
 			<tr>
 				<td class="footer" colspan="2">
-					Copyright (c) 2011 by mobile-technologies 
+					Copyright (c) 2011 by scotomax-hman 
 					&nbsp;&nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
