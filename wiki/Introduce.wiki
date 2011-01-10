@@ -1,0 +1,22 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+I'm just Grails developer geeks, I try to design to project concern something useful for challenge myself in Grails term. The concern point is my office be deficient tools for resource management in a office. I got my requirement now.
+
+
+= Details =
+
+*bold*Functionals*bold*
+* Simple user management for web application
+* Department definition
+* Asset data management
+ - Create/Update/Delete
+ - Link with staff in a office for define owner.
+* Staff information management
+ - Information
+ - Address
+ - Certificate
+ - Photo
+ - Documents Upload/Remove/Download
+ - Leave day quotation in office policy 
+_italic_ Updated 2011, Jan 10 _italic_
