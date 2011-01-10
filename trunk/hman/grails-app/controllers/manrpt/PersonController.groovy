@@ -105,7 +105,38 @@ class PersonController {
 								person:p,
 								addrs:p.addresses,
 								certs:p.certificates,
-								docs:p.documents])
+								docs:p.documents,
+								search:params.search])
+				} else {
+					flash.message = "System could not found the staff data."
+					redirect(action:"view", params:params)
+				}
+			} else {
+				flash.message = "System could not found id of staff data."
+				redirect(action:"view", params:params)
+			}
+		} catch (e) {
+			flash.message = e.message
+			log.error "Exception: "+e.message, e
+			redirect(action:"view", params:params)
+		}
+	}
+	
+	/**
+	* Getting person data by id for data viewing
+	*/
+	def person = {
+		log.debug "Entering Person controller person..."
+		try {
+			if (params.psid) {
+				// Edit person information data
+				def p = Person.get(params.psid)
+				if (p) {
+					render(view:"person", model:[person:p,
+								addrs:p.addresses,
+								certs:p.certificates,
+								docs:p.documents,
+								search:params.search])
 				} else {
 					flash.message = "System could not found the staff data."
 					redirect(action:"view", params:params)
