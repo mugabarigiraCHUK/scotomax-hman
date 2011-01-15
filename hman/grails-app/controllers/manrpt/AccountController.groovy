@@ -85,7 +85,7 @@ class AccountController {
 					a.fullname = params.fullname
 					a.isadmin = params.isadmin?true:false
 					if (a.validate()) {
-						a.update()
+						a.save()
 						flash.message = "Data is updated successfully."
 					} else {
 						def msg = ""
@@ -202,7 +202,6 @@ class AccountController {
 					log.error "Exception: "+e.message, e
 				}
 			}
-			
 		}
 		render(view:"../index")
 	}
