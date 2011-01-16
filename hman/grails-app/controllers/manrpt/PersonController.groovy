@@ -60,6 +60,8 @@ class PersonController {
 			p.firstName = params.firstName
 			p.familyName = params.familyName
 			p.middleName = params.middleName
+			p.gender = params.gender
+			p.birthdate = params.birthdate?(new SimpleDateFormat("yyyy-MM-dd").parse(params.birthdate)):null
 			p.jobTitle = params.jobTitle
 			p.position = params.position
 			p.hasPermit = params.hasPermit?true:false
@@ -165,6 +167,8 @@ class PersonController {
 					p.firstName = params.firstName
 					p.familyName = params.familyName
 					p.middleName = params.middleName
+					p.gender = params.gender
+					p.birthdate = params.birthdate?(new SimpleDateFormat("yyyy-MM-dd").parse(params.birthdate)):null
 					p.jobTitle = params.jobTitle
 					p.position = params.position
 					p.hasPermit = params.hasPermit?true:false
@@ -541,10 +545,7 @@ class PersonController {
 						if ( params.atteid ) {
 							def a = Attendance.get(params.atteid)
 							if (a) {
-								a.year = params.year
-								a.sickCredit = params.sickCredit?new Long(params.sickCredit):0
-								a.annualCredit = params.annualCredit?new Long(params.annualCredit):0
-								a.extraCredit = params.extraCredit?new Long(params.extraCredit):0
+								
 								a.sickUsed = params.sickUsed?new Long(params.sickUsed):0
 								a.annualUsed = params.annualUsed?new Long(params.annualUsed):0
 								a.extraUsed = params.extraUsed?new Long(params.extraUsed):0
@@ -589,10 +590,6 @@ class PersonController {
 							if (item) {
 								def a = Attendance.get(item)
 								if (a) {
-									a.year = params.year[idx]
-									a.sickCredit = params.sickCredit[idx]?new Long(params.sickCredit[idx]):0
-									a.annualCredit = params.annualCredit[idx]?new Long(params.annualCredit[idx]):0
-									a.extraCredit = params.extraCredit[idx]?new Long(params.extraCredit[idx]):0
 									a.sickUsed = params.sickUsed[idx]?new Long(params.sickUsed[idx]):0
 									a.annualUsed = params.annualUsed[idx]?new Long(params.annualUsed[idx]):0
 									a.extraUsed = params.extraUsed[idx]?new Long(params.extraUsed[idx]):0

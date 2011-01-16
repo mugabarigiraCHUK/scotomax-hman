@@ -50,6 +50,7 @@ class AccountController {
 				a.password = params.password.encodeAsMD5()
 				a.fullname = params.fullname
 				a.isadmin = params.isadmin?true:false
+				a.isasset = params.isasset?true:false
 			
 				if (a.validate()) {
 					a.save()
@@ -84,6 +85,8 @@ class AccountController {
 					a.username = params.username
 					a.fullname = params.fullname
 					a.isadmin = params.isadmin?true:false
+					a.isasset = params.isasset?true:false
+					
 					if (a.validate()) {
 						a.save()
 						flash.message = "Data is updated successfully."
@@ -176,7 +179,7 @@ class AccountController {
 			if ( params.uname == "grails" && params.passwd == "grails" ) {
 				session["username"] = "Grails"
 				session["security_token"] = "grails".encodeAsMD5()
-				session["isadmin"] = 'admin'
+				session["privilege"] = 'admin'
 				flash.message = "Login successfully."
 				render(view:"../index")
 			} else {
@@ -186,7 +189,11 @@ class AccountController {
 						if (a.password == params.passwd.encodeAsMD5()) {
 							session["username"] = a.username
 							session["security_token"] = a.username.encodeAsMD5()
-							session["isadmin"] = a.isadmin?'admin':'user'
+							
+							if (a.isadmin) session["privilege"] = "admin"
+							else if (a.isasset) session["privilege"] = "asset"
+							else session["privilege"] = "user"
+							
 							a.lastAccessed = new Date()
 							a.save()
 							flash.message = "Login successfully."
@@ -213,7 +220,7 @@ class AccountController {
 			session.username = null
 			session.security_token = null
 			session.page = null
-			session.isadmin = null
+			session.privilege = null
 			log.debug "Removing all user sessions holding..."
 		}
 		flash.message = "Logout successfully"
