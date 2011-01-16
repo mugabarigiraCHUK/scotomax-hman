@@ -559,20 +559,21 @@ class PersonController {
 										if (msg) msg += ", "+it
 										else msg = it
 									}
-									flash.message = a
+									flash.message = msg
 								}
 							}
 						} else {
-							def a = new Attendance()
-							a.year = params.year
-							a.sickCredit = params.sickCredit?new Long(params.sickCredit):0
-							a.annualCredit = params.annualCredit?new Long(params.annualCredit):0
-							a.extraCredit = params.extraCredit?new Long(params.extraCredit):0
-							a.sickUsed = params.sickUsed?new Long(params.sickUsed):0
-							a.annualUsed = params.annualUsed?new Long(params.annualUsed):0
-							a.extraUsed = params.extraUsed?new Long(params.extraUsed):0
-							a.person = p
-							if (a.validate()) {
+							if (params.year) {
+								def a = new Attendance()
+								a.year = params.year
+								a.sickCredit = params.sickCredit?new Long(params.sickCredit):0
+								a.annualCredit = params.annualCredit?new Long(params.annualCredit):0
+								a.extraCredit = params.extraCredit?new Long(params.extraCredit):0
+								a.sickUsed = params.sickUsed?new Long(params.sickUsed):0
+								a.annualUsed = params.annualUsed?new Long(params.annualUsed):0
+								a.extraUsed = params.extraUsed?new Long(params.extraUsed):0
+								a.person = p
+								if (a.validate()) {
 									a.save()
 									flash.message = "The attendance data is updated successfully."
 								} else {
@@ -581,8 +582,9 @@ class PersonController {
 										if (msg) msg += ", "+it
 										else msg = it
 									}
-									flash.message = a
+									flash.message = msg
 								}
+							}
 						}
 					} else {
 						def idx = 0
@@ -602,29 +604,31 @@ class PersonController {
 											if (msg) msg += ", "+it
 											else msg = it
 										}
-										flash.message = a
+										flash.message = msg
 									}
 								}
 							} else {
-								def a = new Attendance()
-								a.year = params.year[idx]
-								a.sickCredit = params.sickCredit[idx]?new Long(params.sickCredit[idx]):0
-								a.annualCredit = params.annualCredit[idx]?new Long(params.annualCredit[idx]):0
-								a.extraCredit = params.extraCredit[idx]?new Long(params.extraCredit[idx]):0
-								a.sickUsed = params.sickUsed[idx]?new Long(params.sickUsed[idx]):0
-								a.annualUsed = params.annualUsed[idx]?new Long(params.annualUsed[idx]):0
-								a.extraUsed = params.extraUsed[idx]?new Long(params.extraUsed[idx]):0
-								a.person = p
-								if (a.validate()) {
-									a.save()
-									flash.message = "The attendance data is updated successfully."
-								} else {
-									def msg = ""
-									a.errors.allErrors.each {
-										if (msg) msg += ", "+it
-										else msg = it
+								if (params.year[idx]) {
+									def a = new Attendance()
+									a.year = params.year[idx]
+									a.sickCredit = params.sickCredit[idx]?new Long(params.sickCredit[idx]):0
+									a.annualCredit = params.annualCredit[idx]?new Long(params.annualCredit[idx]):0
+									a.extraCredit = params.extraCredit[idx]?new Long(params.extraCredit[idx]):0
+									a.sickUsed = params.sickUsed[idx]?new Long(params.sickUsed[idx]):0
+									a.annualUsed = params.annualUsed[idx]?new Long(params.annualUsed[idx]):0
+									a.extraUsed = params.extraUsed[idx]?new Long(params.extraUsed[idx]):0
+									a.person = p
+									if (a.validate()) {
+										a.save()
+										flash.message = "The attendance data is updated successfully."
+									} else {
+										def msg = ""
+										a.errors.allErrors.each {
+											if (msg) msg += ", "+it
+											else msg = it
+										}
+										flash.message = msg
 									}
-									flash.message = a
 								}
 							}
 							idx++

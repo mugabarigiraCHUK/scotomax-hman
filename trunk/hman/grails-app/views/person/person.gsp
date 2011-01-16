@@ -277,7 +277,7 @@
 									       						<th rowspan="2">Year</th>
 									       						<th colspan="3">Credit</th>
 									       						<th colspan="3">Used</th>
-									       						<th colspan="3">Remain</th>
+									       						<th colspan="3">Available</th>
 									       					</tr>
 									       					<tr>
 									       						<th>Sick</th>

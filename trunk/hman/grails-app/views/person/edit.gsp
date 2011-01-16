@@ -13,9 +13,9 @@
 				$('#savePhotoDialog').dialog({autoOpen: false, resizable: false, width: 400});
 				$('#uploadFileDialog').dialog({autoOpen: false, resizable: false, width: 400});
 				// Date picker
-				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
-				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
-				$('#birthdate').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '1976:2015' });
+				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '1976:2015' });
+				$('#birthdate').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true, yearRange: '1976:2011' });
 				// Only numberic field
 				$('.numberic').numeric({allow:"."});
             });
@@ -395,7 +395,7 @@
 									       						<th rowspan="2">Year</th>
 									       						<th colspan="3">Credit</th>
 									       						<th colspan="3">Used</th>
-									       						<th colspan="3">remain</th>
+									       						<th colspan="3">Available</th>
 									       						<th rowspan="2">&nbsp;</th>
 									       					</tr>
 									       					<tr>
