@@ -19,7 +19,7 @@ class Certificate {
 		value(size:1..255, nullable:true)
 		organization(size:1..255, blank:false)
 		description(size:1..1024, nullable:true)
-		dateStart(nullable:false)
+		dateStart(nullable:true)
 		dateEnd(nullable:true)
     }
 }
