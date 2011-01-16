@@ -1,6 +1,12 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <script type="text/javascript">
+        	$(function(){
+				// Date picker
+        		$('#birthdate').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+            });
+        </script>
     </head>
     <body>
         <div id="pageBody">
@@ -25,6 +31,12 @@
 			       						<td><input type="text" name="middleName" value="${params.middleName}" size="40" class="inputtext"/></td>
 			       						<td></td>
 			       						<td></td>
+			       					</tr>
+			       					<tr>
+			       						<td><strong>Gender</strong></td>
+			       						<td><input type="text" name="gender" value="${params.gender}" size="20" class="inputtext"/></td>
+			       						<td><strong>Birth date</strong></td>
+			       						<td><input type="text" id="birthdate" name="birthdate" value="${params.birthdate}" size="30" class="inputtext"/></td>
 			       					</tr>
 			       					<tr>
 			       						<td><strong>Job Title</strong></td>

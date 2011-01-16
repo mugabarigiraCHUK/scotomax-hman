@@ -87,6 +87,7 @@
        						<th>Username</th>
        						<th>Full name</th>
        						<th>Is Admin</th>
+       						<th>Is Asset</th>
        						<th>Password</th>
        						<th>Last access</th>
        						<th>Create date</th>
@@ -100,6 +101,7 @@
 	       						<td>${acct.username}</td>
 	       						<td>${acct.fullname}</td>
 	       						<td align="center"><input type="checkbox" ${acct.isadmin?'checked=checked':''} disabled/></td>
+	       						<td align="center"><input type="checkbox" ${acct.isasset?'checked=checked':''} disabled/></td>
 	       						<td><input type="button" id="chpasswd" value="change" class="command" onclick="func.chpasswd('${acct.id}')"/></td>
 	       						<td><g:formatDate date="${acct.lastAccessed}"/></td>
 	       						<td><g:formatDate date="${acct.dateCreated}"/></td>
@@ -153,7 +155,13 @@
 	       			<tr>
 	       				<td><strong>Is Admin</strong></td>
 	       				<td><input type="checkbox" name="isadmin" value="1" />
-	       					<br/><span style="color:red;">* Required</span>
+	       					<span style="color:red;">* Required</span>
+	       				</td>
+	       			</tr>
+	       			<tr>
+	       				<td><strong>Is Asset</strong></td>
+	       				<td><input type="checkbox" name="isasset" value="1" />
+	       					<span style="color:red;">* Required</span>
 	       				</td>
 	       			</tr>
 	       			<tr>
@@ -191,7 +199,15 @@
 		       			</tr>
 		       			<tr>
 		       				<td><strong>Is Admin</strong></td>
-		       				<td><input type="checkbox" name="isadmin" value="1" ${account.isadmin?'checked=checked':''} /></td>
+		       				<td><input type="checkbox" name="isadmin" value="1" ${account.isadmin?'checked=checked':''} />
+		       					<span style="color:red;">* Required</span>
+		       				</td>
+		       			</tr>
+		       			<tr>
+		       				<td><strong>Is Asset</strong></td>
+		       				<td><input type="checkbox" name="isasset" value="1" ${account.isasset?'checked=checked':''} />
+		       					<span style="color:red;">* Required</span>
+		       				</td>
 		       			</tr>
 		       			<tr>
 		       				<td></td>

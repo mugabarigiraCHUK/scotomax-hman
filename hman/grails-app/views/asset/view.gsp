@@ -9,8 +9,8 @@
 				// Update department data.
 				$('#updatedialog').dialog({resizable: false, width: 400});
 				// Date picker
-				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd' });
-				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' });
+				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
 
 				// Only numberic field
 				$('.numberic').numeric({allow:"."});
@@ -59,7 +59,7 @@
 		       						<td><input type="text" id="search" name="search" placeholder="Intelligent seach" class="inputtext" size="50" /></td>
 		       						<td>
 		       							<input type="submit" value="Search" class="command" />
-		       							<g:if test="${session.isadmin=='admin'}">
+		       							<g:if test="${session.privilege=='admin' || session.privilege=='asset'}">
 		       							<input type="button" value="Create" class="command" onclick="func.create()"/>
 		       							</g:if>
 		       						</td>
@@ -85,10 +85,10 @@
 	       						<th>Owner</th>
 	       						<th>Create date</th>
 	       						<th>Last update</th>
-	       						<g:if test="${session.isadmin=='admin'}">
-	       						<th>&nbsp;</th>
-	       						<th>&nbsp;</th>
-	       						<th>&nbsp;</th>
+	       						<g:if test="${session.privilege=='admin' || session.privilege=='asset'}">
+		       						<th>&nbsp;</th>
+		       						<th>&nbsp;</th>
+		       						<th>&nbsp;</th>
 	       						</g:if>
 	       					</tr>
 	       					<g:each status="i" in="${assets}" var="asset">
@@ -109,10 +109,10 @@
 		       						</td>
 		       						<td><g:formatDate date="${asset.dateCreated}/></td>
 		       						<td><g:formatDate date="${asset.lastUpdated}/></td>
-		       						<g:if test="${session.isadmin=='admin'}">
-		       						<td><input type="button" id="assign" value="Assign" class="command" onclick="func.assign('${asset.id}')"/></td>
-		       						<td><input type="button" id="edit" value="Edit" class="command" onclick="func.edit('${asset.id}')"/></td>
-		       						<td><input type="button" id="delete" value="Delete" class="command" onclick="func.delete('${asset.id}')"/></td>
+		       						<g:if test="${session.privilege=='admin' || session.privilege=='asset'}">
+			       						<td><input type="button" id="assign" value="Assign" class="command" onclick="func.assign('${asset.id}')"/></td>
+			       						<td><input type="button" id="edit" value="Edit" class="command" onclick="func.edit('${asset.id}')"/></td>
+			       						<td><input type="button" id="delete" value="Delete" class="command" onclick="func.delete('${asset.id}')"/></td>
 		       						</g:if>
 		       					</tr>
 	       					</g:each>

@@ -13,8 +13,9 @@
 				$('#savePhotoDialog').dialog({autoOpen: false, resizable: false, width: 400});
 				$('#uploadFileDialog').dialog({autoOpen: false, resizable: false, width: 400});
 				// Date picker
-				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd' });
-				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' });
+				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+				$('#birthdate').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
 				// Only numberic field
 				$('.numberic').numeric({allow:"."});
             });
@@ -101,6 +102,12 @@
 			       						<td><input type="text" name="middleName" value="${person.middleName}" size="40" class="inputtext"/></td>
 			       						<td></td>
 			       						<td></td>
+			       					</tr>
+			       					<tr>
+			       						<td><strong>Gender</strong></td>
+			       						<td><input type="text" name="gender" value="${person.gender}" size="20" class="inputtext"/></td>
+			       						<td><strong>Birth date</strong></td>
+			       						<td><input type="text" id="birthdate" name="birthdate" value="${person.birthdate}" size="30" class="inputtext"/></td>
 			       					</tr>
 			       					<tr>
 			       						<td><strong>Job Title</strong></td>
@@ -388,14 +395,18 @@
 									       						<th rowspan="2">Year</th>
 									       						<th colspan="3">Credit</th>
 									       						<th colspan="3">Used</th>
+									       						<th colspan="3">remain</th>
 									       						<th rowspan="2">&nbsp;</th>
 									       					</tr>
 									       					<tr>
 									       						<th>Sick</th>
-									       						<th>Annual</th>
+									       						<th>Vacation</th>
 									       						<th>Extra</th>
 									       						<th>Sick</th>
-									       						<th>Annual</th>
+									       						<th>Vacation</th>
+									       						<th>Extra</th>
+									       						<th>Sick</th>
+									       						<th>Vacation</th>
 									       						<th>Extra</th>
 									       					</tr>
 									       					<g:if test="${person.attendances}">
@@ -406,15 +417,26 @@
 											       						</td>
 											       						<td>
 											       							<input type="hidden" name="year" value="${atte.year}" size="15"/>
+											       							
+											       							<input type="hidden" name="sickCredit" value="${atte.sickCredit}" size="15"/>
+											       							<input type="hidden" name="annualCredit" value="${atte.annualCredit}" size="15"/>
+											       							<input type="hidden" name="extraCredit" value="${atte.extraCredit}" size="15"/>
+											       							
 											       							<input type="hidden" name="atteid" value="${atte.id}" size="15"/>
 											       							${atte.year}
 											       						</td>
-											       						<td><input type="text" name="sickCredit" value="${atte.sickCredit}" size="5" class="numberic" /></td>
-											       						<td><input type="text" name="annualCredit" value="${atte.annualCredit}" size="5" class="numberic" /></td>
-											       						<td><input type="text" name="extraCredit" value="${atte.extraCredit}" size="5" class="numberic" /></td>
+											       						<td>${atte.sickCredit}</td>
+											       						<td>${atte.annualCredit}</td>
+											       						<td>${atte.extraCredit}</td>
+											       						
 											       						<td><input type="text" name="sickUsed" value="${atte.sickUsed}" size="5" class="numberic" /></td>
 											       						<td><input type="text" name="annualUsed" value="${atte.annualUsed}" size="5" class="numberic" /></td>
 											       						<td><input type="text" name="extraUsed" value="${atte.extraUsed}" size="5" class="numberic" /></td>
+											       						
+											       						<td>${atte.sickCredit - atte.sickUsed}</td>
+											       						<td>${atte.annualCredit - atte.annualUsed}</td>
+											       						<td>${atte.extraCredit - atte.extraUsed}</td>
+											       						
 											       						<td><input type="button"" 
 											       								   value="Delete"
 											       								   onclick="func.deleteAtte('${atte.id}')"
@@ -434,6 +456,7 @@
 									       						<td><input type="text" name="sickUsed" value="0" size="5" class="numberic" /></td>
 									       						<td><input type="text" name="annualUsed" value="0" size="5" class="numberic" /></td>
 									       						<td><input type="text" name="extraUsed" value="0" size="5" class="numberic" /></td>
+									       						<td colspan="3">&nbsp;</td>
 									       						<td>&nbsp;</td>
 									       					</tr>
 									       					<tr>

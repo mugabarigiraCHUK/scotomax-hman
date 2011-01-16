@@ -47,8 +47,8 @@
 	       							<td><input type="text" name="search" size="50" value="${search}" placeholder="Intelligent search" class="inputtext"/></td>
 	       							<td>
 	       								<input type="submit" name="cmdSearch" value="Search" class="command" />
-	       								<g:if test="${session.isadmin=='admin'}">
-		       							<input type="button" name="cmdCreate" value="Create" onclick="func.create()" class="command" />
+	       								<g:if test="${session.privilege=='admin'}">
+		       								<input type="button" name="cmdCreate" value="Create" onclick="func.create()" class="command" />
 		       							</g:if>
 		       							<input type="hidden" name="command" value="search"/>
 	       							</td>
@@ -69,7 +69,7 @@
 	       						<th>Position</th>
 	       						<th>Created date</th>
 	       						<th>Last updated</th>
-	       						<g:if test="${session.isadmin=='admin'}">
+	       						<g:if test="${session.privilege=='admin'}">
 	       						<th>&nbsp;</th>
 	       						<th>&nbsp;</th>
 	       						</g:if>
@@ -87,7 +87,7 @@
 	       						<td>${ps.position}</td>
 	       						<td><g:formatDate date="${ps.dateCreated}"/></td>
 	       						<td><g:formatDate date="${ps.lastUpdated}"/></td>
-	       						<g:if test="${session.isadmin=='admin'}">
+	       						<g:if test="${session.privilege=='admin'}">
 	       						<td><input type="button" id="edit" value="Edit" class="command" onclick="func.edit('${ps.id}')"/></td>
 	       						<td><input type="button" id="delete" value="Delete" class="command" onclick="func.delete('${ps.id}')"/></td>
 	       						</g:if>

@@ -37,6 +37,12 @@
 			       						<td></td>
 			       					</tr>
 			       					<tr>
+			       						<td><strong>Gender</strong></td>
+			       						<td>${person.gender}</td>
+			       						<td><strong>Birth date</strong></td>
+			       						<td>${person.birthdate}</td>
+			       					</tr>
+			       					<tr>
 			       						<td><strong>Job Title</strong></td>
 			       						<td>${person.jobTitle}</td>
 			       						<td><strong>Position</strong></td>
@@ -271,13 +277,17 @@
 									       						<th rowspan="2">Year</th>
 									       						<th colspan="3">Credit</th>
 									       						<th colspan="3">Used</th>
+									       						<th colspan="3">Remain</th>
 									       					</tr>
 									       					<tr>
 									       						<th>Sick</th>
-									       						<th>Annual</th>
+									       						<th>Vacation</th>
 									       						<th>Extra</th>
 									       						<th>Sick</th>
-									       						<th>Annual</th>
+									       						<th>Vacation</th>
+									       						<th>Extra</th>
+									       						<th>Sick</th>
+									       						<th>Vacation</th>
 									       						<th>Extra</th>
 									       					</tr>
 									       					<g:each status="i" in="${person.attendances}" var="atte">
@@ -290,6 +300,9 @@
 										       						<td>${atte.sickUsed}</td>
 										       						<td>${atte.annualUsed}</td>
 										       						<td>${atte.extraUsed}</td>
+										       						<td>${atte.sickCredit - atte.sickUsed}</td>
+										       						<td>${atte.annualCredit - atte.annualUsed}</td>
+										       						<td>${atte.extraCredit - atte.extraUsed}</td>
 										       					</tr>
 									       					</g:each>
 									       				</table>

@@ -62,7 +62,7 @@
 								<dd><g:link class="${session.page=='staff-nav'?'selected':''}" controller="person" action="view" params="[page:'staff-nav']">Staff</g:link></dd>
 								<dd><g:link class="${session.page=='asset-nav'?'selected':''}" controller="asset" action="view" params="[page:'asset-nav']">Asset</g:link></dd>
 								
-								<g:if test="${session.isadmin=='admin'}">
+								<g:if test="${session.privilege=='admin'}">
 									<dt>Administrator</dt> 
 										<dd><g:link class="${session.page=='dept-nav'?'selected':''}" controller="department" action="view" params="[page:'dept-nav']">Department</g:link></dd> 
 										<dd><g:link class="${session.page=='acct-nav'?'selected':''}" controller="account" action="view" params="[page:'acct-nav']">Account</g:link></dd> 
