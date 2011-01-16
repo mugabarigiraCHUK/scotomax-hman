@@ -9,8 +9,14 @@
 				// Update department data.
 				$('#updatedialog').dialog({resizable: false, width: 400});
 				// Date picker
-				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
-				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+				$('#datepicker1').datepicker({ dateFormat: 'yy-mm-dd', 
+											   changeYear: true, 
+											   changeMonth: true,
+											   yearRange: '2000:2015' });
+				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd', 
+											   changeYear: true, 
+											   changeMonth: true,
+											   yearRange: '2000:2015' });
 
 				// Only numberic field
 				$('.numberic').numeric({allow:"."});

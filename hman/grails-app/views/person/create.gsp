@@ -4,8 +4,17 @@
         <script type="text/javascript">
         	$(function(){
 				// Date picker
-        		$('#birthdate').datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+        		$('#birthdate').datepicker({ dateFormat: 'yy-mm-dd', 
+            								 changeYear: true, 
+            								 changeMonth: true,
+            								 yearRange: '1976:2011' });
             });
+
+            var func = {
+				back: function(){
+					window.location.href='view?search=${search}';
+				}
+            };
         </script>
     </head>
     <body>
@@ -97,7 +106,7 @@
 			       						<td></td>
 			       						<td>
 			       							<input type="submit" name="save" value="Save" class="command"/>
-			       							<input type="submit" name="cancel" value="Cancel" class="command"/>
+			       							<input type="button" name="cancel" value="Cancel" class="command" onclick="func.back()"/>
 			       						</td>
 			       						<td></td>
 			       						<td></td>
