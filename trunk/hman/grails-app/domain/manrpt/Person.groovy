@@ -5,6 +5,8 @@ class Person {
 	String firstName
 	String familyName
 	String middleName
+	String gender
+	Date birthdate
 	String jobTitle
 	String position
 	Boolean hasPermit
@@ -32,6 +34,8 @@ class Person {
 		firstName(size:1..100, blank:false)
 		familyName(size:1..100, nullable:true)
 		middleName(size:1..100, nullable:true)
+		gender(size:1..10, nullable:true)
+		birthdate(nullable:true)
 		jobTitle(size:1..200, nullable:true)
 		position(size:1..200, blank:false)
 		hasPermit(nullable:true)

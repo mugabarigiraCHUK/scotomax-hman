@@ -6,6 +6,7 @@ class Account {
 	String password
 	String fullname
 	Boolean isadmin
+	Boolean isasset
 	Date lastAccessed
 	
 	Date dateCreated
@@ -16,6 +17,7 @@ class Account {
 		password(size:6..32, blank:false)
 		fullname(size:1..255, nullable:true)
 		isadmin(nullable:false)
+		isasset(nullable:false)
 		lastAccessed(nullable:true)
     }
 	
