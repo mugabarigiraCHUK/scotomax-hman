@@ -6,7 +6,8 @@
        
         <link rel="stylesheet" href="${resource(dir:'css',file:'demos.css')}" />
         <link rel="stylesheet" href="${resource(dir:'css',file:'jquery-impromptu.3.1.min.css')}" />
-        <link rel="stylesheet" href="${resource(dir:'css/ui-lightness',file:'jquery-ui-1.8.7.custom.css')}" />
+        <!-- link rel="stylesheet" href="${resource(dir:'css/ui-lightness',file:'jquery-ui-1.8.7.custom.css')}" / -->
+		<link rel="stylesheet" href="${resource(dir:'css/aristo',file:'jquery-ui-1.8.7.custom.css')}" />
         
         <!-- JavaScript -->
         <g:javascript library="jquery-1.4.4.min" />
