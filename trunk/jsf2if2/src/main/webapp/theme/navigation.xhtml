@@ -1,0 +1,239 @@
+<ice:form xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ice="http://www.icesoft.com/icefaces/component"
+          id="navigationMenuForm">
+<ice:panelGroup>
+<!-- standard components-->
+<ice:panelCollapsible id="extendedCompClpsbl" expanded="#{navigation.extendedRender}" styleClass="navPnlClpsbl" >
+    <f:facet name="header">
+        <ice:panelGroup>
+            <ice:outputText value="extendedComponents"/>
+        </ice:panelGroup>
+    </f:facet>
+    <ice:commandLink id="buttonsAndLinksContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="buttonLinks"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="selectionTagsContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="selection"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="textFieldsContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="textFields"/>
+    </ice:commandLink>
+</ice:panelCollapsible>
+
+<!-- Components Collapsible Panel -->
+<ice:panelCollapsible id="customCompClpsbl" expanded="#{navigation.customRender}" styleClass="navPnlClpsbl">
+    <f:facet name="header">
+        <ice:panelGroup>
+            <ice:outputText value="customComponents"/>
+        </ice:panelGroup>
+    </f:facet>
+    <ice:commandLink id="selectInputContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="selectInputText"/>
+    </ice:commandLink>
+    <br />
+    <ice:commandLink id="selectInputDateContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="selectInputDate"/>
+    </ice:commandLink>
+    <br />
+    <!-- Charts -->
+    <ice:commandLink id="chartContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="outputChart"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="connectionStatusContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="outputConnectionStatus"/>
+    </ice:commandLink>
+    <br/>
+    <!-- Output Resource -->
+    <ice:commandLink id="outputResourcePanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="outputResource']}"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="dragDropContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="dragDrop"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="effectsContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="effects"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="inputFileContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="inputFile"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="gMapContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="gMap"/>
+    </ice:commandLink>
+    <br />
+    <ice:commandLink id="outputMediaContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="outputMedia"/>
+    </ice:commandLink>
+    <br />
+    <ice:commandLink id="menuBarContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="menuBar"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="menuBar2ContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value=""/>
+        <ice:outputText value="menuBar2"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="menuPopupContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="menuPopup']}"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="outputProgressContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="outputProgress"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="inputRichTextPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="inputRichText"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="setEventPhasePanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="setEventPhase"/>
+    </ice:commandLink>
+    <br />
+    <ice:commandLink id="treeContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="tree"/>
+    </ice:commandLink>
+    <br />
+    
+    <!-- Tables Collapsible Panel -->
+    <ice:panelCollapsible id="tableCompClpsbl" expanded="#{navigation.tableRender}" styleClass="navPnlClpsbl" >
+        <f:facet name="header">
+            <ice:panelGroup>
+                <ice:outputText value="dataTableParent"/>
+            </ice:panelGroup>
+        </f:facet>
+        <ice:commandLink id="columnsContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="columns"/>
+        </ice:commandLink>
+        <br/>
+        <ice:commandLink id="dataTablePaginatorContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="dataScrolling"/>
+        </ice:commandLink>
+        <br/>
+        <ice:commandLink id="dataTableExpandableContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="expandableDataTable"/>
+        </ice:commandLink>
+        <br/>
+        <ice:commandLink id="commandSortHeaderContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="commandSortHeader"/>
+        </ice:commandLink>
+        <br/>
+        <ice:commandLink id="dataTableResizableColumnsContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="resizable"/>
+        </ice:commandLink>
+        <br/>
+        <ice:commandLink id="dataTableGroupingContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="grouping"/>
+        </ice:commandLink>
+        <br/>
+        <ice:commandLink id="dataTableRowSelectionContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="rowSelector"/>
+        </ice:commandLink>
+      <br/>
+        <ice:commandLink id="dataExporterContentPanel" actionListener="#{navigation.navigationPathChange}">
+            <f:param name="includePath" value="" />
+            <ice:outputText value="dataExporter"/>
+        </ice:commandLink>        
+    </ice:panelCollapsible>
+</ice:panelCollapsible>
+
+<!-- Layout Panels Collapsible Panel -->
+<ice:panelCollapsible id="layoutPnlClpsbl" expanded="#{navigation.layoutRender}" styleClass="navPnlClpsbl" >
+    <f:facet name="header">
+        <ice:panelGroup>
+            <ice:outputText value="layoutPanels"/>
+        </ice:panelGroup>
+    </f:facet>
+
+    <ice:commandLink id="panelBorderContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelBorder"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelDividerContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelDivider"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelStackContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelStack"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelSeriesContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelSeries"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelPositionedContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelPositioned"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelCollapsibleContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelCollapsible"/>
+    </ice:commandLink>
+    <br />
+    <ice:commandLink id="tabbedPaneContentPanel-static" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelTabSetStatic"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="tabbedPaneContentPanel-dynamic" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelTabSetDynamic"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelPopupContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelPopup"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelTooltipContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelTooltip"/>
+    </ice:commandLink>
+    <br/>
+    <ice:commandLink id="panelConfirmationContentPanel" actionListener="#{navigation.navigationPathChange}">
+        <f:param name="includePath" value="" />
+        <ice:outputText value="panelConfirmation"/>
+    </ice:commandLink>
+
+</ice:panelCollapsible>
+</ice:panelGroup>
+</ice:form>
