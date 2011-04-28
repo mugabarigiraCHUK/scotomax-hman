@@ -8,7 +8,22 @@
 		        
 	<ui:define name="body">
 		
-		
+		<h:form id="loginForm">
+	
+			<a4j:outputPanel id="loginPanel">
+				<h:panelGrid columns="2">
+					<h:outputText value="username"/><h:inputText value="#{homeBean.username}"/>
+					<h:outputText value="password"/><h:inputSecret value="#{homeBean.password}"/>
+					<h:outputText value=""/>
+					<h:panelGrid columns="2">
+						<a4j:commandButton value="LOGIN" render="loginPanel" action="#{homeBean.login}" />
+						<a4j:commandButton value="LOGOUT" render="loginPanel" action="#{homeBean.logout}" />
+					</h:panelGrid>
+					<h:outputText value=""/><h:outputText value="#{homeBean.message}"/>
+				</h:panelGrid>
+			</a4j:outputPanel>
+			
+		</h:form>
 		
 	</ui:define>
 	
