@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mt.sample.jsf2rf4.bean.HomeBean;
 
-@ManagedBean
+@ManagedBean(name="homeBean")
 @ViewScoped
 public class HomeController extends HomeBean {
 
