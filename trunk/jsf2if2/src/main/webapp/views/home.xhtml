@@ -7,6 +7,23 @@
 	
 	<ui:define name="page-content">
 		
+			<h:panelGroup id="loginPanel">
+				<h:panelGrid columns="2">
+					<h:outputText value="username"/><h:inputText id="username" value="#{homeBean.username}"/>
+					<h:outputText value="password"/><h:inputSecret id="password" value="#{homeBean.password}"/>
+					<h:outputText value=""/>
+					<h:panelGrid columns="2">
+						<h:commandButton value="LOGIN" action="#{homeBean.login}">
+							<f:ajax execute="iceform:username iceform:password" render="iceform:loginPanel"/>
+						</h:commandButton>
+						<h:commandButton value="LOGOUT" action="#{homeBean.logout}">
+							<f:ajax render="iceform:loginPanel"/>
+						</h:commandButton>
+					</h:panelGrid>
+					<h:outputText value=""/><h:outputText value="#{homeBean.message}"/>
+				</h:panelGrid>
+			</h:panelGroup>
+		
 	</ui:define>
 	
 </ui:composition>
