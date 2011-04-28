@@ -1,0 +1,37 @@
+<ice:form id="icefrm" xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ice="http://www.icesoft.com/icefaces/component">
+    <ice:panelGroup
+            styleClass="themeControlContainer"
+            style="vertical-align: middle;">
+
+        <ice:panelGroup style="float:left;">
+            <ice:selectOneMenu id="currentStyle"
+                               styleClass="themeSelectOneMenu"
+                               value="#{styleBean.currentStyle}"
+                               valueChangeListener="#{styleBean.changeStyle}"
+                               partialSubmit="true">
+                <f:selectItem id="rime" itemLabel="rime"
+                              itemValue="rime"/>
+                <f:selectItem id="xpTheme" itemLabel="xp"
+                              itemValue="xp"/>
+                <f:selectItem id="royaleTheme"
+                              itemLabel="royale"
+                              itemValue="royale"/>
+            </ice:selectOneMenu>
+        </ice:panelGroup>
+
+        <ice:panelGroup style="float:right">
+  
+                <ice:selectOneMenu id="currentLang" styleClass="themeSelectOneMenu"
+                                   valueChangeListener="#{localeBean.changeLanguage}"
+                                   value="#{localeBean.currentLanguage}"
+                                   partialSubmit="true">
+                    <f:selectItems value="#{localeBean.availableLocales}"/>
+                </ice:selectOneMenu>
+
+        </ice:panelGroup>
+    </ice:panelGroup>
+
+</ice:form>
