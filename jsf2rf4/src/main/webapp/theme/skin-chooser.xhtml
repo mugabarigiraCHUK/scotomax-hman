@@ -10,20 +10,28 @@
 
 	<ul id="skin-menu" class="layout">
 		
-		<a4j:repeat var="skin" value="#{skinBean.skins}" iterationStatusVar="iterStatus">
-		
-			<li class="#{(skin==skinBean.skin) ? 'current-skin' : ''}">
-			
+			<li class="current-skin">
 				<h:link includeViewParams="true">
-				
-					<a4j:outputPanel>#{skin}</a4j:outputPanel>
-					<f:param name="skin" value="#{skin}" />
-					
+					<a4j:outputPanel>classic</a4j:outputPanel>
+					<f:param name="skin" value="classic" />
 				</h:link>
-				
 			</li>
-		</a4j:repeat>
-		<li class="label"><span>Select Skin:</span></li>
+			
+			<li class="">
+				<h:link includeViewParams="true">
+					<a4j:outputPanel>yellow</a4j:outputPanel>
+					<f:param name="skin" value="yellow" />
+				</h:link>
+			</li>
+			
+			<li class="">
+				<h:link includeViewParams="true">
+					<a4j:outputPanel>black</a4j:outputPanel>
+					<f:param name="skin" value="black" />
+				</h:link>
+			</li>
+		
+			<li class="label"><span>Select Skin:</span></li>
 	</ul>
 </ui:composition>
 
