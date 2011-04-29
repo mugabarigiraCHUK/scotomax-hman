@@ -7,6 +7,12 @@
 	
 	<ui:define name="page-content">
 		
+		<ice:panelGroup styleClass="exampleBox firstChildTitle backBeanChangeContainer">
+			
+			<ice:panelGroup styleClass="backBeanChangeTitle">
+                <ice:outputText value="Authentication"/>
+            </ice:panelGroup>
+			
 			<h:panelGroup id="loginPanel">
 				<h:panelGrid columns="2">
 					<h:outputText value="username"/><h:inputText id="username" value="#{homeBean.username}"/>
@@ -23,7 +29,8 @@
 					<h:outputText value=""/><h:outputText value="#{homeBean.message}"/>
 				</h:panelGrid>
 			</h:panelGroup>
-		
+			
+		</ice:panelGroup>
 	</ui:define>
 	
 </ui:composition>
