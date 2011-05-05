@@ -73,10 +73,9 @@
 	<dispatcher>INCLUDE</dispatcher>
 	<dispatcher>ERROR</dispatcher>
   </filter-mapping>
-  
   <!-- ********** END JSF 2.0 CONFIG ********** -->
   
-  <!-- Richfaces 4 -->
+  <!-- ********** START RICHFACE 4.0 CONFIG ********** -->
   <context-param>
 		<param-name>org.richfaces.skin</param-name>
 		<param-value>classic</param-value>
@@ -89,5 +88,6 @@
 		<param-name>org.richfaces.fileUpload.createTempFiles</param-name>
 		<param-value>false</param-value>
 	</context-param>
+	<!-- ********** END RICHFACE 4.0 CONFIG ********** -->
 
 </web-app>
