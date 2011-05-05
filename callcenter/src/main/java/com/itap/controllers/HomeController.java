@@ -18,7 +18,7 @@ import com.itap.controllers.beans.HomeBean;
 public class HomeController extends HomeBean {
 
 	/**
-	 * 
+	 * Gernate serial
 	 */
 	private static final long serialVersionUID = 3548880947146886934L;
 	
