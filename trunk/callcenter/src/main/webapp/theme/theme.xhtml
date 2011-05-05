@@ -1,37 +1,65 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:a4j="http://richfaces.org/a4j">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j">
+
 <f:view contentType="text/html">
 	<h:head>
-		<title>RichFaces Showcase</title>
-		<h:outputStylesheet library="css" name="application.css" />
+		<title>Call Center</title>
+		<h:outputStylesheet library="css" name="default.css" />
+		<h:outputStylesheet library="css" name="960.css" />
 	</h:head>
 	<h:body>
-		<div id="page">
-			<div id="header">
-				<!-- ##### HEADER ##### -->
-				<ui:include src="/theme/header.xhtml" />
+
+
+		<header>
+			<div class="container_12 clearfix">
+				<div class="grid_12">
+					<div class="header">
+						<ui:include src="/theme/header.xhtml" />
+					</div>
+				</div>
 			</div>
-			
-			<div id="menu">
-				<!-- ##### MENU BAR ##### -->
-				<ui:include src="/theme/menu.xhtml" />
-			</div>
-			
-			<div id="page-content">	
-				<div class="content-container"><ui:insert name="body">Body content missed</ui:insert></div>
-				<div class="right-menu"><ui:include src="/theme/navigation.xhtml" /></div>
-			</div>
-			
-			<div id="footer">
-				<!-- ##### FOOTER BAR #### -->
-				<ui:include src="/theme/footer.xhtml" />
-			</div>
-			
+		</header>
+
+		<div class="container_12 clearfix">
+			<nav>
+				<div class="grid_12">
+					<div class="nav">
+						<ui:include src="/theme/menu.xhtml" />
+					</div>
+				</div>
+			</nav>
+
+			<article>
+				<section>
+					<div class="grid_9">
+						<div class="section">
+							<ui:insert name="body">Body content missed</ui:insert>
+						</div>
+					</div>
+				</section>
+			</article>
+
+			<aside>
+				<div class="grid_3">
+					<div class="aside">
+						<ui:include src="/theme/navigation.xhtml" />
+					</div>
+				</div>
+			</aside>
+
+			<footer>
+				<div class="grid_12">
+					<div class="footer">
+						<ui:include src="/theme/footer.xhtml" />
+					</div>
+				</div>
+			</footer>
 		</div>
+
 	</h:body>
 </f:view>
 </html>
