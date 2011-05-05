@@ -1,0 +1,54 @@
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #efefef;
+	font: normal 12px "Lucida Sans Unicode", "Lucida Grande", Geneva,
+		Verdana, Arial, sans-serif;
+	height: 100%;
+	font: normal 12px "Lucida Sans Unicode", "Lucida Grande", Geneva,
+		Verdana, Arial, sans-serif;
+}
+
+a {
+	outline: none;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+header {
+	background: #fff;
+	padding: 15px 0px;
+}
+
+.header {
+	background: #fff;
+}
+
+.header .logo {
+	float: left;
+	margin-left: 7px;
+	text-decoration: none;
+}
+
+.nav {
+	background: #fff;
+}
+
+.section {
+	background: #fff;
+}
+
+.aside {
+	background: #fff;
+}
+
+.footer {
+	background: #fff;
+}
