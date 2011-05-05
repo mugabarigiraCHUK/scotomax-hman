@@ -1,0 +1,171 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<script type="text/javascript" charset="utf-8">
+
+	$(function(){
+		// Button Set
+		$("#radio1").buttonset();
+		// Button
+		$("#createTask").button();
+		// Dialog
+		$('#radio2').button().click(function(){
+			$('#product_dialog').dialog('open');
+			return false;
+		});
+		$('#radio3').button().click(function(){
+			$('#download_dialog').dialog('open');
+			return false;
+		});
+		$('#radio4').button().click(function(){
+			$('#aboutus_dialog').dialog('open');
+			return false;
+		});
+		// Product dialog
+		$('#product_dialog').dialog({
+			autoOpen: false,
+			width: 600,
+			buttons: {
+				"Ok": function() { 
+					$(this).dialog("close"); 
+				}, 
+				"Cancel": function() { 
+					$(this).dialog("close"); 
+				} 
+			},
+			modal: true
+		});
+		// Download dialog
+		$('#download_dialog').dialog({
+			autoOpen: false,
+			width: 600,
+			buttons: {
+				"Ok": function() { 
+					$(this).dialog("close"); 
+				}, 
+				"Cancel": function() { 
+					$(this).dialog("close"); 
+				} 
+			},
+			modal: true
+		});
+		// About us dialog
+		$('#aboutus_dialog').dialog({
+			autoOpen: false,
+			width: 600,
+			buttons: {
+				"Ok": function() { 
+					$(this).dialog("close"); 
+				}, 
+				"Cancel": function() { 
+					$(this).dialog("close"); 
+				} 
+			},
+			modal: true
+		});
+
+		// About us dialog
+		$('#createtask_dialog').dialog({
+			autoOpen: false,
+			width: 600,
+			buttons: {
+				"Ok": function() { 
+
+					if ( $('#taskname').val() != '' ) {
+						$.post('@{createTask()}', {title: $('#taskname').val()}, function(task){
+							$('ul').prepend(
+								'<li><input type="checkbox" id="'+task.id+'"/>'+task.title+'</li>'		
+							)
+						}, 'json')
+					}
+					$(this).dialog("close"); 
+				}, 
+				"Cancel": function() {
+					 
+					$(this).dialog("close"); 
+				} 
+			},
+			modal: true
+		});
+
+
+		
+
+		
+		// Create a task
+		$('#createTask').click(function(){
+			$('#createtask_dialog').dialog('open');
+		})
+		
+		// Change input
+		$('input').live('click', function(){
+			$.post('@{changeStatus()}', {id: $(this).attr('id'), done: $(this).val()})
+		})
+	});
+
+</script>
+
+<h1>
+	Sample play framework
+</h1>
+
+<p>
+	<div id="radio1">
+		<input type="radio" id="radio1" name="radio" checked="checked" /><label for="radio1">Home</label>
+		<input type="radio" id="radio2" name="radio" /><label for="radio2">Product</label>
+		<input type="radio" id="radio3" name="radio" /><label for="radio3">Download</label>
+		<input type="radio" id="radio4" name="radio" /><label for="radio4">About us</label>
+	</div>
+</p>
+
+<div class="ui-widget">
+	<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .7em;"></span>
+		<strong>Did you know:</strong> This is a sample java project which is developed by play framework. </p>
+
+	</div>
+</div>
+
+
+<fieldset class="panel">
+	<legend><b>Task list</b></legend>
+	
+	#{ifnot tasks}
+		<p>
+			No tasks
+		</p>
+	#{/ifnot}
+	
+	<ul>
+		#{list items:tasks, as:'task'}
+			<li>
+				<input type="checkbox" id="${task.id}" ${task.done ? 'checked' : ''}/>
+				${task.title}
+			</li>
+		#{/list}
+	</ul>
+	
+	<hr/>
+	
+	<p>
+		<a id="createTask" href="#">Create new task</a>
+	</p>
+
+</fieldset>
+
+
+
+
+<!-- ### Dialog for main menu -->
+<div id="product_dialog" title="Product">
+	<p>Nothing for product on this site.</p>
+</div>
+<div id="download_dialog" title="Download">
+	<p>Nothing for you to download from this site.</p>
+</div>
+<div id="aboutus_dialog" title="About us">
+	<p>We are Java developer geek.</p>
+</div>
+<div id="createtask_dialog" title="Create Task">
+	<p>Enter task name: <input type="text" id="taskname" name="taskname" size="50"/></p>
+</div>
