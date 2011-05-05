@@ -1,23 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.itap</groupId>
-  <artifactId>callcenter</artifactId>
-  <packaging>war</packaging>
-  
-  <version>1.0-alpha</version>
-  <name>callcenter Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+	<groupId>com.itap</groupId>
+	<artifactId>callcenter</artifactId>
+	<packaging>war</packaging>
 
-  <properties>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  	<org.richfaces.bom.version>4.0.0.Final</org.richfaces.bom.version>
-  </properties>
+	<version>1.0-alpha</version>
+	<name>callcenter Maven Webapp</name>
+	<url>http://maven.apache.org</url>
 
-  <dependencyManagement>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.richfaces.bom.version>4.0.0.Final</org.richfaces.bom.version>
+	</properties>
+
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.richfaces</groupId>
@@ -28,10 +27,10 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-  
-  <dependencies>
 
-      <!-- Richfaces -->
+	<dependencies>
+
+		<!-- Richfaces -->
 		<dependency>
 			<groupId>org.richfaces.ui</groupId>
 			<artifactId>richfaces-components-ui</artifactId>
@@ -114,7 +113,7 @@
 			<scope>test</scope>
 		</dependency>
 
-	<!-- ProjectLombok -->
+		<!-- ProjectLombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -122,9 +121,9 @@
 			<scope>provided</scope>
 		</dependency>
 
-  </dependencies>
+	</dependencies>
 
-  <repositories>
+	<repositories>
 		<repository>
 			<id>java.net2</id>
 			<name>Repository hosting the jee6 artifacts</name>
@@ -152,11 +151,11 @@
 		</repository>
 	</repositories>
 
-  <build>
-    <!-- 
-    <finalName>callcenter</finalName>
-    -->
-    <pluginManagement>
+	<build>
+		<!-- 
+    		<finalName>callcenter</finalName>
+    	-->
+		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -169,6 +168,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-  </build>
+	</build>
 
 </project>

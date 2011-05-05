@@ -25,7 +25,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.mt.sample.jsf2rf4">
+	<logger name="com.itap.controllers">
 		<level value="DEBUG" />
 		<appender-ref ref="SYSTEM" />
 		<appender-ref ref="CONSOLE" />
