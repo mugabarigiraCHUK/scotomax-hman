@@ -29,19 +29,19 @@ header { /* for non-css3 browsers */
 	padding: 15px 0px;
 }
 
-#box {
+.box {
 	-webkit-border-radius: 0.5em;
 	-moz-border-radius: 0.5em;
 	border: solid 1px #CDCDCD;
 }
 
-#box ul {
+.box ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-#box ul li {
+.box ul li {
 	padding: 0.3em 0em 0.3em 0em;
 }
 
