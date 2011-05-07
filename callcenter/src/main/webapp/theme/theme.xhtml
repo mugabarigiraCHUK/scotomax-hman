@@ -13,47 +13,55 @@
 		<h:outputStylesheet library="css" name="nav.css" />
 	</h:head>
 	<h:body>
-
-		<header>
-			<div class="container_12 clearfix">
-				<div class="grid_12">
-					<div class="header">
-						<ui:include src="/theme/header.xhtml" />
-					</div>
-				</div>
-			</div>
-		</header>
-
-		<div class="container_12 clearfix">
-			<nav>
-				<div class="grid_12">
-					<ui:include src="/theme/menu.xhtml" />
-				</div>
-			</nav>
-
-			<article>
-				<section>
-					<div class="grid_9">
-						<div class="section">
-							<ui:insert name="body">Body content missed</ui:insert>
+	
+		<div id="nonFooter">
+			<header>
+				<div class="container_12 clearfix">
+					<div class="grid_12">
+						<div class="header">
+							<ui:include src="/theme/header.xhtml" />
 						</div>
 					</div>
-				</section>
-			</article>
-
-			<aside>
-				<div class="grid_3">
-					<ui:include src="/theme/navigation.xhtml" />
 				</div>
-			</aside>
+			</header>
+			
+			<div class="container_12 clearfix">
+				<nav>
+					<div class="grid_12">
+						<ui:include src="/theme/menu.xhtml" />
+					</div>
+				</nav>
+				
+				<div id="message" class="grid_4 prefix_4">
+					<ui:include src="/theme/message.xhtml" />
+				</div>
+				
+				<article>
+					<section>
+						<div class="grid_10">
+							<div class="section">
+								<ui:insert name="body">Body content missed</ui:insert>
+							</div>
+						</div>
+					</section>
+				</article>
 
-			<footer>
+				<aside>
+					<div class="grid_2">
+						<ui:include src="/theme/navigation.xhtml" />
+					</div>
+				</aside>
+			</div>
+		</div>
+
+		<footer>
+			<div class="container_12 clearfix">
 				<div class="grid_12">
 					<ui:include src="/theme/footer.xhtml" />
 				</div>
-			</footer>
-		</div>
-
+			</div>
+		</footer>
+		
 	</h:body>
 </f:view>
 </html>
