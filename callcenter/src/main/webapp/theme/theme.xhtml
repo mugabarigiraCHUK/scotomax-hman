@@ -11,6 +11,12 @@
 		<h:outputStylesheet library="css" name="960.css" />
 		<h:outputStylesheet library="css" name="default.css" />
 		<h:outputStylesheet library="css" name="nav.css" />
+		
+		<!-- Aristo jQuery UI -->
+		<h:outputStylesheet library="css" name="aristo/jquery-ui-1.8.7.custom.css" />
+		<h:outputScript library="js" name="jquery.min.1.5.1.js" />
+		<h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
+		
 	</h:head>
 	<h:body>
 	
@@ -40,6 +46,24 @@
 					<section>
 						<div class="grid_10">
 							<div class="section">
+							
+								<!-- Notify error message -->
+								<div class="ui-widget"> 
+									<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+										<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .7em;"></span> 
+										<strong>Information:</strong> This is information you should know.</p> 
+									</div> 
+								</div> 
+								<br/> 
+								<!-- Notify information message -->
+								<div class="ui-widget"> 
+									<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+										<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .7em;"></span> 
+										<strong>Error:</strong> This is information you should worry. </p> 
+									</div> 
+								</div> 
+								<br/> 
+								
 								<ui:insert name="body">Body content missed</ui:insert>
 							</div>
 						</div>
