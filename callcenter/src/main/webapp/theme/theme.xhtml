@@ -23,10 +23,16 @@
 		<div id="nonFooter">
 			<header>
 				<div class="container_12 clearfix">
-					<div class="grid_12">
+					<div class="grid_10">
 						<div class="header">
 							<ui:include src="/theme/header.xhtml" />
 						</div>
+					</div>
+					<div class="grid_2">
+						<h:column rendered="#{userController.authenticated}">
+							<h:outputLabel value="Username: " for="username" style="font-weight: bold"/>
+							<h:outputText id="username" value="#{userController.username}"/>
+						</h:column>
 					</div>
 				</div>
 			</header>

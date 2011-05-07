@@ -7,7 +7,7 @@
 	<appender name="SYSTEM" class="org.apache.log4j.DailyRollingFileAppender">
 		<errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler" />
 		<param name="Threshold" value="INFO" />
-		<param name="File" value="${catalina.base}/logs/jsf2rf4.log" />
+		<param name="File" value="${catalina.base}/logs/callcenter.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value=".yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -25,7 +25,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.itap.controllers">
+	<logger name="com.itap.callcenter">
 		<level value="DEBUG" />
 		<appender-ref ref="SYSTEM" />
 		<appender-ref ref="CONSOLE" />
