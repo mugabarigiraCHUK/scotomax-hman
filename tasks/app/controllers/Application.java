@@ -12,6 +12,15 @@ public class Application extends Controller {
         render(tasks);
     }
     
+    
+    public static void login() {
+    	
+    }
+    
+    public static void logout() {
+    	
+    }
+    
     public static void createTask(String title) {
     	Task task = new Task(title).save();
     	renderJSON(task);
