@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" 
+ 	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich">
+	  
+    <f:view>
+        <h:head>
+            <title></title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            
+            <!-- Aristo jQuery UI -->
+            <h:outputStylesheet library="css" name="960.css" />
+			<h:outputStylesheet library="css" name="aristo/jquery-ui-1.8.7.custom.css" />
+			<h:outputScript library="js" name="jquery.min.1.5.1.js" />
+			<h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
+            <script type="text/javascript" charset="utf-8">
+            	<!--//[CDATA]
+					$(function(){
+						
+					});   
+            	//-->
+            </script>
+            <style type="text/css">
+            	/* HTML style */
+            	.body {
+					font-family: Tahoma, Geneva, sans-serif;
+					font-size: 11px;
+            		margin:0;
+  					padding: footer-50 0;
+            	}
+            	
+            	/* Page style */
+            	div#page {
+            	
+            	}
+            	
+            	/* Top bar style */
+            	div#topbar {
+            		font-family: Tahoma, Geneva, sans-serif;
+            		font-size: 12px;
+            		text-align: right;
+            		text-shadow: 1px 1px #FFF;
+            		background-color: #CCC;
+            		padding:5px;
+	            	position:absolute;
+					top:0;
+					left:0;
+					width:100%;
+            	}
+            	
+            	/* Header style */
+            	div#header {
+            		font-family: Tahoma, Geneva, sans-serif;
+            		vertical-align: bottom;
+            		height: 100px;
+            	}
+            	
+            	.main {
+            		width: 100%;
+            		height: 100%;
+            		vertical-align: bottom;
+            	}
+            	
+            	/* Main menu style */
+            	div#menu {
+            		font-family: Tahoma, Geneva, sans-serif;
+            		font-size: 11px;
+            		height: 35px;
+            	}
+            	
+            	/* Page content style */
+            	div#content {
+            		font-family: Tahoma, Geneva, sans-serif;
+            	}
+            	
+            	/* Navigation boxes style */
+            	div#navigate {
+            		font-family: Tahoma, Geneva, sans-serif;
+            	}
+            	
+            	/* Footer style */
+            	div#footer {
+					font-family: Tahoma, Geneva, sans-serif;
+					font-size: 11px;
+            		text-align:center;
+            		text-shadow: 1px 1px #FFF;
+            		padding:5px;
+	            	position:absolute;
+					bottom:0;
+					left:0;
+					width:100%;
+					height:footer-50;
+					background-color: #CCC;
+            	}
+            	
+            	.content_body {
+            		height: 100%;
+            		width: 100%;
+            	}
+            	
+            </style>
+        </h:head>
+        <h:body>
+        
+        	<!-- TOPBAR -->
+        	<div id="topbar" class="clearfix">
+        		<div class="container_16 clearfix">
+        			Scotomax | Setting | Logout
+        		</div>
+        	</div>
+        	
+        	<!-- HEADER -->
+        	<div id="header" class="clearfix">
+        		<div class="container_16 clearfix main">HEADER</div>
+        	</div>
+        	
+        	<!-- MAIN MENU -->
+        	<div id="menu" class="clearfix">
+        		<div class="container_16 clearfix">
+        		
+        			<rich:panel>
+        			
+        			</rich:panel>
+        			
+        		</div>
+        	</div>
+        	
+        	<div id="page" class="clearfix">
+	            <div class="container_16 clearfix">
+	            	
+		            <!-- CONTENT -->
+		            <div id="content" class="grid_12">
+		            
+		            	<rich:panel styleClass="content_body">
+		            	
+		            	</rich:panel>
+		            	
+		            </div>
+		            
+		            <!-- NAVIGATION -->
+		            <div id="navigate" class="grid_4">
+		            	
+		            	<rich:panel>
+		            	
+		            	</rich:panel>
+		            	
+		            </div>
+		            <div class="clear"></div>
+		            
+	            </div>
+            </div>
+            
+            <!-- FOOTER -->
+           	<div id="footer" class="clearfix">
+        		<div class="container_16 clearfix">
+        			Copyright (c) 2011 : Company Limited
+        		</div>
+        	</div>
+            
+        </h:body>
+    </f:view>
+</html>
