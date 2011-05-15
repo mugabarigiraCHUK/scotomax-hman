@@ -1,166 +1,210 @@
 <!DOCTYPE html>
 <html lang="en" 
- 	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:a4j="http://richfaces.org/a4j"
-	  xmlns:rich="http://richfaces.org/rich">
-	  
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
     <f:view>
         <h:head>
             <title></title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-            
+
             <!-- Aristo jQuery UI -->
             <h:outputStylesheet library="css" name="960.css" />
-			<h:outputStylesheet library="css" name="aristo/jquery-ui-1.8.7.custom.css" />
-			<h:outputScript library="js" name="jquery.min.1.5.1.js" />
-			<h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
+            <h:outputStylesheet library="css" name="aristo/jquery-ui-1.8.7.custom.css" />
+            <h:outputScript library="js" name="jquery.min.1.5.1.js" />
+            <h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
             <script type="text/javascript" charset="utf-8">
-            	<!--//[CDATA]
-					$(function(){
-						
-					});   
-            	//-->
+                <!--//[CDATA]
+                    $(function(){
+                        // Button Set
+			$("#radio1").buttonset();
+                    });
+                //-->
             </script>
             <style type="text/css">
-            	/* HTML style */
-            	.body {
-					font-family: Tahoma, Geneva, sans-serif;
-					font-size: 11px;
-            		margin:0;
-  					padding: footer-50 0;
-            	}
-            	
-            	/* Page style */
-            	div#page {
-            	
-            	}
-            	
-            	/* Top bar style */
-            	div#topbar {
-            		font-family: Tahoma, Geneva, sans-serif;
-            		font-size: 12px;
-            		text-align: right;
-            		text-shadow: 1px 1px #FFF;
-            		background-color: #CCC;
-            		padding:5px;
-	            	position:absolute;
-					top:0;
-					left:0;
-					width:100%;
-            	}
-            	
-            	/* Header style */
-            	div#header {
-            		font-family: Tahoma, Geneva, sans-serif;
-            		vertical-align: bottom;
-            		height: 100px;
-            	}
-            	
-            	.main {
-            		width: 100%;
-            		height: 100%;
-            		vertical-align: bottom;
-            	}
-            	
-            	/* Main menu style */
-            	div#menu {
-            		font-family: Tahoma, Geneva, sans-serif;
-            		font-size: 11px;
-            		height: 35px;
-            	}
-            	
-            	/* Page content style */
-            	div#content {
-            		font-family: Tahoma, Geneva, sans-serif;
-            	}
-            	
-            	/* Navigation boxes style */
-            	div#navigate {
-            		font-family: Tahoma, Geneva, sans-serif;
-            	}
-            	
-            	/* Footer style */
-            	div#footer {
-					font-family: Tahoma, Geneva, sans-serif;
-					font-size: 11px;
-            		text-align:center;
-            		text-shadow: 1px 1px #FFF;
-            		padding:5px;
-	            	position:absolute;
-					bottom:0;
-					left:0;
-					width:100%;
-					height:footer-50;
-					background-color: #CCC;
-            	}
-            	
-            	.content_body {
-            		height: 100%;
-            		width: 100%;
-            	}
-            	
+                /* HTML style */
+                .body {
+                    font-family: Tahoma, Geneva, sans-serif;
+                    font-size: 12px;
+                    margin:0;
+                    padding: footer-50 0;
+                }
+
+                /* Page style */
+                div#page {
+
+                }
+
+                /* Top bar style */
+                div#topbar {
+                    font-family: Tahoma, Geneva, sans-serif;
+                    font-size: 14px;
+                    text-shadow: 1px 1px #FFF;
+                    background-color: #CCC;
+                    padding:5px;
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    width:100%;
+                    -moz-box-shadow: 0 0 20px 4px #999;
+                    -webkit-box-shadow: 0 0 20px 4px #999;
+                }
+
+                /* Header style */
+                div#header {
+                    font-family: Tahoma, Geneva, sans-serif;
+                    vertical-align: text-bottom;
+                    height: 120px;
+                }
+
+                .main {
+                    font-size: 2.5em;
+                    text-shadow: 1px 1px #FFF;
+                    width: 100%;
+                    height: 100%;
+                    vertical-align: text-bottom;
+                    background-image: url('../images/folder_group.png');
+                    background-repeat: no-repeat;
+                }
+
+                /* Main menu style */
+                div#menu {
+                    font-family: Tahoma, Geneva, sans-serif;
+                    font-size: 11px;
+                    height: 35px;
+                }
+
+                /* Page content style */
+                div#content {
+                    font-family: Tahoma, Geneva, sans-serif;
+                }
+
+                /* Navigation boxes style */
+                div#navigate {
+                    font-family: Tahoma, Geneva, sans-serif;
+                }
+
+                /* Footer style */
+                div#footer {
+                    font-family: Tahoma, Geneva, sans-serif;
+                    font-size: 12px;
+                    text-align:center;
+                    text-shadow: 1px 1px #FFF;
+                    padding:5px;
+                    position:absolute;
+                    bottom:0;
+                    left:0;
+                    width:100%;
+                    height:footer-50;
+                    background-color: #CCC;
+                    -moz-box-shadow: 0 0 20px 4px #999;
+                    -webkit-box-shadow: 0 0 20px 4px #999;
+                }
+
+                .content_body {
+                    height: 100%;
+                    width: 100%;
+                }
+                
+                a.username {
+                    font-size: 13px;
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                
+                a.setting {
+                    font-size: 13px;
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                
+                a.logout{
+                    font-size: 13px;
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                
+                ul#icons { margin: 0; padding: 0;}
+		ul#icons li { margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left; list-style: none; }
+		ul#icons span.ui-icon { float: left; margin: 0 4px; }
             </style>
         </h:head>
         <h:body>
-        
-        	<!-- TOPBAR -->
-        	<div id="topbar" class="clearfix">
-        		<div class="container_16 clearfix">
-        			Scotomax | Setting | Logout
-        		</div>
-        	</div>
-        	
-        	<!-- HEADER -->
-        	<div id="header" class="clearfix">
-        		<div class="container_16 clearfix main">HEADER</div>
-        	</div>
-        	
-        	<!-- MAIN MENU -->
-        	<div id="menu" class="clearfix">
-        		<div class="container_16 clearfix">
-        		
-        			<rich:panel>
-        			
-        			</rich:panel>
-        			
-        		</div>
-        	</div>
-        	
-        	<div id="page" class="clearfix">
-	            <div class="container_16 clearfix">
-	            	
-		            <!-- CONTENT -->
-		            <div id="content" class="grid_12">
-		            
-		            	<rich:panel styleClass="content_body">
-		            	
-		            	</rich:panel>
-		            	
-		            </div>
-		            
-		            <!-- NAVIGATION -->
-		            <div id="navigate" class="grid_4">
-		            	
-		            	<rich:panel>
-		            	
-		            	</rich:panel>
-		            	
-		            </div>
-		            <div class="clear"></div>
-		            
-	            </div>
+
+            <!-- TOPBAR -->
+            <div id="topbar" class="clearfix">
+                <div class="container_16 clearfix">
+                    <div class="grid_16">
+                        <ul id="icons" class="ui-widget ui-helper-clearfix">
+                            <li class="ui-state-default ui-corner-all" style="width: 90px"><span class="ui-icon ui-icon-person"></span><a class="username" href="#">Scotomax</a></li>
+                            <li class="ui-state-default ui-corner-all" style="width: 90px"><span class="ui-icon ui-icon-wrench"></span><a class="setting"  href="#">Setting</a></li>
+                            <li class="ui-state-default ui-corner-all" style="width: 90px"><span class="ui-icon ui-icon-power"></span><a class="logout"  href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            
+
+            <!-- HEADER -->
+            <div id="header" class="clearfix">
+                <div class="container_16 clearfix main"><br/>
+                    <h:outputText value="Call-Center System"/>
+                </div>
+            </div>
+
+            <!-- MAIN MENU -->
+            <div id="menu" class="clearfix">
+                <div class="container_16 clearfix">
+                    <div class="grid_16">
+                        <div id="radio1"> 
+                            <input type="radio" id="radio1" name="radio" checked="checked"/><label for="radio1">Home</label> 
+                            <input type="radio" id="radio2" name="radio" /><label for="radio2">Work phone</label> 
+                            <input type="radio" id="radio3" name="radio" /><label for="radio3">Co-browse</label>
+                            <input type="radio" id="radio4" name="radio" /><label for="radio4">E-mail</label>
+                            <input type="radio" id="radio5" name="radio" /><label for="radio5">Out-bound</label>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <div id="page" class="clearfix">
+                <div class="container_16 clearfix">
+
+                    <!-- CONTENT -->
+                    <div id="content" class="grid_12">
+
+                        <rich:panel styleClass="content_body">
+
+                        </rich:panel>
+
+                    </div>
+
+                    <!-- NAVIGATION -->
+                    <div id="navigate" class="grid_4">
+
+                        <rich:panel>
+
+                        </rich:panel>
+
+                    </div>
+                    <div class="clear"></div>
+
+                </div>
+            </div>
+
             <!-- FOOTER -->
-           	<div id="footer" class="clearfix">
-        		<div class="container_16 clearfix">
+            <div id="footer" class="clearfix">
+                <div class="container_16 clearfix">
         			Copyright (c) 2011 : Company Limited
-        		</div>
-        	</div>
-            
+                </div>
+            </div>
+
         </h:body>
     </f:view>
 </html>
