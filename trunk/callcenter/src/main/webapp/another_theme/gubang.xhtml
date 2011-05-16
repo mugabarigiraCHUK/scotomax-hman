@@ -18,12 +18,12 @@
             <h:outputScript library="js" name="jquery.min.1.5.1.js" />
             <h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
             <script type="text/javascript" charset="utf-8">
-                <!--//[CDATA]
+                
                     $(function(){
                         // Button Set
-			$("#radio1").buttonset();
+						$("#buttonset").buttonset();
                     });
-                //-->
+              
             </script>
             <style type="text/css">
                 /* HTML style */
@@ -162,13 +162,15 @@
             <div id="menu" class="clearfix">
                 <div class="container_16 clearfix">
                     <div class="grid_16">
-                        <div id="radio1"> 
+                    
+                        <div id="buttonset">
                             <input type="radio" id="radio1" name="radio" checked="checked"/><label for="radio1">Home</label> 
                             <input type="radio" id="radio2" name="radio" /><label for="radio2">Work phone</label> 
                             <input type="radio" id="radio3" name="radio" /><label for="radio3">Co-browse</label>
                             <input type="radio" id="radio4" name="radio" /><label for="radio4">E-mail</label>
                             <input type="radio" id="radio5" name="radio" /><label for="radio5">Out-bound</label>
                         </div>
+                        
                     </div> 
                 </div>
             </div>
@@ -179,8 +181,23 @@
                     <!-- CONTENT -->
                     <div id="content" class="grid_12">
 
-                        <rich:panel styleClass="content_body">
+						<div class="ui-widget"> 
+							<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em; font-size: 12px;"> 
+								<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .7em;"></span> 
+								<strong>Information:</strong> This is a information message what you should know. </p> 
+							</div> 
+						</div> 
+						<br/> 
+						<div class="ui-widget"> 
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em; font-size: 12px;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .7em;"></span> 
+								<strong>Error:</strong> This is warning/errot message what you must warry. </p> 
+							</div> 
+						</div>
+						<br/>
 
+                        <rich:panel styleClass="content_body">
+							
                         </rich:panel>
 
                     </div>
@@ -189,7 +206,11 @@
                     <div id="navigate" class="grid_4">
 
                         <rich:panel>
-
+							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
+							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
+							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
+							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
+							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
                         </rich:panel>
 
                     </div>
