@@ -9,7 +9,7 @@
 
     <f:view>
         <h:head>
-            <title></title>
+            <title>Welcome to Call-Center system</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
             <!-- Aristo jQuery UI -->
@@ -22,6 +22,7 @@
                     $(function(){
                         // Button Set
 						$("#buttonset").buttonset();
+
                     });
               
             </script>
@@ -132,8 +133,8 @@
                 }
                 
                 ul#icons { margin: 0; padding: 0;}
-		ul#icons li { margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left; list-style: none; }
-		ul#icons span.ui-icon { float: left; margin: 0 4px; }
+				ul#icons li { margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left; list-style: none; }
+				ul#icons span.ui-icon { float: left; margin: 0 4px; }
             </style>
         </h:head>
         <h:body>
@@ -142,11 +143,40 @@
             <div id="topbar" class="clearfix">
                 <div class="container_16 clearfix">
                     <div class="grid_16">
-                        <ul id="icons" class="ui-widget ui-helper-clearfix">
-                            <li class="ui-state-default ui-corner-all" style="width: 90px"><span class="ui-icon ui-icon-person"></span><a class="username" href="#">Scotomax</a></li>
-                            <li class="ui-state-default ui-corner-all" style="width: 90px"><span class="ui-icon ui-icon-wrench"></span><a class="setting"  href="#">Setting</a></li>
-                            <li class="ui-state-default ui-corner-all" style="width: 90px"><span class="ui-icon ui-icon-power"></span><a class="logout"  href="#">Logout</a></li>
-                        </ul>
+                    	
+                    	<h:panelGrid columns="6" style="float: right;">
+                    		<h:panelGroup>
+		                    	<ul id="icons" class="ui-widget ui-helper-clearfix">
+		                            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-person"></span></li>
+		                        </ul>
+	                        </h:panelGroup>
+	                        
+	                        <h:panelGroup>
+	                        	<a class="username" href="#">Scotomax</a>
+	                        </h:panelGroup>
+	                        
+	                        <h:panelGroup>
+		                        <ul id="icons" class="ui-widget ui-helper-clearfix">
+		                            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+		                        </ul>
+	                        </h:panelGroup>
+	                        
+	                        <h:panelGroup>
+	                        	<a class="setting"  href="#">Setting</a>
+	                        </h:panelGroup>
+	                    	
+	                    	<h:panelGroup>    
+		                        <ul id="icons" class="ui-widget ui-helper-clearfix">
+		                            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-power"></span></li>
+		                        </ul>
+	                        </h:panelGroup>
+	                    	
+	                    	<h:panelGroup>    
+	                        	<a class="logout"  href="#">Logout</a>
+                    		</h:panelGroup>
+                    		
+                    	</h:panelGrid>
+                        
                     </div>
                 </div>
             </div>
@@ -191,27 +221,134 @@
 						<div class="ui-widget"> 
 							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em; font-size: 12px;"> 
 								<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .7em;"></span> 
-								<strong>Error:</strong> This is warning/errot message what you must warry. </p> 
+								<strong>Error:</strong> This is warning/error message what you must warry. </p> 
 							</div> 
 						</div>
 						<br/>
 
-                        <rich:panel styleClass="content_body">
-							
+                        <rich:panel header="Content" styleClass="content_body">
+							<h3>This is a theme template of gage gage.</h3>
+							<h:commandButton value="Enter" style="font-size: 12px; padding: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; cursor: pointer;"/>
                         </rich:panel>
 
                     </div>
 
                     <!-- NAVIGATION -->
                     <div id="navigate" class="grid_4">
-
-                        <rich:panel>
-							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
-							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
-							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
-							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
-							<div class="ui-state-default ui-corner-all" style="width: 15px; height: 15px; position: static;"><span class="ui-icon ui-icon-play"></span></div>
-                        </rich:panel>
+                    
+                    	<h:panelGrid columns="2">
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-signal"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGrid columns="2" style="font-size: 12px; width: 100%;">
+								<h:outputText value="Total Call" />
+								<h:outputText value="15" />
+							</h:panelGrid>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-signal"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGrid columns="2" style="font-size: 12px; width: 100%;">
+								<h:outputText value="Total E-mail" />
+								<h:outputText value="15" />
+							</h:panelGrid>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-signal"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGrid columns="2" style="font-size: 12px; width: 100%;">
+								<h:outputText value="Co-browse" />
+								<h:outputText value="15" />
+							</h:panelGrid>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-signal"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGrid columns="2" style="font-size: 12px; width: 100%;">
+								<h:outputText value="Call in-queue" />
+								<h:outputText value="0" />
+							</h:panelGrid>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-signal"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGrid columns="2" style="font-size: 12px; width: 100%;">
+								<h:outputText value="E-mail in-queue" />
+								<h:outputText value="0" />
+							</h:panelGrid>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-signal"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGrid columns="2" style="font-size: 12px; width: 100%;">
+								<h:outputText value="Co-browse in-queue" />
+								<h:outputText value="0" />
+							</h:panelGrid>
+							                    	
+                    	</h:panelGrid>
+                    	
+                    	
+                    	<h:panelGrid columns="2" style="font-size: 12px;">
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGroup>
+								<a href="#" style="font-size: 12px; text-decoration: none; color: #000;">My Phone</a>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-folder-open"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGroup>
+								<a href="#" style="font-size: 12px; text-decoration: none; color: #000;">Data Center</a>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-calendar"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGroup>
+								<a href="#" style="font-size: 12px; text-decoration: none; color: #000;">My Calendar</a>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-copy"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGroup>
+								<a href="#" style="font-size: 12px; text-decoration: none; color: #000;">My Agent</a>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-note"></span></li>
+								</ul>
+							</h:panelGroup>
+							<h:panelGroup>
+								<a href="#" style="font-size: 12px; text-decoration: none; color: #000;">My Jobs</a>
+							</h:panelGroup>
+							                    	
+                    	</h:panelGrid>
 
                     </div>
                     <div class="clear"></div>
