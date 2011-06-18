@@ -5,11 +5,13 @@
 	<body>
 		<h3><?=$header?></h3>
 		<p>
-			<ol>
-				<?php foreach($todo as $item): ?>
-				<li><?=$item?></li>
-				<?php endforeach; ?>
-			</ol>
+			
+			<?php foreach($query->result() as $row): ?>
+				<h3><?=$row->title?></h3>
+				<p><?=$row->body?></p>
+				<p><?=anchor('blog/comments/'.$row->id,'Comments');?></p>
+			<?php endforeach; ?>
+			
 		</p>
 	</body>
 </html>
