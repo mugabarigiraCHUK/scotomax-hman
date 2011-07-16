@@ -1,0 +1,37 @@
+/*!
+ * Hman-PHP Copyright 2011,
+ *
+ */
+body {
+	font-family: "Tahoma", Sans-serif, Monospace;
+	font-size: 11px;
+	blackground-color: #000000;
+}
+
+#header {
+	margin: 5px;
+	blackground-color: #CCCCCC;
+}
+
+#footer {
+	margin: 5px;
+	blackground-color: #CCCCCC;
+}
+
+#content {
+	margin: 5px;
+	blackground-color: #CCCCCC;
+}
+
+.header {
+	blackground-color: #EEEEEE;
+}
+
+.footer {
+	blackground-color: #EEEEEE;
+}
+
+.content {
+	blackground-color: #EEEEEE;
+}
+

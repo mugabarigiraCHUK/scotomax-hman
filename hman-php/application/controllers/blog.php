@@ -5,7 +5,7 @@ class Blog extends CI_Controller {
 	/**
 	 * Construct
 	 */
-	public function Blog() {
+	public function __construct() {
 		// Execute construct method on parent class		
 		parent::__construct();
 
