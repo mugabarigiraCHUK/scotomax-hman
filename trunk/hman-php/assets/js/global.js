@@ -2,6 +2,11 @@
   * Java Script
   *
   */
+$(function(){
+	// load javascript function for menu.
+	bmenu._init();
+});
+
 var bmenu = {
 	bmenus : ["home", "note", "profile", "contacts","setting"],	
 	_init : function() {

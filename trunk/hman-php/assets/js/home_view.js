@@ -4,7 +4,5 @@
  */
 // jQuery UI initialization.
 $(function(){
-	// load javascript function for menu.
-	bmenu._init();
-
+	
 });
