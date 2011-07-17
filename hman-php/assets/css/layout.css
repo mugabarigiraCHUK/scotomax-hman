@@ -1,0 +1,149 @@
+/**
+  *
+  *
+  * Default content CSS 
+  *
+  */
+body {
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #000000;
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF;
+}
+
+h1, h2 {
+	color: #000000;
+	font-family: Tahoma, Arial, Geneva, sans-serif;
+	margin: 20px 0 10px;
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+p {
+	margin: 10px 0;
+	padding: 0;
+}
+
+blockquote {
+	font-style: italic;
+}
+
+#container {
+	width: 940px;
+	margin: 0 auto;
+	font-size: 1.4em;
+	padding-top: 65px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	position: relative;
+	z-index: 1;
+}
+
+#menu {
+	float: left;
+	width: 870px;
+	height: 36px;
+	background: #E8E8E8;
+	padding: 22px 25px 22px 25px;
+	position: relative;
+	top: 0px;
+	-moz-box-shadow: 3px 3px 4px #505050;
+	-webkit-box-shadow: 3px 3px 4px #505050;
+	box-shadow: 3px 3px 4px #505050;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+}
+
+#content {
+	float: left;
+	width: 880px;
+	height: 485px;
+	background: #E8E8E8;
+	padding: 20px;
+	position: relative;
+	top: 3px;
+	-moz-box-shadow: 3px 3px 4px #505050;
+	-webkit-box-shadow: 3px 3px 4px #505050;
+	box-shadow: 3px 3px 4px #505050;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+}
+
+#logo {
+	font-size: 4em;
+	font-weight: bold;
+	text-shadow: #000000 2px 1px 2px;
+}
+
+#advertise {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 300px;
+	color: #000000;
+	font-weight: bold;
+	text-align: left;
+	text-shadow: #808080 1px 1px 1px;
+	padding: 3px;
+}
+
+/* ************ Header CSS ************ */
+#header-wrap {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #66DD33;
+	-moz-box-shadow: 3px 3px 4px #505050;
+	-webkit-box-shadow: 3px 3px 4px #505050;
+	box-shadow: 3px 3px 4px #505050;
+	z-index: 2;
+}
+
+#header-container {
+	height: 50px;
+	vertical-align: middle;
+}
+
+#header {
+	width: 940px;
+	margin: 5px auto;
+	padding: 0px 3px 0px 3px;
+	position: relative;
+	text-align: right;
+}
+
+/* ************ Footer CSS ************ */
+#footer-wrap {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #66DD33;	
+	-moz-box-shadow:inset 0 0 3px #000000;
+   -webkit-box-shadow:inset 0 0 3px #000000;
+   box-shadow:inset 0 0 3px #000000;
+	z-index: 2;
+}
+
+#footer-container {
+	height: 25px;
+	vertical-align: middle;
+}
+
+#footer {
+	width: 940px;
+	margin: 3px auto;
+	padding: 3px 3px 0px 3px;
+	position: relative;
+	text-align: right;
+	color: #000000;
+	font-weight: bold;
+	text-shadow: #808080 1px 1px 1px;
+}
+
