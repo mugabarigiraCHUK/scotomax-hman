@@ -7,25 +7,25 @@
 	width: 80px;
 	height: 25px;
 	text-align: center;
-	padding-top: 5px;
+	padding-top: 6px;
 	float: left;
 	background: #66DD33;
 	cursor: pointer;
-	text-shadow: #808080 1px 1px 1px;	
-	-moz-box-shadow:inset 0 0 3px #989898;
-	-webkit-box-shadow:inset 0 0 3px #989898;
-	box-shadow:inset 0 0 3px #989898;
+	color: #000000;
+	font-size: 12px;
+	font-weight: bold;
+	-moz-box-shadow:inset 0 0 1px #989898; -webkit-box-shadow:inset 0 0 1px #989898; box-shadow:inset 0 0 1px #989898;
 }
 
 .mbutton_hover {
-	-moz-box-shadow:inset 0 0 3px #000000;
-	-webkit-box-shadow:inset 0 0 3px #000000;
-	box-shadow:inset 0 0 3px #000000;
-	text-shadow: #000000 1px 1px 1px;
+	color: #FFFFFF;
+	background: #0073EA;
+	-moz-box-shadow:inset 0 0 3px #0073EA; -webkit-box-shadow:inset 0 0 3px #0073EA; box-shadow:inset 0 0 3px #0073EA;	
 }
 
 #home {
-
+	-moz-border-top-left-radius: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px;
+	-moz-border-bottom-left-radius: 4px; -webkit-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px;
 }
 
 #note {
@@ -44,4 +44,24 @@
 	position: absolute;
 	top: 22px;
 	right: 25px;
+	-moz-border-top-right-radius: 3px; -webkit-border-top-right-radius: 3px; border-top-right-radius: 3px;
+	-moz-border-bottom-right-radius: 3px; -webkit-border-bottom-right-radius: 3px; border-bottom-right-radius: 3px;
+}
+
+#data {
+	float: left;
+	padding: 2px;
+	width: 620px;
+	font-size: 12px;
+}
+
+#nav {
+	float: left;
+	padding: 2px;
+	width: 250px;
+	font-size: 12px;
+}
+
+.icon-grip {
+	float: left;
 }

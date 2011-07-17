@@ -50,12 +50,8 @@ blockquote {
 	padding: 22px 25px 22px 25px;
 	position: relative;
 	top: 0px;
-	-moz-box-shadow: 3px 3px 4px #505050;
-	-webkit-box-shadow: 3px 3px 4px #505050;
-	box-shadow: 3px 3px 4px #505050;
-	-moz-border-radius: 7px;
-	-webkit-border-radius: 7px;
-	border-radius: 7px;
+	-moz-box-shadow: 3px 3px 4px #505050; -webkit-box-shadow: 3px 3px 4px #505050; box-shadow: 3px 3px 4px #505050;
+	-moz-border-radius: 7px; -webkit-border-radius: 7px; border-radius: 7px;
 }
 
 #content {
@@ -63,15 +59,11 @@ blockquote {
 	width: 880px;
 	height: 485px;
 	background: #E8E8E8;
-	padding: 20px;
+	padding: 10px 20px 10px 20px;
 	position: relative;
 	top: 3px;
-	-moz-box-shadow: 3px 3px 4px #505050;
-	-webkit-box-shadow: 3px 3px 4px #505050;
-	box-shadow: 3px 3px 4px #505050;
-	-moz-border-radius: 7px;
-	-webkit-border-radius: 7px;
-	border-radius: 7px;
+	-moz-box-shadow: 3px 3px 4px #505050; -webkit-box-shadow: 3px 3px 4px #505050; box-shadow: 3px 3px 4px #505050;
+	-moz-border-radius: 7px; -webkit-border-radius: 7px; border-radius: 7px;
 }
 
 #logo {
@@ -99,9 +91,7 @@ blockquote {
 	left: 0;
 	width: 100%;
 	background: #66DD33;
-	-moz-box-shadow: 3px 3px 4px #505050;
-	-webkit-box-shadow: 3px 3px 4px #505050;
-	box-shadow: 3px 3px 4px #505050;
+	-moz-box-shadow: 3px 3px 4px #505050; -webkit-box-shadow: 3px 3px 4px #505050; box-shadow: 3px 3px 4px #505050;
 	z-index: 2;
 }
 
@@ -125,9 +115,7 @@ blockquote {
 	left: 0;
 	width: 100%;
 	background: #66DD33;	
-	-moz-box-shadow:inset 0 0 3px #000000;
-   -webkit-box-shadow:inset 0 0 3px #000000;
-   box-shadow:inset 0 0 3px #000000;
+	-moz-box-shadow:inset 0 0 3px #000000; -webkit-box-shadow:inset 0 0 3px #000000; box-shadow:inset 0 0 3px #000000;
 	z-index: 2;
 }
 
