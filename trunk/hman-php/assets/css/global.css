@@ -2,4 +2,46 @@
  * Hman-PHP Copyright 2011,
  *
  */
+/* ********** Menu ********** */
+.mbutton {
+	width: 80px;
+	height: 25px;
+	text-align: center;
+	padding-top: 5px;
+	float: left;
+	background: #66DD33;
+	cursor: pointer;
+	text-shadow: #808080 1px 1px 1px;	
+	-moz-box-shadow:inset 0 0 3px #989898;
+	-webkit-box-shadow:inset 0 0 3px #989898;
+	box-shadow:inset 0 0 3px #989898;
+}
 
+.mbutton_hover {
+	-moz-box-shadow:inset 0 0 3px #000000;
+	-webkit-box-shadow:inset 0 0 3px #000000;
+	box-shadow:inset 0 0 3px #000000;
+	text-shadow: #000000 1px 1px 1px;
+}
+
+#home {
+
+}
+
+#note {
+
+}
+
+#profile {
+
+}
+
+#contacts {
+
+}
+
+#setting {
+	position: absolute;
+	top: 22px;
+	right: 25px;
+}
