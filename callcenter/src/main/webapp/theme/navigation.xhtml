@@ -6,28 +6,40 @@
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	
-	<rich:panelMenu style="width:200px" 
-						itemMode="client" 
-						groupMode="client"
-                		groupExpandedLeftIcon="triangleUp"
-                		groupCollapsedLeftIcon="triangleDown"
-                		topGroupExpandedRightIcon="chevronUp"
-                		topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
-     	<rich:panelMenuGroup label="Information Update">
-        	<rich:panelMenuItem label="Total Call" name="Item_1_1" />
-         	<rich:panelMenuItem label="Total Email" name="Item_1_2" />
-         	<rich:panelMenuItem label="Total Co-browser" name="Item_1_3" />
-         	<rich:panelMenuItem label="Call in-queue" name="Item_1_4" />
-         	<rich:panelMenuItem label="Email in-queue" name="Item_1_5" />
-         	<rich:panelMenuItem label="Co-browser in-queue" name="Item_1_6" />
-     	</rich:panelMenuGroup>
-     	<rich:panelMenuGroup label="User Profile">
-         	<rich:panelMenuItem label="My phone" name="Item_2_1" />
-         	<rich:panelMenuItem label="Data Center" name="Item_2_2" />
-         	<rich:panelMenuItem label="My Calendar" name="Item_2_3" />
-         	<rich:panelMenuItem label="My Agent" name="Item_2_4" />
-         	<rich:panelMenuItem label="My Job" name="Item_2_5" />
-    	</rich:panelMenuGroup>
-	</rich:panelMenu>
-
+	
+	<h:form id="navForm">
+		<rich:panel header="Information update">
+			<h:panelGrid columns="2">
+				<h:outputText value="Total Call" />
+				<h:outputText value="000.00" />
+				
+				<h:outputText value="Total Email" />
+				<h:outputText value="000.00" />
+				
+				<h:outputText value="Total Co-browser" />
+				<h:outputText value="000.00" />
+				
+				<h:outputText value="Call in-queue" />
+				<h:outputText value="000.00" />
+				
+				<h:outputText value="Email in-queue" />
+				<h:outputText value="000.00" />
+				
+				<h:outputText value="Co-browser in-queue" />
+				<h:outputText value="000.00" />
+				
+			</h:panelGrid>
+		</rich:panel>
+		
+		<rich:panel header="User Profile">
+			<h:panelGrid columns="1">
+				<h:outputText value="My phone" />
+				<h:outputText value="Data Center" />
+				<h:outputText value="My Calendar" />
+				<h:outputText value="My Agent" />
+				<h:outputText value="My Job" />
+			</h:panelGrid>	
+		</rich:panel>
+	</h:form>
+		
 </ui:composition>
