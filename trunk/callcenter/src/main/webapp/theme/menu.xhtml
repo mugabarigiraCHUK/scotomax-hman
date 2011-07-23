@@ -7,19 +7,20 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 	<h:form>
-		<ul id="nav">
-			<li class="current"><a href="#">Home</a></li>
-			<li><a href="#">Work phone</a></li>
-			<li><a href="#">Co Process</a></li>
-			<li><a href="#">E - Mail</a></li>
-			<li><a href="#">Out bound</a></li>
-			<h:column rendered="#{!userController.authenticated}">
-			<li>
-				<a href="login.faces">Login</a>
-			</li>
-			</h:column>
-			<li><h:commandLink value="Logout" action="#{userController.logout}" rendered="#{userController.authenticated}"/></li>
-		</ul>
+	<rich:toolbar id="bar" 
+					   height="30">
+     	<rich:toolbarGroup>
+             <h:commandLink value="Home" />
+             <h:commandLink value="Work phone" />
+             <h:commandLink value="Co browser" />
+             <h:commandLink value="E-Mail" />
+        	 <h:commandLink value="Out bound" />
+        </rich:toolbarGroup>
+       	<rich:toolbarGroup location="right">
+            <h:commandLink value="Login"  rendered="#{!userController.authenticated}"/>
+        	 <h:commandLink value="Logout" action="#{userController.logout}" rendered="#{userController.authenticated}"/>
+    	 </rich:toolbarGroup>
+	 </rich:toolbar>
 	</h:form>
-
+	
 </ui:composition>

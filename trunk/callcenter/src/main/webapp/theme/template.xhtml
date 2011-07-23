@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<f:view contentType="text/html">
+	<h:head>
+		<title>Call Center</title>
+		<!-- CSS components -->
+		<h:outputStylesheet library="css" name="reset.css" />
+		<h:outputStylesheet library="css" name="text.css" />
+		<h:outputStylesheet library="css" name="960.css" />
+		<h:outputStylesheet library="css" name="template.css" />
+		
+		<!-- Aristo jQuery UI -->
+		<h:outputStylesheet library="css" name="aristo/jquery-ui-1.8.7.custom.css" />
+		<h:outputScript library="js" name="jquery.min.1.5.1.js" />
+		<h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
+		
+	</h:head>
+	<h:body>
+				<!-- HEADER -->
+				<div id="header">
+					<table id="header_content">
+						<tr>
+							<td id="header_content_td"><ui:include src="../theme/menu.xhtml" /></td>
+						</tr>
+					</table>
+				</div>
+				
+				<!-- CONTAINER -->
+				<div id="container">
+					<table id="content">
+						<tr>
+							<td id="board">
+								<ui:insert name="body">Body content missed</ui:insert>
+							</td>
+							<td id="navigate">
+								<ui:include src="../theme/navigation.xhtml" />
+							</td>
+						</tr>
+					</table>
+				</div>
+	
+				<!-- FOOTER -->			
+				<div id="footer">
+					<table id="footer_content">
+						<tr>
+							<td id="footer_content_td"><ui:include src="../theme/footer.xhtml" /></td>
+						</tr>
+					</table>
+				</div>
+
+	</h:body>
+</f:view>
+</html>
