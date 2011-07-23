@@ -1,5 +1,5 @@
 /* ***************** Header Content CSS ********************* */
-#header {
+#cc_header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,13 +10,13 @@
 	z-index: 2;
 }
 
-#header_content {
+#cc_header_content {
 	width: 100%;
 	border-width: 0px;
 	padding: 8px 8px 0px 8px;
 }
 
-#header_content_td {
+#cc_header_content_td {
 	height: 98px;
 	border-width: 0px;
 	padding: 8px 8px 0px 8px;
@@ -25,7 +25,7 @@
 
 
 /* ***************** Footer Content CSS ********************* */
-#footer {
+#cc_footer {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -36,13 +36,13 @@
 	z-index: 2;
 }
 
-#footer_content {
+#cc_footer_content {
 	width: 100%;
 	border-width: 0px;
 	padding: 5px 5px 0px 5px;
 }
 
-#footer_content_td {
+#cc_footer_content_td {
 	height: 8px;
 	border-width: 0px;
 	padding: 5px 5px 0px 5px;
@@ -51,7 +51,7 @@
 
 
 /* ***************** Body Content CSS ********************* */
-#container {
+#cc_container {
 	background-color: #FFFFFF;
 	height: 100%;
 	padding-top: 96px;
@@ -60,26 +60,27 @@
 	z-index: 1;
 }
 
-#content {
+#cc_content {
 	background-color: #E8E8E8;
 	width: 100%;
 	border-width: 0px;
 	padding: 5px;
 }
 
-#board {
+#cc_board {
 	background-color: #FFFFFF;
 	height: 100%;
 	border-width: 0px;
 	padding: 5px;
 }
 
-#navigate {
+#cc_navigate {
 	background-color: #FFFFFF;
 	width: 200px;
 	border-width: 0px;
 	padding: 5px;
 }
+
 
 A:link{color:#FFFFFF;text-decoration:none}
 A:visited{color:#FFFFFF;text-decoration:none}
