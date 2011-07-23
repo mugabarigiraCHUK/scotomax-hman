@@ -9,7 +9,7 @@
 	
 	<h:form id="navForm">
 		<rich:panel header="Information update">
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" styleClass="cc_panelgrid" columnClasses="cc_colgrid">
 				<h:outputText value="Total Call" />
 				<h:outputText value="000.00" />
 				
@@ -32,11 +32,26 @@
 		</rich:panel>
 		
 		<rich:panel header="User Profile">
-			<h:panelGrid columns="1">
+			<h:panelGrid columns="2" columnClasses="cc_colgrid">
+				<div id="myphone" class="ui-state-default ui-corner-all" style="cursor: pointer;">
+	     			<span class="ui-icon ui-icon-person"></span>
+	     		</div>
 				<h:outputText value="My phone" />
+				<div id="datacenter" class="ui-state-default ui-corner-all" style="cursor: pointer;">
+	     			<span class="ui-icon ui-icon-person"></span>
+	     		</div>
 				<h:outputText value="Data Center" />
+				<div  id="mycalendar" class="ui-state-default ui-corner-all" style="cursor: pointer;">
+	     			<span class="ui-icon ui-icon-person"></span>
+	     		</div>
 				<h:outputText value="My Calendar" />
+				<div  id="myagent" class="ui-state-default ui-corner-all" style="cursor: pointer;">
+	     			<span class="ui-icon ui-icon-person"></span>
+	     		</div>
 				<h:outputText value="My Agent" />
+				<div  id="myjob" class="ui-state-default ui-corner-all" style="cursor: pointer;">
+	     			<span class="ui-icon ui-icon-person"></span>
+	     		</div>
 				<h:outputText value="My Job" />
 			</h:panelGrid>	
 		</rich:panel>

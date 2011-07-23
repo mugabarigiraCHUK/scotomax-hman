@@ -81,6 +81,13 @@
 	padding: 5px;
 }
 
+.cc_colgrid {
+	padding: 2px 5px 2px 5px;	
+}
+
+.cc_panelgrid {
+	width: 100%	
+}
 
 A:link{color:#FFFFFF;text-decoration:none}
 A:visited{color:#FFFFFF;text-decoration:none}
