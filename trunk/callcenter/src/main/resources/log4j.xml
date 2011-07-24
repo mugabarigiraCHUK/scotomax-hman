@@ -31,6 +31,25 @@
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
+	<logger name="org.springframework.web">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.springframework.security">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	
 	<!-- Root Logger -->
 	<root>
 		<priority value="INFO" />
