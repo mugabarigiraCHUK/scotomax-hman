@@ -16,6 +16,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.richfaces.bom.version>4.0.0.Final</org.richfaces.bom.version>
+		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.security.version>3.0.4.RELEASE</spring.security.version>
 	</properties>
 
 	<dependencyManagement>
@@ -122,93 +124,26 @@
 			<version>0.9.3</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- JAVAX annotation -->
+		<dependency>
+    		<groupId>javax.annotation</groupId>
+    		<artifactId>com.springsource.javax.annotation</artifactId>
+    		<version>1.0.0</version>
+    	</dependency>
 
-		<!-- Spring framework -->
+		<!-- Spring security web framework -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>org.springframework.security.web</artifactId>
-			<version>3.0.4.RELEASE</version>
+			<version>${spring.security.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.context.support</artifactId>
-			<version>3.0.5.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>org.springframework.core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.context</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.transaction</artifactId>
-			<version>3.0.5.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>org.springframework.core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>com.springsource.org.aopalliance</artifactId>
-					<groupId>org.aopalliance</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.aop</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.context</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.web</artifactId>
-			<version>3.0.5.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>org.springframework.core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.aop</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.context</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework.beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>com.springsource.org.aopalliance</artifactId>
-					<groupId>org.aopalliance</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- Spring security configure framework -->
 		<dependency>
         	<groupId>org.springframework.security</groupId>
 			<artifactId>org.springframework.security.config</artifactId>
-        	<version>3.0.4.RELEASE</version>
+        	<version>${spring.security.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>com.springsource.org.apache.commons.logging</artifactId>
@@ -232,12 +167,314 @@
 				</exclusion>
 			</exclusions>
     	</dependency>
+		
+		<!-- Spring context support framework 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.context.support</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>org.springframework.core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		-->
+		
+		<!-- Spring transaction framework 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.transaction</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>org.springframework.core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>com.springsource.org.aopalliance</artifactId>
+					<groupId>org.aopalliance</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.aop</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		-->
+		
+		<!-- Spring web framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>org.springframework.core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.aop</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>org.springframework.beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>com.springsource.org.aopalliance</artifactId>
+					<groupId>org.aopalliance</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
     	
-    	<dependency>
-    		<groupId>javax.annotation</groupId>
-    		<artifactId>com.springsource.javax.annotation</artifactId>
-    		<version>1.0.0</version>
-    	</dependency>
+    	
+    	<!--########## DAO JPA Hibernate ##########-->
+    	<!-- AspectJ -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.8</version>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- commons-collections-3.2.1 -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- asm-all-2.2.3 -->
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm-all</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- c3p0 Connection Pool  -->
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0-oracle-thin-extras</artifactId>
+            <version>0.9.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- Apache Commons Database Connection Pool -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
+            <version>1.2.2.osgi</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>com.springsource.org.apache.commons.pool</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+		<!-- cglib-2.2.jar -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+		<!-- hibernate-entitymanager 3.4.0.GA -->
+        <dependency>
+            <groupId>hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.4.0.GA</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+		<!-- Java Configuration -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.config.java</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+		<!-- Spring Context Support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.context.support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+		<!-- Spring Core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+		<!-- Spring JDBC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+		<!-- Spring ORM -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+                
+                <!-- Spring Transaction -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.transaction</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+                
+                <!-- Spring context  -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+                
+                <!-- Spring Bean  -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+                
+                <!-- Spring Aop  -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
+        <!-- Spring ASM -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-asm</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        
+        <!-- Spring Expression -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+
+		<!-- Spring TEST -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+		<!-- Oracle JDBC
+        <dependency>
+            <groupId>ojdbc</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>14</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+        <!-- MySQL JDBC -->
+        <dependency>
+  			<groupId>mysql</groupId>
+  			<artifactId>mysql-connector-java</artifactId>
+  			<version>5.1.15</version>
+		</dependency>
+		
+        <!-- Apache log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+
+		<!-- javassist-3.9.0.GA -->
+        <dependency>
+            <groupId>org.jboss.javassist</groupId>
+            <artifactId>com.springsource.javassist</artifactId>
+            <version>3.9.0.GA</version>
+        </dependency>
+		
+		<!-- commons-lang 2.6-->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        
+        <!-- AOP alliance -->
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+        </dependency>
+    	
 	</dependencies>
 
 	<repositories>
