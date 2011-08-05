@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,51 +28,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "crm_customer")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "CrmCustomer.findAll", query = "SELECT c FROM CrmCustomer c"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerId", query = "SELECT c FROM CrmCustomer c WHERE c.customerId = :customerId"),
-    @NamedQuery(name = "CrmCustomer.findByBusinessId", query = "SELECT c FROM CrmCustomer c WHERE c.businessId = :businessId"),
-    @NamedQuery(name = "CrmCustomer.findByStatusId", query = "SELECT c FROM CrmCustomer c WHERE c.statusId = :statusId"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerFullname", query = "SELECT c FROM CrmCustomer c WHERE c.customerFullname = :customerFullname"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerGender", query = "SELECT c FROM CrmCustomer c WHERE c.customerGender = :customerGender"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerAddress", query = "SELECT c FROM CrmCustomer c WHERE c.customerAddress = :customerAddress"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerBirthday", query = "SELECT c FROM CrmCustomer c WHERE c.customerBirthday = :customerBirthday"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerPhone", query = "SELECT c FROM CrmCustomer c WHERE c.customerPhone = :customerPhone"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerEmail", query = "SELECT c FROM CrmCustomer c WHERE c.customerEmail = :customerEmail"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerCreateDate", query = "SELECT c FROM CrmCustomer c WHERE c.customerCreateDate = :customerCreateDate"),
-    @NamedQuery(name = "CrmCustomer.findByCustomerUpdateDate", query = "SELECT c FROM CrmCustomer c WHERE c.customerUpdateDate = :customerUpdateDate")})
-public class CrmCustomer implements Serializable {
+public class CrmCustomer implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "customer_id")
     private Integer customerId;
-    @Basic(optional = false)
+    
     @Column(name = "business_id")
     private int businessId;
-    @Basic(optional = false)
+    
     @Column(name = "status_id")
     private int statusId;
-    @Basic(optional = false)
+    
     @Column(name = "customer_fullname")
     private String customerFullname;
-    @Basic(optional = false)
+    
     @Column(name = "customer_gender")
     private int customerGender;
+    
     @Column(name = "customer_address")
     private String customerAddress;
+    
     @Column(name = "customer_birthday")
     @Temporal(TemporalType.TIMESTAMP)
     private Date customerBirthday;
+    
     @Column(name = "customer_phone")
     private String customerPhone;
+    
     @Column(name = "customer_email")
     private String customerEmail;
-    @Basic(optional = false)
+    
     @Column(name = "customer_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date customerCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "customer_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date customerUpdateDate;
@@ -179,28 +175,28 @@ public class CrmCustomer implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (customerId != null ? customerId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CrmCustomer)) {
-            return false;
-        }
-        CrmCustomer other = (CrmCustomer) object;
-        if ((this.customerId == null && other.customerId != null) || (this.customerId != null && !this.customerId.equals(other.customerId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.CrmCustomer[ customerId=" + customerId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+         CrmCustomer other = (CrmCustomer) o;
+        return new EqualsBuilder()
+                 .append(customerId, other.customerId)
+                 .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.customerId)
+         .toHashCode();
     }
     
 }

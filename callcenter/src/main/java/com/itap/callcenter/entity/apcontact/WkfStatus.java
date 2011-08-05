@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,24 +28,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "wkf_status")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "WkfStatus.findAll", query = "SELECT w FROM WkfStatus w"),
-    @NamedQuery(name = "WkfStatus.findByStatusId", query = "SELECT w FROM WkfStatus w WHERE w.statusId = :statusId"),
-    @NamedQuery(name = "WkfStatus.findByStatusName", query = "SELECT w FROM WkfStatus w WHERE w.statusName = :statusName"),
-    @NamedQuery(name = "WkfStatus.findByStatusDescription", query = "SELECT w FROM WkfStatus w WHERE w.statusDescription = :statusDescription"),
-    @NamedQuery(name = "WkfStatus.findByStatusUpdateDate", query = "SELECT w FROM WkfStatus w WHERE w.statusUpdateDate = :statusUpdateDate")})
-public class WkfStatus implements Serializable {
+public class WkfStatus implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "status_id")
     private Integer statusId;
-    @Basic(optional = false)
+    
     @Column(name = "status_name")
     private String statusName;
+    
     @Column(name = "status_description")
     private String statusDescription;
-    @Basic(optional = false)
+    
     @Column(name = "status_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date statusUpdateDate;
@@ -92,28 +92,28 @@ public class WkfStatus implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (statusId != null ? statusId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WkfStatus)) {
-            return false;
-        }
-        WkfStatus other = (WkfStatus) object;
-        if ((this.statusId == null && other.statusId != null) || (this.statusId != null && !this.statusId.equals(other.statusId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.WkfStatus[ statusId=" + statusId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        WkfStatus other = (WkfStatus) o;
+        return new EqualsBuilder()
+                 .append(statusId, other.statusId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.statusId)
+         .toHashCode();
     }
     
 }

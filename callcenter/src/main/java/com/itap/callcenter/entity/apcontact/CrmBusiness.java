@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,24 +28,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "crm_business")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "CrmBusiness.findAll", query = "SELECT c FROM CrmBusiness c"),
-    @NamedQuery(name = "CrmBusiness.findByBusinessId", query = "SELECT c FROM CrmBusiness c WHERE c.businessId = :businessId"),
-    @NamedQuery(name = "CrmBusiness.findByBusinessName", query = "SELECT c FROM CrmBusiness c WHERE c.businessName = :businessName"),
-    @NamedQuery(name = "CrmBusiness.findByBusinessDescription", query = "SELECT c FROM CrmBusiness c WHERE c.businessDescription = :businessDescription"),
-    @NamedQuery(name = "CrmBusiness.findByBusinessUpdateDate", query = "SELECT c FROM CrmBusiness c WHERE c.businessUpdateDate = :businessUpdateDate")})
-public class CrmBusiness implements Serializable {
+public class CrmBusiness implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "business_id")
     private Integer businessId;
-    @Basic(optional = false)
+    
     @Column(name = "business_name")
     private String businessName;
+    
     @Column(name = "business_description")
     private String businessDescription;
-    @Basic(optional = false)
+    
     @Column(name = "business_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date businessUpdateDate;
@@ -92,28 +92,28 @@ public class CrmBusiness implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (businessId != null ? businessId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CrmBusiness)) {
-            return false;
-        }
-        CrmBusiness other = (CrmBusiness) object;
-        if ((this.businessId == null && other.businessId != null) || (this.businessId != null && !this.businessId.equals(other.businessId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.CrmBusiness[ businessId=" + businessId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        CrmBusiness other = (CrmBusiness) o;
+        return new EqualsBuilder()
+                 .append(businessId, other.businessId)
+                 .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.businessId)
+         .toHashCode();
     }
     
 }

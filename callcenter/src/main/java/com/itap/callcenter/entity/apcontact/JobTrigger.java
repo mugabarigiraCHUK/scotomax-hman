@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,32 +28,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "job_trigger")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "JobTrigger.findAll", query = "SELECT j FROM JobTrigger j"),
-    @NamedQuery(name = "JobTrigger.findByTriggerId", query = "SELECT j FROM JobTrigger j WHERE j.triggerId = :triggerId"),
-    @NamedQuery(name = "JobTrigger.findByTriggerName", query = "SELECT j FROM JobTrigger j WHERE j.triggerName = :triggerName"),
-    @NamedQuery(name = "JobTrigger.findByTriggerDescription", query = "SELECT j FROM JobTrigger j WHERE j.triggerDescription = :triggerDescription"),
-    @NamedQuery(name = "JobTrigger.findByTriggerCommand", query = "SELECT j FROM JobTrigger j WHERE j.triggerCommand = :triggerCommand"),
-    @NamedQuery(name = "JobTrigger.findByTriggerCreateDate", query = "SELECT j FROM JobTrigger j WHERE j.triggerCreateDate = :triggerCreateDate"),
-    @NamedQuery(name = "JobTrigger.findByTriggerUpdateDate", query = "SELECT j FROM JobTrigger j WHERE j.triggerUpdateDate = :triggerUpdateDate")})
-public class JobTrigger implements Serializable {
+public class JobTrigger implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "trigger_id")
     private Integer triggerId;
-    @Basic(optional = false)
+    
     @Column(name = "trigger_name")
     private String triggerName;
+    
     @Column(name = "trigger_description")
     private String triggerDescription;
+    
     @Column(name = "trigger_command")
     private String triggerCommand;
-    @Basic(optional = false)
+    
     @Column(name = "trigger_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date triggerCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "trigger_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date triggerUpdateDate;
@@ -117,28 +116,28 @@ public class JobTrigger implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (triggerId != null ? triggerId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof JobTrigger)) {
-            return false;
-        }
-        JobTrigger other = (JobTrigger) object;
-        if ((this.triggerId == null && other.triggerId != null) || (this.triggerId != null && !this.triggerId.equals(other.triggerId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.JobTrigger[ triggerId=" + triggerId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        JobTrigger other = (JobTrigger) o;
+        return new EqualsBuilder()
+                 .append(triggerId, other.triggerId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.triggerId)
+         .toHashCode();
     }
     
 }
