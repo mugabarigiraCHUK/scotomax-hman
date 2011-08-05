@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,51 +28,41 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "wkf_request")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "WkfRequest.findAll", query = "SELECT w FROM WkfRequest w"),
-    @NamedQuery(name = "WkfRequest.findByRequestId", query = "SELECT w FROM WkfRequest w WHERE w.requestId = :requestId"),
-    @NamedQuery(name = "WkfRequest.findByAgentId", query = "SELECT w FROM WkfRequest w WHERE w.agentId = :agentId"),
-    @NamedQuery(name = "WkfRequest.findBySupervisorId", query = "SELECT w FROM WkfRequest w WHERE w.supervisorId = :supervisorId"),
-    @NamedQuery(name = "WkfRequest.findByStatusId", query = "SELECT w FROM WkfRequest w WHERE w.statusId = :statusId"),
-    @NamedQuery(name = "WkfRequest.findByRequestName", query = "SELECT w FROM WkfRequest w WHERE w.requestName = :requestName"),
-    @NamedQuery(name = "WkfRequest.findByRequestDescription", query = "SELECT w FROM WkfRequest w WHERE w.requestDescription = :requestDescription"),
-    @NamedQuery(name = "WkfRequest.findByRequestStartTime", query = "SELECT w FROM WkfRequest w WHERE w.requestStartTime = :requestStartTime"),
-    @NamedQuery(name = "WkfRequest.findByRequestEndTime", query = "SELECT w FROM WkfRequest w WHERE w.requestEndTime = :requestEndTime"),
-    @NamedQuery(name = "WkfRequest.findByRequestCreateDate", query = "SELECT w FROM WkfRequest w WHERE w.requestCreateDate = :requestCreateDate"),
-    @NamedQuery(name = "WkfRequest.findByRequestUpdateDate", query = "SELECT w FROM WkfRequest w WHERE w.requestUpdateDate = :requestUpdateDate")})
-public class WkfRequest implements Serializable {
+public class WkfRequest implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "request_id")
     private Integer requestId;
-    @Basic(optional = false)
+    
     @Column(name = "agent_id")
     private int agentId;
-    @Basic(optional = false)
+    
     @Column(name = "supervisor_id")
     private int supervisorId;
-    @Basic(optional = false)
+    
     @Column(name = "status_id")
     private int statusId;
-    @Basic(optional = false)
+    
     @Column(name = "request_name")
     private String requestName;
+    
     @Column(name = "request_description")
     private String requestDescription;
-    @Basic(optional = false)
+    
     @Column(name = "request_start_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestStartTime;
-    @Basic(optional = false)
+    
     @Column(name = "request_end_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestEndTime;
-    @Basic(optional = false)
+    
     @Column(name = "request_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "request_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestUpdateDate;
@@ -173,28 +167,28 @@ public class WkfRequest implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (requestId != null ? requestId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WkfRequest)) {
-            return false;
-        }
-        WkfRequest other = (WkfRequest) object;
-        if ((this.requestId == null && other.requestId != null) || (this.requestId != null && !this.requestId.equals(other.requestId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.WkfRequest[ requestId=" + requestId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        WkfRequest other = (WkfRequest) o;
+        return new EqualsBuilder()
+                 .append(requestId, other.requestId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.requestId)
+         .toHashCode();
     }
     
 }

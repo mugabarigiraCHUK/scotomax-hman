@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,41 +28,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "ivr_dtmf")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "IvrDtmf.findAll", query = "SELECT i FROM IvrDtmf i"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfId", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfId = :dtmfId"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfName", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfName = :dtmfName"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfDescription", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfDescription = :dtmfDescription"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfDigit", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfDigit = :dtmfDigit"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfCorrectCallflowId", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfCorrectCallflowId = :dtmfCorrectCallflowId"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfErrorCallflowId", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfErrorCallflowId = :dtmfErrorCallflowId"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfCreateDate", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfCreateDate = :dtmfCreateDate"),
-    @NamedQuery(name = "IvrDtmf.findByDtmfUpdateDate", query = "SELECT i FROM IvrDtmf i WHERE i.dtmfUpdateDate = :dtmfUpdateDate")})
-public class IvrDtmf implements Serializable {
+public class IvrDtmf implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "dtmf_id")
+    
     private Integer dtmfId;
-    @Basic(optional = false)
+    
     @Column(name = "dtmf_name")
     private String dtmfName;
+    
     @Column(name = "dtmf_description")
     private String dtmfDescription;
-    @Basic(optional = false)
+    
     @Column(name = "dtmf_digit")
     private String dtmfDigit;
-    @Basic(optional = false)
+    
     @Column(name = "dtmf_correct_callflow_id")
     private int dtmfCorrectCallflowId;
-    @Basic(optional = false)
+    
     @Column(name = "dtmf_error_callflow_id")
     private int dtmfErrorCallflowId;
-    @Basic(optional = false)
+    
     @Column(name = "dtmf_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtmfCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "dtmf_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtmfUpdateDate;
@@ -145,28 +142,28 @@ public class IvrDtmf implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (dtmfId != null ? dtmfId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IvrDtmf)) {
-            return false;
-        }
-        IvrDtmf other = (IvrDtmf) object;
-        if ((this.dtmfId == null && other.dtmfId != null) || (this.dtmfId != null && !this.dtmfId.equals(other.dtmfId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.IvrDtmf[ dtmfId=" + dtmfId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        IvrDtmf other = (IvrDtmf) o;
+        return new EqualsBuilder()
+                 .append(dtmfId, other.dtmfId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.dtmfId)
+         .toHashCode();
     }
     
 }

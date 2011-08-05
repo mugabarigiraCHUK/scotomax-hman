@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,24 +28,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "ivr_protocol")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "IvrProtocol.findAll", query = "SELECT i FROM IvrProtocol i"),
-    @NamedQuery(name = "IvrProtocol.findByProtocolId", query = "SELECT i FROM IvrProtocol i WHERE i.protocolId = :protocolId"),
-    @NamedQuery(name = "IvrProtocol.findByProtocolName", query = "SELECT i FROM IvrProtocol i WHERE i.protocolName = :protocolName"),
-    @NamedQuery(name = "IvrProtocol.findByProtocolDescription", query = "SELECT i FROM IvrProtocol i WHERE i.protocolDescription = :protocolDescription"),
-    @NamedQuery(name = "IvrProtocol.findByProtocolUpdateDate", query = "SELECT i FROM IvrProtocol i WHERE i.protocolUpdateDate = :protocolUpdateDate")})
-public class IvrProtocol implements Serializable {
+public class IvrProtocol implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "protocol_id")
     private Integer protocolId;
-    @Basic(optional = false)
+    
     @Column(name = "protocol_name")
     private String protocolName;
+    
     @Column(name = "protocol_description")
     private String protocolDescription;
-    @Basic(optional = false)
+    
     @Column(name = "protocol_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date protocolUpdateDate;
@@ -92,28 +92,28 @@ public class IvrProtocol implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (protocolId != null ? protocolId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IvrProtocol)) {
-            return false;
-        }
-        IvrProtocol other = (IvrProtocol) object;
-        if ((this.protocolId == null && other.protocolId != null) || (this.protocolId != null && !this.protocolId.equals(other.protocolId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.IvrProtocol[ protocolId=" + protocolId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        IvrProtocol other = (IvrProtocol) o;
+        return new EqualsBuilder()
+                 .append(protocolId, other.protocolId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.protocolId)
+         .toHashCode();
     }
     
 }

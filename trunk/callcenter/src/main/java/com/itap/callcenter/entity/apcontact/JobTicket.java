@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,64 +28,52 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "job_ticket")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "JobTicket.findAll", query = "SELECT j FROM JobTicket j"),
-    @NamedQuery(name = "JobTicket.findByJobId", query = "SELECT j FROM JobTicket j WHERE j.jobId = :jobId"),
-    @NamedQuery(name = "JobTicket.findByCustomerId", query = "SELECT j FROM JobTicket j WHERE j.customerId = :customerId"),
-    @NamedQuery(name = "JobTicket.findByAgentId", query = "SELECT j FROM JobTicket j WHERE j.agentId = :agentId"),
-    @NamedQuery(name = "JobTicket.findBySeatId", query = "SELECT j FROM JobTicket j WHERE j.seatId = :seatId"),
-    @NamedQuery(name = "JobTicket.findBySolutionId", query = "SELECT j FROM JobTicket j WHERE j.solutionId = :solutionId"),
-    @NamedQuery(name = "JobTicket.findByStatusId", query = "SELECT j FROM JobTicket j WHERE j.statusId = :statusId"),
-    @NamedQuery(name = "JobTicket.findByLevelId", query = "SELECT j FROM JobTicket j WHERE j.levelId = :levelId"),
-    @NamedQuery(name = "JobTicket.findByJobName", query = "SELECT j FROM JobTicket j WHERE j.jobName = :jobName"),
-    @NamedQuery(name = "JobTicket.findByJobDescription", query = "SELECT j FROM JobTicket j WHERE j.jobDescription = :jobDescription"),
-    @NamedQuery(name = "JobTicket.findByJobVoiceRecordFile", query = "SELECT j FROM JobTicket j WHERE j.jobVoiceRecordFile = :jobVoiceRecordFile"),
-    @NamedQuery(name = "JobTicket.findByJobAlertEnable", query = "SELECT j FROM JobTicket j WHERE j.jobAlertEnable = :jobAlertEnable"),
-    @NamedQuery(name = "JobTicket.findByJobCreateDate", query = "SELECT j FROM JobTicket j WHERE j.jobCreateDate = :jobCreateDate"),
-    @NamedQuery(name = "JobTicket.findByJobUpdateDate", query = "SELECT j FROM JobTicket j WHERE j.jobUpdateDate = :jobUpdateDate"),
-    @NamedQuery(name = "JobTicket.findByJobCloseDate", query = "SELECT j FROM JobTicket j WHERE j.jobCloseDate = :jobCloseDate")})
-public class JobTicket implements Serializable {
+public class JobTicket implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "job_id")
     private Integer jobId;
-    @Basic(optional = false)
+    
     @Column(name = "customer_id")
     private int customerId;
-    @Basic(optional = false)
+    
     @Column(name = "agent_id")
     private int agentId;
-    @Basic(optional = false)
+    
     @Column(name = "seat_id")
     private int seatId;
-    @Basic(optional = false)
+    
     @Column(name = "solution_id")
     private int solutionId;
-    @Basic(optional = false)
+    
     @Column(name = "status_id")
     private int statusId;
-    @Basic(optional = false)
+    
     @Column(name = "level_id")
     private int levelId;
-    @Basic(optional = false)
+    
     @Column(name = "job_name")
     private String jobName;
+    
     @Column(name = "job_description")
     private String jobDescription;
+    
     @Column(name = "job_voice_record_file")
     private String jobVoiceRecordFile;
-    @Basic(optional = false)
+    
     @Column(name = "job_alert_enable")
     private int jobAlertEnable;
-    @Basic(optional = false)
+    
     @Column(name = "job_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date jobCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "job_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date jobUpdateDate;
+    
     @Column(name = "job_close_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date jobCloseDate;
@@ -220,28 +212,28 @@ public class JobTicket implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (jobId != null ? jobId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof JobTicket)) {
-            return false;
-        }
-        JobTicket other = (JobTicket) object;
-        if ((this.jobId == null && other.jobId != null) || (this.jobId != null && !this.jobId.equals(other.jobId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.JobTicket[ jobId=" + jobId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        JobTicket other = (JobTicket) o;
+        return new EqualsBuilder()
+                 .append(jobId, other.jobId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.jobId)
+         .toHashCode();
     }
     
 }

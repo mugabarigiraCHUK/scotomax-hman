@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,33 +28,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "wkf_holiday")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "WkfHoliday.findAll", query = "SELECT w FROM WkfHoliday w"),
-    @NamedQuery(name = "WkfHoliday.findByHolidayId", query = "SELECT w FROM WkfHoliday w WHERE w.holidayId = :holidayId"),
-    @NamedQuery(name = "WkfHoliday.findByCalendarId", query = "SELECT w FROM WkfHoliday w WHERE w.calendarId = :calendarId"),
-    @NamedQuery(name = "WkfHoliday.findByHolidayName", query = "SELECT w FROM WkfHoliday w WHERE w.holidayName = :holidayName"),
-    @NamedQuery(name = "WkfHoliday.findByHolidayDescription", query = "SELECT w FROM WkfHoliday w WHERE w.holidayDescription = :holidayDescription"),
-    @NamedQuery(name = "WkfHoliday.findByHolidayDate", query = "SELECT w FROM WkfHoliday w WHERE w.holidayDate = :holidayDate"),
-    @NamedQuery(name = "WkfHoliday.findByHolidayUpdateDate", query = "SELECT w FROM WkfHoliday w WHERE w.holidayUpdateDate = :holidayUpdateDate")})
-public class WkfHoliday implements Serializable {
+public class WkfHoliday implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "holiday_id")
     private Integer holidayId;
-    @Basic(optional = false)
+    
     @Column(name = "calendar_id")
     private int calendarId;
-    @Basic(optional = false)
+    
     @Column(name = "holiday_name")
     private String holidayName;
+    
     @Column(name = "holiday_description")
     private String holidayDescription;
-    @Basic(optional = false)
+    
     @Column(name = "holiday_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date holidayDate;
-    @Basic(optional = false)
+    
     @Column(name = "holiday_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date holidayUpdateDate;
@@ -119,28 +117,28 @@ public class WkfHoliday implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (holidayId != null ? holidayId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WkfHoliday)) {
-            return false;
-        }
-        WkfHoliday other = (WkfHoliday) object;
-        if ((this.holidayId == null && other.holidayId != null) || (this.holidayId != null && !this.holidayId.equals(other.holidayId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.WkfHoliday[ holidayId=" + holidayId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        WkfHoliday other = (WkfHoliday) o;
+        return new EqualsBuilder()
+                 .append(holidayId, other.holidayId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.holidayId)
+         .toHashCode();
     }
     
 }

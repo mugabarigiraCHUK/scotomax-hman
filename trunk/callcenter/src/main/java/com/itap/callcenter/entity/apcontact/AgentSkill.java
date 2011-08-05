@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,24 +28,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "agent_skill")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "AgentSkill.findAll", query = "SELECT a FROM AgentSkill a"),
-    @NamedQuery(name = "AgentSkill.findBySkillId", query = "SELECT a FROM AgentSkill a WHERE a.skillId = :skillId"),
-    @NamedQuery(name = "AgentSkill.findBySkillName", query = "SELECT a FROM AgentSkill a WHERE a.skillName = :skillName"),
-    @NamedQuery(name = "AgentSkill.findBySkillDescription", query = "SELECT a FROM AgentSkill a WHERE a.skillDescription = :skillDescription"),
-    @NamedQuery(name = "AgentSkill.findBySkillUpdateDate", query = "SELECT a FROM AgentSkill a WHERE a.skillUpdateDate = :skillUpdateDate")})
-public class AgentSkill implements Serializable {
+public class AgentSkill implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "skill_id")
     private Integer skillId;
-    @Basic(optional = false)
+    
     @Column(name = "skill_name")
     private String skillName;
+    
     @Column(name = "skill_description")
     private String skillDescription;
-    @Basic(optional = false)
+    
     @Column(name = "skill_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date skillUpdateDate;
@@ -92,28 +92,28 @@ public class AgentSkill implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (skillId != null ? skillId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AgentSkill)) {
-            return false;
-        }
-        AgentSkill other = (AgentSkill) object;
-        if ((this.skillId == null && other.skillId != null) || (this.skillId != null && !this.skillId.equals(other.skillId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.AgentSkill[ skillId=" + skillId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        AgentSkill other = (AgentSkill) o;
+        return new EqualsBuilder()
+                 .append(skillId, other.skillId)
+                 .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.skillId)
+         .toHashCode();
     }
     
 }

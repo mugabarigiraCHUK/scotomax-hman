@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,33 +28,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "ivr_voiceprompt")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "IvrVoiceprompt.findAll", query = "SELECT i FROM IvrVoiceprompt i"),
-    @NamedQuery(name = "IvrVoiceprompt.findByVoiceId", query = "SELECT i FROM IvrVoiceprompt i WHERE i.voiceId = :voiceId"),
-    @NamedQuery(name = "IvrVoiceprompt.findByVoiceName", query = "SELECT i FROM IvrVoiceprompt i WHERE i.voiceName = :voiceName"),
-    @NamedQuery(name = "IvrVoiceprompt.findByVoiceDescription", query = "SELECT i FROM IvrVoiceprompt i WHERE i.voiceDescription = :voiceDescription"),
-    @NamedQuery(name = "IvrVoiceprompt.findByVoiceFilename", query = "SELECT i FROM IvrVoiceprompt i WHERE i.voiceFilename = :voiceFilename"),
-    @NamedQuery(name = "IvrVoiceprompt.findByVoiceCreateDate", query = "SELECT i FROM IvrVoiceprompt i WHERE i.voiceCreateDate = :voiceCreateDate"),
-    @NamedQuery(name = "IvrVoiceprompt.findByVoiceUpdateDate", query = "SELECT i FROM IvrVoiceprompt i WHERE i.voiceUpdateDate = :voiceUpdateDate")})
-public class IvrVoiceprompt implements Serializable {
+public class IvrVoiceprompt implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "voice_id")
     private Integer voiceId;
-    @Basic(optional = false)
+    
     @Column(name = "voice_name")
     private String voiceName;
+    
     @Column(name = "voice_description")
     private String voiceDescription;
-    @Basic(optional = false)
+    
     @Column(name = "voice_filename")
     private String voiceFilename;
-    @Basic(optional = false)
+    
     @Column(name = "voice_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date voiceCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "voice_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date voiceUpdateDate;
@@ -119,28 +117,28 @@ public class IvrVoiceprompt implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (voiceId != null ? voiceId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IvrVoiceprompt)) {
-            return false;
-        }
-        IvrVoiceprompt other = (IvrVoiceprompt) object;
-        if ((this.voiceId == null && other.voiceId != null) || (this.voiceId != null && !this.voiceId.equals(other.voiceId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.IvrVoiceprompt[ voiceId=" + voiceId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        IvrVoiceprompt other = (IvrVoiceprompt) o;
+        return new EqualsBuilder()
+                 .append(voiceId, other.voiceId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.voiceId)
+         .toHashCode();
     }
     
 }

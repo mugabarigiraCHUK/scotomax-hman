@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,33 +28,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "knw_category")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "KnwCategory.findAll", query = "SELECT k FROM KnwCategory k"),
-    @NamedQuery(name = "KnwCategory.findByCategoryId", query = "SELECT k FROM KnwCategory k WHERE k.categoryId = :categoryId"),
-    @NamedQuery(name = "KnwCategory.findByParentCategoryId", query = "SELECT k FROM KnwCategory k WHERE k.parentCategoryId = :parentCategoryId"),
-    @NamedQuery(name = "KnwCategory.findByCategoryName", query = "SELECT k FROM KnwCategory k WHERE k.categoryName = :categoryName"),
-    @NamedQuery(name = "KnwCategory.findByCategoryDescription", query = "SELECT k FROM KnwCategory k WHERE k.categoryDescription = :categoryDescription"),
-    @NamedQuery(name = "KnwCategory.findByCategoryCreateDate", query = "SELECT k FROM KnwCategory k WHERE k.categoryCreateDate = :categoryCreateDate"),
-    @NamedQuery(name = "KnwCategory.findByCategoryUpdateDate", query = "SELECT k FROM KnwCategory k WHERE k.categoryUpdateDate = :categoryUpdateDate")})
-public class KnwCategory implements Serializable {
+public class KnwCategory implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "category_id")
     private Integer categoryId;
-    @Basic(optional = false)
+    
     @Column(name = "parent_category_id")
     private int parentCategoryId;
-    @Basic(optional = false)
+    
     @Column(name = "category_name")
     private String categoryName;
+    
     @Column(name = "category_description")
     private String categoryDescription;
-    @Basic(optional = false)
+    
     @Column(name = "category_create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date categoryCreateDate;
-    @Basic(optional = false)
+    
     @Column(name = "category_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date categoryUpdateDate;
@@ -119,28 +117,28 @@ public class KnwCategory implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (categoryId != null ? categoryId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof KnwCategory)) {
-            return false;
-        }
-        KnwCategory other = (KnwCategory) object;
-        if ((this.categoryId == null && other.categoryId != null) || (this.categoryId != null && !this.categoryId.equals(other.categoryId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.KnwCategory[ categoryId=" + categoryId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        KnwCategory other = (KnwCategory) o;
+        return new EqualsBuilder()
+                 .append(categoryId, other.categoryId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.categoryId)
+         .toHashCode();
     }
     
 }

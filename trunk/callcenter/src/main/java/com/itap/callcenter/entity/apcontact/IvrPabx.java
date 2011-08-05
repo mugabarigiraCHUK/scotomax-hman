@@ -6,16 +6,20 @@ package com.itap.callcenter.entity.apcontact;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.itap.callcenter.entity.DomainObject;
 
 /**
  *
@@ -24,28 +28,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "ivr_pabx")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "IvrPabx.findAll", query = "SELECT i FROM IvrPabx i"),
-    @NamedQuery(name = "IvrPabx.findByPabxId", query = "SELECT i FROM IvrPabx i WHERE i.pabxId = :pabxId"),
-    @NamedQuery(name = "IvrPabx.findByProtocolId", query = "SELECT i FROM IvrPabx i WHERE i.protocolId = :protocolId"),
-    @NamedQuery(name = "IvrPabx.findByPabxName", query = "SELECT i FROM IvrPabx i WHERE i.pabxName = :pabxName"),
-    @NamedQuery(name = "IvrPabx.findByPabxDescription", query = "SELECT i FROM IvrPabx i WHERE i.pabxDescription = :pabxDescription"),
-    @NamedQuery(name = "IvrPabx.findByPabxUpdateDate", query = "SELECT i FROM IvrPabx i WHERE i.pabxUpdateDate = :pabxUpdateDate")})
-public class IvrPabx implements Serializable {
+public class IvrPabx implements Serializable, DomainObject {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @Column(name = "pabx_id")
     private Integer pabxId;
-    @Basic(optional = false)
+    
     @Column(name = "protocol_id")
     private int protocolId;
-    @Basic(optional = false)
+    
     @Column(name = "pabx_name")
     private String pabxName;
+    
     @Column(name = "pabx_description")
     private String pabxDescription;
-    @Basic(optional = false)
+    
     @Column(name = "pabx_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date pabxUpdateDate;
@@ -105,28 +104,28 @@ public class IvrPabx implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (pabxId != null ? pabxId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IvrPabx)) {
-            return false;
-        }
-        IvrPabx other = (IvrPabx) object;
-        if ((this.pabxId == null && other.pabxId != null) || (this.pabxId != null && !this.pabxId.equals(other.pabxId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.itap.callcenter.entity.apcontact.IvrPabx[ pabxId=" + pabxId + " ]";
+        return ToStringBuilder.reflectionToString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        IvrPabx other = (IvrPabx) o;
+        return new EqualsBuilder()
+                 .append(pabxId, other.pabxId)
+                 .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.pabxId)
+         .toHashCode();
     }
     
 }
