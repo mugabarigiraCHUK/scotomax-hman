@@ -16,24 +16,8 @@
 				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- Scans for application-method @Repository, @Services and @Component -->
-	<context:component-scan base-package="com.itap.callcenter" />
+	<context:component-scan base-package="com.itap.callcenter.dao, com.itap.callcenter.entity" />
 	
-	<!-- Scans for application-method @Transactional to deploy -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-
-	<sec:http auto-config="true" access-denied-page="/views/accessDenied.faces">
-		<sec:form-login login-page="/views/login.faces" />
-		<sec:intercept-url pattern="/views/welcome.faces" access="ROLE_SYSTEM, ROLE_ADMINISTRATOR, ROLE_USER" />	    
-	</sec:http>
-
-	<sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" >
-	</sec:global-method-security>
-	
-	<sec:authentication-manager alias="authenticationManager">
-		<sec:authentication-provider user-service-ref="userDetailsService" />
-	</sec:authentication-manager>
-
 	<!-- Spring data source -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">		
 			<property name="driverClass" value="com.mysql.jdbc.Driver"/>
@@ -69,4 +53,7 @@
 	<!-- Spring JPA persistence bean post processor -->
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 	
+	<!-- Scans for application-method @Transactional to deploy -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
 </beans>
