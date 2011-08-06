@@ -100,33 +100,33 @@
 		</dependency>
 
 		<!-- SLF4J Log4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>com.springsource.slf4j.log4j</artifactId>
-            <version>1.5.10</version>
-        </dependency>
-        
-        <!-- SLF4J Api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>com.springsource.slf4j.api</artifactId>
-            <version>1.5.10</version>
-        </dependency>
-        
-        <!-- Apache log4j -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.log4j</artifactId>
+			<version>1.5.10</version>
+		</dependency>
 
-		<!-- JUnit Test Case: use junit version 4.4. for spring.test version 2.5.6-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
+		<!-- SLF4J Api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.api</artifactId>
+			<version>1.5.10</version>
+		</dependency>
+
+		<!-- Apache log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+
+		<!-- JUnit Test Case: use junit version 4.4. for spring.test version 2.5.6 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- ProjectLombok -->
 		<dependency>
@@ -313,18 +313,9 @@
 		</dependency>
 
 		<!-- Java Configuration -->
-                <!--
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.config.java</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-                -->
-                <dependency>
-                    <groupId>org.springframework.javaconfig</groupId>
-                    <artifactId>spring-javaconfig</artifactId>
-                    <version>1.0.0.m3</version>
-                </dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>org.springframework.config.java</artifactId> 
+			<version>1.0.0</version> </dependency> <dependency> <groupId>org.springframework.javaconfig</groupId> 
+			<artifactId>spring-javaconfig</artifactId> <version>1.0.0.m3</version> </dependency> -->
 
 		<!-- Spring Context Support -->
 		<dependency>
@@ -445,7 +436,7 @@
 	</dependencies>
 
 	<repositories>
-                <repository>
+		<repository>
 			<id>com.springsource.repository.bundles.release</id>
 			<name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
 			<url>http://repository.springsource.com/maven/bundles/release</url>
