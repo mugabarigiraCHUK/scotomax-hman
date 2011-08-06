@@ -28,16 +28,16 @@ public class JobStatusContoller extends JobStatusBean {
 
 	static final long serialVersionUID = 5677112565939288621L;
 	
+	// SLF4J logger
 	Logger logger = LoggerFactory.getLogger(JobStatusContoller.class);
 	
+	// Job status DAO
 	@ManagedProperty(value = "#{jobStatusDaoImpl}")
 	JobStatusDao jobStatusDao;
 	
 	public void setJobStatusDao(JobStatusDao jobStatusDao) {
 		this.jobStatusDao = jobStatusDao;
 	}
-
-	final FacesContext facesMessage = FacesContext.getCurrentInstance();
 
 	/**
 	 * Create job status entity data insert into database.
@@ -47,18 +47,18 @@ public class JobStatusContoller extends JobStatusBean {
 		try {
 			if ( Utils.isEmpty(statusName) ) {
 				logger.warn("Job status name could not empty");
-				facesMessage.addMessage(null, new FacesMessage("Job status name could not empty"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Job status name could not empty"));
 			} else {
 				JobStatus entry = new JobStatus();
 				entry.setStatusName(statusName);
 				entry.setStatusDescription(statusDescription);
 				entry.setStatusUpdateDate(new Date());
 				jobStatusDao.save(entry);
-				facesMessage.addMessage(null, new FacesMessage("The data been created successfully."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			facesMessage.addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
 		}
 	}
 	
@@ -74,10 +74,10 @@ public class JobStatusContoller extends JobStatusBean {
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());
 			jobStatusDao.update(entry);
-			facesMessage.addMessage(null, new FacesMessage("The data been updated successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to update the data into db, Cause: "+ex.getMessage(), ex);
-			facesMessage.addMessage(null, new FacesMessage("Failed to update the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to update the data into db, Cause: "+ex.getMessage()));
 		}
 	}
 	
@@ -101,10 +101,9 @@ public class JobStatusContoller extends JobStatusBean {
 				selectedStatusId = -1;
 			} catch (Exception ex) {
 				logger.error("Failed to fetch the element data from db, Cause: "+ex.getMessage(), ex);
-				facesMessage.addMessage(null, new FacesMessage("Failed to fetch the element data from db, Cause: "+ex.getMessage()));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetch the element data from db, Cause: "+ex.getMessage()));
 			}
 		}
-		
 	}
 	
 	/**
@@ -116,11 +115,11 @@ public class JobStatusContoller extends JobStatusBean {
 			if ( selectedStatusId != null ) {
 				jobStatusDao.deleteById(selectedStatusId);
 				selectedStatusId = -1;
-				facesMessage.addMessage(null, new FacesMessage("The data been deleted successfully."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			facesMessage.addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
 		}
 	}
 	
@@ -134,7 +133,7 @@ public class JobStatusContoller extends JobStatusBean {
 			rsList = jobStatusDao.findAll();
 		} catch ( Exception ex ) {
 			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
-			facesMessage.addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
 		}
 		return rsList;
 	}
