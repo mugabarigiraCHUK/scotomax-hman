@@ -33,44 +33,44 @@ public class JobTicket implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "job_id")
+    @Column(name = "job_id", length = 11, nullable = false)
     private Integer jobId;
     
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", length = 11, nullable = false)
     private int customerId;
     
-    @Column(name = "agent_id")
+    @Column(name = "agent_id", length = 11, nullable = false)
     private int agentId;
     
-    @Column(name = "seat_id")
+    @Column(name = "seat_id", length = 11, nullable = false)
     private int seatId;
     
-    @Column(name = "solution_id")
+    @Column(name = "solution_id", length = 11, nullable = false)
     private int solutionId;
     
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private int statusId;
     
-    @Column(name = "level_id")
+    @Column(name = "level_id", length = 11, nullable = false)
     private int levelId;
     
-    @Column(name = "job_name")
+    @Column(name = "job_name", length = 50, nullable = false)
     private String jobName;
     
-    @Column(name = "job_description")
+    @Column(name = "job_description", length = 100, nullable = false)
     private String jobDescription;
     
-    @Column(name = "job_voice_record_file")
+    @Column(name = "job_voice_record_file", length = 500, nullable = false)
     private String jobVoiceRecordFile;
     
-    @Column(name = "job_alert_enable")
+    @Column(name = "job_alert_enable", length = 11, nullable = false)
     private int jobAlertEnable;
     
-    @Column(name = "job_create_date")
+    @Column(name = "job_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date jobCreateDate;
     
-    @Column(name = "job_update_date")
+    @Column(name = "job_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date jobUpdateDate;
     

@@ -33,23 +33,23 @@ public class KnwCategory implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "category_id")
+    @Column(name = "category_id", length = 11, nullable = false)
     private Integer categoryId;
     
-    @Column(name = "parent_category_id")
+    @Column(name = "parent_category_id", length = 11, nullable = false)
     private int parentCategoryId;
     
-    @Column(name = "category_name")
+    @Column(name = "category_name", length = 50, nullable = false)
     private String categoryName;
     
-    @Column(name = "category_description")
+    @Column(name = "category_description", length = 100)
     private String categoryDescription;
     
-    @Column(name = "category_create_date")
+    @Column(name = "category_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date categoryCreateDate;
     
-    @Column(name = "category_update_date")
+    @Column(name = "category_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date categoryUpdateDate;
 

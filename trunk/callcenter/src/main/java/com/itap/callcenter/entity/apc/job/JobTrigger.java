@@ -33,23 +33,23 @@ public class JobTrigger implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "trigger_id")
+    @Column(name = "trigger_id", length = 11, nullable = false)
     private Integer triggerId;
     
-    @Column(name = "trigger_name")
+    @Column(name = "trigger_name", length = 50, nullable = false)
     private String triggerName;
     
-    @Column(name = "trigger_description")
+    @Column(name = "trigger_description", length = 100)
     private String triggerDescription;
     
-    @Column(name = "trigger_command")
+    @Column(name = "trigger_command", length = 500)
     private String triggerCommand;
     
-    @Column(name = "trigger_create_date")
+    @Column(name = "trigger_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date triggerCreateDate;
     
-    @Column(name = "trigger_update_date")
+    @Column(name = "trigger_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date triggerUpdateDate;
 
