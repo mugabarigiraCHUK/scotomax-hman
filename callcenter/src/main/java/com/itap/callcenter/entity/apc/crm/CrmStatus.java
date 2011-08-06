@@ -33,16 +33,16 @@ public class CrmStatus implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private Integer statusId;
     
-    @Column(name = "status_name")
+    @Column(name = "status_name", length = 50, nullable = false)
     private String statusName;
     
-    @Column(name = "status_description")
+    @Column(name = "status_description", length = 100)
     private String statusDescription;
     
-    @Column(name = "status_update_date")
+    @Column(name = "status_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date statusUpdateDate;
 

@@ -33,35 +33,35 @@ public class CrmCustomer implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", length = 11, nullable = false)
     private Integer customerId;
     
-    @Column(name = "business_id")
+    @Column(name = "business_id", length = 11, nullable = false)
     private int businessId;
     
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private int statusId;
     
-    @Column(name = "customer_fullname")
+    @Column(name = "customer_fullname", length = 100, nullable = false)
     private String customerFullname;
     
-    @Column(name = "customer_gender")
+    @Column(name = "customer_gender", length = 11, nullable = false)
     private int customerGender;
     
-    @Column(name = "customer_address")
+    @Column(name = "customer_address", length = 500, nullable = false)
     private String customerAddress;
     
     @Column(name = "customer_birthday")
     @Temporal(TemporalType.TIMESTAMP)
     private Date customerBirthday;
     
-    @Column(name = "customer_phone")
+    @Column(name = "customer_phone", length = 100, nullable = false)
     private String customerPhone;
     
-    @Column(name = "customer_email")
+    @Column(name = "customer_email", length = 100, nullable = false)
     private String customerEmail;
     
-    @Column(name = "customer_create_date")
+    @Column(name = "customer_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date customerCreateDate;
     
