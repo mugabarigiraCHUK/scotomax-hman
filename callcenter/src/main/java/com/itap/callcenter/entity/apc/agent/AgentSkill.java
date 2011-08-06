@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,16 +35,19 @@ public class AgentSkill implements Serializable, DomainObject {
     
     @Id
     @Column(name = "skill_id", length = 11, nullable = false)
+    @NotNull
     private Integer skillId;
     
     @Column(name = "skill_name", length = 50, nullable = false)
+    @NotNull
     private String skillName;
     
-    @Column(name = "skill_description", length = 100, nullable = false)
+    @Column(name = "skill_description", length = 100)
     private String skillDescription;
     
     @Column(name = "skill_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date skillUpdateDate;
 
     public AgentSkill() {

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,40 +35,52 @@ public class AgentProfile implements Serializable, DomainObject {
     
     @Id
     @Column(name = "agent_id", length = 11, nullable = false)
+    @NotNull
     private Integer agentId;
     
     @Column(name = "supervisor_id", length = 11, nullable = false)
+    @NotNull
     private int supervisorId;
     
     @Column(name = "level_id", length = 11, nullable = false)
+    @NotNull
     private int levelId;
     
     @Column(name = "skill_id", length = 11, nullable = false)
+    @NotNull
     private int skillId;
     
     @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
     private int statusId;
     
     @Column(name = "workplan_id", length = 11, nullable = false)
+    @NotNull
     private int workplanId;
     
     @Column(name = "agent_fullname", length = 100, nullable = false)
+    @NotNull
     private String agentFullname;
     
     @Column(name = "agent_username", length = 50, nullable = false)
+    @NotNull
     private String agentUsername;
     
     @Column(name = "agent_password", length = 50, nullable = false)
+    @NotNull
     private String agentPassword;
     
     @Column(name = "agent_max_call", length = 11, nullable = false)
+    @NotNull
     private int agentMaxCall;
     
     @Column(name = "agent_allow_outbound", length = 11, nullable = false)
+    @NotNull
     private int agentAllowOutbound;
     
     @Column(name = "agent_create_date", length = 11, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date agentCreateDate;
     
     @Column(name = "agent_update_date")
