@@ -317,6 +317,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- hibernate validate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+		</dependency>
 
 		<!-- Java Configuration -->
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>org.springframework.config.java</artifactId> 
