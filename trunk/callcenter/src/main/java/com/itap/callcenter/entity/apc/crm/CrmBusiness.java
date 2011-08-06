@@ -33,13 +33,13 @@ public class CrmBusiness implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "business_id")
+    @Column(name = "business_id", length = 11, nullable = false)
     private Integer businessId;
     
-    @Column(name = "business_name")
+    @Column(name = "business_name", length = 50, nullable = false)
     private String businessName;
     
-    @Column(name = "business_description")
+    @Column(name = "business_description", length = 100)
     private String businessDescription;
     
     @Column(name = "business_update_date")
