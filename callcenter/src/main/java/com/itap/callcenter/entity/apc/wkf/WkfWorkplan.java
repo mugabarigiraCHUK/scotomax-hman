@@ -33,39 +33,39 @@ public class WkfWorkplan implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "workplan_id")
+    @Column(name = "workplan_id", length = 11, nullable = false)
     private Integer workplanId;
     
-    @Column(name = "calendar_id")
+    @Column(name = "calendar_id", length = 11, nullable = false)
     private int calendarId;
     
-    @Column(name = "workplan_name")
+    @Column(name = "workplan_name", length = 50, nullable = false)
     private String workplanName;
     
-    @Column(name = "workplan_description")
+    @Column(name = "workplan_description", nullable = false)
     private String workplanDescription;
     
-    @Column(name = "workplan_start_date")
+    @Column(name = "workplan_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date workplanStartDate;
     
-    @Column(name = "workplan_end_date")
+    @Column(name = "workplan_end_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date workplanEndDate;
     
-    @Column(name = "workplan_start_time")
+    @Column(name = "workplan_start_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date workplanStartTime;
     
-    @Column(name = "workplan_end_time")
+    @Column(name = "workplan_end_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date workplanEndTime;
     
-    @Column(name = "workplan_create_date")
+    @Column(name = "workplan_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date workplanCreateDate;
     
-    @Column(name = "workplan_update_date")
+    @Column(name = "workplan_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date workplanUpdateDate;
 

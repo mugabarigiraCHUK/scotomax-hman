@@ -33,37 +33,37 @@ public class WkfRequest implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "request_id")
+    @Column(name = "request_id", length = 11, nullable = false)
     private Integer requestId;
     
-    @Column(name = "agent_id")
+    @Column(name = "agent_id", length = 11, nullable = false)
     private int agentId;
     
-    @Column(name = "supervisor_id")
+    @Column(name = "supervisor_id", length = 11, nullable = false)
     private int supervisorId;
     
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private int statusId;
     
-    @Column(name = "request_name")
+    @Column(name = "request_name", length = 50, nullable = false)
     private String requestName;
     
-    @Column(name = "request_description")
+    @Column(name = "request_description", length = 100)
     private String requestDescription;
     
-    @Column(name = "request_start_time")
+    @Column(name = "request_start_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestStartTime;
     
-    @Column(name = "request_end_time")
+    @Column(name = "request_end_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestEndTime;
     
-    @Column(name = "request_create_date")
+    @Column(name = "request_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestCreateDate;
     
-    @Column(name = "request_update_date")
+    @Column(name = "request_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestUpdateDate;
 
