@@ -33,23 +33,23 @@ public class WkfHoliday implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "holiday_id")
+    @Column(name = "holiday_id", length = 11, nullable = false)
     private Integer holidayId;
     
-    @Column(name = "calendar_id")
+    @Column(name = "calendar_id", length = 11, nullable = false)
     private int calendarId;
     
-    @Column(name = "holiday_name")
+    @Column(name = "holiday_name", length = 50, nullable = false)
     private String holidayName;
     
-    @Column(name = "holiday_description")
+    @Column(name = "holiday_description", length = 100)
     private String holidayDescription;
     
-    @Column(name = "holiday_date")
+    @Column(name = "holiday_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date holidayDate;
     
-    @Column(name = "holiday_update_date")
+    @Column(name = "holiday_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date holidayUpdateDate;
 

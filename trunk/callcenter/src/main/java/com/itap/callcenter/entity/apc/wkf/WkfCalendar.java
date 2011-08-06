@@ -33,27 +33,27 @@ public class WkfCalendar implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "calendar_id")
+    @Column(name = "calendar_id", length = 11, nullable = false)
     private Integer calendarId;
     
-    @Column(name = "calendar_name")
+    @Column(name = "calendar_name", length = 50, nullable = false)
     private String calendarName;
     
-    @Column(name = "calendar_description")
+    @Column(name = "calendar_description", length = 100, nullable = false)
     private String calendarDescription;
     
-    @Column(name = "calendar_enable")
+    @Column(name = "calendar_enable", length = 11, nullable = false)
     private int calendarEnable;
     
-    @Column(name = "calendar_start_date")
+    @Column(name = "calendar_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date calendarStartDate;
     
-    @Column(name = "calendar_end_date")
+    @Column(name = "calendar_end_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date calendarEndDate;
     
-    @Column(name = "calendar_update_date")
+    @Column(name = "calendar_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date calendarUpdateDate;
 
