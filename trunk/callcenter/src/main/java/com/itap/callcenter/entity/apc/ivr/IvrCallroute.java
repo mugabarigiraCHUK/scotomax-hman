@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,25 +35,30 @@ public class IvrCallroute implements Serializable, DomainObject {
     
     @Id
     @Column(name = "callroute_id", length = 11, nullable = false)
+    @NotNull
     private Integer callrouteId;
     
     @Column(name = "callroute_name", length = 50, nullable = false)
+    @NotNull
     private String callrouteName;
     
-    @Column(name = "callroute_description", length = 100, nullable = false)
+    @Column(name = "callroute_description", length = 100)
     private String callrouteDescription;
     
     @Column(name = "callroute_caller", length = 50, nullable = false)
+    @NotNull
     private String callrouteCaller;
     
     @Column(name = "callroute_called", length = 50, nullable = false)
+    @NotNull
     private String callrouteCalled;
     
     @Column(name = "callroute_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date callrouteCreateDate;
     
-    @Column(name = "callroute_update_date", nullable = false)
+    @Column(name = "callroute_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date callrouteUpdateDate;
 

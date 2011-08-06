@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,15 +35,17 @@ public class IvrProtocol implements Serializable, DomainObject {
     
     @Id
     @Column(name = "protocol_id", length = 11, nullable = false)
+    @NotNull
     private Integer protocolId;
     
     @Column(name = "protocol_name", length = 50, nullable = false)
+    @NotNull
     private String protocolName;
     
     @Column(name = "protocol_description", length = 100)
     private String protocolDescription;
     
-    @Column(name = "protocol_update_date", nullable = false)
+    @Column(name = "protocol_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date protocolUpdateDate;
 

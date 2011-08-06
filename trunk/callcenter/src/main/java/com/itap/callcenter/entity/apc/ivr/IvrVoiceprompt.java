@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,23 +35,28 @@ public class IvrVoiceprompt implements Serializable, DomainObject {
     
     @Id
     @Column(name = "voice_id", length = 11, nullable = false)
+    @NotNull
     private Integer voiceId;
     
     @Column(name = "voice_name", length = 50, nullable = false)
+    @NotNull
     private String voiceName;
     
-    @Column(name = "voice_description", length = 100, nullable = false)
+    @Column(name = "voice_description", length = 100)
     private String voiceDescription;
     
     @Column(name = "voice_filename", length = 500, nullable = false)
+    @NotNull
     private String voiceFilename;
     
     @Column(name = "voice_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date voiceCreateDate;
     
     @Column(name = "voice_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date voiceUpdateDate;
 
     public IvrVoiceprompt() {

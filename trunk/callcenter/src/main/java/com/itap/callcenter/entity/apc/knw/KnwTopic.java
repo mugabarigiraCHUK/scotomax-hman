@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.itap.callcenter.entity.DomainObject;
@@ -26,31 +27,38 @@ private static final long serialVersionUID = 1L;
     
     @Id
     @Column(name = "topic_id", length = 11, nullable = false)
+    @NotNull
     private Integer topicId;
     
     @Column(name = "agent_id", length = 11, nullable = false)
+    @NotNull
     private Integer agentId;
 
     @Column(name = "category_id", length = 11, nullable = false)
+    @NotNull
     private Integer categoryId;
     
     @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
     private Integer statusId;
     
     @Column(name = "topic_name", length = 50, nullable = false)
+    @NotNull
     private String topicName;
     
-    @Column(name = "topic_description", length = 100, nullable = false)
+    @Column(name = "topic_description", length = 100)
     private String topicDescription;
     
     @Column(name = "topic_subject", length = 100, nullable = false)
+    @NotNull
     private String topicSubject;
     
     @Column(name = "topic_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date topicCreateDate;
     
-    @Column(name = "topic_update_date", nullable = false)
+    @Column(name = "topic_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date topicUpdateDate;
     

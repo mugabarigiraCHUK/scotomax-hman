@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,18 +35,23 @@ public class WkfRequest implements Serializable, DomainObject {
     
     @Id
     @Column(name = "request_id", length = 11, nullable = false)
+    @NotNull
     private Integer requestId;
     
     @Column(name = "agent_id", length = 11, nullable = false)
+    @NotNull
     private int agentId;
     
     @Column(name = "supervisor_id", length = 11, nullable = false)
+    @NotNull
     private int supervisorId;
     
     @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
     private int statusId;
     
     @Column(name = "request_name", length = 50, nullable = false)
+    @NotNull
     private String requestName;
     
     @Column(name = "request_description", length = 100)
@@ -53,17 +59,20 @@ public class WkfRequest implements Serializable, DomainObject {
     
     @Column(name = "request_start_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date requestStartTime;
     
     @Column(name = "request_end_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date requestEndTime;
     
     @Column(name = "request_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date requestCreateDate;
     
-    @Column(name = "request_update_date", nullable = false)
+    @Column(name = "request_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestUpdateDate;
 

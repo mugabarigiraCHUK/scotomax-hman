@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,21 +35,27 @@ public class CrmCustomer implements Serializable, DomainObject {
     
     @Id
     @Column(name = "customer_id", length = 11, nullable = false)
+    @NotNull
     private Integer customerId;
     
     @Column(name = "business_id", length = 11, nullable = false)
+    @NotNull
     private int businessId;
     
     @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
     private int statusId;
     
     @Column(name = "customer_fullname", length = 100, nullable = false)
+    @NotNull
     private String customerFullname;
     
     @Column(name = "customer_gender", length = 11, nullable = false)
+    @NotNull
     private int customerGender;
     
     @Column(name = "customer_address", length = 500, nullable = false)
+    @NotNull
     private String customerAddress;
     
     @Column(name = "customer_birthday")
@@ -56,13 +63,16 @@ public class CrmCustomer implements Serializable, DomainObject {
     private Date customerBirthday;
     
     @Column(name = "customer_phone", length = 100, nullable = false)
+    @NotNull
     private String customerPhone;
     
     @Column(name = "customer_email", length = 100, nullable = false)
+    @NotNull
     private String customerEmail;
     
     @Column(name = "customer_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date customerCreateDate;
     
     @Column(name = "customer_update_date")

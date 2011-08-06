@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,9 +35,11 @@ public class CrmBusiness implements Serializable, DomainObject {
     
     @Id
     @Column(name = "business_id", length = 11, nullable = false)
+    @NotNull
     private Integer businessId;
     
     @Column(name = "business_name", length = 50, nullable = false)
+    @NotNull
     private String businessName;
     
     @Column(name = "business_description", length = 100)
