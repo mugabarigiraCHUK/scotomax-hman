@@ -9,7 +9,7 @@ import lombok.Data;
  * @author seven
  *
  */
-public @Data class UserBean implements Serializable {
+public @Data abstract class UserBean implements Serializable {
 	
 	private static final long serialVersionUID = 8007109425483203461L;
 	
