@@ -63,13 +63,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
@@ -234,13 +232,11 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.6.8</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.8</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- commons-collections-3.2.1 -->
@@ -248,7 +244,6 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- asm-all-2.2.3 -->
@@ -256,7 +251,6 @@
 			<groupId>asm</groupId>
 			<artifactId>asm-all</artifactId>
 			<version>3.1</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- c3p0 Connection Pool -->
@@ -264,13 +258,11 @@
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0-oracle-thin-extras</artifactId>
 			<version>0.9.0.2</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- Apache Commons Database Connection Pool -->
@@ -278,7 +270,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
 			<version>1.2.2.osgi</version>
-			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.commons</groupId>
@@ -292,7 +283,6 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>2.2</version>
-			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>asm</groupId>
@@ -306,7 +296,6 @@
 			<groupId>hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.4.0.GA</version>
-			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>javassist</groupId>
@@ -324,11 +313,18 @@
 		</dependency>
 
 		<!-- Java Configuration -->
+                <!--
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.config.java</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+                -->
+                <dependency>
+                    <groupId>org.springframework.javaconfig</groupId>
+                    <artifactId>spring-javaconfig</artifactId>
+                    <version>1.0.0.m3</version>
+                </dependency>
 
 		<!-- Spring Context Support -->
 		<dependency>
@@ -449,6 +445,16 @@
 	</dependencies>
 
 	<repositories>
+                <repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
 		<repository>
 			<id>java.net2</id>
 			<name>Repository hosting the jee6 artifacts</name>
@@ -473,16 +479,6 @@
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
-		</repository>
-		<repository>
-			<id>com.springsource.repository.bundles.release</id>
-			<name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
-			<url>http://repository.springsource.com/maven/bundles/release</url>
-		</repository>
-		<repository>
-			<id>com.springsource.repository.bundles.external</id>
-			<name>SpringSource Enterprise Bundle Repository - External Releases</name>
-			<url>http://repository.springsource.com/maven/bundles/external</url>
 		</repository>
 	</repositories>
 
