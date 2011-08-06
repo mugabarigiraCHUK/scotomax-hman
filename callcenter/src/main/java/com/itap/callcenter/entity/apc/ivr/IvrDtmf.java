@@ -33,30 +33,29 @@ public class IvrDtmf implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "dtmf_id")
-    
+    @Column(name = "dtmf_id", length = 11, nullable = false)
     private Integer dtmfId;
     
-    @Column(name = "dtmf_name")
+    @Column(name = "dtmf_name", length = 50, nullable = false)
     private String dtmfName;
     
-    @Column(name = "dtmf_description")
+    @Column(name = "dtmf_description", length = 100, nullable = false)
     private String dtmfDescription;
     
-    @Column(name = "dtmf_digit")
+    @Column(name = "dtmf_digit", length = 50, nullable = false)
     private String dtmfDigit;
     
-    @Column(name = "dtmf_correct_callflow_id")
+    @Column(name = "dtmf_correct_callflow_id", length = 11, nullable = false)
     private int dtmfCorrectCallflowId;
     
-    @Column(name = "dtmf_error_callflow_id")
+    @Column(name = "dtmf_error_callflow_id", length = 11, nullable = false)
     private int dtmfErrorCallflowId;
     
-    @Column(name = "dtmf_create_date")
+    @Column(name = "dtmf_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtmfCreateDate;
     
-    @Column(name = "dtmf_update_date")
+    @Column(name = "dtmf_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtmfUpdateDate;
 

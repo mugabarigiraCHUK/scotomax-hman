@@ -33,19 +33,19 @@ public class IvrPabx implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "pabx_id")
+    @Column(name = "pabx_id", length = 11, nullable = false)
     private Integer pabxId;
     
-    @Column(name = "protocol_id")
+    @Column(name = "protocol_id", length = 11, nullable = false)
     private int protocolId;
     
-    @Column(name = "pabx_name")
+    @Column(name = "pabx_name", length = 50, nullable = false)
     private String pabxName;
     
-    @Column(name = "pabx_description")
+    @Column(name = "pabx_description", length = 100)
     private String pabxDescription;
     
-    @Column(name = "pabx_update_date")
+    @Column(name = "pabx_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date pabxUpdateDate;
 

@@ -33,36 +33,36 @@ public class IvrSchedule implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "schedule_id")
+    @Column(name = "schedule_id", length = 11, nullable = false)
     private Integer scheduleId;
     
-    @Column(name = "schedule_name")
+    @Column(name = "schedule_name", length = 50, nullable = false)
     private String scheduleName;
     
-    @Column(name = "schedule_description")
+    @Column(name = "schedule_description", length = 100, nullable = false)
     private String scheduleDescription;
     
-    @Column(name = "schedule_caller")
+    @Column(name = "schedule_caller", length = 50, nullable = false)
     private String scheduleCaller;
     
-    @Column(name = "schedule_called")
+    @Column(name = "schedule_called", length = 50, nullable = false)
     private String scheduleCalled;
     
-    @Column(name = "schedule_channel")
+    @Column(name = "schedule_channel", length = 11, nullable = false)
     private int scheduleChannel;
     
-    @Column(name = "schedule_start_date")
+    @Column(name = "schedule_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date scheduleStartDate;
     
-    @Column(name = "schedule_retry_time")
+    @Column(name = "schedule_retry_time", length = 11, nullable = false)
     private int scheduleRetryTime;
     
-    @Column(name = "schedule_create_date")
+    @Column(name = "schedule_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date scheduleCreateDate;
     
-    @Column(name = "schedule_update_date")
+    @Column(name = "schedule_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date scheduleUpdateDate;
 

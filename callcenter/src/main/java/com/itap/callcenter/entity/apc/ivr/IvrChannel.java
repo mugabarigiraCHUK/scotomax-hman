@@ -33,16 +33,16 @@ public class IvrChannel implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "channel_id")
+    @Column(name = "channel_id", length = 11, nullable = false)
     private Integer channelId;
     
-    @Column(name = "channel_name")
+    @Column(name = "channel_name", length = 50, nullable = false)
     private String channelName;
     
-    @Column(name = "channel_description")
+    @Column(name = "channel_description", length = 100)
     private String channelDescription;
     
-    @Column(name = "channel_update_date")
+    @Column(name = "channel_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date channelUpdateDate;
 

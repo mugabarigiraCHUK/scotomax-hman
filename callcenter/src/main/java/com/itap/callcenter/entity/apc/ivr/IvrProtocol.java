@@ -33,16 +33,16 @@ public class IvrProtocol implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "protocol_id")
+    @Column(name = "protocol_id", length = 11, nullable = false)
     private Integer protocolId;
     
-    @Column(name = "protocol_name")
+    @Column(name = "protocol_name", length = 50, nullable = false)
     private String protocolName;
     
-    @Column(name = "protocol_description")
+    @Column(name = "protocol_description", length = 100)
     private String protocolDescription;
     
-    @Column(name = "protocol_update_date")
+    @Column(name = "protocol_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date protocolUpdateDate;
 

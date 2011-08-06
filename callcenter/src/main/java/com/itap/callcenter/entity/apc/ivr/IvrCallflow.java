@@ -33,38 +33,38 @@ public class IvrCallflow implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "callflow_id")
+    @Column(name = "callflow_id", length = 11, nullable = false)
     private Integer callflowId;
     
-    @Column(name = "voice_id")
+    @Column(name = "voice_id", length = 11, nullable = false)
     private int voiceId;
     
-    @Column(name = "callflow_name")
+    @Column(name = "callflow_name", length = 50, nullable = false)
     private String callflowName;
     
-    @Column(name = "callflow_description")
+    @Column(name = "callflow_description", length = 100, nullable = false)
     private String callflowDescription;
     
-    @Column(name = "callflow_step")
+    @Column(name = "callflow_step", length = 11, nullable = false)
     private int callflowStep;
     
-    @Column(name = "callflow_timeout")
+    @Column(name = "callflow_timeout", length = 11, nullable = false)
     private int callflowTimeout;
     
-    @Column(name = "callflow_next_id")
+    @Column(name = "callflow_next_id", length = 11, nullable = false)
     private int callflowNextId;
     
-    @Column(name = "callflow_back_id")
+    @Column(name = "callflow_back_id", length = 11, nullable = false)
     private int callflowBackId;
     
-    @Column(name = "callflow_voice_repeat_enable")
+    @Column(name = "callflow_voice_repeat_enable", length = 11, nullable = false)
     private int callflowVoiceRepeatEnable;
     
-    @Column(name = "callflow_create_date")
+    @Column(name = "callflow_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date callflowCreateDate;
     
-    @Column(name = "callflow_update_date")
+    @Column(name = "callflow_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date callflowUpdateDate;
 
