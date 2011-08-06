@@ -33,22 +33,22 @@ public class AcdRoute implements Serializable, DomainObject {
 	private static final long serialVersionUID = 1L;
     
 	@Id
-    @Column(name = "route_id")
+    @Column(name = "route_id", length = 11, nullable = false)
     private Integer routeId;
 	
-    @Column(name = "route_name")
+    @Column(name = "route_name", length = 50, nullable = false)
     private String routeName;
     
-    @Column(name = "route_description")
+    @Column(name = "route_description", length = 100)
     private String routeDescription;
     
-    @Column(name = "route_condition")
+    @Column(name = "route_condition", length = 11)
     private int routeCondition;
     
-    @Column(name = "route_caller")
+    @Column(name = "route_caller", length = 50)
     private String routeCaller;
     
-    @Column(name = "route_called")
+    @Column(name = "route_called", length = 50)
     private String routeCalled;
     
     @Column(name = "route_create_date")
