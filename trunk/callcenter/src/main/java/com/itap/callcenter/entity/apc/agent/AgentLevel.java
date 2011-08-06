@@ -33,13 +33,13 @@ public class AgentLevel implements Serializable, DomainObject {
 	private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "level_id")
+    @Column(name = "level_id", length = 11, nullable = false)
     private Integer levelId;
     
-    @Column(name = "level_name")
+    @Column(name = "level_name", length = 50, nullable = false)
     private String levelName;
     
-    @Column(name = "level_description")
+    @Column(name = "level_description", length = 100)
     private String levelDescription;
     
     @Column(name = "level_update_date")

@@ -33,13 +33,13 @@ public class AcdCondition implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "condition_id")
+    @Column(name = "condition_id", length = 11, nullable = false)
     private Integer conditionId;
     
-    @Column(name = "condition_name")
+    @Column(name = "condition_name", length = 50, nullable = false)
     private String conditionName;
     
-    @Column(name = "condition_description")
+    @Column(name = "condition_description", length = 100, nullable = false)
     private String conditionDescription;
     
     @Column(name = "condition_update_date")
