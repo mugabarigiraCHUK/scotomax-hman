@@ -33,28 +33,28 @@ public class AgentScript implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "script_id")
+    @Column(name = "script_id", length = 11, nullable = false)
     private Integer scriptId;
     
-    @Column(name = "business_id")
+    @Column(name = "business_id", length = 11, nullable = false)
     private int businessId;
     
-    @Column(name = "topic_id")
+    @Column(name = "topic_id", length = 11, nullable = false)
     private int topicId;
     
-    @Column(name = "script_name")
+    @Column(name = "script_name", length = 50, nullable = false)
     private String scriptName;
     
-    @Column(name = "script_description")
+    @Column(name = "script_description", length = 100, nullable = false)
     private String scriptDescription;
     
-    @Column(name = "script_step")
+    @Column(name = "script_step", length = 11, nullable = false)
     private int scriptStep;
     
-    @Column(name = "script_message")
+    @Column(name = "script_message", length = 1000, nullable = false)
     private String scriptMessage;
     
-    @Column(name = "script_create_date")
+    @Column(name = "script_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date scriptCreateDate;
     

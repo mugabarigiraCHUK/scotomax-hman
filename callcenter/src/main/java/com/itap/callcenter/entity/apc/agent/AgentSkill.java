@@ -33,16 +33,16 @@ public class AgentSkill implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "skill_id")
+    @Column(name = "skill_id", length = 11, nullable = false)
     private Integer skillId;
     
-    @Column(name = "skill_name")
+    @Column(name = "skill_name", length = 50, nullable = false)
     private String skillName;
     
-    @Column(name = "skill_description")
+    @Column(name = "skill_description", length = 100, nullable = false)
     private String skillDescription;
     
-    @Column(name = "skill_update_date")
+    @Column(name = "skill_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date skillUpdateDate;
 

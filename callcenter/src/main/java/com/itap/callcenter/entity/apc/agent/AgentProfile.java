@@ -33,40 +33,40 @@ public class AgentProfile implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "agent_id")
+    @Column(name = "agent_id", length = 11, nullable = false)
     private Integer agentId;
     
-    @Column(name = "supervisor_id")
+    @Column(name = "supervisor_id", length = 11, nullable = false)
     private int supervisorId;
     
-    @Column(name = "level_id")
+    @Column(name = "level_id", length = 11, nullable = false)
     private int levelId;
     
-    @Column(name = "skill_id")
+    @Column(name = "skill_id", length = 11, nullable = false)
     private int skillId;
     
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private int statusId;
     
-    @Column(name = "workplan_id")
+    @Column(name = "workplan_id", length = 11, nullable = false)
     private int workplanId;
     
-    @Column(name = "agent_fullname")
+    @Column(name = "agent_fullname", length = 100, nullable = false)
     private String agentFullname;
     
-    @Column(name = "agent_username")
+    @Column(name = "agent_username", length = 50, nullable = false)
     private String agentUsername;
     
-    @Column(name = "agent_password")
+    @Column(name = "agent_password", length = 50, nullable = false)
     private String agentPassword;
     
-    @Column(name = "agent_max_call")
+    @Column(name = "agent_max_call", length = 11, nullable = false)
     private int agentMaxCall;
     
-    @Column(name = "agent_allow_outbound")
+    @Column(name = "agent_allow_outbound", length = 11, nullable = false)
     private int agentAllowOutbound;
     
-    @Column(name = "agent_create_date")
+    @Column(name = "agent_create_date", length = 11, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date agentCreateDate;
     
