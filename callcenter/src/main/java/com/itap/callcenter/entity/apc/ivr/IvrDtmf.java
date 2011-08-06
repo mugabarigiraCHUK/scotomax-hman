@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,28 +35,35 @@ public class IvrDtmf implements Serializable, DomainObject {
     
     @Id
     @Column(name = "dtmf_id", length = 11, nullable = false)
+    @NotNull
     private Integer dtmfId;
     
     @Column(name = "dtmf_name", length = 50, nullable = false)
+    @NotNull
     private String dtmfName;
     
-    @Column(name = "dtmf_description", length = 100, nullable = false)
+    @Column(name = "dtmf_description", length = 100)
+    @NotNull
     private String dtmfDescription;
     
     @Column(name = "dtmf_digit", length = 50, nullable = false)
+    @NotNull
     private String dtmfDigit;
     
     @Column(name = "dtmf_correct_callflow_id", length = 11, nullable = false)
+    @NotNull
     private int dtmfCorrectCallflowId;
     
     @Column(name = "dtmf_error_callflow_id", length = 11, nullable = false)
+    @NotNull
     private int dtmfErrorCallflowId;
     
     @Column(name = "dtmf_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date dtmfCreateDate;
     
-    @Column(name = "dtmf_update_date", nullable = false)
+    @Column(name = "dtmf_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtmfUpdateDate;
 

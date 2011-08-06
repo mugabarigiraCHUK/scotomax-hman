@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,43 +35,54 @@ public class JobTicket implements Serializable, DomainObject {
     
     @Id
     @Column(name = "job_id", length = 11, nullable = false)
+    @NotNull
     private Integer jobId;
     
     @Column(name = "customer_id", length = 11, nullable = false)
+    @NotNull
     private int customerId;
     
     @Column(name = "agent_id", length = 11, nullable = false)
+    @NotNull
     private int agentId;
     
     @Column(name = "seat_id", length = 11, nullable = false)
+    @NotNull
     private int seatId;
     
     @Column(name = "solution_id", length = 11, nullable = false)
+    @NotNull
     private int solutionId;
     
     @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
     private int statusId;
     
     @Column(name = "level_id", length = 11, nullable = false)
+    @NotNull
     private int levelId;
     
     @Column(name = "job_name", length = 50, nullable = false)
+    @NotNull
     private String jobName;
     
-    @Column(name = "job_description", length = 100, nullable = false)
+    @Column(name = "job_description", length = 100)
     private String jobDescription;
     
     @Column(name = "job_voice_record_file", length = 500, nullable = false)
+    @NotNull
     private String jobVoiceRecordFile;
     
     @Column(name = "job_alert_enable", length = 11, nullable = false)
+    @NotNull
     private int jobAlertEnable;
     
     @Column(name = "job_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date jobCreateDate;
     
-    @Column(name = "job_update_date", nullable = false)
+    @Column(name = "job_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date jobUpdateDate;
     

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,15 +35,17 @@ public class WkfStatus implements Serializable, DomainObject {
     
     @Id
     @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
     private Integer statusId;
     
     @Column(name = "status_name", length = 50, nullable = false)
+    @NotNull
     private String statusName;
     
     @Column(name = "status_description", length = 100)
     private String statusDescription;
     
-    @Column(name = "status_update_date", nullable = false)
+    @Column(name = "status_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date statusUpdateDate;
 

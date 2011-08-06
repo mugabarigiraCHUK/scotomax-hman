@@ -60,9 +60,8 @@ public class AcdRoute implements Serializable, DomainObject {
     @NotNull
     private Date routeCreateDate;
     
-    @Column(name = "route_update_date", nullable = false)
+    @Column(name = "route_update_date")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date routeUpdateDate;
 
     public AcdRoute() {

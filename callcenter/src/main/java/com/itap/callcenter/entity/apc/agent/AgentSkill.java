@@ -47,7 +47,6 @@ public class AgentSkill implements Serializable, DomainObject {
     
     @Column(name = "skill_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date skillUpdateDate;
 
     public AgentSkill() {

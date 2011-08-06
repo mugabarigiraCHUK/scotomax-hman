@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,37 +35,46 @@ public class IvrCallflow implements Serializable, DomainObject {
     
     @Id
     @Column(name = "callflow_id", length = 11, nullable = false)
+    @NotNull
     private Integer callflowId;
     
     @Column(name = "voice_id", length = 11, nullable = false)
+    @NotNull
     private int voiceId;
     
     @Column(name = "callflow_name", length = 50, nullable = false)
+    @NotNull
     private String callflowName;
     
-    @Column(name = "callflow_description", length = 100, nullable = false)
+    @Column(name = "callflow_description", length = 100)
     private String callflowDescription;
     
     @Column(name = "callflow_step", length = 11, nullable = false)
+    @NotNull
     private int callflowStep;
     
     @Column(name = "callflow_timeout", length = 11, nullable = false)
+    @NotNull
     private int callflowTimeout;
     
     @Column(name = "callflow_next_id", length = 11, nullable = false)
+    @NotNull
     private int callflowNextId;
     
     @Column(name = "callflow_back_id", length = 11, nullable = false)
+    @NotNull
     private int callflowBackId;
     
     @Column(name = "callflow_voice_repeat_enable", length = 11, nullable = false)
+    @NotNull
     private int callflowVoiceRepeatEnable;
     
     @Column(name = "callflow_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date callflowCreateDate;
     
-    @Column(name = "callflow_update_date", nullable = false)
+    @Column(name = "callflow_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date callflowUpdateDate;
 

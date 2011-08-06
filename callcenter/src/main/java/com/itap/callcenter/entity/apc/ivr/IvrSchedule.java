@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,36 +35,45 @@ public class IvrSchedule implements Serializable, DomainObject {
     
     @Id
     @Column(name = "schedule_id", length = 11, nullable = false)
+    @NotNull
     private Integer scheduleId;
     
     @Column(name = "schedule_name", length = 50, nullable = false)
+    @NotNull
     private String scheduleName;
     
-    @Column(name = "schedule_description", length = 100, nullable = false)
+    @Column(name = "schedule_description", length = 100)
     private String scheduleDescription;
     
     @Column(name = "schedule_caller", length = 50, nullable = false)
+    @NotNull
     private String scheduleCaller;
     
     @Column(name = "schedule_called", length = 50, nullable = false)
+    @NotNull
     private String scheduleCalled;
     
     @Column(name = "schedule_channel", length = 11, nullable = false)
+    @NotNull
     private int scheduleChannel;
     
     @Column(name = "schedule_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date scheduleStartDate;
     
     @Column(name = "schedule_retry_time", length = 11, nullable = false)
+    @NotNull
     private int scheduleRetryTime;
     
     @Column(name = "schedule_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date scheduleCreateDate;
     
     @Column(name = "schedule_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date scheduleUpdateDate;
 
     public IvrSchedule() {
