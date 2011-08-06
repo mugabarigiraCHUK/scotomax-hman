@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="jobstatusForm">
+			<rich:panel id="jobStatusPanel" header="#{msg['jobstatus.inputpanel']}">
+				<a4j:outputPanel id="jobStatusOutputPanel">
+					
+						<h:messages/>
+						
+						<h:panelGrid columns="2" styleClass="inputtable">
+							<a4j:commandButton value="#{msg['button.create']}" 
+						                							action="#{jobStatusController.edit}"
+																 	render="jobStatusCreateUpdatePanel" 
+																 	execute="@this" 
+																 	oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.show()">
+											<a4j:param value="-1" assignTo="#{jobStatusController.selectedStatusId}"/>
+							</a4j:commandButton>
+							<a4j:commandButton value="#{msg['button.refresh']}" 
+																 	render="jobStatusCreateUpdatePanel" 
+																 	execute="@this"/>
+						</h:panelGrid>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['jobstatus.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty jobStatusController.jobStatusList}"/>
+							<rich:dataTable value="#{jobStatusController.jobStatusList}" 
+												   var="data" 
+												   rendered="#{not empty jobStatusController.jobStatusList}">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.id']}" /></f:facet>
+									<h:outputText value="#{data.statusId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.name']}" /></f:facet>
+									<h:outputText value="#{data.statusName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.description']}" /></f:facet>
+									<h:outputText value="#{data.statusDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.statusUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{jobStatusController.edit}" 
+																 render="jobStatusCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.show()">
+										<a4j:param value="#{data.statusId}" assignTo="#{jobStatusController.selectedStatusId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('jobStatusDeletePanel')}.show()">
+										<a4j:param value="#{data.statusId}" assignTo="#{jobStatusController.selectedStatusId}"/>
+									</a4j:commandButton>
+								</rich:column>
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+			
+			<rich:popupPanel id="jobStatusCreateUpdatePanel" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['jobstatus.create.update.legend']}" /></legend>
+						<h:panelGrid columns="2" styleClass="inputtable">
+							<h:column/>
+							<h:messages/>
+							
+							<h:outputText value="#{msg['jobstatus.id']}" rendered="#{not empty jobStatusController.statusId}"/>
+							<h:outputText value="#{jobStatusController.statusId}" rendered="#{not empty jobStatusController.statusId}"/>
+							
+							<h:outputText value="#{msg['jobstatus.name']}"/>
+							<h:inputText value="#{jobStatusController.statusName}" />
+							
+							<h:outputText value="#{msg['jobstatus.description']}"/>
+							<h:inputTextarea value="#{jobStatusController.statusDescription}" cols="30" rows="5" />
+							
+							<h:outputText value="#{msg['jobstatus.updatedate']}" rendered="#{msg['not empty jobstatus.updatedate']}"/>
+							<h:outputText value="#{jobStatusController.statusUpdateDate}" rendered="#{not empty msg['jobstatus.updatedate']}"/>
+							
+							<h:column/>
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.create']}" 
+															  action="#{jobStatusController.create}" 
+															  rendered="#{empty jobStatusController.statusId}" 
+															  oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.update']}" 
+															  action="#{jobStatusController.update}" 
+															  rendered="#{not empty jobStatusController.statusId}" 
+															  oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobStatusCreateUpdatePanel')}.hide(); return false;" />
+							</h:panelGroup>
+							
+						</h:panelGrid>
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="jobStatusDeletePanel" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['jobstatus.delete.legend']}" /></legend>
+					<h:panelGrid columns="1" styleClass="inputtable">
+						<h:outputText value="#{msg['jobstatus.delete.message']}" />
+						<h:panelGroup>
+							<a4j:commandButton value="#{msg['button.delete']}" 
+														  action="#{jobStatusController.delete}" 
+														  oncomplete="#{rich:component('jobStatusDeletePanel')}.hide(); return false;"/>
+							<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobStatusDeletePanel')}.hide(); return false;" />
+						</h:panelGroup>
+					</h:panelGrid>						
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+		
+		
+		
+	</ui:define>
+
+</ui:composition>
