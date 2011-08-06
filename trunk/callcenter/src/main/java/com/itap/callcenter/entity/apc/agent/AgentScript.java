@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,28 +35,34 @@ public class AgentScript implements Serializable, DomainObject {
     
     @Id
     @Column(name = "script_id", length = 11, nullable = false)
+    @NotNull
     private Integer scriptId;
     
     @Column(name = "business_id", length = 11, nullable = false)
+    @NotNull
     private int businessId;
     
     @Column(name = "topic_id", length = 11, nullable = false)
+    @NotNull
     private int topicId;
     
     @Column(name = "script_name", length = 50, nullable = false)
+    @NotNull
     private String scriptName;
     
-    @Column(name = "script_description", length = 100, nullable = false)
+    @Column(name = "script_description", length = 100)
     private String scriptDescription;
     
     @Column(name = "script_step", length = 11, nullable = false)
+    @NotNull
     private int scriptStep;
     
-    @Column(name = "script_message", length = 1000, nullable = false)
+    @Column(name = "script_message", length = 1000)
     private String scriptMessage;
     
     @Column(name = "script_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date scriptCreateDate;
     
     @Column(name = "script_update_date")

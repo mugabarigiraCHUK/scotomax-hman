@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,12 +36,15 @@ public class AcdCondition implements Serializable, DomainObject {
     
     @Id
     @Column(name = "condition_id", length = 11, nullable = false)
+    @NotNull
     private Integer conditionId;
     
     @Column(name = "condition_name", length = 50, nullable = false)
+    @NotNull
     private String conditionName;
     
     @Column(name = "condition_description", length = 100, nullable = false)
+    @NotNull
     private String conditionDescription;
     
     @Column(name = "condition_update_date")

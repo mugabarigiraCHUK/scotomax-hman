@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,19 +35,22 @@ public class AgentTrigger implements Serializable, DomainObject {
     
     @Id
     @Column(name = "trigger_id", length = 11, nullable = false)
+    @NotNull
     private Integer triggerId;
     
     @Column(name = "trigger_name", length = 50, nullable = false)
+    @NotNull
     private String triggerName;
     
-    @Column(name = "trigger_description", length = 100, nullable = false)
+    @Column(name = "trigger_description", length = 100)
     private String triggerDescription;
     
-    @Column(name = "trigger_command", length = 500, nullable = false)
+    @Column(name = "trigger_command", length = 500)
     private String triggerCommand;
     
     @Column(name = "trigger_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date triggerCreateDate;
     
     @Column(name = "trigger_update_date")

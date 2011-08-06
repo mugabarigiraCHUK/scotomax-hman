@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,15 +35,18 @@ public class AcdRoute implements Serializable, DomainObject {
     
 	@Id
     @Column(name = "route_id", length = 11, nullable = false)
+    @NotNull
     private Integer routeId;
 	
     @Column(name = "route_name", length = 50, nullable = false)
+    @NotNull
     private String routeName;
     
     @Column(name = "route_description", length = 100)
     private String routeDescription;
     
-    @Column(name = "route_condition", length = 11)
+    @Column(name = "route_condition", length = 11, nullable = false)
+    @NotNull
     private int routeCondition;
     
     @Column(name = "route_caller", length = 50)
@@ -51,12 +55,14 @@ public class AcdRoute implements Serializable, DomainObject {
     @Column(name = "route_called", length = 50)
     private String routeCalled;
     
-    @Column(name = "route_create_date")
+    @Column(name = "route_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date routeCreateDate;
     
-    @Column(name = "route_update_date")
+    @Column(name = "route_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date routeUpdateDate;
 
     public AcdRoute() {
