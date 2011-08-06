@@ -33,32 +33,32 @@ public class KnwSolution implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "solution_id")
+    @Column(name = "solution_id", length = 11, nullable = false)
     private Integer solutionId;
     
-    @Column(name = "topic_id")
+    @Column(name = "topic_id", length = 11, nullable = false)
     private int topicId;
     
-    @Column(name = "agent_id")
+    @Column(name = "agent_id", length = 11, nullable = false)
     private int agentId;
     
-    @Column(name = "supervisor_id")
+    @Column(name = "supervisor_id", length = 11, nullable = false)
     private int supervisorId;
     
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private int statusId;
     
-    @Column(name = "solution_name")
+    @Column(name = "solution_name", length = 50, nullable = false)
     private String solutionName;
     
-    @Column(name = "solution_description")
+    @Column(name = "solution_description", length = 1000)
     private String solutionDescription;
     
-    @Column(name = "solution_create_date")
+    @Column(name = "solution_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date solutionCreateDate;
     
-    @Column(name = "solution_update_date")
+    @Column(name = "solution_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date solutionUpdateDate;
 
