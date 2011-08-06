@@ -33,23 +33,23 @@ public class IvrVoiceprompt implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "voice_id")
+    @Column(name = "voice_id", length = 11, nullable = false)
     private Integer voiceId;
     
-    @Column(name = "voice_name")
+    @Column(name = "voice_name", length = 50, nullable = false)
     private String voiceName;
     
-    @Column(name = "voice_description")
+    @Column(name = "voice_description", length = 100, nullable = false)
     private String voiceDescription;
     
-    @Column(name = "voice_filename")
+    @Column(name = "voice_filename", length = 500, nullable = false)
     private String voiceFilename;
     
-    @Column(name = "voice_create_date")
+    @Column(name = "voice_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date voiceCreateDate;
     
-    @Column(name = "voice_update_date")
+    @Column(name = "voice_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date voiceUpdateDate;
 

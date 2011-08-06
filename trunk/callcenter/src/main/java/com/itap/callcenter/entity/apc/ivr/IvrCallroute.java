@@ -33,26 +33,26 @@ public class IvrCallroute implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "callroute_id")
+    @Column(name = "callroute_id", length = 11, nullable = false)
     private Integer callrouteId;
     
-    @Column(name = "callroute_name")
+    @Column(name = "callroute_name", length = 50, nullable = false)
     private String callrouteName;
     
-    @Column(name = "callroute_description")
+    @Column(name = "callroute_description", length = 100, nullable = false)
     private String callrouteDescription;
     
-    @Column(name = "callroute_caller")
+    @Column(name = "callroute_caller", length = 50, nullable = false)
     private String callrouteCaller;
     
-    @Column(name = "callroute_called")
+    @Column(name = "callroute_called", length = 50, nullable = false)
     private String callrouteCalled;
     
-    @Column(name = "callroute_create_date")
+    @Column(name = "callroute_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date callrouteCreateDate;
     
-    @Column(name = "callroute_update_date")
+    @Column(name = "callroute_update_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date callrouteUpdateDate;
 
