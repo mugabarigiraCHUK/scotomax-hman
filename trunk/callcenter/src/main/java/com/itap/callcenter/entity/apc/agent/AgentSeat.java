@@ -33,39 +33,39 @@ public class AgentSeat implements Serializable, DomainObject {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "seat_id")
+    @Column(name = "seat_id", length = 11, nullable = false)
     private Integer seatId;
     
-    @Column(name = "level_id")
+    @Column(name = "level_id", length = 11, nullable = false)
     private int levelId;
     
-    @Column(name = "skill_id")
+    @Column(name = "skill_id", length = 11, nullable = false)
     private int skillId;
     
-    @Column(name = "status_id")
+    @Column(name = "status_id", length = 11, nullable = false)
     private int statusId;
     
-    @Column(name = "seat_name")
+    @Column(name = "seat_name", length = 50, nullable = false)
     private String seatName;
     
-    @Column(name = "seat_description")
+    @Column(name = "seat_description", length = 100, nullable = false)
     private String seatDescription;
     
-    @Column(name = "seat_start_period")
+    @Column(name = "seat_start_period", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date seatStartPeriod;
     
-    @Column(name = "seat_end_period")
+    @Column(name = "seat_end_period", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date seatEndPeriod;
     
-    @Column(name = "seat_max_call")
+    @Column(name = "seat_max_call", length = 11, nullable = false)
     private int seatMaxCall;
     
-    @Column(name = "seat_allow_outbound")
+    @Column(name = "seat_allow_outbound", length = 11, nullable = false)
     private int seatAllowOutbound;
     
-    @Column(name = "seat_create_date")
+    @Column(name = "seat_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date seatCreateDate;
     
