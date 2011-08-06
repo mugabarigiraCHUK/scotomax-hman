@@ -95,3 +95,7 @@ A:link{color:#FFFFFF;text-decoration:none}
 A:visited{color:#FFFFFF;text-decoration:none}
 A:active{color:#FFFFFF;text-decoration:none}
 A:hover{filter:blur; height: 20; COLOR: FFFFFF; text-decoration: none }
+
+table.inputtable td {
+	padding: 2px;
+}
