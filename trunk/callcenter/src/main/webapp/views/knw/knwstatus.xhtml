@@ -95,8 +95,8 @@
 									<h:outputText value="#{msg['knwstatus.description']}"/>
 									<h:inputTextarea value="#{knwStatusController.statusDescription}" cols="30" rows="5" />
 									
-									<h:outputText value="#{msg['knwstatus.updatedate']}" rendered="#{msg['not empty knwstatus.updatedate']}"/>
-									<h:outputText value="#{knwStatusController.statusUpdateDate}" rendered="#{not empty msg['knwstatus.updatedate']}"/>
+									<h:outputText value="#{msg['knwstatus.updatedate']}" rendered="#{not empty knwStatusController.statusUpdateDate}"/>
+									<h:outputText value="#{knwStatusController.statusUpdateDate}" rendered="#{not empty knwStatusController.statusUpdateDate}"/>
 									
 									<h:column/>
 									<h:panelGroup>
