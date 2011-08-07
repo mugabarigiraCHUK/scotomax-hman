@@ -104,11 +104,13 @@
 																	  action="#{wkfStatusController.create}"
 																	  execute="wkfStatusCreateUpdatePanel" 
 																	  rendered="#{empty wkfStatusController.statusId}" 
+																	  render="wkfStatusOutputPanel"
 																	  oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.update']}" 
 																	  action="#{wkfStatusController.update}"
 																	  execute="wkfStatusCreateUpdatePanel" 
 																	  rendered="#{not empty wkfStatusController.statusId}" 
+																	  render="wkfStatusOutputPanel"
 																	  oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;" />
 									</h:panelGroup>
@@ -127,6 +129,7 @@
 							<h:panelGroup>
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{wkfStatusController.delete}" 
+															  render="wkfStatusOutputPanel"
 															  oncomplete="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;"/>
 								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;" />
 							</h:panelGroup>

@@ -104,11 +104,13 @@
 																	  action="#{crmStatusController.create}"
 																	  execute="crmStatusCreateUpdatePanel" 
 																	  rendered="#{empty crmStatusController.statusId}" 
+																	  render="crmStatusOutputPanel"
 																	  oncomplete="#{rich:component('crmStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.update']}" 
 																	  action="#{crmStatusController.update}"
 																	  execute="crmStatusCreateUpdatePanel" 
 																	  rendered="#{not empty crmStatusController.statusId}" 
+																	  render="crmStatusOutputPanel"
 																	  oncomplete="#{rich:component('crmStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('crmStatusCreateUpdatePanel')}.hide(); return false;" />
 									</h:panelGroup>
@@ -127,6 +129,7 @@
 							<h:panelGroup>
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{crmStatusController.delete}" 
+															  render="crmStatusOutputPanel"
 															  oncomplete="#{rich:component('crmStatusDeletePanel')}.hide(); return false;"/>
 								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('crmStatusDeletePanel')}.hide(); return false;" />
 							</h:panelGroup>
