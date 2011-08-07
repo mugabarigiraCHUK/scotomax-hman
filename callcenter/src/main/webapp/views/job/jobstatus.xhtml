@@ -95,8 +95,8 @@
 									<h:outputText value="#{msg['jobstatus.description']}"/>
 									<h:inputTextarea value="#{jobStatusController.statusDescription}" cols="30" rows="5" />
 									
-									<h:outputText value="#{msg['jobstatus.updatedate']}" rendered="#{msg['not empty jobstatus.updatedate']}"/>
-									<h:outputText value="#{jobStatusController.statusUpdateDate}" rendered="#{not empty msg['jobstatus.updatedate']}"/>
+									<h:outputText value="#{msg['jobstatus.updatedate']}" rendered="#{not empty jobStatusController.statusUpdateDate}"/>
+									<h:outputText value="#{jobStatusController.statusUpdateDate}" rendered="#{not empty jobStatusController.statusUpdateDate}"/>
 									
 									<h:column/>
 									<h:panelGroup>

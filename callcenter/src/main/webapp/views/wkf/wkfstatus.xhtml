@@ -95,8 +95,8 @@
 									<h:outputText value="#{msg['wkfstatus.description']}"/>
 									<h:inputTextarea value="#{wkfStatusController.statusDescription}" cols="30" rows="5" />
 									
-									<h:outputText value="#{msg['wkfstatus.updatedate']}" rendered="#{msg['not empty wkfstatus.updatedate']}"/>
-									<h:outputText value="#{wkfStatusController.statusUpdateDate}" rendered="#{not empty msg['wkfstatus.updatedate']}"/>
+									<h:outputText value="#{msg['wkfstatus.updatedate']}" rendered="#{not empty wkfStatusController.statusUpdateDate}"/>
+									<h:outputText value="#{wkfStatusController.statusUpdateDate}" rendered="#{not empty wkfStatusController.statusUpdateDate}"/>
 									
 									<h:column/>
 									<h:panelGroup>

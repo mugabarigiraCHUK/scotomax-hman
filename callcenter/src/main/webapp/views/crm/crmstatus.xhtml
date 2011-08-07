@@ -95,8 +95,8 @@
 									<h:outputText value="#{msg['crmstatus.description']}"/>
 									<h:inputTextarea value="#{crmStatusController.statusDescription}" cols="30" rows="5" />
 									
-									<h:outputText value="#{msg['crmstatus.updatedate']}" rendered="#{msg['not empty crmstatus.updatedate']}"/>
-									<h:outputText value="#{crmStatusController.statusUpdateDate}" rendered="#{not empty msg['crmstatus.updatedate']}"/>
+									<h:outputText value="#{msg['crmstatus.updatedate']}" rendered="#{not empty crmStatusController.statusUpdateDate}"/>
+									<h:outputText value="#{crmStatusController.statusUpdateDate}" rendered="#{not empty crmStatusController.statusUpdateDate}"/>
 									
 									<h:column/>
 									<h:panelGroup>
