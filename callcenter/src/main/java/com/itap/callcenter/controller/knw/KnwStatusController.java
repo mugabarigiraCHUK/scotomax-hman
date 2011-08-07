@@ -1,4 +1,4 @@
-package com.itap.callcenter.controller.job;
+package com.itap.callcenter.controller.knw;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,9 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.itap.callcenter.beans.job.JobStatusBean;
-import com.itap.callcenter.dao.apc.job.JobStatusDao;
-import com.itap.callcenter.entity.apc.job.JobStatus;
+import com.itap.callcenter.beans.knw.KnwStatusBean;
+import com.itap.callcenter.dao.apc.knw.KnwStatusDao;
+import com.itap.callcenter.entity.apc.knw.KnwStatus;
 
 /**
  * 
@@ -22,33 +22,33 @@ import com.itap.callcenter.entity.apc.job.JobStatus;
  *
  */
 @ViewScoped
-@ManagedBean(name = "jobStatusController")
-public class JobStatusContoller extends JobStatusBean {
+@ManagedBean(name="knwStatusController")
+public class KnwStatusController extends KnwStatusBean {
 
-	static final long serialVersionUID = 5677112565939288621L;
+	private static final long serialVersionUID = 8925951740557775361L;
 	
 	// SLF4J logger
-	Logger logger = LoggerFactory.getLogger(JobStatusContoller.class);
-	
-	// Job status DAO
-	@ManagedProperty(value = "#{jobStatusDaoImpl}")
-	JobStatusDao jobStatusDao;
-	
-	public void setJobStatusDao(JobStatusDao jobStatusDao) {
-		this.jobStatusDao = jobStatusDao;
-	}
+	private static Logger logger = LoggerFactory.getLogger(KnwStatusController.class);
 
+	// KNW status DAO
+	@ManagedProperty(value = "#{knwStatusDaoImpl}")
+	KnwStatusDao knwStatusDao;
+
+	public void setKnwStatusDao(KnwStatusDao knwStatusDao) {
+		this.knwStatusDao = knwStatusDao;
+	}
+	
 	/**
-	 * Create job status entity data insert into database.
+	 * Create KNW status entity data insert into database.
 	 */
 	public void create() {
-		logger.debug("Entering Job Status creation method...");
+		logger.debug("Entering KNW Status creation method...");
 		try {
-			JobStatus entry = new JobStatus();
+			KnwStatus entry = new KnwStatus();
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());
-			jobStatusDao.save(entry);
+			knwStatusDao.save(entry);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
@@ -57,17 +57,17 @@ public class JobStatusContoller extends JobStatusBean {
 	}
 	
 	/**
-	 * Update job status entity data update into database.
+	 * Update KNW status entity data update into database.
 	 */
 	public void update() {
-		logger.debug("Entering Job Status update method...");
+		logger.debug("Entering KNW Status update method...");
 		try {
-			JobStatus entry = new JobStatus();
+			KnwStatus entry = new KnwStatus();
 			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());
-			jobStatusDao.update(entry);
+			knwStatusDao.update(entry);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to update the data into db, Cause: "+ex.getMessage(), ex);
@@ -76,10 +76,10 @@ public class JobStatusContoller extends JobStatusBean {
 	}
 	
 	/**
-	 * Fetch job status entity data from database.
+	 * Fetch KNW status entity data from database.
 	 */
 	public void edit() {
-		logger.debug("Entering Job Status edit method...");
+		logger.debug("Entering KNW Status edit method...");
 		if ( selectedStatusId == null || selectedStatusId.intValue() == -1 ) {
 			statusId = null;
 			statusName = null;
@@ -87,7 +87,7 @@ public class JobStatusContoller extends JobStatusBean {
 			statusUpdateDate = null;
 		} else {
 			try {
-				JobStatus entry = jobStatusDao.findById(selectedStatusId);
+				KnwStatus entry = knwStatusDao.findById(selectedStatusId);
 				statusId = entry.getStatusId();
 				statusName = entry.getStatusName();
 				statusDescription = entry.getStatusDescription();
@@ -101,13 +101,13 @@ public class JobStatusContoller extends JobStatusBean {
 	}
 	
 	/**
-	 * Delete job status entity data from database.
+	 * Delete KNW status entity data from database.
 	 */
 	public void delete() {
-		logger.debug("Entering Job Status delete method...");
+		logger.debug("Entering KNW Status delete method...");
 		try {
 			if ( selectedStatusId != null ) {
-				jobStatusDao.deleteById(selectedStatusId);
+				knwStatusDao.deleteById(selectedStatusId);
 				selectedStatusId = -1;
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
 			}
@@ -118,13 +118,13 @@ public class JobStatusContoller extends JobStatusBean {
 	}
 	
 	/**
-	 * Fetch list of all job status entity data from database.
+	 * Fetch list of all KNW status entity data from database.
 	 */
-	public List<JobStatus> getJobStatusList() {
-		logger.debug("Entering Job Status getting list of all entity method...");
-		List<JobStatus> rsList = null;
+	public List<KnwStatus> getKnwStatusList() {
+		logger.debug("Entering KNW Status getting list of all entity method...");
+		List<KnwStatus> rsList = null;
 		try {
-			rsList = jobStatusDao.findAll();
+			rsList = knwStatusDao.findAll();
 		} catch ( Exception ex ) {
 			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
