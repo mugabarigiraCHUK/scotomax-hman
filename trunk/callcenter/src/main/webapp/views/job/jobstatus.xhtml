@@ -104,11 +104,13 @@
 																	  action="#{jobStatusController.create}"
 																	  execute="jobStatusCreateUpdatePanel" 
 																	  rendered="#{empty jobStatusController.statusId}" 
+																	  render="jobStatusOutputPanel"
 																	  oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.update']}" 
 																	  action="#{jobStatusController.update}"
 																	  execute="jobStatusCreateUpdatePanel" 
 																	  rendered="#{not empty jobStatusController.statusId}" 
+																	  render="jobStatusOutputPanel"
 																	  oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobStatusCreateUpdatePanel')}.hide(); return false;" />
 									</h:panelGroup>
@@ -127,6 +129,7 @@
 							<h:panelGroup>
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{jobStatusController.delete}" 
+															  render="jobStatusOutputPanel"
 															  oncomplete="#{rich:component('jobStatusDeletePanel')}.hide(); return false;"/>
 								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobStatusDeletePanel')}.hide(); return false;" />
 							</h:panelGroup>

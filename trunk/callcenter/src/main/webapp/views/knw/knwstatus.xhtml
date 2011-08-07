@@ -104,11 +104,13 @@
 																	  action="#{knwStatusController.create}"
 																	  execute="knwStatusCreateUpdatePanel" 
 																	  rendered="#{empty knwStatusController.statusId}" 
+																	  render="knwStatusOutputPanel"
 																	  oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.update']}" 
 																	  action="#{knwStatusController.update}"
 																	  execute="knwStatusCreateUpdatePanel" 
-																	  rendered="#{not empty knwStatusController.statusId}" 
+																	  rendered="#{not empty knwStatusController.statusId}"
+																	  render="knwStatusOutputPanel" 
 																	  oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;"/>
 										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;" />
 									</h:panelGroup>
@@ -127,6 +129,7 @@
 							<h:panelGroup>
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{knwStatusController.delete}" 
+															  render="knwStatusOutputPanel"
 															  oncomplete="#{rich:component('knwStatusDeletePanel')}.hide(); return false;"/>
 								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('knwStatusDeletePanel')}.hide(); return false;" />
 							</h:panelGroup>
