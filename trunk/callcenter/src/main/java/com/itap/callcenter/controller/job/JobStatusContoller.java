@@ -45,6 +45,7 @@ public class JobStatusContoller extends JobStatusBean {
 		logger.debug("Entering Job Status creation method...");
 		try {
 			JobStatus entry = new JobStatus();
+			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());

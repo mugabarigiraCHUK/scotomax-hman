@@ -45,6 +45,7 @@ public class CrmStatusController extends CrmStatusBean {
 		logger.debug("Entering CRM Status creation method...");
 		try {
 			CrmStatus entry = new CrmStatus();
+			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());
