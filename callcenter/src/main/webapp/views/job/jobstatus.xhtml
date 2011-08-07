@@ -14,25 +14,10 @@
 					
 						<h:messages/>
 						
-						<h:panelGrid columns="2" styleClass="inputtable">
-							<a4j:commandButton value="#{msg['button.create']}" 
-						                							action="#{jobStatusController.edit}"
-																 	render="jobStatusCreateUpdatePanel" 
-																 	execute="@this" 
-																 	oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.show()">
-											<a4j:param value="-1" assignTo="#{jobStatusController.selectedStatusId}"/>
-							</a4j:commandButton>
-							<a4j:commandButton value="#{msg['button.refresh']}" 
-																 	render="jobStatusCreateUpdatePanel" 
-																 	execute="@this"/>
-						</h:panelGrid>
-						
 						<fieldset>
 							<legend><h:outputText value="#{msg['jobstatus.datatable.legend']}" /></legend>
 							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty jobStatusController.jobStatusList}"/>
-							<rich:dataTable value="#{jobStatusController.jobStatusList}" 
-												   var="data" 
-												   rendered="#{not empty jobStatusController.jobStatusList}">
+							<rich:dataTable value="#{jobStatusController.jobStatusList}" var="data">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['jobstatus.table.id']}" /></f:facet>
 									<h:outputText value="#{data.statusId}" />
@@ -55,7 +40,8 @@
 																 action="#{jobStatusController.edit}" 
 																 render="jobStatusCreateUpdatePanel" 
 																 execute="@this" 
-																 oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.show()">
+																 oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.statusId}">
 										<a4j:param value="#{data.statusId}" assignTo="#{jobStatusController.selectedStatusId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -64,10 +50,27 @@
 									<a4j:commandButton value="#{msg['button.delete']}" 
 																  render="@none" 
 																  execute="@this" 
-																  oncomplete="#{rich:component('jobStatusDeletePanel')}.show()">
+																  oncomplete="#{rich:component('jobStatusDeletePanel')}.show()"
+																  rendered="#{not empty data.statusId}">
 										<a4j:param value="#{data.statusId}" assignTo="#{jobStatusController.selectedStatusId}"/>
 									</a4j:commandButton>
 								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{jobStatusController.edit}"
+																			 	render="jobStatusCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('jobStatusCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{jobStatusController.selectedStatusId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="jobStatusCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
 							</rich:dataTable>
 						</fieldset>
 						
@@ -82,14 +85,15 @@
 									<h:column/>
 									<h:messages/>
 									
-									<h:outputText value="#{msg['jobstatus.id']}" rendered="#{not empty jobStatusController.statusId}"/>
+									<h:outputText value="#{msg['jobstatus.id']}" />
+									<h:inputText value="#{jobStatusController.statusId}" rendered="#{empty jobStatusController.statusId}"/>
 									<h:outputText value="#{jobStatusController.statusId}" rendered="#{not empty jobStatusController.statusId}"/>
 									
 									<h:outputText value="#{msg['jobstatus.name']}"/>
-									<h:inputText id="statusName" value="#{jobStatusController.statusName}" />
+									<h:inputText value="#{jobStatusController.statusName}" />
 									
 									<h:outputText value="#{msg['jobstatus.description']}"/>
-									<h:inputTextarea id="statusDesc" value="#{jobStatusController.statusDescription}" cols="30" rows="5" />
+									<h:inputTextarea value="#{jobStatusController.statusDescription}" cols="30" rows="5" />
 									
 									<h:outputText value="#{msg['jobstatus.updatedate']}" rendered="#{msg['not empty jobstatus.updatedate']}"/>
 									<h:outputText value="#{jobStatusController.statusUpdateDate}" rendered="#{not empty msg['jobstatus.updatedate']}"/>

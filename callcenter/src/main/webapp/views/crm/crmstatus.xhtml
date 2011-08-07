@@ -1,0 +1,140 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="crmstatusForm">
+			<rich:panel id="crmStatusPanel" header="#{msg['crmstatus.inputpanel']}">
+				<a4j:outputPanel id="crmStatusOutputPanel">
+					
+						<h:messages/>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['crmstatus.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty crmStatusController.crmStatusList}"/>
+							<rich:dataTable value="#{crmStatusController.crmStatusList}" var="data">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmstatus.table.id']}" /></f:facet>
+									<h:outputText value="#{data.statusId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmstatus.table.name']}" /></f:facet>
+									<h:outputText value="#{data.statusName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmstatus.table.description']}" /></f:facet>
+									<h:outputText value="#{data.statusDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmstatus.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.statusUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmstatus.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{crmStatusController.edit}" 
+																 render="crmStatusCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('crmStatusCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.statusId}">
+										<a4j:param value="#{data.statusId}" assignTo="#{crmStatusController.selectedStatusId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmstatus.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('crmStatusDeletePanel')}.show()"
+																  rendered="#{not empty data.statusId}">
+										<a4j:param value="#{data.statusId}" assignTo="#{crmStatusController.selectedStatusId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{crmStatusController.edit}"
+																			 	render="crmStatusCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('crmStatusCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{crmStatusController.selectedStatusId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="crmStatusCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+		
+			<rich:popupPanel id="crmStatusCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['crmstatus.create.update.legend']}" /></legend>
+					
+								<h:panelGrid columns="2" styleClass="inputtable">
+									<h:column/>
+									<h:messages/>
+									
+									<h:outputText value="#{msg['crmstatus.id']}" />
+									<h:inputText value="#{crmStatusController.statusId}" rendered="#{empty crmStatusController.statusId}"/>
+									<h:outputText value="#{crmStatusController.statusId}" rendered="#{not empty crmStatusController.statusId}"/>
+									
+									<h:outputText value="#{msg['crmstatus.name']}"/>
+									<h:inputText value="#{crmStatusController.statusName}" />
+									
+									<h:outputText value="#{msg['crmstatus.description']}"/>
+									<h:inputTextarea value="#{crmStatusController.statusDescription}" cols="30" rows="5" />
+									
+									<h:outputText value="#{msg['crmstatus.updatedate']}" rendered="#{msg['not empty crmstatus.updatedate']}"/>
+									<h:outputText value="#{crmStatusController.statusUpdateDate}" rendered="#{not empty msg['crmstatus.updatedate']}"/>
+									
+									<h:column/>
+									<h:panelGroup>
+										<a4j:commandButton value="#{msg['button.create']}" 
+																	  action="#{crmStatusController.create}"
+																	  execute="crmStatusCreateUpdatePanel" 
+																	  rendered="#{empty crmStatusController.statusId}" 
+																	  oncomplete="#{rich:component('crmStatusCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.update']}" 
+																	  action="#{crmStatusController.update}"
+																	  execute="crmStatusCreateUpdatePanel" 
+																	  rendered="#{not empty crmStatusController.statusId}" 
+																	  oncomplete="#{rich:component('crmStatusCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('crmStatusCreateUpdatePanel')}.hide(); return false;" />
+									</h:panelGroup>
+									
+								</h:panelGrid>
+						
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="crmStatusDeletePanel" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['crmstatus.delete.legend']}" /></legend>
+		
+						<h:panelGrid columns="1" styleClass="inputtable">
+							<h:outputText value="#{msg['crmstatus.delete.message']}" />
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  action="#{crmStatusController.delete}" 
+															  oncomplete="#{rich:component('crmStatusDeletePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('crmStatusDeletePanel')}.hide(); return false;" />
+							</h:panelGroup>
+						</h:panelGrid>
+
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

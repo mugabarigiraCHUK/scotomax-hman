@@ -64,6 +64,7 @@ public class WkfStatusController extends WkfStatusBean {
 		try {
 			WkfStatus entry = new WkfStatus();
 			entry.setStatusId(statusId);
+			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());

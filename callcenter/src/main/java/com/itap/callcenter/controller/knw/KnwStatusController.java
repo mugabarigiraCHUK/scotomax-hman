@@ -45,6 +45,7 @@ public class KnwStatusController extends KnwStatusBean {
 		logger.debug("Entering KNW Status creation method...");
 		try {
 			KnwStatus entry = new KnwStatus();
+			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());
