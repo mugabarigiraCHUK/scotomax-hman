@@ -45,6 +45,7 @@ public class WkfStatusController extends WkfStatusBean {
 		logger.debug("Entering WKF Status creation method...");
 		try {
 			WkfStatus entry = new WkfStatus();
+			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
 			entry.setStatusUpdateDate(new Date());
@@ -63,7 +64,6 @@ public class WkfStatusController extends WkfStatusBean {
 		logger.debug("Entering WKF Status update method...");
 		try {
 			WkfStatus entry = new WkfStatus();
-			entry.setStatusId(statusId);
 			entry.setStatusId(statusId);
 			entry.setStatusName(statusName);
 			entry.setStatusDescription(statusDescription);
