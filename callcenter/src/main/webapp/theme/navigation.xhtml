@@ -8,51 +8,57 @@
 	
 	
 	<h:form id="navForm">
-		<rich:panel header="Information update">
+		<rich:panel header="#{msg['info.update.title']}">
 			<h:panelGrid columns="2" styleClass="cc_panelgrid" columnClasses="cc_colgrid">
-				<h:outputText value="Total Call" />
+				<h:outputText value="#{msg['info.update.total.call']}" />
 				<h:outputText value="000.00" />
 				
-				<h:outputText value="Total Email" />
+				<h:outputText value="#{msg['info.update.total.email']}" />
 				<h:outputText value="000.00" />
 				
-				<h:outputText value="Total Co-browser" />
+				<h:outputText value="#{msg['info.update.total.co.browser']}" />
 				<h:outputText value="000.00" />
 				
-				<h:outputText value="Call in-queue" />
+				<h:outputText value="#{msg['info.update.queue.call']}" />
 				<h:outputText value="000.00" />
 				
-				<h:outputText value="Email in-queue" />
+				<h:outputText value="#{msg['info.update.queue.email']}" />
 				<h:outputText value="000.00" />
 				
-				<h:outputText value="Co-browser in-queue" />
+				<h:outputText value="#{msg['info.update.queue.co.browser']}" />
 				<h:outputText value="000.00" />
 				
 			</h:panelGrid>
 		</rich:panel>
 		
-		<rich:panel header="User Profile">
+		<rich:panel header="#{msg['user.profile.title']}">
 			<h:panelGrid columns="2" columnClasses="cc_colgrid">
+				
 				<div id="myphone" class="ui-state-default ui-corner-all" style="cursor: pointer;">
 	     			<span class="ui-icon ui-icon-person"></span>
 	     		</div>
-				<h:outputText value="My phone" />
+				<h:outputText value="#{msg['user.profile.myphone']}" />
+				
 				<div id="datacenter" class="ui-state-default ui-corner-all" style="cursor: pointer;">
 	     			<span class="ui-icon ui-icon-calculator"></span>
 	     		</div>
-				<h:outputText value="Data Center" />
+				<h:outputText value="#{msg['user.profile.datacenter']}" />
+				
 				<div  id="mycalendar" class="ui-state-default ui-corner-all" style="cursor: pointer;">
 	     			<span class="ui-icon ui-icon-calendar"></span>
 	     		</div>
-				<h:outputText value="My Calendar" />
+				<h:outputText value="#{msg['user.profile.mycalendar']}" />
+				
 				<div  id="myagent" class="ui-state-default ui-corner-all" style="cursor: pointer;">
 	     			<span class="ui-icon ui-icon-contact"></span>
 	     		</div>
-				<h:outputText value="My Agent" />
+				<h:outputText value="#{msg['user.profile.myagent']}" />
+				
 				<div  id="myjob" class="ui-state-default ui-corner-all" style="cursor: pointer;">
 	     			<span class="ui-icon ui-icon-note"></span>
 	     		</div>
-				<h:outputText value="My Job" />
+				<h:outputText value="#{msg['user.profile.myjob']}" />
+			
 			</h:panelGrid>	
 		</rich:panel>
 	</h:form>
