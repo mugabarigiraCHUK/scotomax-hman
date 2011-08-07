@@ -1,5 +1,7 @@
 package com.itap.callcenter.controller;
 
+import java.util.Locale;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -51,6 +53,21 @@ public class UserController extends UserBean {
 		authenticated = false;
 		
 		return "home.faces";
+	}
+	
+	public void changeLocale() {
+		logger.debug("Entering change locale mathod by param.locale->"+locale);
+		try {
+			if ("en".equals(locale)) {
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en"));
+			} else if ("th".equals(locale)) {
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("th"));
+			} else {
+				logger.warn("System could not found selected locale for updating!");
+			}
+		} catch ( Exception ex ) {
+			logger.warn("Failed to update system locale, Cause: "+ex.getMessage(), ex);
+		}
 	}
 
 }
