@@ -15,38 +15,38 @@
 	     		<div class="ui-state-default ui-corner-all">
 	     			<span class="ui-icon ui-icon-home"></span>
 	     		</div>
-	             <h:commandLink value="Home" />
+	             <h:commandLink value="#{msg['menu.home']}" />
 	        </rich:toolbarGroup>
 	        <rich:toolbarGroup>
 	        	<div class="ui-state-default ui-corner-all">
 	     			<span class="ui-icon ui-icon-newwin"></span>
 	     		</div>
-	             <h:commandLink value="Work phone" />
+	             <h:commandLink value="#{msg['menu.workphone']}" />
 	        </rich:toolbarGroup>
 	        <rich:toolbarGroup>
 	        	<div class="ui-state-default ui-corner-all">
 	     			<span class="ui-icon ui-icon-extlink"></span>
 	     		</div>
-	             <h:commandLink value="Co browser" />
+	             <h:commandLink value="#{msg['menu.co.browser']}" />
 	        </rich:toolbarGroup>
 	        <rich:toolbarGroup>
 	        	<div class="ui-state-default ui-corner-all">
 	     			<span class="ui-icon ui-icon-mail-closed"></span>
 	     		</div>
-	             <h:commandLink value="E-Mail" />
+	             <h:commandLink value="#{msg['menu.email']}" />
 	        </rich:toolbarGroup>
 	        <rich:toolbarGroup>
 	        	<div class="ui-state-default ui-corner-all">
 	     			<span class="ui-icon ui-icon-transferthick-e-w"></span>
 	     		</div>
-	        	 <h:commandLink value="Out bound" />
+	        	 <h:commandLink value="#{msg['menu.outbound']}" />
 	        </rich:toolbarGroup>
 	       	<rich:toolbarGroup location="right">
 	       		<div class="ui-state-default ui-corner-all">
 	     			<span class="ui-icon ui-icon-power"></span>
 	     		</div>
-	          	<h:commandLink class="cmdLogin" value="Login"  rendered="#{!userController.authenticated}"/>
-	        	<h:commandLink class="cmdLogout" value="Logout" action="#{userController.logout}" rendered="#{userController.authenticated}"/>
+	          	<h:commandLink class="cmdLogin" value="#{msg['menu.login']}"  rendered="#{!userController.authenticated}"/>
+	        	<h:commandLink class="cmdLogout" value="#{msg['menu.logout']}" action="#{userController.logout}" rendered="#{userController.authenticated}"/>
 	    	 </rich:toolbarGroup>
 		 </rich:toolbar>
 	</h:form>
