@@ -55,13 +55,16 @@ public class UserController extends UserBean {
 		return "home.faces";
 	}
 	
+	/**
+	 * Locale change event handle
+	 */
 	public void changeLocale() {
-		logger.debug("Entering change locale mathod by param.locale->"+locale);
+		logger.debug("Entering change locale mathod by param.locale->"+strLocale);
 		try {
-			if ("en".equals(locale)) {
-				FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en"));
-			} else if ("th".equals(locale)) {
-				FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("th"));
+			if ("en".equals(strLocale)) {
+				locale = new Locale("en");
+			} else if ("th".equals(strLocale)) {
+				locale = new Locale("th");
 			} else {
 				logger.warn("System could not found selected locale for updating!");
 			}

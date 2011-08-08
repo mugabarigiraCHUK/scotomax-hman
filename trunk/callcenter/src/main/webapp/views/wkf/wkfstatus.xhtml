@@ -120,7 +120,7 @@
 					</fieldset>
 			</rich:popupPanel>
 			
-			<rich:popupPanel id="wkfStatusDeletePanel" autosized="true">
+			<rich:popupPanel id="wkfStatusDeletePanel" domElementAttachment="parent" autosized="true">
 				<fieldset>
 					<legend><h:outputText value="#{msg['wkfstatus.delete.legend']}" /></legend>
 		
@@ -129,6 +129,7 @@
 							<h:panelGroup>
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{wkfStatusController.delete}" 
+															  execute="wkfStatusDeletePanel"
 															  render="wkfStatusOutputPanel"
 															  oncomplete="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;"/>
 								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;" />

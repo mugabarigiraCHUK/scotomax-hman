@@ -120,7 +120,7 @@
 					</fieldset>
 			</rich:popupPanel>
 			
-			<rich:popupPanel id="jobStatusDeletePanel" autosized="true">
+			<rich:popupPanel id="jobStatusDeletePanel" domElementAttachment="parent" autosized="true">
 				<fieldset>
 					<legend><h:outputText value="#{msg['jobstatus.delete.legend']}" /></legend>
 		
@@ -129,6 +129,7 @@
 							<h:panelGroup>
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{jobStatusController.delete}" 
+															  execute="jobStatusDeletePanel"
 															  render="jobStatusOutputPanel"
 															  oncomplete="#{rich:component('jobStatusDeletePanel')}.hide(); return false;"/>
 								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobStatusDeletePanel')}.hide(); return false;" />

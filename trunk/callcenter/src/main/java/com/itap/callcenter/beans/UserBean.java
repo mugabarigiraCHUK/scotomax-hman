@@ -1,6 +1,7 @@
 package com.itap.callcenter.beans;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public @Data abstract class UserBean implements Serializable {
 	protected String password;
 	protected boolean authenticated;
 	
-	protected String locale;
+	protected String strLocale;
+	protected Locale locale = new Locale("en");
 	
 }

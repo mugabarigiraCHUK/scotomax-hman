@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="ivrprotocolForm">
+			<rich:panel id="ivrProtocolPanel" header="#{msg['ivrprotocol.inputpanel']}">
+				<a4j:outputPanel id="ivrProtocolOutputPanel">
+					
+						<h:messages/>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['ivrprotocol.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty ivrProtocolController.ivrProtocolList}"/>
+							<rich:dataTable value="#{ivrProtocolController.ivrProtocolList}" var="data">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['ivrprotocol.table.id']}" /></f:facet>
+									<h:outputText value="#{data.protocolId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['ivrprotocol.table.name']}" /></f:facet>
+									<h:outputText value="#{data.protocolName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['ivrprotocol.table.description']}" /></f:facet>
+									<h:outputText value="#{data.protocolDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['ivrprotocol.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.protocolUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['ivrprotocol.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{ivrProtocolController.edit}" 
+																 render="ivrProtocolCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('ivrProtocolCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.protocolId}">
+										<a4j:param value="#{data.protocolId}" assignTo="#{ivrProtocolController.selectedProtocolId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['ivrprotocol.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('ivrProtocolDeletePanel')}.show()"
+																  rendered="#{not empty data.protocolId}">
+										<a4j:param value="#{data.protocolId}" assignTo="#{ivrProtocolController.selectedProtocolId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{ivrProtocolController.edit}"
+																			 	render="ivrProtocolCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('ivrProtocolCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{ivrProtocolController.selectedProtocolId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="ivrProtocolCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+		
+			<rich:popupPanel id="ivrProtocolCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['ivrprotocol.create.update.legend']}" /></legend>
+					
+								<h:panelGrid columns="2" styleClass="inputtable">
+									<h:column/>
+									<h:messages/>
+									
+									<h:outputText value="#{msg['ivrprotocol.id']}" />
+									<h:inputText value="#{ivrProtocolController.protocolId}" rendered="#{empty ivrProtocolController.protocolId}"/>
+									<h:outputText value="#{ivrProtocolController.protocolId}" rendered="#{not empty ivrProtocolController.protocolId}"/>
+									
+									<h:outputText value="#{msg['ivrprotocol.name']}"/>
+									<h:inputText value="#{ivrProtocolController.protocolName}" />
+									
+									<h:outputText value="#{msg['ivrprotocol.description']}"/>
+									<h:inputTextarea value="#{ivrProtocolController.protocolDescription}" cols="30" rows="5" />
+									
+									<h:outputText value="#{msg['ivrprotocol.updatedate']}" rendered="#{not empty ivrProtocolController.protocolUpdateDate}"/>
+									<h:outputText value="#{ivrProtocolController.protocolUpdateDate}" rendered="#{not empty ivrProtocolController.protocolUpdateDate}"/>
+									
+									<h:column/>
+									<h:panelGroup>
+										<a4j:commandButton value="#{msg['button.create']}" 
+																	  action="#{ivrProtocolController.create}"
+																	  execute="ivrProtocolCreateUpdatePanel" 
+																	  rendered="#{empty ivrProtocolController.protocolId}" 
+																	  render="ivrProtocolOutputPanel"
+																	  oncomplete="#{rich:component('ivrProtocolCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.update']}" 
+																	  action="#{ivrProtocolController.update}"
+																	  execute="ivrProtocolCreateUpdatePanel" 
+																	  rendered="#{not empty ivrProtocolController.protocolId}" 
+																	  render="ivrProtocolOutputPanel"
+																	  oncomplete="#{rich:component('ivrProtocolCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrProtocolCreateUpdatePanel')}.hide(); return false;" />
+									</h:panelGroup>
+									
+								</h:panelGrid>
+						
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="ivrProtocolDeletePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['ivrprotocol.delete.legend']}" /></legend>
+		
+						<h:panelGrid columns="1" styleClass="inputtable">
+							<h:outputText value="#{msg['ivrprotocol.delete.message']}" />
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  action="#{ivrProtocolController.delete}" 
+															  execute="ivrProtocolDeletePanel"
+															  render="ivrProtocolOutputPanel"
+															  oncomplete="#{rich:component('ivrProtocolDeletePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrProtocolDeletePanel')}.hide(); return false;" />
+							</h:panelGroup>
+						</h:panelGrid>
+
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
