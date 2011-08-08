@@ -44,11 +44,11 @@
 	        
 	        <rich:toolbarGroup location="right">
 	        	<h:commandLink action="#{userController.changeLocale}">
-	        		<f:setPropertyActionListener target="#{userController.locale}" value="en" />
+	        		<f:setPropertyActionListener target="#{userController.strLocale}" value="en" />
 	        		<h:graphicImage value="/images/lang/usa-flag-icon.gif" />
 	        	</h:commandLink>
 	        	<h:commandLink action="#{userController.changeLocale}">
-	        		<f:setPropertyActionListener target="#{userController.locale}" value="th" />
+	        		<f:setPropertyActionListener target="#{userController.strLocale}" value="th" />
 	        		<h:graphicImage value="/images/lang/thailand_flag.gif" />
 	        	</h:commandLink>
 	        </rich:toolbarGroup>
