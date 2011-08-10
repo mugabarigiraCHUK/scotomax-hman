@@ -9,7 +9,7 @@
 	<h:form id="menuForm">
 		<rich:toolbar id="bar" height="26">
 			<!-- Home -->
-			<rich:dropDownMenu id="home" mode="ajax">
+			<rich:dropDownMenu id="home" mode="ajax" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/'">
                 <f:facet name="label">
                     <h:panelGroup>
                         <h:graphicImage value="/images/icons/go-home.png" styleClass="pic" />
@@ -37,7 +37,7 @@
                     </h:panelGroup>
                 </f:facet>
                 <rich:menuItem id="menu-agent-level" label="#{msg['menu.agent.level']}"  icon="/images/icons/level.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agentlevel.faces'"/>
-                <rich:menuItem id="menu-agent-profile" label="#{msg['menu.agent.profile']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-profile" label="#{msg['menu.agent.profile']}"  icon="/images/icons/ms-word.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agentprofile.faces'"/>
                 <rich:menuItem id="menu-agent-script" label="#{msg['menu.agent.script']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-agent-seat" label="#{msg['menu.agent.seat']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-agent-skill" label="#{msg['menu.agent.skill']}"  icon="/images/icons/blank-doc.png" />
