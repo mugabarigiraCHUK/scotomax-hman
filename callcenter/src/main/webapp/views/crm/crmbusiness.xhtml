@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="crmbusinessForm">
+			<rich:panel id="crmBusinessPanel" header="#{msg['crmbusiness.inputpanel']}">
+				<a4j:outputPanel id="crmBusinessOutputPanel">
+					
+						<h:messages/>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['crmbusiness.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty crmBusinessController.crmBusinessList}"/>
+							<rich:dataTable value="#{crmBusinessController.crmBusinessList}" var="data">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmbusiness.table.id']}" /></f:facet>
+									<h:outputText value="#{data.businessId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmbusiness.table.name']}" /></f:facet>
+									<h:outputText value="#{data.businessName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmbusiness.table.description']}" /></f:facet>
+									<h:outputText value="#{data.businessDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmbusiness.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.businessUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmbusiness.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{crmBusinessController.edit}" 
+																 render="crmBusinessCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('crmBusinessCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.businessId}">
+										<a4j:param value="#{data.businessId}" assignTo="#{crmBusinessController.selectedBusinessId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['crmbusiness.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('crmBusinessDeletePanel')}.show()"
+																  rendered="#{not empty data.businessId}">
+										<a4j:param value="#{data.businessId}" assignTo="#{crmBusinessController.selectedBusinessId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{crmBusinessController.edit}"
+																			 	render="crmBusinessCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('crmBusinessCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{crmBusinessController.selectedBusinessId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="crmBusinessCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+		
+			<rich:popupPanel id="crmBusinessCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['crmbusiness.create.update.legend']}" /></legend>
+					
+								<h:panelGrid columns="2" styleClass="inputtable">
+									<h:column/>
+									<h:messages/>
+									
+									<h:outputText value="#{msg['crmbusiness.id']}" />
+									<h:inputText value="#{crmBusinessController.businessId}" rendered="#{empty crmBusinessController.businessId}"/>
+									<h:outputText value="#{crmBusinessController.businessId}" rendered="#{not empty crmBusinessController.businessId}"/>
+									
+									<h:outputText value="#{msg['crmbusiness.name']}"/>
+									<h:inputText value="#{crmBusinessController.businessName}" />
+									
+									<h:outputText value="#{msg['crmbusiness.description']}"/>
+									<h:inputTextarea value="#{crmBusinessController.businessDescription}" cols="30" rows="5" />
+									
+									<h:outputText value="#{msg['crmbusiness.updatedate']}" rendered="#{not empty crmBusinessController.businessUpdateDate}"/>
+									<h:outputText value="#{crmBusinessController.businessUpdateDate}" rendered="#{not empty crmBusinessController.businessUpdateDate}"/>
+									
+									<h:column/>
+									<h:panelGroup>
+										<a4j:commandButton value="#{msg['button.create']}" 
+																	  action="#{crmBusinessController.create}"
+																	  execute="crmBusinessCreateUpdatePanel" 
+																	  rendered="#{empty crmBusinessController.businessId}" 
+																	  render="crmBusinessOutputPanel"
+																	  oncomplete="#{rich:component('crmBusinessCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.update']}" 
+																	  action="#{crmBusinessController.update}"
+																	  execute="crmBusinessCreateUpdatePanel" 
+																	  rendered="#{not empty crmBusinessController.businessId}" 
+																	  render="crmBusinessOutputPanel"
+																	  oncomplete="#{rich:component('crmBusinessCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('crmBusinessCreateUpdatePanel')}.hide(); return false;" />
+									</h:panelGroup>
+									
+								</h:panelGrid>
+						
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="crmBusinessDeletePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['crmbusiness.delete.legend']}" /></legend>
+		
+						<h:panelGrid columns="1" styleClass="inputtable">
+							<h:outputText value="#{msg['crmbusiness.delete.message']}" />
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  action="#{crmBusinessController.delete}" 
+															  execute="crmBusinessDeletePanel"
+															  render="crmBusinessOutputPanel"
+															  oncomplete="#{rich:component('crmBusinessDeletePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('crmBusinessDeletePanel')}.hide(); return false;" />
+							</h:panelGroup>
+						</h:panelGrid>
+
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
