@@ -24,6 +24,12 @@ legend {
   text-align:right;
 }
 
+.pic {
+    margin-bottom: -2px;
+    margin-right: 2px;
+}
+ 
+
 /* ***************** Page loading ***************************** */
 /* Page loading */
 .loading-screen {

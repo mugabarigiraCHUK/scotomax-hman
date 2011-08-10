@@ -7,58 +7,142 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 	<h:form id="menuForm">
-		<rich:toolbar id="bar" 
-						   height="32"
-						   itemSeparator="line"
-						   itemClass="toolbar">
-	     	<rich:toolbarGroup>
-	     		<div class="ui-state-default ui-corner-all">
-	     			<span class="ui-icon ui-icon-home"></span>
-	     		</div>
-	             <h:commandLink value="#{msg['menu.home']}" />
-	        </rich:toolbarGroup>
-	        <rich:toolbarGroup>
-	        	<div class="ui-state-default ui-corner-all">
-	     			<span class="ui-icon ui-icon-newwin"></span>
-	     		</div>
-	             <h:commandLink value="#{msg['menu.workphone']}" />
-	        </rich:toolbarGroup>
-	        <rich:toolbarGroup>
-	        	<div class="ui-state-default ui-corner-all">
-	     			<span class="ui-icon ui-icon-extlink"></span>
-	     		</div>
-	             <h:commandLink value="#{msg['menu.co.browser']}" />
-	        </rich:toolbarGroup>
-	        <rich:toolbarGroup>
-	        	<div class="ui-state-default ui-corner-all">
-	     			<span class="ui-icon ui-icon-mail-closed"></span>
-	     		</div>
-	             <h:commandLink value="#{msg['menu.email']}" />
-	        </rich:toolbarGroup>
-	        <rich:toolbarGroup>
-	        	<div class="ui-state-default ui-corner-all">
-	     			<span class="ui-icon ui-icon-transferthick-e-w"></span>
-	     		</div>
-	        	 <h:commandLink value="#{msg['menu.outbound']}" />
-	        </rich:toolbarGroup>
+		<rich:toolbar id="bar" height="26">
+			<!-- Home -->
+			<rich:dropDownMenu id="home" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/go-home.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.home']}" />
+                    </h:panelGroup>
+                </f:facet>
+            </rich:dropDownMenu>
+			<!-- Menu ACD -->
+			<rich:dropDownMenu id="menu-acd" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/setting.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.acd']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-acd-condition" label="#{msg['menu.acd.condition']}"  icon="/images/icons/blank-doc.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/acd/acdcondition.faces'"/>
+                <rich:menuItem id="menu-acd-route" label="#{msg['menu.acd.route']}"  icon="/images/icons/blank-doc.png" />
+            </rich:dropDownMenu>
+            <!-- Menu Agent -->
+			<rich:dropDownMenu id="menu-agent" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/agent.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.agent']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-agent-level" label="#{msg['menu.agent.level']}"  icon="/images/icons/blank-doc.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agentlevel.faces'"/>
+                <rich:menuItem id="menu-agent-profile" label="#{msg['menu.agent.profile']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-script" label="#{msg['menu.agent.script']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-seat" label="#{msg['menu.agent.seat']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-skill" label="#{msg['menu.agent.skill']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-trigger" label="#{msg['menu.agent.trigger']}"  icon="/images/icons/blank-doc.png" />
+            </rich:dropDownMenu>
+            <!-- Menu CRM -->
+			<rich:dropDownMenu id="menu-crm" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/crm.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.crm']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-crm-business" label="#{msg['menu.crm.business']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-crm-customer" label="#{msg['menu.crm.customer']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-crm-status" label="#{msg['menu.crm.status']}"  icon="/images/icons/status.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/crm/crmstatus.faces'"/>
+            </rich:dropDownMenu>
+            <!-- Menu IVR -->
+			<rich:dropDownMenu id="menu-ivr" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/setting.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.ivr']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-ivr-callflow" label="#{msg['menu.ivr.callflow']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-callroute" label="#{msg['menu.ivr.callroute']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-channel" label="#{msg['menu.ivr.channel']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-dtmf" label="#{msg['menu.ivr.dtmf']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-pabx" label="#{msg['menu.ivr.pabx']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-protocol" label="#{msg['menu.ivr.protocol']}"  icon="/images/icons/blank-doc.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/ivr/ivrprotocol.faces'"/>
+                <rich:menuItem id="menu-ivr-schedule" label="#{msg['menu.ivr.schedule']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-voiceprompt" label="#{msg['menu.ivr.voiceprompt']}"  icon="/images/icons/blank-doc.png" />
+            </rich:dropDownMenu>
+            <!-- Menu Job -->
+			<rich:dropDownMenu id="menu-job" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/jobs.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.job']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-job-status" label="#{msg['menu.job.status']}"  icon="/images/icons/status.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/job/jobstatus.faces'"/>
+                <rich:menuItem id="menu-job-ticket" label="#{msg['menu.job.ticket']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-job-trigger" label="#{msg['menu.job.trigger']}"  icon="/images/icons/blank-doc.png" />
+            </rich:dropDownMenu>
+            <!-- Menu Know -->
+			<rich:dropDownMenu id="menu-knw" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/know.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.knw']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-knw-category" label="#{msg['menu.knw.category']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-knw-solution" label="#{msg['menu.knw.solution']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-knw-status" label="#{msg['menu.knw.status']}"  icon="/images/icons/status.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/knw/knwstatus.faces'"/>
+                <rich:menuItem id="menu-knw-topic" label="#{msg['menu.knw.topic']}"  icon="/images/icons/blank-doc.png" />
+            </rich:dropDownMenu>
+            <!-- Menu Work flow -->
+			<rich:dropDownMenu id="menu-wkf" mode="ajax">
+                <f:facet name="label">
+                    <h:panelGroup>
+                        <h:graphicImage value="/images/icons/workflow.png" styleClass="pic" />
+                        <h:outputText value="#{msg['menu.wkf']}" />
+                    </h:panelGroup>
+                </f:facet>
+                <rich:menuItem id="menu-wkf-calendar"  label="#{msg['menu.wkf.calendar']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-wkf-holiday" label="#{msg['menu.wkf.holiday']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-wkf-request" label="#{msg['menu.wkf.request']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-wkf-status" label="#{msg['menu.wkf.status']}"  icon="/images/icons/status.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/wkf/wkfstatus.faces'"/>
+                <rich:menuItem id="menu-wkf-workplan" label="#{msg['menu.wkf.workplan']}"  icon="/images/icons/blank-doc.png" />
+            </rich:dropDownMenu>
 	        
-	        <rich:toolbarGroup location="right">
-	        	<h:commandLink action="#{userController.changeLocale}">
-	        		<f:setPropertyActionListener target="#{userController.strLocale}" value="en" />
-	        		<h:graphicImage value="/images/lang/usa-flag-icon.gif" />
-	        	</h:commandLink>
-	        	<h:commandLink action="#{userController.changeLocale}">
-	        		<f:setPropertyActionListener target="#{userController.strLocale}" value="th" />
-	        		<h:graphicImage value="/images/lang/thailand_flag.gif" />
-	        	</h:commandLink>
-	        </rich:toolbarGroup>
+	        <!-- Menu on right side -->
 	       	<rich:toolbarGroup location="right">
-	       		<div class="ui-state-default ui-corner-all">
-	     			<span class="ui-icon ui-icon-power"></span>
-	     		</div>
-	          	<h:commandLink class="cmdLogin" value="#{msg['menu.login']}"  rendered="#{!userController.authenticated}"/>
-	        	<h:commandLink class="cmdLogout" value="#{msg['menu.logout']}" action="#{userController.logout}" rendered="#{userController.authenticated}"/>
-	    	 </rich:toolbarGroup>
+	       		<rich:dropDownMenu id="menu-lang" mode="server">
+	                <f:facet name="label">
+	                    <h:panelGroup>
+	                        <h:graphicImage value="/images/icons/setting.png" styleClass="pic" />
+	                        <h:outputText value="#{msg['menu.lang']}" />
+	                    </h:panelGroup>
+	                </f:facet>
+	                <rich:menuItem id="menu-lang-en"  label="#{msg['menu.lang.en']}"  icon="/images/lang/usa-flag-icon.gif" action="#{userController.changeLocale}">
+	        			<f:setPropertyActionListener target="#{userController.strLocale}" value="en" />        
+	                </rich:menuItem>
+	                <rich:menuItem id="menu-lang-th" label="#{msg['menu.lang.th']}"  icon="/images/lang/thailand_flag.gif" action="#{userController.changeLocale}">
+	        			<f:setPropertyActionListener target="#{userController.strLocale}" value="th" />        
+	                </rich:menuItem>
+	            </rich:dropDownMenu>
+	       		<rich:dropDownMenu id="menu-log" mode="server">
+	                <f:facet name="label">
+	                    <h:panelGroup>
+	                    	<h:commandLink class="cmdLogin"  rendered="#{!userController.authenticated}">
+	                        	<h:graphicImage value="/images/icons/keys.png" styleClass="pic" />
+	                        	<h:outputText value="#{msg['menu.login']}" />
+	                        </h:commandLink>
+	                        <h:commandLink class="cmdLogout" action="#{userController.logout}" rendered="#{userController.authenticated}">
+	                        	<h:graphicImage value="/images/icons/keys.png" styleClass="pic" />
+	                        	<h:outputText value="#{msg['menu.logout']}" />
+	                        </h:commandLink>
+	                    </h:panelGroup>
+	                </f:facet>
+	            </rich:dropDownMenu>        	
+			</rich:toolbarGroup>
 	    	 
 		 </rich:toolbar>
 	</h:form>

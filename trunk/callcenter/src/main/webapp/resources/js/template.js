@@ -2,6 +2,7 @@
  * ************ On template be loaded ****************
  */
 $(function(){
+	
 	$(".cmdLogin").click(function(){
 		window.location.href='login.faces';
 	});
