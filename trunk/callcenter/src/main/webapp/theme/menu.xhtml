@@ -40,7 +40,7 @@
                 <rich:menuItem id="menu-agent-profile" label="#{msg['menu.agent.profile']}"  icon="/images/icons/ms-word.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agentprofile.faces'"/>
                 <rich:menuItem id="menu-agent-script" label="#{msg['menu.agent.script']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-agent-seat" label="#{msg['menu.agent.seat']}"  icon="/images/icons/blank-doc.png" />
-                <rich:menuItem id="menu-agent-skill" label="#{msg['menu.agent.skill']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-skill" label="#{msg['menu.agent.skill']}"  icon="/images/icons/skill.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agentskill.faces'"/>
                 <rich:menuItem id="menu-agent-trigger" label="#{msg['menu.agent.trigger']}"  icon="/images/icons/blank-doc.png" />
             </rich:dropDownMenu>
             <!-- Menu CRM -->
@@ -51,7 +51,7 @@
                         <h:outputText value="#{msg['menu.crm']}" />
                     </h:panelGroup>
                 </f:facet>
-                <rich:menuItem id="menu-crm-business" label="#{msg['menu.crm.business']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-crm-business" label="#{msg['menu.crm.business']}"  icon="/images/icons/business.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/crm/crmbusiness.faces'"/>
                 <rich:menuItem id="menu-crm-customer" label="#{msg['menu.crm.customer']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-crm-status" label="#{msg['menu.crm.status']}"  icon="/images/icons/status.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/crm/crmstatus.faces'"/>
             </rich:dropDownMenu>

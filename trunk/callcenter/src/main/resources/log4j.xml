@@ -49,6 +49,11 @@
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
+	<logger name="com.mchange.v2.log.MLog">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
 	
 	<!-- Root Logger -->
 	<root>
