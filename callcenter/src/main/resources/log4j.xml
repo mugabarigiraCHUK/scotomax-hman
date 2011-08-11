@@ -49,7 +49,19 @@
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
-	<logger name="com.mchange.v2.log.MLog">
+	<logger name="com.mchange.v2.log">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="com.mchange.v2.c3p0">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.springframework.orm.jpa">
 		<level value="INFO"/>
 		<appender-ref ref="SYSTEM" />
 		<appender-ref ref="CONSOLE" />
