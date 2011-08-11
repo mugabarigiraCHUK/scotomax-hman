@@ -41,7 +41,7 @@
                 <rich:menuItem id="menu-agent-script" label="#{msg['menu.agent.script']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-agent-seat" label="#{msg['menu.agent.seat']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-agent-skill" label="#{msg['menu.agent.skill']}"  icon="/images/icons/skill.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agentskill.faces'"/>
-                <rich:menuItem id="menu-agent-trigger" label="#{msg['menu.agent.trigger']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-agent-trigger" label="#{msg['menu.agent.trigger']}"  icon="/images/icons/command.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/agent/agenttrigger.faces'"/>
             </rich:dropDownMenu>
             <!-- Menu CRM -->
 			<rich:dropDownMenu id="menu-crm" mode="ajax">
@@ -65,12 +65,12 @@
                 </f:facet>
                 <rich:menuItem id="menu-ivr-callflow" label="#{msg['menu.ivr.callflow']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-ivr-callroute" label="#{msg['menu.ivr.callroute']}"  icon="/images/icons/blank-doc.png" />
-                <rich:menuItem id="menu-ivr-channel" label="#{msg['menu.ivr.channel']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-channel" label="#{msg['menu.ivr.channel']}"  icon="/images/icons/channel.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/ivr/ivrchannel.faces'"/>
                 <rich:menuItem id="menu-ivr-dtmf" label="#{msg['menu.ivr.dtmf']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-ivr-pabx" label="#{msg['menu.ivr.pabx']}"  icon="/images/icons/blank-doc.png" />
                 <rich:menuItem id="menu-ivr-protocol" label="#{msg['menu.ivr.protocol']}"  icon="/images/icons/protocol.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/ivr/ivrprotocol.faces'"/>
                 <rich:menuItem id="menu-ivr-schedule" label="#{msg['menu.ivr.schedule']}"  icon="/images/icons/blank-doc.png" />
-                <rich:menuItem id="menu-ivr-voiceprompt" label="#{msg['menu.ivr.voiceprompt']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-ivr-voiceprompt" label="#{msg['menu.ivr.voiceprompt']}"  icon="/images/icons/voice-prompt.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/ivr/ivrvoiceprompt.faces'"/>
             </rich:dropDownMenu>
             <!-- Menu Job -->
 			<rich:dropDownMenu id="menu-job" mode="ajax">
@@ -82,7 +82,7 @@
                 </f:facet>
                 <rich:menuItem id="menu-job-status" label="#{msg['menu.job.status']}"  icon="/images/icons/status.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/job/jobstatus.faces'"/>
                 <rich:menuItem id="menu-job-ticket" label="#{msg['menu.job.ticket']}"  icon="/images/icons/blank-doc.png" />
-                <rich:menuItem id="menu-job-trigger" label="#{msg['menu.job.trigger']}"  icon="/images/icons/blank-doc.png" />
+                <rich:menuItem id="menu-job-trigger" label="#{msg['menu.job.trigger']}"  icon="/images/icons/command.png" onclick="window.location.href='#{facesContext.externalContext.requestContextPath}/views/job/jobtrigger.faces'"/>
             </rich:dropDownMenu>
             <!-- Menu Know -->
 			<rich:dropDownMenu id="menu-knw" mode="ajax">

@@ -1,0 +1,158 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="agenttriggerForm">
+			<rich:panel id="agentTriggerPanel" header="#{msg['agenttrigger.inputpanel']}">
+				<a4j:outputPanel id="agentTriggerOutputPanel">
+					
+						<h:messages/>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['agenttrigger.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentTriggerController.agentTriggerList}"/>
+							<rich:dataTable value="#{agentTriggerController.agentTriggerList}" var="data">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.id']}" /></f:facet>
+									<h:outputText value="#{data.triggerId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.name']}" /></f:facet>
+									<h:outputText value="#{data.triggerName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.description']}" /></f:facet>
+									<h:outputText value="#{data.triggerDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.command']}" /></f:facet>
+									<h:outputText value="#{data.triggerCommand}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.createdate']}" /></f:facet>
+									<h:outputText value="#{data.triggerCreateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.triggerUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{agentTriggerController.edit}" 
+																 render="agentTriggerCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('agentTriggerCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.triggerId}">
+										<a4j:param value="#{data.triggerId}" assignTo="#{agentTriggerController.selectedTriggerId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agenttrigger.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('agentTriggerDeletePanel')}.show()"
+																  rendered="#{not empty data.triggerId}">
+										<a4j:param value="#{data.triggerId}" assignTo="#{agentTriggerController.selectedTriggerId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{agentTriggerController.edit}"
+																			 	render="agentTriggerCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('agentTriggerCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{agentTriggerController.selectedTriggerId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="agentTriggerCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+		
+			<rich:popupPanel id="agentTriggerCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['agenttrigger.create.update.legend']}" /></legend>
+					
+								<h:panelGrid columns="2" styleClass="inputtable">
+									<h:column/>
+									<h:messages/>
+									
+									<h:outputText value="#{msg['agenttrigger.id']}" />
+									<h:inputText value="#{agentTriggerController.triggerId}" rendered="#{empty agentTriggerController.triggerId}"/>
+									<h:outputText value="#{agentTriggerController.triggerId}" rendered="#{not empty agentTriggerController.triggerId}"/>
+									
+									<h:outputText value="#{msg['agenttrigger.name']}"/>
+									<h:inputText value="#{agentTriggerController.triggerName}" />
+									
+									<h:outputText value="#{msg['agenttrigger.description']}"/>
+									<h:inputTextarea value="#{agentTriggerController.triggerDescription}" cols="30" rows="5" />
+									
+									<h:outputText value="#{msg['agenttrigger.command']}"/>
+									<h:inputTextarea value="#{agentTriggerController.triggerCommand}" cols="60" rows="2" />
+									
+									<h:outputText value="#{msg['agenttrigger.createdate']}" rendered="#{not empty agentTriggerController.triggerCreateDate}"/>
+									<h:outputText value="#{agentTriggerController.triggerCreateDate}" rendered="#{not empty agentTriggerController.triggerCreateDate}"/>
+									
+									<h:outputText value="#{msg['agenttrigger.updatedate']}" rendered="#{not empty agentTriggerController.triggerUpdateDate}"/>
+									<h:outputText value="#{agentTriggerController.triggerUpdateDate}" rendered="#{not empty agentTriggerController.triggerUpdateDate}"/>
+									
+									<h:column/>
+									<h:panelGroup>
+										<a4j:commandButton value="#{msg['button.create']}" 
+																	  action="#{agentTriggerController.create}"
+																	  execute="agentTriggerCreateUpdatePanel" 
+																	  rendered="#{empty agentTriggerController.triggerId}" 
+																	  render="agentTriggerOutputPanel"
+																	  oncomplete="#{rich:component('agentTriggerCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.update']}" 
+																	  action="#{agentTriggerController.update}"
+																	  execute="agentTriggerCreateUpdatePanel" 
+																	  rendered="#{not empty agentTriggerController.triggerId}" 
+																	  render="agentTriggerOutputPanel"
+																	  oncomplete="#{rich:component('agentTriggerCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentTriggerCreateUpdatePanel')}.hide(); return false;" />
+									</h:panelGroup>
+									
+								</h:panelGrid>
+						
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="agentTriggerDeletePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['agenttrigger.delete.legend']}" /></legend>
+		
+						<h:panelGrid columns="1" styleClass="inputtable">
+							<h:outputText value="#{msg['agenttrigger.delete.message']}" />
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  action="#{agentTriggerController.delete}" 
+															  execute="agentTriggerDeletePanel"
+															  render="agentTriggerOutputPanel"
+															  oncomplete="#{rich:component('agentTriggerDeletePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentTriggerDeletePanel')}.hide(); return false;" />
+							</h:panelGroup>
+						</h:panelGrid>
+
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
