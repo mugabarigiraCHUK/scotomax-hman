@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,223 +21,235 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
+import com.itap.callcenter.entity.apc.wkf.WkfWorkplan;
 
 /**
- *
+ * 
  * @author scotomax
  */
 @Entity
 @Table(name = "agent_profile")
 @XmlRootElement
 public class AgentProfile implements Serializable, DomainObject {
-	
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "agent_id", length = 11, nullable = false)
-    @NotNull
-    private Integer agentId;
-    
-    @Column(name = "supervisor_id", length = 11, nullable = false)
-    @NotNull
-    private int supervisorId;
-    
-    @Column(name = "level_id", length = 11, nullable = false)
-    @NotNull
-    private int levelId;
-    
-    @Column(name = "skill_id", length = 11, nullable = false)
-    @NotNull
-    private int skillId;
-    
-    @Column(name = "status_id", length = 11, nullable = false)
-    @NotNull
-    private int statusId;
-    
-    @Column(name = "workplan_id", length = 11, nullable = false)
-    @NotNull
-    private int workplanId;
-    
-    @Column(name = "agent_fullname", length = 100, nullable = false)
-    @NotNull
-    private String agentFullname;
-    
-    @Column(name = "agent_username", length = 50, nullable = false)
-    @NotNull
-    private String agentUsername;
-    
-    @Column(name = "agent_password", length = 50, nullable = false)
-    @NotNull
-    private String agentPassword;
-    
-    @Column(name = "agent_max_call", length = 11, nullable = false)
-    @NotNull
-    private int agentMaxCall;
-    
-    @Column(name = "agent_allow_outbound", length = 11, nullable = false)
-    @NotNull
-    private int agentAllowOutbound;
-    
-    @Column(name = "agent_create_date", length = 11, nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
-    private Date agentCreateDate;
-    
-    @Column(name = "agent_update_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date agentUpdateDate;
 
-    public AgentProfile() {
-    }
+	private static final long serialVersionUID = 1L;
 
-    public AgentProfile(Integer agentId) {
-        this.agentId = agentId;
-    }
+	@Id
+	@Column(name = "agent_id", length = 11, nullable = false)
+	@NotNull
+	private Integer agentId;
 
-    public AgentProfile(Integer agentId, int supervisorId, int levelId, int skillId, int statusId, int workplanId, String agentFullname, String agentUsername, int agentMaxCall, int agentAllowOutbound, Date agentCreateDate, Date agentUpdateDate) {
-        this.agentId = agentId;
-        this.supervisorId = supervisorId;
-        this.levelId = levelId;
-        this.skillId = skillId;
-        this.statusId = statusId;
-        this.workplanId = workplanId;
-        this.agentFullname = agentFullname;
-        this.agentUsername = agentUsername;
-        this.agentMaxCall = agentMaxCall;
-        this.agentAllowOutbound = agentAllowOutbound;
-        this.agentCreateDate = agentCreateDate;
-        this.agentUpdateDate = agentUpdateDate;
-    }
+	@Column(name = "supervisor_id", length = 11, nullable = false)
+	@NotNull
+	private int supervisorId;
 
-    public Integer getAgentId() {
-        return agentId;
-    }
+	@ManyToOne
+	@JoinColumn(name="level_id", nullable = false)
+	@NotNull
+	private AgentLevel agentLevel;
 
-    public void setAgentId(Integer agentId) {
-        this.agentId = agentId;
-    }
+	@ManyToOne
+	@JoinColumn(name="skill_id", nullable = false)
+	@NotNull
+	private AgentSkill agentSkill;
 
-    public int getSupervisorId() {
-        return supervisorId;
-    }
+	@ManyToOne
+	@JoinColumn(name="workplan_id", nullable = false)
+	@NotNull
+	private WkfWorkplan workplan;
 
-    public void setSupervisorId(int supervisorId) {
-        this.supervisorId = supervisorId;
-    }
+	@Column(name = "status_id", length = 11, nullable = false)
+	@NotNull
+	private int statusId;
 
-    public int getLevelId() {
-        return levelId;
-    }
 
-    public void setLevelId(int levelId) {
-        this.levelId = levelId;
-    }
+	@Column(name = "agent_fullname", length = 100, nullable = false)
+	@NotNull
+	private String agentFullname;
 
-    public int getSkillId() {
-        return skillId;
-    }
+	@Column(name = "agent_username", length = 50, nullable = false)
+	@NotNull
+	private String agentUsername;
 
-    public void setSkillId(int skillId) {
-        this.skillId = skillId;
-    }
+	@Column(name = "agent_password", length = 50, nullable = false)
+	@NotNull
+	private String agentPassword;
 
-    public int getStatusId() {
-        return statusId;
-    }
+	@Column(name = "agent_max_call", length = 11, nullable = false)
+	@NotNull
+	private int agentMaxCall;
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
+	@Column(name = "agent_allow_outbound", length = 11, nullable = false)
+	@NotNull
+	private int agentAllowOutbound;
 
-    public int getWorkplanId() {
-        return workplanId;
-    }
+	@Column(name = "agent_create_date", length = 11, nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	private Date agentCreateDate;
 
-    public void setWorkplanId(int workplanId) {
-        this.workplanId = workplanId;
-    }
+	@Column(name = "agent_update_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date agentUpdateDate;
 
-    public String getAgentFullname() {
-        return agentFullname;
-    }
+	public AgentProfile() {
+	}
 
-    public void setAgentFullname(String agentFullname) {
-        this.agentFullname = agentFullname;
-    }
+	public AgentProfile(Integer agentId) {
+		this.agentId = agentId;
+	}
 
-    public String getAgentUsername() {
-        return agentUsername;
-    }
+	public AgentProfile(Integer agentId, int supervisorId, AgentLevel agentLevel,
+			AgentSkill agentSkill, int statusId, WkfWorkplan workplan, String agentFullname,
+			String agentUsername, int agentMaxCall, int agentAllowOutbound,
+			Date agentCreateDate, Date agentUpdateDate) {
+		this.agentId = agentId;
+		this.supervisorId = supervisorId;
+		this.agentLevel = agentLevel;
+		this.agentSkill = agentSkill;
+		this.statusId = statusId;
+		this.workplan = workplan;
+		this.agentFullname = agentFullname;
+		this.agentUsername = agentUsername;
+		this.agentMaxCall = agentMaxCall;
+		this.agentAllowOutbound = agentAllowOutbound;
+		this.agentCreateDate = agentCreateDate;
+		this.agentUpdateDate = agentUpdateDate;
+	}
 
-    public void setAgentUsername(String agentUsername) {
-        this.agentUsername = agentUsername;
-    }
+	public Integer getAgentId() {
+		return agentId;
+	}
 
-    public String getAgentPassword() {
-        return agentPassword;
-    }
+	public void setAgentId(Integer agentId) {
+		this.agentId = agentId;
+	}
 
-    public void setAgentPassword(String agentPassword) {
-        this.agentPassword = agentPassword;
-    }
+	public int getSupervisorId() {
+		return supervisorId;
+	}
 
-    public int getAgentMaxCall() {
-        return agentMaxCall;
-    }
+	public void setSupervisorId(int supervisorId) {
+		this.supervisorId = supervisorId;
+	}
 
-    public void setAgentMaxCall(int agentMaxCall) {
-        this.agentMaxCall = agentMaxCall;
-    }
+	public AgentLevel getAgentLevel() {
+		return agentLevel;
+	}
 
-    public int getAgentAllowOutbound() {
-        return agentAllowOutbound;
-    }
+	public void setAgentLevel(AgentLevel agentLevel) {
+		this.agentLevel = agentLevel;
+	}
 
-    public void setAgentAllowOutbound(int agentAllowOutbound) {
-        this.agentAllowOutbound = agentAllowOutbound;
-    }
+	public AgentSkill getAgentSkill() {
+		return agentSkill;
+	}
 
-    public Date getAgentCreateDate() {
-        return agentCreateDate;
-    }
+	public void setAgentSkill(AgentSkill agentSkill) {
+		this.agentSkill = agentSkill;
+	}
 
-    public void setAgentCreateDate(Date agentCreateDate) {
-        this.agentCreateDate = agentCreateDate;
-    }
+	public WkfWorkplan getWorkplan() {
+		return workplan;
+	}
 
-    public Date getAgentUpdateDate() {
-        return agentUpdateDate;
-    }
+	public void setWorkplan(WkfWorkplan workplan) {
+		this.workplan = workplan;
+	}
 
-    public void setAgentUpdateDate(Date agentUpdateDate) {
-        this.agentUpdateDate = agentUpdateDate;
-    }
+	public int getStatusId() {
+		return statusId;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	public void setStatusId(int statusId) {
+		this.statusId = statusId;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) { return false; }
-        if (o == this) { return true; }
-        if (o.getClass() != getClass()) {
-            return false;
-        }
-        AgentProfile other = (AgentProfile) o;
-        return new EqualsBuilder()
-                 .append(agentId, other.agentId)
-                 .isEquals();
-    }
+	public String getAgentFullname() {
+		return agentFullname;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder()
-         .append(this.agentId)
-         .toHashCode();
-    }
-    
+	public void setAgentFullname(String agentFullname) {
+		this.agentFullname = agentFullname;
+	}
+
+	public String getAgentUsername() {
+		return agentUsername;
+	}
+
+	public void setAgentUsername(String agentUsername) {
+		this.agentUsername = agentUsername;
+	}
+
+	public String getAgentPassword() {
+		return agentPassword;
+	}
+
+	public void setAgentPassword(String agentPassword) {
+		this.agentPassword = agentPassword;
+	}
+
+	public int getAgentMaxCall() {
+		return agentMaxCall;
+	}
+
+	public void setAgentMaxCall(int agentMaxCall) {
+		this.agentMaxCall = agentMaxCall;
+	}
+
+	public int getAgentAllowOutbound() {
+		return agentAllowOutbound;
+	}
+
+	public void setAgentAllowOutbound(int agentAllowOutbound) {
+		this.agentAllowOutbound = agentAllowOutbound;
+	}
+
+	public Date getAgentCreateDate() {
+		return agentCreateDate;
+	}
+
+	public void setAgentCreateDate(Date agentCreateDate) {
+		this.agentCreateDate = agentCreateDate;
+	}
+
+	public Date getAgentUpdateDate() {
+		return agentUpdateDate;
+	}
+
+	public void setAgentUpdateDate(Date agentUpdateDate) {
+		this.agentUpdateDate = agentUpdateDate;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("agentId", agentId)
+				.append("agentFullname", agentFullname)
+				.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
+		if (o == this) {
+			return true;
+		}
+		if (o.getClass() != getClass()) {
+			return false;
+		}
+		AgentProfile other = (AgentProfile) o;
+		return new EqualsBuilder().append(agentId, other.agentId).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.agentId).toHashCode();
+	}
+
 }
