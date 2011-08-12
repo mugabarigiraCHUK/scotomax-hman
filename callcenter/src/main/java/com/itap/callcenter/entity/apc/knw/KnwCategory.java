@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -38,9 +41,10 @@ public class KnwCategory implements Serializable, DomainObject {
     @NotNull
     private Integer categoryId;
     
-    @Column(name = "parent_category_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "parent_category_id", nullable = false)
     @NotNull
-    private int parentCategoryId;
+    private KnwCategory parentCategory;
     
     @Column(name = "category_name", length = 50, nullable = false)
     @NotNull
@@ -65,9 +69,9 @@ public class KnwCategory implements Serializable, DomainObject {
         this.categoryId = categoryId;
     }
 
-    public KnwCategory(Integer categoryId, int parentCategoryId, String categoryName, Date categoryCreateDate, Date categoryUpdateDate) {
+    public KnwCategory(Integer categoryId, KnwCategory parentCategory, String categoryName, Date categoryCreateDate, Date categoryUpdateDate) {
         this.categoryId = categoryId;
-        this.parentCategoryId = parentCategoryId;
+        this.parentCategory = parentCategory;
         this.categoryName = categoryName;
         this.categoryCreateDate = categoryCreateDate;
         this.categoryUpdateDate = categoryUpdateDate;
@@ -81,15 +85,15 @@ public class KnwCategory implements Serializable, DomainObject {
         this.categoryId = categoryId;
     }
 
-    public int getParentCategoryId() {
-        return parentCategoryId;
-    }
+    public KnwCategory getParentCategory() {
+		return parentCategory;
+	}
 
-    public void setParentCategoryId(int parentCategoryId) {
-        this.parentCategoryId = parentCategoryId;
-    }
+	public void setParentCategory(KnwCategory parentCategory) {
+		this.parentCategory = parentCategory;
+	}
 
-    public String getCategoryName() {
+	public String getCategoryName() {
         return categoryName;
     }
 
@@ -123,7 +127,10 @@ public class KnwCategory implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("categoryId", categoryId)
+				.append("categoryId", categoryId)
+				.toString();
     }
 
     @Override
