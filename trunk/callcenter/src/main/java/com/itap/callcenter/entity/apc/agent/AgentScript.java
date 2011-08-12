@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,8 +21,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
+import com.itap.callcenter.entity.apc.crm.CrmBusiness;
+import com.itap.callcenter.entity.apc.knw.KnwTopic;
 
 /**
  *
@@ -38,13 +43,15 @@ public class AgentScript implements Serializable, DomainObject {
     @NotNull
     private Integer scriptId;
     
-    @Column(name = "business_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name="business_id", nullable = false)
     @NotNull
-    private int businessId;
+    private CrmBusiness business;
     
-    @Column(name = "topic_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name="topic_id", nullable = false)
     @NotNull
-    private int topicId;
+    private KnwTopic topic;
     
     @Column(name = "script_name", length = 50, nullable = false)
     @NotNull
@@ -76,10 +83,10 @@ public class AgentScript implements Serializable, DomainObject {
         this.scriptId = scriptId;
     }
 
-    public AgentScript(Integer scriptId, int businessId, int topicId, String scriptName, int scriptStep, Date scriptCreateDate, Date scriptUpdateDate) {
+    public AgentScript(Integer scriptId, CrmBusiness business, KnwTopic topic, String scriptName, int scriptStep, Date scriptCreateDate, Date scriptUpdateDate) {
         this.scriptId = scriptId;
-        this.businessId = businessId;
-        this.topicId = topicId;
+        this.business = business;
+        this.topic = topic;
         this.scriptName = scriptName;
         this.scriptStep = scriptStep;
         this.scriptCreateDate = scriptCreateDate;
@@ -94,23 +101,23 @@ public class AgentScript implements Serializable, DomainObject {
         this.scriptId = scriptId;
     }
 
-    public int getBusinessId() {
-        return businessId;
-    }
+    public CrmBusiness getBusiness() {
+		return business;
+	}
 
-    public void setBusinessId(int businessId) {
-        this.businessId = businessId;
-    }
+	public void setBusiness(CrmBusiness business) {
+		this.business = business;
+	}
 
-    public int getTopicId() {
-        return topicId;
-    }
+	public KnwTopic getTopic() {
+		return topic;
+	}
 
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
-    }
+	public void setTopic(KnwTopic topic) {
+		this.topic = topic;
+	}
 
-    public String getScriptName() {
+	public String getScriptName() {
         return scriptName;
     }
 
@@ -160,7 +167,10 @@ public class AgentScript implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("scriptId", scriptId)
+				.append("scriptName", scriptName)
+				.toString();
     }
 
     @Override

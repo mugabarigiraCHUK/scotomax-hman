@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -38,13 +41,15 @@ public class AgentSeat implements Serializable, DomainObject {
     @NotNull
     private Integer seatId;
     
-    @Column(name = "level_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name="level_id", nullable = false)
     @NotNull
-    private int levelId;
+    private AgentLevel agentLevel;
     
-    @Column(name = "skill_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name="skill_id", nullable = false)
     @NotNull
-    private int skillId;
+    private AgentSkill agentSkill;
     
     @Column(name = "status_id", length = 11, nullable = false)
     @NotNull
@@ -91,10 +96,10 @@ public class AgentSeat implements Serializable, DomainObject {
         this.seatId = seatId;
     }
 
-    public AgentSeat(Integer seatId, int levelId, int skillId, int statusId, String seatName, Date seatStartPeriod, Date seatEndPeriod, int seatMaxCall, int seatAllowOutbound, Date seatCreateDate, Date seatUpdateDate) {
+    public AgentSeat(Integer seatId, AgentLevel agentLevel, AgentSkill agentSkill, int statusId, String seatName, Date seatStartPeriod, Date seatEndPeriod, int seatMaxCall, int seatAllowOutbound, Date seatCreateDate, Date seatUpdateDate) {
         this.seatId = seatId;
-        this.levelId = levelId;
-        this.skillId = skillId;
+        this.agentLevel = agentLevel;
+        this.agentSkill = agentSkill;
         this.statusId = statusId;
         this.seatName = seatName;
         this.seatStartPeriod = seatStartPeriod;
@@ -113,23 +118,23 @@ public class AgentSeat implements Serializable, DomainObject {
         this.seatId = seatId;
     }
 
-    public int getLevelId() {
-        return levelId;
-    }
+    public AgentLevel getAgentLevel() {
+		return agentLevel;
+	}
 
-    public void setLevelId(int levelId) {
-        this.levelId = levelId;
-    }
+	public void setAgentLevel(AgentLevel agentLevel) {
+		this.agentLevel = agentLevel;
+	}
 
-    public int getSkillId() {
-        return skillId;
-    }
+	public AgentSkill getAgentSkill() {
+		return agentSkill;
+	}
 
-    public void setSkillId(int skillId) {
-        this.skillId = skillId;
-    }
+	public void setAgentSkill(AgentSkill agentSkill) {
+		this.agentSkill = agentSkill;
+	}
 
-    public int getStatusId() {
+	public int getStatusId() {
         return statusId;
     }
 
@@ -203,7 +208,10 @@ public class AgentSeat implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("seatId", seatId)
+				.append("seatName", seatName)
+				.toString();
     }
 
     @Override
