@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -38,9 +41,10 @@ public class IvrCallflow implements Serializable, DomainObject {
     @NotNull
     private Integer callflowId;
     
-    @Column(name = "voice_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "voice_id", nullable = false)
     @NotNull
-    private int voiceId;
+    private IvrVoiceprompt voicePrompt;
     
     @Column(name = "callflow_name", length = 50, nullable = false)
     @NotNull
@@ -57,13 +61,15 @@ public class IvrCallflow implements Serializable, DomainObject {
     @NotNull
     private int callflowTimeout;
     
-    @Column(name = "callflow_next_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "callflow_next_id", nullable = false)
     @NotNull
-    private int callflowNextId;
+    private IvrCallflow callflowNext;
     
-    @Column(name = "callflow_back_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "callflow_back_id", nullable = false)
     @NotNull
-    private int callflowBackId;
+    private IvrCallflow callflowBack;
     
     @Column(name = "callflow_voice_repeat_enable", length = 11, nullable = false)
     @NotNull
@@ -85,14 +91,14 @@ public class IvrCallflow implements Serializable, DomainObject {
         this.callflowId = callflowId;
     }
 
-    public IvrCallflow(Integer callflowId, int voiceId, String callflowName, int callflowStep, int callflowTimeout, int callflowNextId, int callflowBackId, int callflowVoiceRepeatEnable, Date callflowCreateDate, Date callflowUpdateDate) {
+    public IvrCallflow(Integer callflowId, IvrVoiceprompt voicePrompt, String callflowName, int callflowStep, int callflowTimeout, IvrCallflow callflowNext, IvrCallflow callflowBack, int callflowVoiceRepeatEnable, Date callflowCreateDate, Date callflowUpdateDate) {
         this.callflowId = callflowId;
-        this.voiceId = voiceId;
+        this.voicePrompt = voicePrompt;
         this.callflowName = callflowName;
         this.callflowStep = callflowStep;
         this.callflowTimeout = callflowTimeout;
-        this.callflowNextId = callflowNextId;
-        this.callflowBackId = callflowBackId;
+        this.callflowNext = callflowNext;
+        this.callflowBack = callflowBack;
         this.callflowVoiceRepeatEnable = callflowVoiceRepeatEnable;
         this.callflowCreateDate = callflowCreateDate;
         this.callflowUpdateDate = callflowUpdateDate;
@@ -104,14 +110,6 @@ public class IvrCallflow implements Serializable, DomainObject {
 
     public void setCallflowId(Integer callflowId) {
         this.callflowId = callflowId;
-    }
-
-    public int getVoiceId() {
-        return voiceId;
-    }
-
-    public void setVoiceId(int voiceId) {
-        this.voiceId = voiceId;
     }
 
     public String getCallflowName() {
@@ -146,22 +144,6 @@ public class IvrCallflow implements Serializable, DomainObject {
         this.callflowTimeout = callflowTimeout;
     }
 
-    public int getCallflowNextId() {
-        return callflowNextId;
-    }
-
-    public void setCallflowNextId(int callflowNextId) {
-        this.callflowNextId = callflowNextId;
-    }
-
-    public int getCallflowBackId() {
-        return callflowBackId;
-    }
-
-    public void setCallflowBackId(int callflowBackId) {
-        this.callflowBackId = callflowBackId;
-    }
-
     public int getCallflowVoiceRepeatEnable() {
         return callflowVoiceRepeatEnable;
     }
@@ -186,9 +168,36 @@ public class IvrCallflow implements Serializable, DomainObject {
         this.callflowUpdateDate = callflowUpdateDate;
     }
 
-    @Override
+    public IvrVoiceprompt getVoicePrompt() {
+		return voicePrompt;
+	}
+
+	public void setVoicePrompt(IvrVoiceprompt voicePrompt) {
+		this.voicePrompt = voicePrompt;
+	}
+
+	public IvrCallflow getCallflowNext() {
+		return callflowNext;
+	}
+
+	public void setCallflowNext(IvrCallflow callflowNext) {
+		this.callflowNext = callflowNext;
+	}
+
+	public IvrCallflow getCallflowBack() {
+		return callflowBack;
+	}
+
+	public void setCallflowBack(IvrCallflow callflowBack) {
+		this.callflowBack = callflowBack;
+	}
+
+	@Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("callflowId", callflowId)
+				.append("callflowName", callflowName)
+				.toString();
     }
 
     @Override
