@@ -19,106 +19,112 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
 /**
- *
+ * 
  * @author scotomax
  */
 @Entity
 @Table(name = "acd_condition")
 @XmlRootElement
 public class AcdCondition implements Serializable, DomainObject {
-	
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "condition_id", length = 11, nullable = false)
-    @NotNull
-    private Integer conditionId;
-    
-    @Column(name = "condition_name", length = 50, nullable = false)
-    @NotNull
-    private String conditionName;
-    
-    @Column(name = "condition_description", length = 100, nullable = false)
-    @NotNull
-    private String conditionDescription;
-    
-    @Column(name = "condition_update_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date conditionUpdateDate;
 
-    public AcdCondition() {
-    }
+	private static final long serialVersionUID = 1L;
 
-    public AcdCondition(Integer conditionId) {
-        this.conditionId = conditionId;
-    }
+	@Id
+	@Column(name = "condition_id", length = 11, nullable = false)
+	@NotNull
+	private Integer conditionId;
 
-    public AcdCondition(Integer conditionId, String conditionName, String conditionDescription, Date conditionUpdateDate) {
-        this.conditionId = conditionId;
-        this.conditionName = conditionName;
-        this.conditionDescription = conditionDescription;
-        this.conditionUpdateDate = conditionUpdateDate;
-    }
+	@Column(name = "condition_name", length = 50, nullable = false)
+	@NotNull
+	private String conditionName;
 
-    public Integer getConditionId() {
-        return conditionId;
-    }
+	@Column(name = "condition_description", length = 100, nullable = false)
+	@NotNull
+	private String conditionDescription;
 
-    public void setConditionId(Integer conditionId) {
-        this.conditionId = conditionId;
-    }
+	@Column(name = "condition_update_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date conditionUpdateDate;
 
-    public String getConditionName() {
-        return conditionName;
-    }
+	public AcdCondition() {
+	}
 
-    public void setConditionName(String conditionName) {
-        this.conditionName = conditionName;
-    }
+	public AcdCondition(Integer conditionId) {
+		this.conditionId = conditionId;
+	}
 
-    public String getConditionDescription() {
-        return conditionDescription;
-    }
+	public AcdCondition(Integer conditionId, String conditionName,
+			String conditionDescription, Date conditionUpdateDate) {
+		this.conditionId = conditionId;
+		this.conditionName = conditionName;
+		this.conditionDescription = conditionDescription;
+		this.conditionUpdateDate = conditionUpdateDate;
+	}
 
-    public void setConditionDescription(String conditionDescription) {
-        this.conditionDescription = conditionDescription;
-    }
+	public Integer getConditionId() {
+		return conditionId;
+	}
 
-    public Date getConditionUpdateDate() {
-        return conditionUpdateDate;
-    }
+	public void setConditionId(Integer conditionId) {
+		this.conditionId = conditionId;
+	}
 
-    public void setConditionUpdateDate(Date conditionUpdateDate) {
-        this.conditionUpdateDate = conditionUpdateDate;
-    }
+	public String getConditionName() {
+		return conditionName;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	public void setConditionName(String conditionName) {
+		this.conditionName = conditionName;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) { return false; }
-        if (o == this) { return true; }
-        if (o.getClass() != getClass()) {
-            return false;
-        }
-        AcdCondition other = (AcdCondition) o;
-        return new EqualsBuilder()
-                 .append(conditionId, other.conditionId)
-                 .isEquals();
-    }
+	public String getConditionDescription() {
+		return conditionDescription;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder()
-         .append(this.conditionId)
-         .toHashCode();
-    }
-    
+	public void setConditionDescription(String conditionDescription) {
+		this.conditionDescription = conditionDescription;
+	}
+
+	public Date getConditionUpdateDate() {
+		return conditionUpdateDate;
+	}
+
+	public void setConditionUpdateDate(Date conditionUpdateDate) {
+		this.conditionUpdateDate = conditionUpdateDate;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("conditionId", conditionId)
+				.append("conditionName", conditionName)
+				.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
+		if (o == this) {
+			return true;
+		}
+		if (o.getClass() != getClass()) {
+			return false;
+		}
+		AcdCondition other = (AcdCondition) o;
+		return new EqualsBuilder().append(conditionId, other.conditionId)
+				.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.conditionId).toHashCode();
+	}
+
 }
