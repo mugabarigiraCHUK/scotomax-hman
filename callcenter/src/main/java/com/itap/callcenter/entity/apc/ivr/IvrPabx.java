@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -38,9 +41,10 @@ public class IvrPabx implements Serializable, DomainObject {
     @NotNull
     private Integer pabxId;
     
-    @Column(name = "protocol_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "protocol_id", nullable = false)
     @NotNull
-    private int protocolId;
+    private IvrProtocol protocol;
     
     @Column(name = "pabx_name", length = 50, nullable = false)
     @NotNull
@@ -60,9 +64,9 @@ public class IvrPabx implements Serializable, DomainObject {
         this.pabxId = pabxId;
     }
 
-    public IvrPabx(Integer pabxId, int protocolId, String pabxName, Date pabxUpdateDate) {
+    public IvrPabx(Integer pabxId, IvrProtocol protocol, String pabxName, Date pabxUpdateDate) {
         this.pabxId = pabxId;
-        this.protocolId = protocolId;
+        this.protocol = protocol;
         this.pabxName = pabxName;
         this.pabxUpdateDate = pabxUpdateDate;
     }
@@ -75,15 +79,15 @@ public class IvrPabx implements Serializable, DomainObject {
         this.pabxId = pabxId;
     }
 
-    public int getProtocolId() {
-        return protocolId;
-    }
+    public IvrProtocol getProtocol() {
+		return protocol;
+	}
 
-    public void setProtocolId(int protocolId) {
-        this.protocolId = protocolId;
-    }
+	public void setProtocol(IvrProtocol protocol) {
+		this.protocol = protocol;
+	}
 
-    public String getPabxName() {
+	public String getPabxName() {
         return pabxName;
     }
 
@@ -109,7 +113,10 @@ public class IvrPabx implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    	return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+		.append("pabxId", pabxId)
+		.append("pabxName", pabxName)
+		.toString();
     }
 
     @Override

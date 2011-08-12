@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -50,13 +53,15 @@ public class IvrDtmf implements Serializable, DomainObject {
     @NotNull
     private String dtmfDigit;
     
-    @Column(name = "dtmf_correct_callflow_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "dtmf_correct_callflow_id", nullable = false)
     @NotNull
-    private int dtmfCorrectCallflowId;
+    private IvrCallflow dtmfCorrectCallflow;
     
-    @Column(name = "dtmf_error_callflow_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "dtmf_error_callflow_id", nullable = false)
     @NotNull
-    private int dtmfErrorCallflowId;
+    private IvrCallflow dtmfErrorCallflow;
     
     @Column(name = "dtmf_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,12 +79,12 @@ public class IvrDtmf implements Serializable, DomainObject {
         this.dtmfId = dtmfId;
     }
 
-    public IvrDtmf(Integer dtmfId, String dtmfName, String dtmfDigit, int dtmfCorrectCallflowId, int dtmfErrorCallflowId, Date dtmfCreateDate, Date dtmfUpdateDate) {
+    public IvrDtmf(Integer dtmfId, String dtmfName, String dtmfDigit, IvrCallflow dtmfCorrectCallflow, IvrCallflow dtmfErrorCallflow, Date dtmfCreateDate, Date dtmfUpdateDate) {
         this.dtmfId = dtmfId;
         this.dtmfName = dtmfName;
         this.dtmfDigit = dtmfDigit;
-        this.dtmfCorrectCallflowId = dtmfCorrectCallflowId;
-        this.dtmfErrorCallflowId = dtmfErrorCallflowId;
+        this.dtmfCorrectCallflow = dtmfCorrectCallflow;
+        this.dtmfErrorCallflow = dtmfErrorCallflow;
         this.dtmfCreateDate = dtmfCreateDate;
         this.dtmfUpdateDate = dtmfUpdateDate;
     }
@@ -116,23 +121,23 @@ public class IvrDtmf implements Serializable, DomainObject {
         this.dtmfDigit = dtmfDigit;
     }
 
-    public int getDtmfCorrectCallflowId() {
-        return dtmfCorrectCallflowId;
-    }
+    public IvrCallflow getDtmfCorrectCallflow() {
+		return dtmfCorrectCallflow;
+	}
 
-    public void setDtmfCorrectCallflowId(int dtmfCorrectCallflowId) {
-        this.dtmfCorrectCallflowId = dtmfCorrectCallflowId;
-    }
+	public void setDtmfCorrectCallflow(IvrCallflow dtmfCorrectCallflow) {
+		this.dtmfCorrectCallflow = dtmfCorrectCallflow;
+	}
 
-    public int getDtmfErrorCallflowId() {
-        return dtmfErrorCallflowId;
-    }
+	public IvrCallflow getDtmfErrorCallflow() {
+		return dtmfErrorCallflow;
+	}
 
-    public void setDtmfErrorCallflowId(int dtmfErrorCallflowId) {
-        this.dtmfErrorCallflowId = dtmfErrorCallflowId;
-    }
+	public void setDtmfErrorCallflow(IvrCallflow dtmfErrorCallflow) {
+		this.dtmfErrorCallflow = dtmfErrorCallflow;
+	}
 
-    public Date getDtmfCreateDate() {
+	public Date getDtmfCreateDate() {
         return dtmfCreateDate;
     }
 
@@ -150,7 +155,10 @@ public class IvrDtmf implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    	return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+		.append("dtmfId", dtmfId)
+		.append("dtmfName", dtmfName)
+		.toString();
     }
 
     @Override
