@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -53,9 +56,10 @@ public class IvrSchedule implements Serializable, DomainObject {
     @NotNull
     private String scheduleCalled;
     
-    @Column(name = "schedule_channel", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "schedule_channel", nullable = false)
     @NotNull
-    private int scheduleChannel;
+    private IvrSchedule scheduleChannel;
     
     @Column(name = "schedule_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -83,7 +87,7 @@ public class IvrSchedule implements Serializable, DomainObject {
         this.scheduleId = scheduleId;
     }
 
-    public IvrSchedule(Integer scheduleId, String scheduleName, String scheduleCaller, String scheduleCalled, int scheduleChannel, Date scheduleStartDate, int scheduleRetryTime, Date scheduleCreateDate, Date scheduleUpdateDate) {
+    public IvrSchedule(Integer scheduleId, String scheduleName, String scheduleCaller, String scheduleCalled, IvrSchedule scheduleChannel, Date scheduleStartDate, int scheduleRetryTime, Date scheduleCreateDate, Date scheduleUpdateDate) {
         this.scheduleId = scheduleId;
         this.scheduleName = scheduleName;
         this.scheduleCaller = scheduleCaller;
@@ -135,11 +139,11 @@ public class IvrSchedule implements Serializable, DomainObject {
         this.scheduleCalled = scheduleCalled;
     }
 
-    public int getScheduleChannel() {
+    public IvrSchedule getScheduleChannel() {
         return scheduleChannel;
     }
 
-    public void setScheduleChannel(int scheduleChannel) {
+    public void setScheduleChannel(IvrSchedule scheduleChannel) {
         this.scheduleChannel = scheduleChannel;
     }
 
@@ -177,7 +181,10 @@ public class IvrSchedule implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    	return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+		.append("scheduleId", scheduleId)
+		.append("scheduleName", scheduleName)
+		.toString();
     }
 
     @Override
