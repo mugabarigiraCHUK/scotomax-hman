@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -38,13 +41,15 @@ public class CrmCustomer implements Serializable, DomainObject {
     @NotNull
     private Integer customerId;
     
-    @Column(name = "business_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "business_id", nullable = false)
     @NotNull
-    private int businessId;
+    private CrmBusiness business;
     
-    @Column(name = "status_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
     @NotNull
-    private int statusId;
+    private CrmStatus status;
     
     @Column(name = "customer_fullname", length = 100, nullable = false)
     @NotNull
@@ -86,10 +91,10 @@ public class CrmCustomer implements Serializable, DomainObject {
         this.customerId = customerId;
     }
 
-    public CrmCustomer(Integer customerId, int businessId, int statusId, String customerFullname, int customerGender, Date customerCreateDate, Date customerUpdateDate) {
+    public CrmCustomer(Integer customerId, CrmBusiness business, CrmStatus status, String customerFullname, int customerGender, Date customerCreateDate, Date customerUpdateDate) {
         this.customerId = customerId;
-        this.businessId = businessId;
-        this.statusId = statusId;
+        this.business = business;
+        this.status = status;
         this.customerFullname = customerFullname;
         this.customerGender = customerGender;
         this.customerCreateDate = customerCreateDate;
@@ -104,23 +109,23 @@ public class CrmCustomer implements Serializable, DomainObject {
         this.customerId = customerId;
     }
 
-    public int getBusinessId() {
-        return businessId;
-    }
+    public CrmBusiness getBusiness() {
+		return business;
+	}
 
-    public void setBusinessId(int businessId) {
-        this.businessId = businessId;
-    }
+	public void setBusiness(CrmBusiness business) {
+		this.business = business;
+	}
 
-    public int getStatusId() {
-        return statusId;
-    }
+	public CrmStatus getStatus() {
+		return status;
+	}
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
+	public void setStatus(CrmStatus status) {
+		this.status = status;
+	}
 
-    public String getCustomerFullname() {
+	public String getCustomerFullname() {
         return customerFullname;
     }
 
@@ -186,7 +191,10 @@ public class CrmCustomer implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    	return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+		.append("customerId", customerId)
+		.append("customerFullname", customerFullname)
+		.toString();
     }
 
     @Override
