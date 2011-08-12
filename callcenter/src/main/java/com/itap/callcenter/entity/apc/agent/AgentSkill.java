@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
@@ -96,7 +97,10 @@ public class AgentSkill implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("skillId", skillId)
+				.append("skillName", skillName)
+				.toString();
     }
 
     @Override
