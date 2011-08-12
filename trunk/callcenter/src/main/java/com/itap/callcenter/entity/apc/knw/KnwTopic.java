@@ -6,13 +6,21 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import com.itap.callcenter.entity.DomainObject;
+import com.itap.callcenter.entity.apc.agent.AgentProfile;
 
 /**
 *
@@ -30,17 +38,20 @@ private static final long serialVersionUID = 1L;
     @NotNull
     private Integer topicId;
     
-    @Column(name = "agent_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "agent_id", nullable = false)
     @NotNull
-    private Integer agentId;
+    private AgentProfile agentProfile;
 
-    @Column(name = "category_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     @NotNull
-    private Integer categoryId;
+    private KnwCategory category;
     
-    @Column(name = "status_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
     @NotNull
-    private Integer statusId;
+    private KnwStatus status;
     
     @Column(name = "topic_name", length = 50, nullable = false)
     @NotNull
@@ -64,6 +75,7 @@ private static final long serialVersionUID = 1L;
     
     public KnwTopic () {
     }
+    
 
 	public Integer getTopicId() {
 		return topicId;
@@ -72,30 +84,38 @@ private static final long serialVersionUID = 1L;
 	public void setTopicId(Integer topicId) {
 		this.topicId = topicId;
 	}
+	
+	
 
-	public Integer getAgentId() {
-		return agentId;
+	public AgentProfile getAgentProfile() {
+		return agentProfile;
 	}
 
-	public void setAgentId(Integer agentId) {
-		this.agentId = agentId;
+
+	public void setAgentProfile(AgentProfile agentProfile) {
+		this.agentProfile = agentProfile;
 	}
 
-	public Integer getCategoryId() {
-		return categoryId;
+
+	public KnwCategory getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
+
+	public void setCategory(KnwCategory category) {
+		this.category = category;
 	}
 
-	public Integer getStatusId() {
-		return statusId;
+
+	public KnwStatus getStatus() {
+		return status;
 	}
 
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
+
+	public void setStatus(KnwStatus status) {
+		this.status = status;
 	}
+
 
 	public String getTopicName() {
 		return topicName;
@@ -137,6 +157,32 @@ private static final long serialVersionUID = 1L;
 		this.topicUpdateDate = topicUpdateDate;
 	}
     
+	@Override
+    public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("topicId", topicId)
+				.append("topicName", topicName)
+				.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o == this) { return true; }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        KnwTopic other = (KnwTopic) o;
+        return new EqualsBuilder()
+                 .append(topicId, other.topicId)
+                 .isEquals();
+    }
     
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+         .append(this.topicId)
+         .toHashCode();
+    }
 	
 }

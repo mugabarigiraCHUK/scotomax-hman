@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,8 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
+import com.itap.callcenter.entity.apc.agent.AgentProfile;
 
 /**
  *
@@ -38,21 +42,25 @@ public class KnwSolution implements Serializable, DomainObject {
     @NotNull
     private Integer solutionId;
     
-    @Column(name = "topic_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "topic_id", nullable = false)
     @NotNull
-    private int topicId;
+    private KnwTopic topic;
     
-    @Column(name = "agent_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "agent_id", nullable = false)
     @NotNull
-    private int agentId;
+    private AgentProfile agentProfile;
     
-    @Column(name = "supervisor_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "supervisor_id", nullable = false)
     @NotNull
-    private int supervisorId;
+    private AgentProfile supervisor;
     
-    @Column(name = "status_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
     @NotNull
-    private int statusId;
+    private KnwStatus status;
     
     @Column(name = "solution_name", length = 50, nullable = false)
     @NotNull
@@ -77,12 +85,12 @@ public class KnwSolution implements Serializable, DomainObject {
         this.solutionId = solutionId;
     }
 
-    public KnwSolution(Integer solutionId, int topicId, int agentId, int supervisorId, int statusId, String solutionName, Date solutionCreateDate, Date solutionUpdateDate) {
+    public KnwSolution(Integer solutionId, KnwTopic topic, AgentProfile agentProfile, AgentProfile supervisor, KnwStatus status, String solutionName, Date solutionCreateDate, Date solutionUpdateDate) {
         this.solutionId = solutionId;
-        this.topicId = topicId;
-        this.agentId = agentId;
-        this.supervisorId = supervisorId;
-        this.statusId = statusId;
+        this.topic = topic;
+        this.agentProfile = agentProfile;
+        this.supervisor = supervisor;
+        this.status = status;
         this.solutionName = solutionName;
         this.solutionCreateDate = solutionCreateDate;
         this.solutionUpdateDate = solutionUpdateDate;
@@ -96,39 +104,39 @@ public class KnwSolution implements Serializable, DomainObject {
         this.solutionId = solutionId;
     }
 
-    public int getTopicId() {
-        return topicId;
-    }
+    public KnwTopic getTopic() {
+		return topic;
+	}
 
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
-    }
+	public void setTopic(KnwTopic topic) {
+		this.topic = topic;
+	}
 
-    public int getAgentId() {
-        return agentId;
-    }
+	public AgentProfile getAgentProfile() {
+		return agentProfile;
+	}
 
-    public void setAgentId(int agentId) {
-        this.agentId = agentId;
-    }
+	public void setAgentProfile(AgentProfile agentProfile) {
+		this.agentProfile = agentProfile;
+	}
 
-    public int getSupervisorId() {
-        return supervisorId;
-    }
+	public AgentProfile getSupervisor() {
+		return supervisor;
+	}
 
-    public void setSupervisorId(int supervisorId) {
-        this.supervisorId = supervisorId;
-    }
+	public void setSupervisor(AgentProfile supervisor) {
+		this.supervisor = supervisor;
+	}
 
-    public int getStatusId() {
-        return statusId;
-    }
+	public KnwStatus getStatus() {
+		return status;
+	}
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
+	public void setStatus(KnwStatus status) {
+		this.status = status;
+	}
 
-    public String getSolutionName() {
+	public String getSolutionName() {
         return solutionName;
     }
 
@@ -162,7 +170,10 @@ public class KnwSolution implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("solutionId", solutionId)
+				.append("solutionName", solutionName)
+				.toString();
     }
 
     @Override
