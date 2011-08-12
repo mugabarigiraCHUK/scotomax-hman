@@ -19,153 +19,158 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
 /**
- *
+ * 
  * @author scotomax
  */
 @Entity
 @Table(name = "acd_route")
 @XmlRootElement
 public class AcdRoute implements Serializable, DomainObject {
-    
+
 	private static final long serialVersionUID = 1L;
-    
+
 	@Id
-    @Column(name = "route_id", length = 11, nullable = false)
-    @NotNull
-    private Integer routeId;
-	
-    @Column(name = "route_name", length = 50, nullable = false)
-    @NotNull
-    private String routeName;
-    
-    @Column(name = "route_description", length = 100)
-    private String routeDescription;
-    
-    @Column(name = "route_condition", length = 11, nullable = false)
-    @NotNull
-    private int routeCondition;
-    
-    @Column(name = "route_caller", length = 50)
-    private String routeCaller;
-    
-    @Column(name = "route_called", length = 50)
-    private String routeCalled;
-    
-    @Column(name = "route_create_date", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
-    private Date routeCreateDate;
-    
-    @Column(name = "route_update_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date routeUpdateDate;
+	@Column(name = "route_id", length = 11, nullable = false)
+	@NotNull
+	private Integer routeId;
 
-    public AcdRoute() {
-    }
+	@Column(name = "route_name", length = 50, nullable = false)
+	@NotNull
+	private String routeName;
 
-    public AcdRoute(Integer routeId) {
-        this.routeId = routeId;
-    }
+	@Column(name = "route_description", length = 100)
+	private String routeDescription;
 
-    public AcdRoute(Integer routeId, String routeName, int routeCondition, Date routeCreateDate, Date routeUpdateDate) {
-        this.routeId = routeId;
-        this.routeName = routeName;
-        this.routeCondition = routeCondition;
-        this.routeCreateDate = routeCreateDate;
-        this.routeUpdateDate = routeUpdateDate;
-    }
+	@Column(name = "route_condition", length = 11, nullable = false)
+	@NotNull
+	private int routeCondition;
 
-    public Integer getRouteId() {
-        return routeId;
-    }
+	@Column(name = "route_caller", length = 50)
+	private String routeCaller;
 
-    public void setRouteId(Integer routeId) {
-        this.routeId = routeId;
-    }
+	@Column(name = "route_called", length = 50)
+	private String routeCalled;
 
-    public String getRouteName() {
-        return routeName;
-    }
+	@Column(name = "route_create_date", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	private Date routeCreateDate;
 
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
-    }
+	@Column(name = "route_update_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date routeUpdateDate;
 
-    public String getRouteDescription() {
-        return routeDescription;
-    }
+	public AcdRoute() {
+	}
 
-    public void setRouteDescription(String routeDescription) {
-        this.routeDescription = routeDescription;
-    }
+	public AcdRoute(Integer routeId) {
+		this.routeId = routeId;
+	}
 
-    public int getRouteCondition() {
-        return routeCondition;
-    }
+	public AcdRoute(Integer routeId, String routeName, int routeCondition,
+			Date routeCreateDate, Date routeUpdateDate) {
+		this.routeId = routeId;
+		this.routeName = routeName;
+		this.routeCondition = routeCondition;
+		this.routeCreateDate = routeCreateDate;
+		this.routeUpdateDate = routeUpdateDate;
+	}
 
-    public void setRouteCondition(int routeCondition) {
-        this.routeCondition = routeCondition;
-    }
+	public Integer getRouteId() {
+		return routeId;
+	}
 
-    public String getRouteCaller() {
-        return routeCaller;
-    }
+	public void setRouteId(Integer routeId) {
+		this.routeId = routeId;
+	}
 
-    public void setRouteCaller(String routeCaller) {
-        this.routeCaller = routeCaller;
-    }
+	public String getRouteName() {
+		return routeName;
+	}
 
-    public String getRouteCalled() {
-        return routeCalled;
-    }
+	public void setRouteName(String routeName) {
+		this.routeName = routeName;
+	}
 
-    public void setRouteCalled(String routeCalled) {
-        this.routeCalled = routeCalled;
-    }
+	public String getRouteDescription() {
+		return routeDescription;
+	}
 
-    public Date getRouteCreateDate() {
-        return routeCreateDate;
-    }
+	public void setRouteDescription(String routeDescription) {
+		this.routeDescription = routeDescription;
+	}
 
-    public void setRouteCreateDate(Date routeCreateDate) {
-        this.routeCreateDate = routeCreateDate;
-    }
+	public int getRouteCondition() {
+		return routeCondition;
+	}
 
-    public Date getRouteUpdateDate() {
-        return routeUpdateDate;
-    }
+	public void setRouteCondition(int routeCondition) {
+		this.routeCondition = routeCondition;
+	}
 
-    public void setRouteUpdateDate(Date routeUpdateDate) {
-        this.routeUpdateDate = routeUpdateDate;
-    }
+	public String getRouteCaller() {
+		return routeCaller;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	public void setRouteCaller(String routeCaller) {
+		this.routeCaller = routeCaller;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) { return false; }
-        if (o == this) { return true; }
-        if (o.getClass() != getClass()) {
-            return false;
-        }
-        AcdRoute other = (AcdRoute) o;
-        return new EqualsBuilder()
-                 .append(routeId, other.routeId)
-                 .isEquals();
-    }
+	public String getRouteCalled() {
+		return routeCalled;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder()
-         .append(this.routeId)
-         .toHashCode();
-    }
-    
+	public void setRouteCalled(String routeCalled) {
+		this.routeCalled = routeCalled;
+	}
+
+	public Date getRouteCreateDate() {
+		return routeCreateDate;
+	}
+
+	public void setRouteCreateDate(Date routeCreateDate) {
+		this.routeCreateDate = routeCreateDate;
+	}
+
+	public Date getRouteUpdateDate() {
+		return routeUpdateDate;
+	}
+
+	public void setRouteUpdateDate(Date routeUpdateDate) {
+		this.routeUpdateDate = routeUpdateDate;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("routeId", routeId)
+				.append("routeName", routeName)
+				.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
+		if (o == this) {
+			return true;
+		}
+		if (o.getClass() != getClass()) {
+			return false;
+		}
+		AcdRoute other = (AcdRoute) o;
+		return new EqualsBuilder().append(routeId, other.routeId).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.routeId).toHashCode();
+	}
+
 }
