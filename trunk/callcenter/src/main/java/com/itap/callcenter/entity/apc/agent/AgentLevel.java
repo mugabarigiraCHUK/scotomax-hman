@@ -19,104 +19,108 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
 
 /**
- *
+ * 
  * @author scotomax
  */
 @Entity
 @Table(name = "agent_level")
 @XmlRootElement
 public class AgentLevel implements Serializable, DomainObject {
-    
+
 	private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "level_id", length = 11, nullable = false)
-    @NotNull
-    private Integer levelId;
-    
-    @Column(name = "level_name", length = 50, nullable = false)
-    @NotNull
-    private String levelName;
-    
-    @Column(name = "level_description", length = 100)
-    private String levelDescription;
-    
-    @Column(name = "level_update_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date levelUpdateDate;
 
-    public AgentLevel() {
-    }
+	@Id
+	@Column(name = "level_id", length = 11, nullable = false)
+	@NotNull
+	private Integer levelId;
 
-    public AgentLevel(Integer levelId) {
-        this.levelId = levelId;
-    }
+	@Column(name = "level_name", length = 50, nullable = false)
+	@NotNull
+	private String levelName;
 
-    public AgentLevel(Integer levelId, String levelName, Date levelUpdateDate) {
-        this.levelId = levelId;
-        this.levelName = levelName;
-        this.levelUpdateDate = levelUpdateDate;
-    }
+	@Column(name = "level_description", length = 100)
+	private String levelDescription;
 
-    public Integer getLevelId() {
-        return levelId;
-    }
+	@Column(name = "level_update_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date levelUpdateDate;
 
-    public void setLevelId(Integer levelId) {
-        this.levelId = levelId;
-    }
+	public AgentLevel() {
+	}
 
-    public String getLevelName() {
-        return levelName;
-    }
+	public AgentLevel(Integer levelId) {
+		this.levelId = levelId;
+	}
 
-    public void setLevelName(String levelName) {
-        this.levelName = levelName;
-    }
+	public AgentLevel(Integer levelId, String levelName, Date levelUpdateDate) {
+		this.levelId = levelId;
+		this.levelName = levelName;
+		this.levelUpdateDate = levelUpdateDate;
+	}
 
-    public String getLevelDescription() {
-        return levelDescription;
-    }
+	public Integer getLevelId() {
+		return levelId;
+	}
 
-    public void setLevelDescription(String levelDescription) {
-        this.levelDescription = levelDescription;
-    }
+	public void setLevelId(Integer levelId) {
+		this.levelId = levelId;
+	}
 
-    public Date getLevelUpdateDate() {
-        return levelUpdateDate;
-    }
+	public String getLevelName() {
+		return levelName;
+	}
 
-    public void setLevelUpdateDate(Date levelUpdateDate) {
-        this.levelUpdateDate = levelUpdateDate;
-    }
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	public String getLevelDescription() {
+		return levelDescription;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) { return false; }
-        if (o == this) { return true; }
-        if (o.getClass() != getClass()) {
-            return false;
-        }
-        AgentLevel other = (AgentLevel) o;
-        return new EqualsBuilder()
-                 .append(levelId, other.levelId)
-                 .isEquals();
-    }
+	public void setLevelDescription(String levelDescription) {
+		this.levelDescription = levelDescription;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder()
-         .append(this.levelId)
-         .toHashCode();
-    }
-    
+	public Date getLevelUpdateDate() {
+		return levelUpdateDate;
+	}
+
+	public void setLevelUpdateDate(Date levelUpdateDate) {
+		this.levelUpdateDate = levelUpdateDate;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("levelId", levelId)
+				.append("levelName", levelName)
+				.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
+		if (o == this) {
+			return true;
+		}
+		if (o.getClass() != getClass()) {
+			return false;
+		}
+		AgentLevel other = (AgentLevel) o;
+		return new EqualsBuilder().append(levelId, other.levelId).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.levelId).toHashCode();
+	}
+
 }
