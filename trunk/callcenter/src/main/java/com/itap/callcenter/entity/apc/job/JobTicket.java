@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,8 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
+import com.itap.callcenter.entity.apc.agent.AgentLevel;
+import com.itap.callcenter.entity.apc.agent.AgentProfile;
+import com.itap.callcenter.entity.apc.agent.AgentSeat;
+import com.itap.callcenter.entity.apc.crm.CrmCustomer;
+import com.itap.callcenter.entity.apc.knw.KnwSolution;
 
 /**
  *
@@ -38,29 +46,35 @@ public class JobTicket implements Serializable, DomainObject {
     @NotNull
     private Integer jobId;
     
-    @Column(name = "customer_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
     @NotNull
-    private int customerId;
+    private CrmCustomer customer;
     
-    @Column(name = "agent_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "agent_id", nullable = false)
     @NotNull
-    private int agentId;
+    private AgentProfile agentProfile;
     
-    @Column(name = "seat_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "seat_id", nullable = false)
     @NotNull
-    private int seatId;
+    private AgentSeat agentSeat;
     
-    @Column(name = "solution_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "solution_id", nullable = false)
     @NotNull
-    private int solutionId;
+    private KnwSolution solution;
     
-    @Column(name = "status_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
     @NotNull
-    private int statusId;
+    private JobStatus status;
     
-    @Column(name = "level_id", length = 11, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "level_id", nullable = false)
     @NotNull
-    private int levelId;
+    private AgentLevel agentLevel;
     
     @Column(name = "job_name", length = 50, nullable = false)
     @NotNull
@@ -97,14 +111,14 @@ public class JobTicket implements Serializable, DomainObject {
         this.jobId = jobId;
     }
 
-    public JobTicket(Integer jobId, int customerId, int agentId, int seatId, int solutionId, int statusId, int levelId, String jobName, int jobAlertEnable, Date jobCreateDate, Date jobUpdateDate) {
+    public JobTicket(Integer jobId, CrmCustomer customer, AgentProfile agentProfile, AgentSeat agentSeat, KnwSolution solution, JobStatus status, AgentLevel agentLevel, String jobName, int jobAlertEnable, Date jobCreateDate, Date jobUpdateDate) {
         this.jobId = jobId;
-        this.customerId = customerId;
-        this.agentId = agentId;
-        this.seatId = seatId;
-        this.solutionId = solutionId;
-        this.statusId = statusId;
-        this.levelId = levelId;
+        this.customer = customer;
+        this.agentProfile = agentProfile;
+        this.agentSeat = agentSeat;
+        this.solution = solution;
+        this.status = status;
+        this.agentLevel = agentLevel;
         this.jobName = jobName;
         this.jobAlertEnable = jobAlertEnable;
         this.jobCreateDate = jobCreateDate;
@@ -119,55 +133,55 @@ public class JobTicket implements Serializable, DomainObject {
         this.jobId = jobId;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
+    public CrmCustomer getCustomer() {
+		return customer;
+	}
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
+	public void setCustomer(CrmCustomer customer) {
+		this.customer = customer;
+	}
 
-    public int getAgentId() {
-        return agentId;
-    }
+	public AgentProfile getAgentProfile() {
+		return agentProfile;
+	}
 
-    public void setAgentId(int agentId) {
-        this.agentId = agentId;
-    }
+	public void setAgentProfile(AgentProfile agentProfile) {
+		this.agentProfile = agentProfile;
+	}
 
-    public int getSeatId() {
-        return seatId;
-    }
+	public AgentSeat getAgentSeat() {
+		return agentSeat;
+	}
 
-    public void setSeatId(int seatId) {
-        this.seatId = seatId;
-    }
+	public void setAgentSeat(AgentSeat agentSeat) {
+		this.agentSeat = agentSeat;
+	}
 
-    public int getSolutionId() {
-        return solutionId;
-    }
+	public KnwSolution getSolution() {
+		return solution;
+	}
 
-    public void setSolutionId(int solutionId) {
-        this.solutionId = solutionId;
-    }
+	public void setSolution(KnwSolution solution) {
+		this.solution = solution;
+	}
 
-    public int getStatusId() {
-        return statusId;
-    }
+	public JobStatus getStatus() {
+		return status;
+	}
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
+	public void setStatus(JobStatus status) {
+		this.status = status;
+	}
 
-    public int getLevelId() {
-        return levelId;
-    }
+	public AgentLevel getAgentLevel() {
+		return agentLevel;
+	}
 
-    public void setLevelId(int levelId) {
-        this.levelId = levelId;
-    }
+	public void setAgentLevel(AgentLevel agentLevel) {
+		this.agentLevel = agentLevel;
+	}
 
-    public String getJobName() {
+	public String getJobName() {
         return jobName;
     }
 
@@ -225,7 +239,10 @@ public class JobTicket implements Serializable, DomainObject {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+				.append("jobId", jobId)
+				.append("jobName", jobName)
+				.toString();
     }
 
     @Override
