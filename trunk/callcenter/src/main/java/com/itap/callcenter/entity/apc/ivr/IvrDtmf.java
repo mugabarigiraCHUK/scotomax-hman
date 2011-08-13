@@ -54,13 +54,13 @@ public class IvrDtmf implements Serializable, DomainObject {
     private String dtmfDigit;
     
     @ManyToOne
-    @JoinColumn(name = "dtmf_correct_callflow_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "dtmf_correct_callflow_id")
+//    @NotNull
     private IvrCallflow dtmfCorrectCallflow;
     
     @ManyToOne
-    @JoinColumn(name = "dtmf_error_callflow_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "dtmf_error_callflow_id")
+//    @NotNull
     private IvrCallflow dtmfErrorCallflow;
     
     @Column(name = "dtmf_create_date", nullable = false)
