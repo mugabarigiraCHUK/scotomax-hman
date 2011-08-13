@@ -62,7 +62,7 @@ public class AgentScript implements Serializable, DomainObject {
     
     @Column(name = "script_step", length = 11, nullable = false)
     @NotNull
-    private int scriptStep;
+    private Integer scriptStep;
     
     @Column(name = "script_message", length = 1000)
     private String scriptMessage;
@@ -133,11 +133,11 @@ public class AgentScript implements Serializable, DomainObject {
         this.scriptDescription = scriptDescription;
     }
 
-    public int getScriptStep() {
+    public Integer getScriptStep() {
         return scriptStep;
     }
 
-    public void setScriptStep(int scriptStep) {
+    public void setScriptStep(Integer scriptStep) {
         this.scriptStep = scriptStep;
     }
 
