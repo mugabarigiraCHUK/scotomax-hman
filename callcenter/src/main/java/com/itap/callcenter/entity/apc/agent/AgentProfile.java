@@ -62,7 +62,7 @@ public class AgentProfile implements Serializable, DomainObject {
 	private WkfWorkplan workplan;
 
 	@ManyToOne
-    @Column(name = "status_id", length = 11, nullable = false)
+	@JoinColumn(name = "status_id",  nullable = false)
     @NotNull
     private AgentStatus agentStatus;
 
