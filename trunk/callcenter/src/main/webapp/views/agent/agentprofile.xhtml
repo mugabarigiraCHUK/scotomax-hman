@@ -170,19 +170,29 @@
 								<h:panelGrid columns="2" styleClass="inputtable">
 					
 									<h:outputText value="#{msg['agentprofile.supervisor']}"/>
-									<h:inputText value="#{agentProfileController.supervisorId}" />
+									<h:selectOneMenu value="#{agentProfileController.agentProfile}" converter="#{agentProfileConverter}">
+										<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
+									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.level']}"/>
-									<h:inputText value="#{agentProfileController.levelId}" />
+									<h:selectOneMenu value="#{agentProfileController.agentLevel}" converter="#{agentLevelConverter}">
+										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
+									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.skill']}"/>
-									<h:inputText value="#{agentProfileController.skillId}" />
+									<h:selectOneMenu value="#{agentProfileController.agentSkill}" converter="#{agentSkillConverter}">
+										<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
+									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.status']}"/>
-									<h:inputText value="#{agentProfileController.statusId}" />
+									<h:selectOneMenu value="#{agentProfileController.agentStatus}" converter="#{agentStatusConverter}">
+										<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
+									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.workplan']}"/>
-									<h:inputText value="#{agentProfileController.workplanId}" />
+									<h:selectOneMenu value="#{agentProfileController.wkfWorkplan}" converter="#{wkfWorkplanConverter}">
+										<f:selectItems value="#{dataLoadController.wkfWorkplanSelectItems}"/>
+									</h:selectOneMenu>
 									
 								</h:panelGrid>	
 						</fieldset>
