@@ -70,6 +70,10 @@ public class AgentScriptController extends AgentScriptBean {
 	 */
 	public void create() {
 		logger.debug("Entering Agent script creation method...");
+		
+		logger.debug("Look -> CrmBusiness -> " + business);
+		logger.debug("Look -> KnwTopic -> " + topic);
+		
 		try {
 			if ( isBusinessAndTopicSelected() ) {
 				AgentScript entry = new AgentScript();

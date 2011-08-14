@@ -69,6 +69,13 @@ public class AgentProfileController extends AgentProfileBean {
 	 */
 	public void create() {
 		logger.debug("Entering Agent profile creation method...");
+		
+		logger.debug("Look -> Supervisor -> " + agentProfile);
+		logger.debug("Look -> AgentSkill -> " + agentSkill);
+		logger.debug("Look -> AgentLevel -> " + agentLevel);
+		logger.debug("Look -> AgentStatus -> " + agentStatus);
+		logger.debug("Look -> WkfWorkplan -> " + wkfWorkplan);
+		
 		try {
 			AgentProfile entry = new AgentProfile();
 			entry.setAgentId(agentId);
@@ -79,6 +86,13 @@ public class AgentProfileController extends AgentProfileBean {
 			entry.setAgentAllowOutbound(agentAllowOutbound);
 			entry.setAgentCreateDate(new Date());
 			entry.setAgentUpdateDate(new Date());
+			
+			entry.setSupervisor(agentProfile);
+			entry.setAgentSkill(agentSkill);
+			entry.setAgentLevel(agentLevel);
+			entry.setAgentStatus(agentStatus);
+			entry.setWorkplan(wkfWorkplan);
+			
 			agentProfileDao.save(entry);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
 		} catch (Exception ex) {
@@ -92,6 +106,13 @@ public class AgentProfileController extends AgentProfileBean {
 	 */
 	public void update() {
 		logger.debug("Entering Agent profile update method...");
+		
+		logger.debug("Look -> Supervisor -> " + agentProfile);
+		logger.debug("Look -> AgentSkill -> " + agentSkill);
+		logger.debug("Look -> AgentLevel -> " + agentLevel);
+		logger.debug("Look -> AgentStatus -> " + agentStatus);
+		logger.debug("Look -> WkfWorkplan -> " + wkfWorkplan);
+		
 		try {
 			AgentProfile entry = agentProfileDao.findById(agentId);
 			entry.setAgentFullname(agentFullname);
@@ -100,6 +121,13 @@ public class AgentProfileController extends AgentProfileBean {
 			entry.setAgentMaxCall(agentMaxCall);
 			entry.setAgentAllowOutbound(agentAllowOutbound);
 			entry.setAgentUpdateDate(new Date());
+			
+			entry.setSupervisor(agentProfile);
+			entry.setAgentSkill(agentSkill);
+			entry.setAgentLevel(agentLevel);
+			entry.setAgentStatus(agentStatus);
+			entry.setWorkplan(wkfWorkplan);
+			
 			agentProfileDao.update(entry);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
 		} catch (Exception ex) {
@@ -122,6 +150,13 @@ public class AgentProfileController extends AgentProfileBean {
 			agentAllowOutbound = null;
 			agentCreateDate = null;
 			agentUpdateDate =null;
+			
+			agentProfile = null;
+			agentSkill = null;
+			agentLevel = null;
+			agentStatus = null;
+			wkfWorkplan = null;
+			
 		} else {
 			try {
 				AgentProfile entry = agentProfileDao.findById(agentId);
@@ -133,6 +168,13 @@ public class AgentProfileController extends AgentProfileBean {
 				agentAllowOutbound = entry.getAgentAllowOutbound();
 				agentCreateDate = entry.getAgentCreateDate();
 				agentUpdateDate = entry.getAgentUpdateDate();
+				
+				agentProfile = entry.getSupervisor();
+				agentSkill = entry.getAgentSkill();
+				agentLevel = entry.getAgentLevel();
+				agentStatus = entry.getAgentStatus();
+				wkfWorkplan = entry.getWorkplan();
+				
 				selectedAgentId = -1;
 			} catch (Exception ex) {
 				logger.error("Failed to fetch the element data from db, Cause: "+ex.getMessage(), ex);

@@ -42,9 +42,10 @@ public class AgentProfile implements Serializable, DomainObject {
 	@NotNull
 	private Integer agentId;
 
-	@Column(name = "supervisor_id", length = 11, nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "supervisor_id", nullable = false)
 	@NotNull
-	private int supervisorId;
+	private AgentProfile supervisor;
 
 	@ManyToOne
 	@JoinColumn(name="level_id", nullable = false)
@@ -102,12 +103,12 @@ public class AgentProfile implements Serializable, DomainObject {
 		this.agentId = agentId;
 	}
 
-	public AgentProfile(Integer agentId, int supervisorId, AgentLevel agentLevel,
+	public AgentProfile(Integer agentId, AgentProfile supervisor, AgentLevel agentLevel,
 			AgentSkill agentSkill, AgentStatus agentStatus, WkfWorkplan workplan, String agentFullname,
 			String agentUsername, int agentMaxCall, int agentAllowOutbound,
 			Date agentCreateDate, Date agentUpdateDate) {
 		this.agentId = agentId;
-		this.supervisorId = supervisorId;
+		this.supervisor = supervisor;
 		this.agentLevel = agentLevel;
 		this.agentSkill = agentSkill;
 		this.agentStatus = agentStatus;
@@ -128,12 +129,12 @@ public class AgentProfile implements Serializable, DomainObject {
 		this.agentId = agentId;
 	}
 
-	public int getSupervisorId() {
-		return supervisorId;
+	public AgentProfile getSupervisor() {
+		return supervisor;
 	}
 
-	public void setSupervisorId(int supervisorId) {
-		this.supervisorId = supervisorId;
+	public void setSupervisor(AgentProfile supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	public AgentLevel getAgentLevel() {
