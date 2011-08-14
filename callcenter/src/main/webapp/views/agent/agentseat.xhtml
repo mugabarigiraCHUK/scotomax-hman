@@ -7,7 +7,12 @@
 		template="/theme/template.xhtml">
 
 	<ui:define name="body">
-	
+		<h:outputStylesheet>
+			.agent-seat-tooltip {
+			    background-color: #{richSkin.generalBackgroundColor};
+			    border-width:3px;
+			}
+		</h:outputStylesheet>
 		<h:form id="agentseatForm">
 			<rich:panel id="agentSeatPanel" header="#{msg['agentseat.panel.input']}">
 				<a4j:outputPanel id="agentSeatOutputPanel">
@@ -17,19 +22,17 @@
 							<h:messages/>
 							
 							<h:panelGrid columns="3" styleClass="inputtable">
-								
 								<h:column/>
 								<a4j:commandButton value="#{msg['button.create']}" 
 				                							action="#{agentSeatController.edit}"
 														 	render="agentSeatCreateUpdatePanel" 
 														 	execute="@this"
 														 	oncomplete="#{rich:component('agentSeatCreateUpdatePanel')}.show()">
-									<a4j:param value="-1" assignTo="#{agentSeatController.selectedScriptId}"/>
+									<a4j:param value="-1" assignTo="#{agentSeatController.selectedSeatId}"/>
 								</a4j:commandButton>
 								<a4j:commandButton value="#{msg['button.refresh']}"
-															action="#{agentSeatController.clear}" 
-														 	render="agentSeatCreateUpdatePanel" 
-														 	execute="@this"/>
+															 	render="agentSeatCreateUpdatePanel" 
+															 	execute="@this"/>
 							</h:panelGrid>
 							
 					</fieldset>
@@ -38,66 +41,69 @@
 						<legend><h:outputText value="#{msg['agentseat.datatable.legend']}" /></legend>
 
 						<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentSeatController.agentSeats}"/>
-						<rich:dataTable value="#{agentSeatController.agentSeats}" var="data" rendered="#{not empty agentSeatController.agentSeats}">
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.id']}" /></f:facet>
-								<h:outputText value="#{data.seatId}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.name']}" /></f:facet>
-								<h:outputText value="#{data.seatName}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.description']}" /></f:facet>
-								<h:outputText value="#{data.seatDescription}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.startperiod']}" /></f:facet>
-								<h:outputText value="#{data.seatStartPeriod}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.endperiod']}" /></f:facet>
-								<h:outputText value="#{data.seatEndPeriod}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.maxcall']}" /></f:facet>
-								<h:outputText value="#{data.seatMaxCall}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.allowoutbound']}" /></f:facet>
-								<h:outputText value="#{data.seatAllowOutbound}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.createdate']}" /></f:facet>
-								<h:outputText value="#{data.seatCreateDate}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.updatedate']}" /></f:facet>
-								<h:outputText value="#{data.seatUpdateDate}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.edit']}" /></f:facet>
-								<a4j:commandButton value="#{msg['button.edit']}" 
-															 action="#{agentSeatController.edit}" 
-															 render="agentSeatCreateUpdatePanel" 
-															 execute="@this" 
-															 oncomplete="#{rich:component('agentSeatCreateUpdatePanel')}.show()"
-															 rendered="#{not empty data.scriptId}">
-									<a4j:param value="#{data.agentId}" assignTo="#{agentSeatController.selectedScriptId}"/>
-								</a4j:commandButton>
-							</rich:column>
-							<rich:column>
-								<f:facet name="header"><h:outputText value="#{msg['agentseat.table.delete']}" /></f:facet>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  render="@none" 
-															  execute="@this" 
-															  oncomplete="#{rich:component('agentSeatDeletePanel')}.show()"
-															  rendered="#{not empty data.levelId}">
-									<a4j:param value="#{data.agentId}" assignTo="#{agentSeatController.selectedScriptId}"/>
-								</a4j:commandButton>
-							</rich:column>
-							
-						</rich:dataTable>
+						<!-- Data Grid -->
+						<rich:dataGrid value="#{agentSeatController.agentSeats}" 
+											 var="data" 
+											 columns="#{agentSeatController.numberOfColumn}" 
+											 border="0" 
+											 rendered="#{not empty agentSeatController.agentSeats}">
+                			
+                			<rich:panel styleClass="agent-seat">
+                				<h:outputText value="#{data.seatName}" />
+                				<h:panelGrid columns="2">
+                					<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{agentSeatController.edit}" 
+																 render="agentSeatCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('agentSeatCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.scriptId}">
+										<a4j:param value="#{data.agentId}" assignTo="#{agentSeatController.selectedSeatId}"/>
+									</a4j:commandButton>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('agentSeatDeletePanel')}.show()"
+																  rendered="#{not empty data.levelId}">
+										<a4j:param value="#{data.agentId}" assignTo="#{agentSeatController.selectedSeatId}"/>
+									</a4j:commandButton>
+									
+									<rich:tooltip styleClass="tooltip" layout="block">
+						                <h:panelGrid columns="2">
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.id']}" />
+						                	<h:outputText value="#{data.seatId}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.name']}" />
+						                	<h:outputText value="#{data.seatName}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.description']}" />
+						                	<h:outputText value="#{data.seatDescription}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.startperiod']}" />
+						                	<h:outputText value="#{data.seatStartPeriod}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.endperiod']}" />
+						                	<h:outputText value="#{data.seatEndPeriod}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.maxcall']}" />
+						                	<h:outputText value="#{data.seatMaxCall}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.allowoutbound']}" />
+						                	<h:outputText value="#{data.seatAllowOutbound}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.createdate']}" />
+						                	<h:outputText value="#{data.seatCreateDate}" />
+						                	
+						                	<h:outputText value="#{msg['agentseat.table.updatedate']}" />
+						                	<h:outputText value="#{data.seatUpdateDate}" />
+						                	
+						                </h:panelGrid>
+						            </rich:tooltip>
+                				</h:panelGrid>
+                			</rich:panel>
+                			
+                		</rich:dataGrid>
+					
 					</fieldset>
 						
 				</a4j:outputPanel>
@@ -125,10 +131,26 @@
 									<h:inputText value="#{agentSeatController.seatDescription}" />
 									
 									<h:outputText value="#{msg['agentseat.startperiod']}"/>
-									<h:inputText value="#{agentSeatController.seatStartPeriod}" />
+									<rich:calendar value="#{agentSeatController.seatStartPeriod}"
+										                    locale="#{userController.locale}" 
+										                    popup="true"
+										                    datePattern="dd/MM/yy HH:mm"
+										                    showApplyButton="true" 
+										                    cellWidth="24px"
+										                    cellHeight="22px" 
+										                    style="width:200px">
+					                </rich:calendar>
 									
 									<h:outputText value="#{msg['agentseat.endperiod']}"/>
-									<h:inputText value="#{agentSeatController.seatEndPeriod}" />
+									<rich:calendar value="#{agentSeatController.seatEndPeriod}"
+										                    locale="#{userController.locale}" 
+										                    popup="true"
+										                    datePattern="dd/MM/yy HH:mm"
+										                    showApplyButton="true" 
+										                    cellWidth="24px"
+										                    cellHeight="22px" 
+										                    style="width:200px">
+					                </rich:calendar>
 									
 									<h:outputText value="#{msg['agentseat.maxcall']}"/>
 									<h:inputText value="#{agentSeatController.seatMaxCall}" />
@@ -167,17 +189,20 @@
 								<h:panelGrid columns="2" styleClass="inputtable">
 					
 									<h:outputText value="#{msg['agentseat.level']}"/>
-									<h:selectOneMenu value="#{agentSeatController.agentLevel}" converter="#{agentLevelConverter}">
+									<h:selectOneMenu value="#{agentSeatController.agentLevel}">
+										<f:converter converterId="agentLevelConverter"/>
 										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
 									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentseat.skill']}"/>
-									<h:selectOneMenu value="#{agentSeatController.agentSkill}" converter="#{agentSkillConverter}">
+									<h:selectOneMenu value="#{agentSeatController.agentSkill}">
+										<f:converter converterId="agentSkillConverter"/>
 										<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
 									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentseat.status']}"/>
-									<h:selectOneMenu value="#{agentSeatController.agentStatus}" converter="#{agentStatusConverter}">
+									<h:selectOneMenu value="#{agentSeatController.agentStatus}">
+										<f:converter converterId="agentStatusConverter"/>
 										<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
 									</h:selectOneMenu>
 									

@@ -19,15 +19,15 @@
 							<h:panelGrid columns="2" styleClass="inputtable">
 								
 								<h:outputText value="#{msg['agentscript.business']}"/>
-								<h:selectOneMenu value="#{agentScriptController.business}"
-														   converter="#{crmBusinessConverter}">
+								<h:selectOneMenu value="#{agentScriptController.business}">
+									<f:converter converterId="crmBusinessConverter"/>
 									<f:selectItem itemLabel="- Select -" itemValue="-1" />
 									<f:selectItems value="#{dataLoadController.crmBusinessSelectItems}" />
 								</h:selectOneMenu>
 								
 								<h:outputText value="#{msg['agentscript.topic']}"/>
-								<h:selectOneMenu value="#{agentScriptController.topic}"
-														   converter="#{knwTopicConverter}">
+								<h:selectOneMenu value="#{agentScriptController.topic}">
+									<f:converter converterId="knwTopicConverter"/>
 									<f:selectItem itemLabel="- Select -" itemValue="-1" />
 									<f:selectItems value="#{dataLoadController.knwTopicSelectItems}"></f:selectItems>
 								</h:selectOneMenu>
