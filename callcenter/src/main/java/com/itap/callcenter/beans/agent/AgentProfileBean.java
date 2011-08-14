@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.itap.callcenter.entity.apc.agent.AgentLevel;
 import com.itap.callcenter.entity.apc.agent.AgentProfile;
+import com.itap.callcenter.entity.apc.agent.AgentSkill;
+import com.itap.callcenter.entity.apc.agent.AgentStatus;
+import com.itap.callcenter.entity.apc.wkf.WkfWorkplan;
 
 import lombok.Data;
 
@@ -19,11 +23,11 @@ public @Data abstract class AgentProfileBean implements Serializable {
 
 	protected Integer agentId;
 	
-	protected Integer supervisorId;
-	protected Integer levelId;
-	protected Integer skillId;
-	protected Integer statusId;
-	protected Integer workplanId;
+	protected AgentProfile agentProfile;
+	protected AgentLevel agentLevel;
+	protected AgentSkill agentSkill;
+	protected AgentStatus agentStatus;
+	protected WkfWorkplan wkfWorkplan;
     
 	protected String agentFullname;
 	protected String agentUsername;

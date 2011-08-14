@@ -61,10 +61,10 @@ public class AgentProfile implements Serializable, DomainObject {
 	@NotNull
 	private WkfWorkplan workplan;
 
-	@Column(name = "status_id", length = 11, nullable = false)
-	@NotNull
-	private int statusId;
-
+	@ManyToOne
+    @Column(name = "status_id", length = 11, nullable = false)
+    @NotNull
+    private AgentStatus agentStatus;
 
 	@Column(name = "agent_fullname", length = 100, nullable = false)
 	@NotNull
@@ -103,14 +103,14 @@ public class AgentProfile implements Serializable, DomainObject {
 	}
 
 	public AgentProfile(Integer agentId, int supervisorId, AgentLevel agentLevel,
-			AgentSkill agentSkill, int statusId, WkfWorkplan workplan, String agentFullname,
+			AgentSkill agentSkill, AgentStatus agentStatus, WkfWorkplan workplan, String agentFullname,
 			String agentUsername, int agentMaxCall, int agentAllowOutbound,
 			Date agentCreateDate, Date agentUpdateDate) {
 		this.agentId = agentId;
 		this.supervisorId = supervisorId;
 		this.agentLevel = agentLevel;
 		this.agentSkill = agentSkill;
-		this.statusId = statusId;
+		this.agentStatus = agentStatus;
 		this.workplan = workplan;
 		this.agentFullname = agentFullname;
 		this.agentUsername = agentUsername;
@@ -159,13 +159,13 @@ public class AgentProfile implements Serializable, DomainObject {
 	public void setWorkplan(WkfWorkplan workplan) {
 		this.workplan = workplan;
 	}
-
-	public int getStatusId() {
-		return statusId;
+	
+	public AgentStatus getAgentStatus() {
+		return agentStatus;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setAgentStatus(AgentStatus agentStatus) {
+		this.agentStatus = agentStatus;
 	}
 
 	public String getAgentFullname() {

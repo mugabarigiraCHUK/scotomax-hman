@@ -51,9 +51,10 @@ public class AgentSeat implements Serializable, DomainObject {
     @NotNull
     private AgentSkill agentSkill;
     
+    @ManyToOne
     @Column(name = "status_id", length = 11, nullable = false)
     @NotNull
-    private int statusId;
+    private AgentStatus agentStatus;
     
     @Column(name = "seat_name", length = 50, nullable = false)
     @NotNull
@@ -96,11 +97,11 @@ public class AgentSeat implements Serializable, DomainObject {
         this.seatId = seatId;
     }
 
-    public AgentSeat(Integer seatId, AgentLevel agentLevel, AgentSkill agentSkill, int statusId, String seatName, Date seatStartPeriod, Date seatEndPeriod, int seatMaxCall, int seatAllowOutbound, Date seatCreateDate, Date seatUpdateDate) {
+    public AgentSeat(Integer seatId, AgentLevel agentLevel, AgentSkill agentSkill, AgentStatus agentStatus, String seatName, Date seatStartPeriod, Date seatEndPeriod, int seatMaxCall, int seatAllowOutbound, Date seatCreateDate, Date seatUpdateDate) {
         this.seatId = seatId;
         this.agentLevel = agentLevel;
         this.agentSkill = agentSkill;
-        this.statusId = statusId;
+        this.agentStatus = agentStatus;
         this.seatName = seatName;
         this.seatStartPeriod = seatStartPeriod;
         this.seatEndPeriod = seatEndPeriod;
@@ -134,15 +135,15 @@ public class AgentSeat implements Serializable, DomainObject {
 		this.agentSkill = agentSkill;
 	}
 
-	public int getStatusId() {
-        return statusId;
-    }
+    public AgentStatus getAgentStatus() {
+		return agentStatus;
+	}
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
+	public void setAgentStatus(AgentStatus agentStatus) {
+		this.agentStatus = agentStatus;
+	}
 
-    public String getSeatName() {
+	public String getSeatName() {
         return seatName;
     }
 

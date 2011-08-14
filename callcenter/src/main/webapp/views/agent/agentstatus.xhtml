@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="agentstatusForm">
+			<rich:panel id="agentStatusPanel" header="#{msg['agentstatus.inputpanel']}">
+				<a4j:outputPanel id="agentStatusOutputPanel">
+					
+						<h:messages/>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['agentstatus.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentStatusController.agentStatusList}"/>
+							<rich:dataTable value="#{agentStatusController.agentStatusList}" var="data">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agentstatus.table.id']}" /></f:facet>
+									<h:outputText value="#{data.statusId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agentstatus.table.name']}" /></f:facet>
+									<h:outputText value="#{data.statusName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agentstatus.table.description']}" /></f:facet>
+									<h:outputText value="#{data.statusDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agentstatus.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.statusUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agentstatus.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{agentStatusController.edit}" 
+																 render="agentStatusCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('agentStatusCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.statusId}">
+										<a4j:param value="#{data.statusId}" assignTo="#{agentStatusController.selectedStatusId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['agentstatus.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('agentStatusDeletePanel')}.show()"
+																  rendered="#{not empty data.statusId}">
+										<a4j:param value="#{data.statusId}" assignTo="#{agentStatusController.selectedStatusId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{agentStatusController.edit}"
+																			 	render="agentStatusCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('agentStatusCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{agentStatusController.selectedStatusId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="agentStatusCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+		
+			<rich:popupPanel id="agentStatusCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['agentstatus.create.update.legend']}" /></legend>
+					
+								<h:panelGrid columns="2" styleClass="inputtable">
+									<h:column/>
+									<h:messages/>
+									
+									<h:outputText value="#{msg['agentstatus.id']}" />
+									<h:inputText value="#{agentStatusController.statusId}" rendered="#{empty agentStatusController.statusId}"/>
+									<h:outputText value="#{agentStatusController.statusId}" rendered="#{not empty agentStatusController.statusId}"/>
+									
+									<h:outputText value="#{msg['agentstatus.name']}"/>
+									<h:inputText value="#{agentStatusController.statusName}" />
+									
+									<h:outputText value="#{msg['agentstatus.description']}"/>
+									<h:inputTextarea value="#{agentStatusController.statusDescription}" cols="30" rows="5" />
+									
+									<h:outputText value="#{msg['agentstatus.updatedate']}" rendered="#{not empty agentStatusController.statusUpdateDate}"/>
+									<h:outputText value="#{agentStatusController.statusUpdateDate}" rendered="#{not empty agentStatusController.statusUpdateDate}"/>
+									
+									<h:column/>
+									<h:panelGroup>
+										<a4j:commandButton value="#{msg['button.create']}" 
+																	  action="#{agentStatusController.create}"
+																	  execute="agentStatusCreateUpdatePanel" 
+																	  rendered="#{empty agentStatusController.statusId}" 
+																	  render="agentStatusOutputPanel"
+																	  oncomplete="#{rich:component('agentStatusCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.update']}" 
+																	  action="#{agentStatusController.update}"
+																	  execute="agentStatusCreateUpdatePanel" 
+																	  rendered="#{not empty agentStatusController.statusId}" 
+																	  render="agentStatusOutputPanel"
+																	  oncomplete="#{rich:component('agentStatusCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentStatusCreateUpdatePanel')}.hide(); return false;" />
+									</h:panelGroup>
+									
+								</h:panelGrid>
+						
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="agentStatusDeletePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['agentstatus.delete.legend']}" /></legend>
+		
+						<h:panelGrid columns="1" styleClass="inputtable">
+							<h:outputText value="#{msg['agentstatus.delete.message']}" />
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  action="#{agentStatusController.delete}" 
+															  execute="agentStatusDeletePanel"
+															  render="agentStatusOutputPanel"
+															  oncomplete="#{rich:component('agentStatusDeletePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentStatusDeletePanel')}.hide(); return false;" />
+							</h:panelGroup>
+						</h:panelGrid>
+
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
