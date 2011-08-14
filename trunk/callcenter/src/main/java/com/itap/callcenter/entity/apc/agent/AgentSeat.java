@@ -75,11 +75,11 @@ public class AgentSeat implements Serializable, DomainObject {
     
     @Column(name = "seat_max_call", length = 11, nullable = false)
     @NotNull
-    private int seatMaxCall;
+    private Integer seatMaxCall;
     
     @Column(name = "seat_allow_outbound", length = 11, nullable = false)
     @NotNull
-    private int seatAllowOutbound;
+    private Integer seatAllowOutbound;
     
     @Column(name = "seat_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -175,19 +175,19 @@ public class AgentSeat implements Serializable, DomainObject {
         this.seatEndPeriod = seatEndPeriod;
     }
 
-    public int getSeatMaxCall() {
+    public Integer getSeatMaxCall() {
         return seatMaxCall;
     }
 
-    public void setSeatMaxCall(int seatMaxCall) {
+    public void setSeatMaxCall(Integer seatMaxCall) {
         this.seatMaxCall = seatMaxCall;
     }
 
-    public int getSeatAllowOutbound() {
+    public Integer getSeatAllowOutbound() {
         return seatAllowOutbound;
     }
 
-    public void setSeatAllowOutbound(int seatAllowOutbound) {
+    public void setSeatAllowOutbound(Integer seatAllowOutbound) {
         this.seatAllowOutbound = seatAllowOutbound;
     }
 
