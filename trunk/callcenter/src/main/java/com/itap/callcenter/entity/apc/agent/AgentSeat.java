@@ -52,7 +52,7 @@ public class AgentSeat implements Serializable, DomainObject {
     private AgentSkill agentSkill;
     
     @ManyToOne
-    @Column(name = "status_id", length = 11, nullable = false)
+    @JoinColumn(name = "status_id", nullable = false)
     @NotNull
     private AgentStatus agentStatus;
     
