@@ -47,6 +47,9 @@ public class AgentSeatController extends AgentSeatBean {
 		List<AgentSeat> agentSeats = new ArrayList<AgentSeat>();
 		try {
 			agentSeats = agentSeatDao.findAll();
+			if (agentSeats != null && agentSeats.size() > 0) {
+				numberOfRow = (( agentSeats.size() + ( numberOfColumn - 1 ) ) / numberOfColumn );
+			}
 		} catch ( Exception ex ) {
 			logger.error("Failed to fetching the data from db, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetching the data from db, Cause: "+ex.getMessage()));

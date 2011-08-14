@@ -170,27 +170,32 @@
 								<h:panelGrid columns="2" styleClass="inputtable">
 					
 									<h:outputText value="#{msg['agentprofile.supervisor']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentProfile}" converter="#{agentProfileConverter}">
+									<h:selectOneMenu value="#{agentProfileController.agentProfile}">
+										<f:converter converterId="agentProfileConverter"/>
 										<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
 									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.level']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentLevel}" converter="#{agentLevelConverter}">
+									<h:selectOneMenu value="#{agentProfileController.agentLevel}">
+										<f:converter converterId="agentLevelConverter"/>
 										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
 									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.skill']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentSkill}" converter="#{agentSkillConverter}">
+									<h:selectOneMenu value="#{agentProfileController.agentSkill}">
+										<f:converter converterId="agentSkillConverter"/>
 										<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
 									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.status']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentStatus}" converter="#{agentStatusConverter}">
+									<h:selectOneMenu value="#{agentProfileController.agentStatus}">
+										<f:converter converterId="agentStatusConverter"/>
 										<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
 									</h:selectOneMenu>
 									
 									<h:outputText value="#{msg['agentprofile.workplan']}"/>
-									<h:selectOneMenu value="#{agentProfileController.wkfWorkplan}" converter="#{wkfWorkplanConverter}">
+									<h:selectOneMenu value="#{agentProfileController.wkfWorkplan}">
+										<f:converter converterId="wkfWorkplanConverter"/>
 										<f:selectItems value="#{dataLoadController.wkfWorkplanSelectItems}"/>
 									</h:selectOneMenu>
 									

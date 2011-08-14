@@ -34,4 +34,7 @@ public @Data abstract class AgentSeatBean implements Serializable {
 	protected Date seatUpdateDate;
 	
 	protected Integer selectedSeatId;
+	
+	protected final int numberOfColumn = 6;
+	protected int numberOfRow = 0;
 }
