@@ -62,13 +62,11 @@ public class IvrCallflow implements Serializable, DomainObject {
     private int callflowTimeout;
     
     @ManyToOne
-    @JoinColumn(name = "callflow_next_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "callflow_next_id")
     private IvrCallflow callflowNext;
     
     @ManyToOne
-    @JoinColumn(name = "callflow_back_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "callflow_back_id")
     private IvrCallflow callflowBack;
     
     @Column(name = "callflow_voice_repeat_enable", length = 11, nullable = false)
