@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,9 +48,10 @@ public class AcdRoute implements Serializable, DomainObject {
 	@Column(name = "route_description", length = 100)
 	private String routeDescription;
 
-	@Column(name = "route_condition", length = 11, nullable = false)
+	@ManyToOne
+    @JoinColumn(name = "route_condition", nullable = false)
 	@NotNull
-	private int routeCondition;
+	private AcdCondition routeCondition;
 
 	@Column(name = "route_caller", length = 50)
 	private String routeCaller;
@@ -72,7 +75,7 @@ public class AcdRoute implements Serializable, DomainObject {
 		this.routeId = routeId;
 	}
 
-	public AcdRoute(Integer routeId, String routeName, int routeCondition,
+	public AcdRoute(Integer routeId, String routeName, AcdCondition routeCondition,
 			Date routeCreateDate, Date routeUpdateDate) {
 		this.routeId = routeId;
 		this.routeName = routeName;
@@ -105,11 +108,11 @@ public class AcdRoute implements Serializable, DomainObject {
 		this.routeDescription = routeDescription;
 	}
 
-	public int getRouteCondition() {
+	public AcdCondition getRouteCondition() {
 		return routeCondition;
 	}
 
-	public void setRouteCondition(int routeCondition) {
+	public void setRouteCondition(AcdCondition routeCondition) {
 		this.routeCondition = routeCondition;
 	}
 
