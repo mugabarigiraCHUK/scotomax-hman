@@ -56,15 +56,15 @@
 																 render="agentSeatCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('agentSeatCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.scriptId}">
-										<a4j:param value="#{data.agentId}" assignTo="#{agentSeatController.selectedSeatId}"/>
+																 rendered="#{not empty data.seatId}">
+										<a4j:param value="#{data.seatId}" assignTo="#{agentSeatController.selectedSeatId}"/>
 									</a4j:commandButton>
 									<a4j:commandButton value="#{msg['button.delete']}" 
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('agentSeatDeletePanel')}.show()"
-																  rendered="#{not empty data.levelId}">
-										<a4j:param value="#{data.agentId}" assignTo="#{agentSeatController.selectedSeatId}"/>
+																  rendered="#{not empty data.seatId}">
+										<a4j:param value="#{data.seatId}" assignTo="#{agentSeatController.selectedSeatId}"/>
 									</a4j:commandButton>
 									
 									<rich:tooltip styleClass="tooltip" layout="block">
