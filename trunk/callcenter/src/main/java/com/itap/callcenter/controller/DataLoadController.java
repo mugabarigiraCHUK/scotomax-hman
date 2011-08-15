@@ -12,6 +12,7 @@ import javax.faces.model.SelectItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itap.callcenter.dao.apc.acd.AcdConditionDao;
 import com.itap.callcenter.dao.apc.agent.AgentLevelDao;
 import com.itap.callcenter.dao.apc.agent.AgentProfileDao;
 import com.itap.callcenter.dao.apc.agent.AgentSkillDao;
@@ -19,6 +20,7 @@ import com.itap.callcenter.dao.apc.agent.AgentStatusDao;
 import com.itap.callcenter.dao.apc.crm.CrmBusinessDao;
 import com.itap.callcenter.dao.apc.knw.KnwTopicDao;
 import com.itap.callcenter.dao.apc.wkf.WkfWorkplanDao;
+import com.itap.callcenter.entity.apc.acd.AcdCondition;
 import com.itap.callcenter.entity.apc.agent.AgentLevel;
 import com.itap.callcenter.entity.apc.agent.AgentProfile;
 import com.itap.callcenter.entity.apc.agent.AgentSkill;
@@ -71,6 +73,10 @@ public class DataLoadController implements Serializable {
 	@ManagedProperty(value="#{wkfWorkplanDaoImpl}")
 	WkfWorkplanDao wkfWorkplanDao;
 	
+	// Acd condition DAO
+	@ManagedProperty(value="#{acdConditionDaoImpl}")
+	AcdConditionDao acdConditionDao;
+	
 	public void setCrmBusinessDao(CrmBusinessDao crmBusinessDao) {
 		this.crmBusinessDao = crmBusinessDao;
 	}
@@ -97,6 +103,10 @@ public class DataLoadController implements Serializable {
 
 	public void setWkfWorkplanDao(WkfWorkplanDao wkfWorkplanDao) {
 		this.wkfWorkplanDao = wkfWorkplanDao;
+	}
+
+	public void setAcdConditionDao(AcdConditionDao acdConditionDao) {
+		this.acdConditionDao = acdConditionDao;
 	}
 
 	/**
@@ -226,6 +236,25 @@ public class DataLoadController implements Serializable {
 			if ( rsList != null && rsList.size() > 0 ) 
 				for ( WkfWorkplan item : rsList ) 
 					selectItems.add(new SelectItem(item, item.getWorkplanName()));
+		} catch (Exception ex) {
+			logger.warn("Failed to load Work plan entity list, "+ex.getMessage());
+		}
+		return selectItems;
+	}
+	
+	/**
+	 * List of JSF select item for JSF selection list by
+	 * list of Acd condition entity
+	 * 
+	 * @return List of SelectItem.clss by <AcdCondition, String<Label>>
+	 */
+	public List<SelectItem> getAcdConditionSelectItems() {
+		List<SelectItem> selectItems = new ArrayList<SelectItem>();
+		try {
+			List<AcdCondition> rsList = acdConditionDao.findAll();
+			if ( rsList != null && rsList.size() > 0 ) 
+				for ( AcdCondition item : rsList ) 
+					selectItems.add(new SelectItem(item, item.getConditionName()));
 		} catch (Exception ex) {
 			logger.warn("Failed to load Work plan entity list, "+ex.getMessage());
 		}

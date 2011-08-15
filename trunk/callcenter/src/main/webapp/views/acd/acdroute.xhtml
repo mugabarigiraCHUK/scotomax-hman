@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+		<h:form id="acdrouteForm">
+			<rich:panel id="acdRoutePanel" header="#{msg['acdroute.inputpanel']}">
+				<a4j:outputPanel id="acdRouteOutputPanel">
+					
+						<h:messages/>
+						
+						<fieldset>
+							<legend><h:outputText value="#{msg['acdroute.datatable.legend']}" /></legend>
+							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty acdRouteController.acdRouteList}"/>
+							<rich:dataTable value="#{acdRouteController.acdRouteList}" var="data">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.id']}" /></f:facet>
+									<h:outputText value="#{data.routeId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.name']}" /></f:facet>
+									<h:outputText value="#{data.routeName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.description']}" /></f:facet>
+									<h:outputText value="#{data.routeDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.condition']}" /></f:facet>
+									<h:outputText value="#{data.routeCondition.conditionName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.caller']}" /></f:facet>
+									<h:outputText value="#{data.routeCaller}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.called']}" /></f:facet>
+									<h:outputText value="#{data.routeCalled}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.createdate']}" /></f:facet>
+									<h:outputText value="#{data.routeCreateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.routeUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{acdRouteController.edit}" 
+																 render="acdRouteCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('acdRouteCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.routeId}">
+										<a4j:param value="#{data.routeId}" assignTo="#{acdRouteController.selectedRouteId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['acdroute.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('acdRouteDeletePanel')}.show()"
+																  rendered="#{not empty data.routeId}">
+										<a4j:param value="#{data.routeId}" assignTo="#{acdRouteController.selectedRouteId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<h:panelGrid columns="2" styleClass="inputtable">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{acdRouteController.edit}"
+																			 	render="acdRouteCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('acdRouteCreateUpdatePanel')}.show()">
+														<a4j:param value="-1" assignTo="#{acdRouteController.selectedRouteId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="acdRouteCreateUpdatePanel" 
+																			 	execute="@this"/>
+									</h:panelGrid>
+								</f:facet>
+								
+							</rich:dataTable>
+						</fieldset>
+						
+				</a4j:outputPanel>
+			</rich:panel>
+		
+			<rich:popupPanel id="acdRouteCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+						<legend><h:outputText value="#{msg['acdroute.create.update.legend']}" /></legend>
+					
+								<h:panelGrid columns="2" styleClass="inputtable">
+									<h:column/>
+									<h:messages/>
+									
+									<h:outputText value="#{msg['acdroute.id']}" />
+									<h:inputText value="#{acdRouteController.routeId}" rendered="#{empty acdRouteController.routeId}"/>
+									<h:outputText value="#{acdRouteController.routeId}" rendered="#{not empty acdRouteController.routeId}"/>
+									
+									<h:outputText value="#{msg['acdroute.name']}"/>
+									<h:inputText value="#{acdRouteController.routeName}" />
+									
+									<h:outputText value="#{msg['acdroute.description']}"/>
+									<h:inputText value="#{acdRouteController.routeDescription}" />
+									
+									<h:outputText value="#{msg['acdroute.condition']}"/>
+									<h:selectOneMenu value="#{acdRouteController.routeCondition}">
+										<f:converter converterId="acdConditionConverter"/>
+										<f:selectItems value="#{dataLoadController.acdConditionSelectItems}"/>
+									</h:selectOneMenu>
+									
+									<h:outputText value="#{msg['acdroute.caller']}"/>
+									<h:inputText value="#{acdRouteController.routeCaller}" />
+									
+									<h:outputText value="#{msg['acdroute.called']}"/>
+									<h:inputText value="#{acdRouteController.routeCalled}" />
+									
+									<h:outputText value="#{msg['acdroute.createdate']}" rendered="#{not empty acdRouteController.routeCreateDate}"/>
+									<h:outputText value="#{acdRouteController.routeCreateDate}" rendered="#{not empty acdRouteController.routeCreateDate}"/>
+									
+									<h:outputText value="#{msg['acdroute.updatedate']}" rendered="#{not empty acdRouteController.routeUpdateDate}"/>
+									<h:outputText value="#{acdRouteController.routeUpdateDate}" rendered="#{not empty acdRouteController.routeUpdateDate}"/>
+									
+									<h:column/>
+									<h:panelGroup>
+										<a4j:commandButton value="#{msg['button.create']}" 
+																	  action="#{acdRouteController.create}"
+																	  execute="acdRouteCreateUpdatePanel" 
+																	  rendered="#{empty acdRouteController.routeId}" 
+																	  render="acdRouteOutputPanel"
+																	  oncomplete="#{rich:component('acdRouteCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.update']}" 
+																	  action="#{acdRouteController.update}"
+																	  execute="acdRouteCreateUpdatePanel" 
+																	  rendered="#{not empty acdRouteController.routeId}" 
+																	  render="acdRouteOutputPanel"
+																	  oncomplete="#{rich:component('acdRouteCreateUpdatePanel')}.hide(); return false;"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('acdRouteCreateUpdatePanel')}.hide(); return false;" />
+									</h:panelGroup>
+									
+								</h:panelGrid>
+						
+					</fieldset>
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="acdRouteDeletePanel" domElementAttachment="parent" autosized="true">
+				<fieldset>
+					<legend><h:outputText value="#{msg['acdroute.delete.legend']}" /></legend>
+		
+						<h:panelGrid columns="1" styleClass="inputtable">
+							<h:outputText value="#{msg['acdroute.delete.message']}" />
+							<h:panelGroup>
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  action="#{acdRouteController.delete}" 
+															  execute="acdRouteDeletePanel"
+															  render="acdRouteOutputPanel"
+															  oncomplete="#{rich:component('acdRouteDeletePanel')}.hide(); return false;"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('acdRouteDeletePanel')}.hide(); return false;" />
+							</h:panelGroup>
+						</h:panelGrid>
+
+				</fieldset>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
