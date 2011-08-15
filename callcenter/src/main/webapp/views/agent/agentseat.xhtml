@@ -67,39 +67,31 @@
 										<a4j:param value="#{data.seatId}" assignTo="#{agentSeatController.selectedSeatId}"/>
 									</a4j:commandButton>
 									
-									<rich:tooltip styleClass="tooltip" layout="block">
-						                <h:panelGrid columns="2">
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.id']}" />
-						                	<h:outputText value="#{data.seatId}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.name']}" />
-						                	<h:outputText value="#{data.seatName}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.description']}" />
-						                	<h:outputText value="#{data.seatDescription}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.startperiod']}" />
-						                	<h:outputText value="#{data.seatStartPeriod}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.endperiod']}" />
-						                	<h:outputText value="#{data.seatEndPeriod}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.maxcall']}" />
-						                	<h:outputText value="#{data.seatMaxCall}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.allowoutbound']}" />
-						                	<h:outputText value="#{data.seatAllowOutbound}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.createdate']}" />
-						                	<h:outputText value="#{data.seatCreateDate}" />
-						                	
-						                	<h:outputText value="#{msg['agentseat.table.updatedate']}" />
-						                	<h:outputText value="#{data.seatUpdateDate}" />
-						                	
-						                </h:panelGrid>
-						            </rich:tooltip>
                 				</h:panelGrid>
+                				<rich:tooltip styleClass="tooltip" layout="block">
+						                	
+					                	<h:outputLabel for="tooltip-seatid" value="#{msg['agentseat.table.id']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-seatid" value="#{data.seatId}" /><br />
+					                	
+					                	<h:outputLabel for="tooltip-name" value="#{msg['agentseat.table.name']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-name" value="#{data.seatName}" /><br />
+					                	
+					                	<h:outputLabel for="tooltip-description" value="#{msg['agentseat.table.description']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-description" value="#{data.seatDescription}" /><br />
+					                	
+					                	<h:outputLabel for="tooltip-startperiod" value="#{msg['agentseat.table.startperiod']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-startperiod" value="#{data.seatStartPeriod}" /><br />
+					                	
+					                	<h:outputLabel for="tooltip-endperiod" value="#{msg['agentseat.table.endperiod']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-endperiod" value="#{data.seatEndPeriod}" /><br />
+					                	
+					                	<h:outputLabel for="tooltip-maxcall" value="#{msg['agentseat.table.maxcall']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-maxcall" value="#{data.seatMaxCall}" /><br />
+					                	
+					                	<h:outputLabel for="tooltip-allowoutbound" value="#{msg['agentseat.table.allowoutbound']} : " style="font-weight: bold;" />
+					                	<h:outputText id="tooltip-allowoutbound" value="#{data.seatAllowOutbound}" /><br />
+						                	
+						            </rich:tooltip>
                 			</rich:panel>
                 			
                 		</rich:dataGrid>

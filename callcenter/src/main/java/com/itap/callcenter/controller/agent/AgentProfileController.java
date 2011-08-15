@@ -159,7 +159,7 @@ public class AgentProfileController extends AgentProfileBean {
 			
 		} else {
 			try {
-				AgentProfile entry = agentProfileDao.findById(agentId);
+				AgentProfile entry = agentProfileDao.findById(selectedAgentId);
 				agentId = entry.getAgentId();
 				agentFullname = entry.getAgentFullname();
 				agentUsername = entry.getAgentUsername();
