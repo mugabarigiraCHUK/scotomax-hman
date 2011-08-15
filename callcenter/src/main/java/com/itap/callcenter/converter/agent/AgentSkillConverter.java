@@ -1,6 +1,5 @@
 package com.itap.callcenter.converter.agent;
 
-import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -9,6 +8,7 @@ import javax.faces.convert.FacesConverter;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import com.itap.callcenter.dao.apc.agent.AgentSkillDao;
 import com.itap.callcenter.entity.apc.agent.AgentSkill;
@@ -18,21 +18,15 @@ public class AgentSkillConverter implements Converter {
 
 	// SLF4J logger
 	Logger logger = LoggerFactory.getLogger(AgentSkillConverter.class);
-	// Agent Skill DAO
-	@ManagedProperty(value="#{agentSkillDaoImpl}")
-	AgentSkillDao agentSkillDao;
-	
-	public void setAgentSkillDao(AgentSkillDao agentSkillDao) {
-		this.agentSkillDao = agentSkillDao;
-	}
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		try {
 			logger.debug("The string value getting from faces context, " + value);
-			if ( StringUtils.isNumeric(value) && Integer.parseInt(value) != -1 )  
+			if ( StringUtils.isNumeric(value) && Integer.parseInt(value) != -1 )  {
+				AgentSkillDao agentSkillDao = (AgentSkillDao) FacesContextUtils.getWebApplicationContext(context).getBean("agentSkillDaoImpl");
 				return agentSkillDao.findById(Integer.parseInt(value));
-			else throw new RuntimeException("The string value is empty or non-numberic.");
+			} else throw new RuntimeException("The string value is empty or non-numberic.");
 		} catch (Exception ex) {
 			logger.warn("Failed to JSF convert string to Agent skill object, "+ex.getMessage());
 			return null;
