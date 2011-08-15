@@ -149,7 +149,7 @@ public class AgentSeatController extends AgentSeatBean {
 				
 		} else {
 			try {
-				AgentSeat entry = agentSeatDao.findById(seatId);
+				AgentSeat entry = agentSeatDao.findById(selectedSeatId);
 				
 				seatId = entry.getSeatId();
 				seatName = entry.getSeatName();

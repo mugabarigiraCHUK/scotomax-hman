@@ -30,7 +30,8 @@ legend {
 }
  
 .agent-seat {
-	background: transparent url('../images/icons/agent_seat_64x64px.png') no-repeat top left;
+	background-image: url('../images/icons/agent_seat_64x64px.png');
+	background-repeat: no-repeat;
 }
 
 /* ***************** Page loading ***************************** */

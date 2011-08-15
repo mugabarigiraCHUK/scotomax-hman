@@ -137,7 +137,7 @@ public class AgentScriptController extends AgentScriptBean {
 				
 			} else {
 				try {
-					AgentScript entry = agentScriptDao.findById(scriptId);
+					AgentScript entry = agentScriptDao.findById(selectedScriptId);
 					scriptId = entry.getScriptId();
 					scriptName = entry.getScriptName();
 					scriptDescription = entry.getScriptDescription();
