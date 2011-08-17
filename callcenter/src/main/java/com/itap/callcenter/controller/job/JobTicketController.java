@@ -30,7 +30,7 @@ public class JobTicketController extends JobTicketBean {
 	Logger logger = LoggerFactory.getLogger(JobTicketController.class);
 	
 	// Job DAO
-	@ManagedProperty(value="jobTicketDaoImpl")
+	@ManagedProperty(value="#{jobTicketDaoImpl}")
 	JobTicketDao jobTicketDao;
 	
 	public void setJobTicketDao(JobTicketDao jobTicketDao) {
@@ -42,8 +42,16 @@ public class JobTicketController extends JobTicketBean {
 	 */
 	public void search() {
 		logger.debug("Entering Job ticket searching method...");
+		
+		logger.debug("Look -> AgentProfile -> " + agentProfile);
+		logger.debug("Look -> AgentLevel -> " + agentLevel);
+		logger.debug("Look -> AgentSeat -> " + agentSeat);
+		logger.debug("Look -> CrmCustomer -> " + customer);
+		logger.debug("Look -> JobStatus -> " + status);
+		logger.debug("Look -> JobName -> " + jobName);
+		
 		try {
-			
+			jobTicketList = jobTicketDao.findByCriteria(agentProfile, agentLevel, agentSeat, customer, status, jobName);
 		} catch (Exception ex) {
 			logger.error("Failed to search the data from database, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to search data from database, Cause: "+ex.getMessage()));
@@ -55,6 +63,13 @@ public class JobTicketController extends JobTicketBean {
 	 */
 	public void create() {
 		logger.debug("Entering Job ticket creation method...");
+		
+		logger.debug("Look -> AgentProfile -> " + agentProfile);
+		logger.debug("Look -> AgentLevel -> " + agentLevel);
+		logger.debug("Look -> AgentSeat -> " + agentSeat);
+		logger.debug("Look -> CrmCustomer -> " + customer);
+		logger.debug("Look -> JobStatus -> " + status);
+		
 		try {
 			JobTicket entry = new JobTicket();
 			
@@ -87,6 +102,13 @@ public class JobTicketController extends JobTicketBean {
 	 */
 	public void update() {
 		logger.debug("Entering Job ticket update method...");
+		
+		logger.debug("Look -> AgentProfile -> " + agentProfile);
+		logger.debug("Look -> AgentLevel -> " + agentLevel);
+		logger.debug("Look -> AgentSeat -> " + agentSeat);
+		logger.debug("Look -> CrmCustomer -> " + customer);
+		logger.debug("Look -> JobStatus -> " + status);
+		
 		try {
 			JobTicket entry = jobTicketDao.findById(jobId);
 			

@@ -29,7 +29,7 @@
 									<a4j:commandButton value="#{msg['button.search']}" 
 					                							action="#{agentProfileController.search}"
 															 	render="agentProfileCreateUpdatePanel" 
-															 	execute="@this">
+															 	execute="agentProfileOutputPanel">
 									</a4j:commandButton>
 									<a4j:commandButton value="#{msg['button.create']}" 
 					                							action="#{agentProfileController.edit}"
@@ -128,10 +128,10 @@
 									<h:inputText value="#{agentProfileController.agentUsername}" />
 									
 									<h:outputText value="#{msg['agentprofile.password']}"/>
-									<h:inputText value="#{agentProfileController.agentPassword}" />
+									<h:inputSecret value="#{agentProfileController.agentPassword}" />
 									
 									<h:outputText value="#{msg['agentprofile.confirm.password']}"/>
-									<h:inputText value="#{agentProfileController.confirmPassword}" />
+									<h:inputSecret value="#{agentProfileController.confirmPassword}" />
 									
 									<h:outputText value="#{msg['agentprofile.maxcall']}"/>
 									<h:inputText value="#{agentProfileController.agentMaxCall}" />
@@ -139,8 +139,8 @@
 									<h:outputText value="#{msg['agentprofile.allowoutbound']}"/>
 									<h:inputText value="#{agentProfileController.agentAllowOutbound}" />
 									
-									<h:outputText value="#{msg['agentprofile.createdate']}" rendered="#{not empty agentProfileController.agentUpdateDate}"/>
-									<h:outputText value="#{agentProfileController.agentCreateDate}" rendered="#{not empty agentProfileController.agentUpdateDate}"/>
+									<h:outputText value="#{msg['agentprofile.createdate']}" rendered="#{not empty agentProfileController.agentCreateDate}"/>
+									<h:outputText value="#{agentProfileController.agentCreateDate}" rendered="#{not empty agentProfileController.agentCreateDate}"/>
 									
 									<h:outputText value="#{msg['agentprofile.updatedate']}" rendered="#{not empty agentProfileController.agentUpdateDate}"/>
 									<h:outputText value="#{agentProfileController.agentUpdateDate}" rendered="#{not empty agentProfileController.agentUpdateDate}"/>
