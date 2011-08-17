@@ -89,7 +89,7 @@ public class JobTicket implements Serializable, DomainObject {
     
     @Column(name = "job_alert_enable", length = 11, nullable = false)
     @NotNull
-    private int jobAlertEnable;
+    private Integer jobAlertEnable;
     
     @Column(name = "job_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -111,7 +111,17 @@ public class JobTicket implements Serializable, DomainObject {
         this.jobId = jobId;
     }
 
-    public JobTicket(Integer jobId, CrmCustomer customer, AgentProfile agentProfile, AgentSeat agentSeat, KnwSolution solution, JobStatus status, AgentLevel agentLevel, String jobName, int jobAlertEnable, Date jobCreateDate, Date jobUpdateDate) {
+    public JobTicket(Integer jobId, 
+    					CrmCustomer customer, 
+    					AgentProfile agentProfile, 
+    					AgentSeat agentSeat, 
+    					KnwSolution solution, 
+    					JobStatus status, 
+    					AgentLevel agentLevel, 
+    					String jobName, 
+    					Integer 	jobAlertEnable, 
+    					Date jobCreateDate,
+    					Date jobUpdateDate) {
         this.jobId = jobId;
         this.customer = customer;
         this.agentProfile = agentProfile;
@@ -205,11 +215,11 @@ public class JobTicket implements Serializable, DomainObject {
         this.jobVoiceRecordFile = jobVoiceRecordFile;
     }
 
-    public int getJobAlertEnable() {
+    public Integer getJobAlertEnable() {
         return jobAlertEnable;
     }
 
-    public void setJobAlertEnable(int jobAlertEnable) {
+    public void setJobAlertEnable(Integer jobAlertEnable) {
         this.jobAlertEnable = jobAlertEnable;
     }
 
