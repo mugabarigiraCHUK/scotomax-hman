@@ -41,6 +41,6 @@ public @Data abstract class JobTicketBean implements Serializable {
     
 	protected Integer selectedJobId;
 	
-	protected List<JobTicket> jobTickets;
+	protected List<JobTicket> jobTicketList;
 	
 }
