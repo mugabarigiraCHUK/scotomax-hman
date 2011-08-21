@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" template="/theme/template.xhtml">
+
+	<ui:define name="body">
+	
+			<h:panelGrid id="ivrCallflowGrid" columns="3" >
+				<h:form>
+					<rich:panel id="callflowTreePanel" header="Callflow" style="width:400px;">
+						<rich:tree var="item" toggleType="client">
+							<rich:treeModelRecursiveAdaptor
+								roots="#{ivrCallflowController.root}"
+								nodes="#{item.childCallflow}">
+								<rich:treeNode>
+								<a4j:commandLink value="#{item.callflowName}" render="callflowManage" style="color:#000">
+									<a4j:param value="#{item.callflowId}" assignTo="#{ivrCallflowController.selectedCallflowId}" />
+								</a4j:commandLink>
+							</rich:treeNode>
+							</rich:treeModelRecursiveAdaptor>
+						</rich:tree>
+					</rich:panel>
+				</h:form>
+				
+				<div style="padding: 5px;" />
+				
+				<h:form>
+					<rich:panel id="callflowManage" header="Callfllow Management" style="width:300px;">
+						<h:panelGrid columns="2">
+							<h:outputText value="Flow parent" />
+							<h:outputText value="#{ivrCallflowController.parentCallflowName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:inputText value="#{ivrCallflowController.parentCallflowName}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							
+							<h:outputText value="Flow name:" />
+							<h:outputText value="#{ivrCallflowController.callflowName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:inputText value="#{ivrCallflowController.callflowName}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							
+							<h:outputText value="Flow description:" />
+							<h:outputText value="#{ivrCallflowController.callflowDescription}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:inputText value="#{ivrCallflowController.callflowDescription}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							
+							<h:outputText value="Flow step:" />
+							<h:outputText value="#{ivrCallflowController.callflowStep}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:inputText value="#{ivrCallflowController.callflowStep}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							
+							<h:outputText value="Timeout:" />
+							<h:outputText value="#{ivrCallflowController.callflowTimeout}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:inputText value="#{ivrCallflowController.callflowTimeout}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							
+							<h:outputText value="Repeat enable:" />
+							<h:outputText value="#{ivrCallflowController.callflowVoiceRepeatEnable}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:inputText value="#{ivrCallflowController.callflowVoiceRepeatEnable}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							
+							<h:outputText value="Voice prompt:" />
+							<h:outputText value="#{ivrCallflowController.ivrVoiceprompt.voiceName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+							<h:selectOneMenu converter="#{ivrCallflowConverter}" value="#{ivrCallflowController.ivrVoiceprompt}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+								<f:selectItems value="#{ivrCallflowController.listIvrVoiceprompt}" />
+							</h:selectOneMenu> 
+							
+							<h:outputText value="Created date:" />
+							<h:outputText value="#{ivrCallflowController.callflowCreateDate}" />
+							
+							<h:outputText value="Updated date:" />
+							<h:outputText value="#{ivrCallflowController.callflowUpdateDate}" />
+						</h:panelGrid>
+						
+						<h:commandButton value="Create" action="#{ivrCallflowController.createNew}" rendered="#{!ivrCallflowController.createable and !ivrCallflowController.editable}">
+							<f:ajax render="callflowManage"/>
+						</h:commandButton>
+						<h:commandButton value="Edit" action="#{ivrCallflowController.edit}" rendered="#{not empty ivrCallflowController.callflowId and !ivrCallflowController.editable}"> 
+							<f:ajax render="callflowManage"/> 
+						</h:commandButton>
+						<h:commandButton value="Delete" action="#{ivrCallflowController.edit}" rendered="#{not empty ivrCallflowController.callflowId and !ivrCallflowController.editable}">
+							<rich:componentControl target="deletePopup" operation="show" />
+						</h:commandButton>
+						 
+						<h:panelGroup rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+							<a4j:commandButton value="Submit" action="#{ivrCallflowController.submit}" render="callflowTreePanel, callflowManage" />
+							<a4j:commandButton value="Cancel" action="#{ivrCallflowController.cancel}" render="callflowManage" /> 
+						</h:panelGroup> 
+						
+					</rich:panel>
+				</h:form>
+			</h:panelGrid>
+			
+			<rich:popupPanel id="deletePopup" modal="true" autosized="true" resizeable="false">
+        		<f:facet name="header">
+            		<h:outputText value="Comfirm delete" />
+        		</f:facet>
+		        <f:facet name="controls">
+		            <h:outputLink value="#" onclick="#{rich:component('deletePopup')}.hide(); return false;"> X </h:outputLink>
+		        </f:facet>
+		        <center>
+	        		<p>Do you want to delete this call flow</p>
+	        		<h:form>
+		        		<a4j:commandButton value="Submit" action="#{ivrCallflowController.delete}" oncomplete="#{rich:component('deletePopup')}.hide(); return false;" render="callflowTreePanel, callflowManage" />
+		        		<a4j:commandButton value="Cancel" onclick="#{rich:component('deletePopup')}.hide(); return false;" />
+	        		</h:form>
+        		</center>
+    		</rich:popupPanel>
+		
+	</ui:define>
+
+</ui:composition>
