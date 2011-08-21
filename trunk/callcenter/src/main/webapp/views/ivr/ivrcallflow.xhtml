@@ -29,9 +29,13 @@
 				<h:form>
 					<rich:panel id="callflowManage" header="Callfllow Management" style="width:300px;">
 						<h:panelGrid columns="2">
-							<h:outputText value="Flow parent" />
+							<h:outputText value="Flow parent:" />
 							<h:outputText value="#{ivrCallflowController.parentCallflowName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
-							<h:inputText value="#{ivrCallflowController.parentCallflowName}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+							<h:selectOneMenu value="#{ivrCallflowController.callflowBack}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+								<f:converter converterId="ivrCallflowConverter"/>
+								<f:selectItem itemLabel=" -- Root -- " itemValue="-1"/>
+								<f:selectItems value="#{ivrCallflowController.listIvrVoiceprompt}" />
+							</h:selectOneMenu>
 							
 							<h:outputText value="Flow name:" />
 							<h:outputText value="#{ivrCallflowController.callflowName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
@@ -55,9 +59,10 @@
 							
 							<h:outputText value="Voice prompt:" />
 							<h:outputText value="#{ivrCallflowController.ivrVoiceprompt.voiceName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
-							<h:selectOneMenu converter="#{ivrCallflowConverter}" value="#{ivrCallflowController.ivrVoiceprompt}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+							<h:selectOneMenu value="#{ivrCallflowController.ivrVoiceprompt}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+								<f:converter converterId="ivrVoicepromptConverter"/>
 								<f:selectItems value="#{ivrCallflowController.listIvrVoiceprompt}" />
-							</h:selectOneMenu> 
+							</h:selectOneMenu>
 							
 							<h:outputText value="Created date:" />
 							<h:outputText value="#{ivrCallflowController.callflowCreateDate}" />
