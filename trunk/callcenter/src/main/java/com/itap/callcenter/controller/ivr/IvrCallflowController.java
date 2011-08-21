@@ -48,11 +48,16 @@ public class IvrCallflowController extends IvrCallflowBean {
 	private List<SelectItem> listIvrCallflow = new ArrayList<SelectItem>();
 	
 	@PostConstruct
-	private void factoryIvrVoiceprompt() {
+	private void factoryListItem() {
 		listIvrVoiceprompt = new ArrayList<SelectItem>();
-		List<IvrVoiceprompt> resultQuery = ivrVoicepromptDao.findAll();
-		for (IvrVoiceprompt ivrVoiceprompt : resultQuery) {
+		listIvrCallflow = new ArrayList<SelectItem>();
+		List<IvrVoiceprompt> queryListIvrVoiceprompt = ivrVoicepromptDao.findAll();
+		for (IvrVoiceprompt ivrVoiceprompt : queryListIvrVoiceprompt) {
 			listIvrVoiceprompt.add(new SelectItem(ivrVoiceprompt, ivrVoiceprompt.getVoiceName()));
+		}
+		List<IvrCallflow> queryListIvrCallflow = ivrCallflowDao.findAll();
+		for (IvrCallflow ivrCallflow : queryListIvrCallflow) {
+			listIvrCallflow.add(new SelectItem(ivrCallflow, ivrCallflow.getCallflowName()));
 		}
 	}
 
@@ -88,8 +93,9 @@ public class IvrCallflowController extends IvrCallflowBean {
 		ivrCallflow.setCallflowStep(callflowStep);
 		ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
 		ivrCallflow.setCallflowTimeout(callflowTimeout);
-		ivrCallflow.setCallflowBack(ivrCallflowDao.findById(1));
+		ivrCallflow.setCallflowBack(callflowBack == null ? null : ivrCallflowDao.findById(callflowBack.getCallflowId()));
 		ivrCallflow.setVoicePrompt(ivrVoicepromptDao.findById(ivrVoiceprompt.getVoiceId()));
+		// TODO add dtmf
 		ivrCallflow.setCallflowCreateDate(new Date());
 		ivrCallflowDao.save(ivrCallflow);
 		createable = false;
@@ -106,9 +112,13 @@ public class IvrCallflowController extends IvrCallflowBean {
 		ivrCallflow.setCallflowStep(callflowStep);
 		ivrCallflow.setCallflowTimeout(callflowTimeout);
 		ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
+		ivrCallflow.setCallflowBack(callflowBack);
+		ivrCallflow.setVoicePrompt(ivrVoiceprompt);
+		// TODO add dtmf		
 		ivrCallflow.setCallflowUpdateDate(new Date());
 		ivrCallflowDao.update(ivrCallflow);
 		editable = false;
+		reset();
 		logger.debug("callflow have updated");
 	}
 	
@@ -119,54 +129,6 @@ public class IvrCallflowController extends IvrCallflowBean {
 		logger.debug("callflow have deleted");
 	}
 	
-
-	// Getter & Setter
-	public void setIvrCallflowDao(IvrCallflowDao ivrCallflowDao) {
-		this.ivrCallflowDao = ivrCallflowDao;
-	}
-	public void setIvrVoicepromptDao(IvrVoicepromptDao ivrVoicepromptDao) {
-		this.ivrVoicepromptDao = ivrVoicepromptDao;
-	}
-	public void setIvrDtmfDao(IvrDtmfDao ivrDtmfDao) {
-		this.ivrDtmfDao = ivrDtmfDao;
-	}
-	public List<SelectItem> getListIvrVoiceprompt() {
-		return listIvrVoiceprompt;
-	}
-	public void setListIvrVoiceprompt(List<SelectItem> listIvrVoiceprompt) {
-		this.listIvrVoiceprompt = listIvrVoiceprompt;
-	}
-	public List<SelectItem> getListIvrCallflow() {
-		return listIvrCallflow;
-	}
-	public void setListIvrCallflow(List<SelectItem> listIvrCallflow) {
-		this.listIvrCallflow = listIvrCallflow;
-	}
-
-	public void setSelectedCallflowId(Integer selectedCallflowId) {
-		reset();
-		this.selectedCallflowId = selectedCallflowId;
-		IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
-		this.callflowId = ivrCallflow.getCallflowId();
-		this.callflowName = ivrCallflow.getCallflowName();
-		this.callflowDescription = ivrCallflow.getCallflowDescription();
-		this.callflowStep = ivrCallflow.getCallflowTimeout();
-		this.callflowTimeout = ivrCallflow.getCallflowTimeout();
-		this.callflowVoiceRepeatEnable = ivrCallflow.getCallflowVoiceRepeatEnable();
-		this.callflowCreateDate = ivrCallflow.getCallflowCreateDate();
-		this.callflowUpdateDate = ivrCallflow.getCallflowUpdateDate();
-		if (ivrCallflow.getCallflowBack() != null) {
-			this.parentCallflowId = ivrCallflow.getCallflowBack().getCallflowId();
-			this.parentCallflowName = ivrCallflow.getCallflowBack().getCallflowName();
-		}
-		this.ivrVoiceprompt = ivrCallflow.getVoicePrompt();
-		this.callflowBack = ivrCallflow.getCallflowBack();
-	}
-	
-	public Integer getSelectedCallflowId() {
-		return selectedCallflowId;
-	}
-
 	
 	public void createNew() {
 		logger.debug("field can create new");
@@ -196,5 +158,60 @@ public class IvrCallflowController extends IvrCallflowBean {
 	public boolean isCreateable() {
 		return createable;
 	}
+	
+	
+
+	// Getter & Setter
+	public void setIvrCallflowDao(IvrCallflowDao ivrCallflowDao) {
+		this.ivrCallflowDao = ivrCallflowDao;
+	}
+	public void setIvrVoicepromptDao(IvrVoicepromptDao ivrVoicepromptDao) {
+		this.ivrVoicepromptDao = ivrVoicepromptDao;
+	}
+	public void setIvrDtmfDao(IvrDtmfDao ivrDtmfDao) {
+		this.ivrDtmfDao = ivrDtmfDao;
+	}
+	public List<SelectItem> getListIvrVoiceprompt() {
+		return listIvrVoiceprompt;
+	}
+	public void setListIvrVoiceprompt(List<SelectItem> listIvrVoiceprompt) {
+		this.listIvrVoiceprompt = listIvrVoiceprompt;
+	}
+	public List<SelectItem> getListIvrCallflow() {
+		return listIvrCallflow;
+	}
+	public void setListIvrCallflow(List<SelectItem> listIvrCallflow) {
+		this.listIvrCallflow = listIvrCallflow;
+	}
+
+	public void setSelectedCallflowId(Integer selectedCallflowId) {
+		logger.debug("selected callflow id: " + selectedCallflowId);
+		reset();
+		this.selectedCallflowId = selectedCallflowId;
+		IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
+		this.callflowId = ivrCallflow.getCallflowId();
+		this.callflowName = ivrCallflow.getCallflowName();
+		this.callflowDescription = ivrCallflow.getCallflowDescription();
+		this.callflowStep = ivrCallflow.getCallflowStep();
+		this.callflowTimeout = ivrCallflow.getCallflowTimeout();
+		this.callflowVoiceRepeatEnable = ivrCallflow.getCallflowVoiceRepeatEnable();
+		this.callflowCreateDate = ivrCallflow.getCallflowCreateDate();
+		this.callflowUpdateDate = ivrCallflow.getCallflowUpdateDate();
+		if (ivrCallflow.getCallflowBack() != null) {
+			this.parentCallflowId = ivrCallflow.getCallflowBack().getCallflowId();
+			this.parentCallflowName = ivrCallflow.getCallflowBack().getCallflowName();
+		}
+		this.ivrVoiceprompt = ivrCallflow.getVoicePrompt();
+		this.callflowBack = ivrCallflow.getCallflowBack();
+		editable = false;
+		createable = false;
+	}
+	
+	public Integer getSelectedCallflowId() {
+		return selectedCallflowId;
+	}
+
+	
+	
 	
 }
