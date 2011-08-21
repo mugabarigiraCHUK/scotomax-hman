@@ -11,7 +11,7 @@ import com.itap.callcenter.entity.apc.ivr.IvrVoiceprompt;
  * @author scotomax
  *
  */
-@Repository
+@Repository 
 public class IvrVoicepromptDaoImpl extends GenericDaoImpl<IvrVoiceprompt, Integer> implements IvrVoicepromptDao {
 
 	public IvrVoicepromptDaoImpl() {
