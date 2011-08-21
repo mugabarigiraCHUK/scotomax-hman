@@ -43,7 +43,7 @@ public class IvrCallflowNode extends IvrCallflowBean implements Serializable {
 			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
 		}
-		return null;
+		return new ArrayList<IvrCallflowNode>();
 	}
 	
 	public synchronized List<IvrCallflowNode> getChildCallflow() {
@@ -62,7 +62,7 @@ public class IvrCallflowNode extends IvrCallflowBean implements Serializable {
 			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
 		}
-		return null;
+		return new ArrayList<IvrCallflowNode>();
 	}
 	
 	private IvrCallflowNode convert(IvrCallflow ivrCallflow) {

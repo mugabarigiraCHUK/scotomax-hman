@@ -19,9 +19,9 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 	protected Integer callflowId;
 	protected String callflowName;
 	protected String callflowDescription;
-	protected int callflowStep;
-	protected int callflowTimeout;
-	protected int callflowVoiceRepeatEnable;
+	protected Integer callflowStep;
+	protected Integer callflowTimeout;
+	protected Integer callflowVoiceRepeatEnable;
 	protected Date callflowCreateDate;
 	protected Date callflowUpdateDate;
 	
@@ -37,9 +37,9 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 		callflowId = null;
 		callflowName = null;
 		callflowDescription = null;
-		callflowStep = 0;
-		callflowTimeout = 0;
-		callflowVoiceRepeatEnable = 0;
+		callflowStep = null;
+		callflowTimeout = null;
+		callflowVoiceRepeatEnable = null;
 		callflowCreateDate = null;
 		callflowUpdateDate = null;
 		parentCallflowId = null;
