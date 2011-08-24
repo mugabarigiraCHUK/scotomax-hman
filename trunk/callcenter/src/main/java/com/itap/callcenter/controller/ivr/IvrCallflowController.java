@@ -21,6 +21,7 @@ import com.itap.callcenter.dao.apc.ivr.IvrCallflowDao;
 import com.itap.callcenter.dao.apc.ivr.IvrDtmfDao;
 import com.itap.callcenter.dao.apc.ivr.IvrVoicepromptDao;
 import com.itap.callcenter.entity.apc.ivr.IvrCallflow;
+import com.itap.callcenter.entity.apc.ivr.IvrDtmf;
 import com.itap.callcenter.entity.apc.ivr.IvrVoiceprompt;
 
 @ViewScoped
@@ -46,19 +47,32 @@ public class IvrCallflowController extends IvrCallflowBean {
 	
 	private List<SelectItem> listIvrVoiceprompt = new ArrayList<SelectItem>();
 	private List<SelectItem> listIvrCallflow = new ArrayList<SelectItem>();
+	private List<SelectItem> listIvrDtmf = new ArrayList<SelectItem>();
 	
 	@PostConstruct
 	private void factoryListItem() {
-		listIvrVoiceprompt = new ArrayList<SelectItem>();
-		listIvrCallflow = new ArrayList<SelectItem>();
-		List<IvrVoiceprompt> queryListIvrVoiceprompt = ivrVoicepromptDao.findAll();
-		for (IvrVoiceprompt ivrVoiceprompt : queryListIvrVoiceprompt) {
-			listIvrVoiceprompt.add(new SelectItem(ivrVoiceprompt, ivrVoiceprompt.getVoiceName()));
+		logger.debug("load data init page");
+		try {
+			listIvrVoiceprompt = new ArrayList<SelectItem>();
+			listIvrCallflow = new ArrayList<SelectItem>();
+			listIvrDtmf = new ArrayList<SelectItem>();
+			List<IvrVoiceprompt> queryListIvrVoiceprompt = ivrVoicepromptDao.findAll();
+			for (IvrVoiceprompt ivrVoiceprompt : queryListIvrVoiceprompt) {
+				listIvrVoiceprompt.add(new SelectItem(ivrVoiceprompt, ivrVoiceprompt.getVoiceName()));
+			}
+			List<IvrCallflow> queryListIvrCallflow = ivrCallflowDao.findAll();
+			for (IvrCallflow ivrCallflow : queryListIvrCallflow) {
+				listIvrCallflow.add(new SelectItem(ivrCallflow, ivrCallflow.getCallflowName()));
+			}
+			List<IvrDtmf> queryListIvrDtmf = ivrDtmfDao.findAll();
+			for (IvrDtmf ivrDtmf : queryListIvrDtmf) {
+				listIvrDtmf.add(new SelectItem(ivrDtmf, "#" + ivrDtmf.getDtmfDigit() + " - " + ivrDtmf.getDtmfName()));
+			}
+		} catch (Exception e) {
+			logger.error("error, load data when init page");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("error, load data when init page" + e.getMessage()));
 		}
-		List<IvrCallflow> queryListIvrCallflow = ivrCallflowDao.findAll();
-		for (IvrCallflow ivrCallflow : queryListIvrCallflow) {
-			listIvrCallflow.add(new SelectItem(ivrCallflow, ivrCallflow.getCallflowName()));
-		}
+		
 	}
 
 	public List<IvrCallflowNode> getRoot() {
@@ -67,9 +81,9 @@ public class IvrCallflowController extends IvrCallflowBean {
 			IvrCallflowNode ivrCallflowNode = new IvrCallflowNode();
 			ivrCallflowNode.setIvrCallflowDao(ivrCallflowDao);
 			return ivrCallflowNode.getRoot();
-		} catch ( Exception ex ) {
-			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
+		} catch ( Exception e ) {
+			logger.error("error, get root callflow: " + e.getMessage(), e);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("error, get root callflow " + e.getMessage()));
 		}
 		return null;
 	}
@@ -86,47 +100,66 @@ public class IvrCallflowController extends IvrCallflowBean {
 	public void create() {
 		logger.debug("call create action");
 		logger.debug("callflowName: " + callflowName);
-		IvrCallflow ivrCallflow = new IvrCallflow();
-		ivrCallflow.setCallflowId(ivrCallflowDao.findAll().size()+1);
-		ivrCallflow.setCallflowName(callflowName);
-		ivrCallflow.setCallflowDescription(callflowDescription);
-		ivrCallflow.setCallflowStep(callflowStep);
-		ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
-		ivrCallflow.setCallflowTimeout(callflowTimeout);
-		ivrCallflow.setCallflowBack(callflowBack == null ? null : ivrCallflowDao.findById(callflowBack.getCallflowId()));
-		ivrCallflow.setVoicePrompt(ivrVoicepromptDao.findById(ivrVoiceprompt.getVoiceId()));
-		// TODO add dtmf
-		ivrCallflow.setCallflowCreateDate(new Date());
-		ivrCallflowDao.save(ivrCallflow);
-		createable = false;
-		reset();
-		logger.debug("callflow have created");
+		try{
+			IvrCallflow ivrCallflow = new IvrCallflow();
+			ivrCallflow.setCallflowId(ivrCallflowDao.findAll().size()+1);
+			ivrCallflow.setCallflowName(callflowName);
+			ivrCallflow.setCallflowDescription(callflowDescription);
+			ivrCallflow.setCallflowStep(callflowStep);
+			ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
+			ivrCallflow.setCallflowTimeout(callflowTimeout);
+			ivrCallflow.setCallflowBack(callflowBack == null ? null : ivrCallflowDao.findById(callflowBack.getCallflowId()));
+			ivrCallflow.setVoicePrompt(ivrVoicepromptDao.findById(ivrVoiceprompt.getVoiceId()));
+			// TODO add dtmf
+			ivrCallflow.setCallflowCreateDate(new Date());
+			ivrCallflowDao.save(ivrCallflow);
+			createable = false;
+			reset();
+			logger.debug("callflow have created");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
+		} catch (Exception ex) {
+			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+		}
 	}
 	
 	public void update() {
 		logger.debug("call update action");
 		logger.debug("callflowName: " + callflowName);
-		IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
-		ivrCallflow.setCallflowName(callflowName);
-		ivrCallflow.setCallflowDescription(callflowDescription);
-		ivrCallflow.setCallflowStep(callflowStep);
-		ivrCallflow.setCallflowTimeout(callflowTimeout);
-		ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
-		ivrCallflow.setCallflowBack(callflowBack);
-		ivrCallflow.setVoicePrompt(ivrVoiceprompt);
-		// TODO add dtmf		
-		ivrCallflow.setCallflowUpdateDate(new Date());
-		ivrCallflowDao.update(ivrCallflow);
-		editable = false;
-		reset();
-		logger.debug("callflow have updated");
+		try{
+			IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
+			ivrCallflow.setCallflowName(callflowName);
+			ivrCallflow.setCallflowDescription(callflowDescription);
+			ivrCallflow.setCallflowStep(callflowStep);
+			ivrCallflow.setCallflowTimeout(callflowTimeout);
+			ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
+			ivrCallflow.setCallflowBack(callflowBack);
+			ivrCallflow.setVoicePrompt(ivrVoiceprompt);
+			// TODO add dtmf		
+			ivrCallflow.setCallflowUpdateDate(new Date());
+			ivrCallflowDao.update(ivrCallflow);
+			editable = false;
+			reset();
+			logger.debug("callflow have updated");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
+		} catch (Exception ex) {
+			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+		}
 	}
 	
 	public void delete() {
 		logger.debug("call delete action");
-		ivrCallflowDao.deleteById(selectedCallflowId); 
-		reset();
-		logger.debug("callflow have deleted");
+		logger.debug("selectedCallflowId: " + selectedCallflowId);
+		try {
+			ivrCallflowDao.deleteById(selectedCallflowId); 
+			reset();
+			logger.debug("callflow have deleted");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
+		} catch (Exception ex) {
+			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+		}
 	}
 	
 	
