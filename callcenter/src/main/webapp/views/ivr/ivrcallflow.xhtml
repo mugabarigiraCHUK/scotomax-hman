@@ -7,6 +7,8 @@
 
 	<ui:define name="body">
 	
+			<h:messages/>
+	
 			<h:panelGrid id="ivrCallflowGrid" columns="3" >
 				
 					<rich:panel id="callflowTreePanel" header="Callflow" style="width:400px;">
@@ -17,9 +19,9 @@
 							
 								<rich:treeNode>
 									<h:form>
-									<a4j:commandLink value="#{item.callflowName}" render="callflowManage" style="color:#000">
-										<a4j:param value="#{item.callflowId}" assignTo="#{ivrCallflowController.selectedCallflowId}" />
-									</a4j:commandLink>
+										<a4j:commandLink value="#{item.callflowName}" render="callflowManage" style="color:#000">
+											<a4j:param value="#{item.callflowId}" assignTo="#{ivrCallflowController.selectedCallflowId}" />
+										</a4j:commandLink>
 									</h:form>
 								</rich:treeNode>
 							
