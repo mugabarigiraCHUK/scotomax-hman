@@ -82,14 +82,17 @@
   <!-- ********** START RICHFACE 4.0 CONFIG ********** -->
   <context-param>
 		<param-name>org.richfaces.skin</param-name>
-		<param-value>classic</param-value>
+		<param-value>none</param-value>
 		<!--
-		<param-value>wine</param-value>
-		<param-value>ruby</param-value>
-		<param-value>japanCherry</param-value>
-		<param-value>emeraldTown</param-value>
-		<param-value>deepMarine</param-value>
-		<param-value>blueSky</param-value>
+			none is custom skin
+			<param-value>wine</param-value>
+			<param-value>ruby</param-value>
+			<param-value>japanCherry</param-value>
+			<param-value>emeraldTown</param-value>
+			<param-value>deepMarine</param-value>
+			<param-value>blueSky</param-value>
+			<param-value>classic</param-value>
+			<param-value>plain</param-value>
 		-->
 	</context-param>
 	<context-param>
