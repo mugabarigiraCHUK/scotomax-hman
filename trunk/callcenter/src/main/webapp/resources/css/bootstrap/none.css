@@ -1,0 +1,70 @@
+/* panel */
+.rf-p, .rf-cp {
+	background-color: #fff !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #ccc !important;
+    padding: 1px !important;
+    -webkit-border-radius: 6px !important;
+    -moz-border-radius: 6px !important;
+    border-radius: 6px !important;
+}
+.rf-p-hdr, .rf-cp-hdr {
+	color: #aaa !important;
+	font-weight: bold !important;
+	padding: 5px !important;  
+	border-width: 1px !important;
+	border-style: none !important;
+	border-bottom-style: solid !important;
+	background-position: top left !important;
+	background-repeat: repeat-x !important;
+	border-color: #ccc !important;
+	background: #eee !important;
+}
+
+/* calendar */
+.rf-cal-btn {
+	margin-left: 5px !important;
+	padding-left: 2px !important;
+}
+.rf-cal-monthpicker-cnt {
+	background-color: #fff !important;
+}
+.rf-cal-popup {
+	background-color: #fff !important;
+}
+
+/* panel popup */
+.rf-pp-cntr {
+	background-color: #fff !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #ccc !important;
+    -webkit-border-radius: 6px !important;
+    -moz-border-radius: 6px !important;
+}
+.rf-pp-hdr {
+	color: #aaa !important;
+	font-weight: bold !important;
+	padding: 5px !important;  
+	border-width: 1px !important;
+	border-style: none !important;
+	border-bottom-style: solid !important;
+	background-position: top left !important;
+	background-repeat: repeat-x !important;
+	border-color: #ccc !important;
+	background: #eee !important;
+	-webkit-border-radius: 6px 6px 0px 0px;
+	-moz-border-radius: 6px 6px 0px 0px;
+}
+.rf-pp-cnt-scrlr {
+	background-color: #fff !important;
+	-webkit-border-radius: 0px 0px 6px 6px;
+	-moz-border-radius: 0px 0px 6px 6px;
+}
+.rf-pp-shdw {
+	-webkit-border-radius: 6px !important;
+}
+.rf-pp-hdr-cntrls {
+	padding: 5px 10px;
+}
