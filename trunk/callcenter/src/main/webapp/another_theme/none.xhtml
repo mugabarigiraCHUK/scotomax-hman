@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<h:head>
+		<title>Bootstrap, from Callcenter</title>
+		<h:outputStylesheet library="css" name="bootstrap/bootstrap-1.1.0.css" />
+		<h:outputStylesheet library="css" name="bootstrap/none.css" />
+	</h:head>
+	
+<body>
+	
+	<div class="topbar">
+		<div class="fill">
+			<div class="container"> 
+				<h3><a href="#">Our project</a></h3> 
+				<ul> 
+					<li class="active"><a href="#me">Phamonyut</a></li> 
+					<li><a href="#setting">Setting</a></li> 
+					<li><a href="#logout">Logout</a></li> 
+				</ul> 
+			</div> 
+		</div>
+	</div>	
+	
+	
+	<div id="masthead" style="margin-top: 40px; background-color: #eee"> 
+		<div class="container-fluid" >
+			<div class="row">
+				<div class="span16 columns">
+					<ul class="pills">
+					  <li class="active"><a href="#">Home</a></li>
+					  <li><a href="#">Menu</a></li>
+					  <li><a href="#">Menu</a></li>
+					  <li><a href="#">Menu</a></li>
+					  <li><a href="#">Menu</a></li>
+					  <li><a href="#">Menu</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="hero-unit">
+			<h1>Hello, world!</h1>
+			<p>This is bootstrap for our project. {css3 + richface4 + html5}</p>
+			<p>This demo show the power of grid integrate with richface4, any comment welcome</p>
+			<p>Read more on <a href="http://twitter.github.com/bootstrap/">bootstrap</a></p>
+		</div>
+		
+        <div class="row">
+        	<div class="span4 columns">
+        		<rich:panel header="header">
+        			4 columns
+        		</rich:panel>
+        	</div>
+        	<div class="span8 columns offset4">
+        		<rich:panel header="header">
+        			8 offset 4
+        		</rich:panel>
+        	</div>
+        </div>
+        
+        <br/>
+        <div class="row">
+        	<div class="span5 columns">
+        		<rich:panel header="Panel Master-Child">
+        			<rich:panel header="Panel1" />
+        			<br/>
+        			<rich:panel header="Panel2">
+        				<rich:panel header="Panel2-1" />
+        			</rich:panel>
+        		</rich:panel>
+        	</div>
+        	<div class="span4 columns">
+        		<rich:panel header="Panel4">
+					<p>This is new richface panel style. not inheritance old css. You don't need to change any thing in your code.</p>
+				</rich:panel>
+        	</div>
+        	<div class="span3 columns">
+        		<rich:panel header="panel3" />
+        	</div>
+        	<div class="span2 columns">
+        		<rich:panel header="panel2" />
+        	</div>
+        	<div class="span2 columns">
+        		<rich:panel header="panel2" />
+        	</div>
+        </div>
+		
+		<br />
+		<div class="row">
+			<div class="span7">
+				<rich:collapsiblePanel header="Simple Collapsible Panel" switchType="client"> 
+            		Hello world, Hello world, Hello world, Hello world, Hello world
+            	</rich:collapsiblePanel>
+			</div>
+			<div class="span5">
+			 	<h:commandButton value="Call the popup" styleClass="btn">
+					<rich:componentControl target="popup" operation="show" />
+				</h:commandButton>
+			</div>
+		</div>
+		
+		<rich:popupPanel id="popup" modal="false" autosized="true" resizeable="false">
+	        <f:facet name="header">
+	            <h:outputText value="Simple popup panel" />
+	        </f:facet>
+	        <f:facet name="controls">
+	            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;"> X </h:outputLink>
+	        </f:facet>
+	        <p>Any content might be inside this panel.</p>
+	        <p>The popup panel is open and closed from the javascript function of component client side object. The following code 
+	        	<a href="#" onclick="#{rich:component('popup')}.hide()">hide this panel</a>: 
+	        	<f:verbatim>&#35;</f:verbatim>{rich:component('popup')}.hide()</p>
+    	</rich:popupPanel>
+		
+		
+		<br/>
+		<div class="row">
+        	<div class="span10">
+        		<rich:panel header="Data table">
+        			<p>rich:dataTable zebra style</p>
+        			<rich:dataTable value="#{ivrDtmfController.listIvrDtmf}" var="data" styleClass="common-table table zebra-striped">
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.id']}" /></f:facet>
+							<h:outputText value="#{data.dtmfId}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.name']}" /></f:facet>
+							<h:outputText value="#{data.dtmfName}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.description']}" /></f:facet>
+							<h:outputText value="#{data.dtmfDescription}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.digit']}" /></f:facet>
+							<h:outputText value="#{data.dtmfDigit}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.createdate']}" /></f:facet>
+							<h:outputText value="#{data.dtmfCreateDate}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.updatedate']}" /></f:facet>
+							<h:outputText value="#{data.dtmfUpdateDate}" />
+						</rich:column>
+					</rich:dataTable>
+					<h:commandButton styleClass="btn" value="Create"/>
+					<h:commandButton styleClass="btn" value="Update"/>
+					<h:commandButton styleClass="btn" value="Delete"/> 
+        		</rich:panel>
+        	</div>
+        	<div class="span6">
+        		<rich:panel header="Table">
+        			<p>simple table</p>
+					<table class="table">
+				        <thead>
+				          <tr>
+				            <th>#</th>
+				            <th>First Name</th>
+				            <th>Last Name</th>
+				            <th>Language</th>
+				          </tr>
+				        </thead>
+				        <tbody>
+				          <tr>
+				            <td>1</td>
+				            <td>Some</td>
+				            <td>One</td>
+				            <td>English</td>
+				          </tr>
+				          <tr>
+				            <td>2</td>
+				            <td>Joe</td>
+				            <td>Sixpack</td>
+				            <td>English</td>
+				          </tr>
+				          <tr>
+				            <td>3</td>
+				            <td>Stu</td>
+				            <td>Dent</td>
+				            <td>Code</td>
+				          </tr>
+				        </tbody>
+				      </table>
+			      </rich:panel>
+        	</div>
+        </div>
+        
+        
+        <br/>
+        <div class="row">
+        	<div class="span10 columns">
+        		<rich:panel header="Form">
+	        		<p>basic tag form not need to add style</p> 
+	        		<form>
+	        			<div class="clearfix">
+	  						<label>input text="text"</label>
+	  						<div class="input">
+	    						<input type="text" />
+							</div>
+						</div>
+						<div class="clearfix">
+	  						<label>input text="text" class="xlarge"</label>
+	  						<div class="input">
+	    						<input type="text" class="xlarge" />
+							</div>
+						</div>
+						<div class="clearfix">
+	  						<label>h:inputText</label>
+	  						<div class="input">
+	    						<h:inputText value="" />
+							</div>
+						</div>
+						<div class="clearfix">
+	  						<label>h:inputText styleClass="xlarge"</label>
+	  						<div class="input">
+	    						<h:inputText value="" styleClass="xlarge" />
+							</div>
+						</div>
+						<div class="clearfix">
+	  						<label>h:inputText disabled="true"</label>
+	  						<div class="input">
+	    						<h:inputText value="" disabled="true" />
+							</div>
+						</div>
+						<div class="clearfix">
+	  						<label>select item</label>
+	  						<div class="input">
+	    						<select>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</div>
+						</div>
+						<div class="clearfix">
+	  						<label>h:selectOneMenu</label>
+	  						<div class="input">
+	  							<h:selectOneMenu>
+									<f:converter converterId="ivrVoicepromptConverter"/>
+									<f:selectItems value="#{ivrCallflowController.listIvrVoiceprompt}" />
+								</h:selectOneMenu>
+	  						</div>
+	  					</div>
+	  					<div class="clearfix">
+	  						<label>rich:calendar</label>
+	  						<div class="input">
+	  							<rich:calendar locale="en" popup="true" />
+	  						</div>
+	  					</div>
+	  					<div class="actions">
+	  						<h:commandButton styleClass="btn primary" value="Save change" />
+	  						<h:commandButton styleClass="btn" value="Cancel" />
+	  					</div>
+					</form>
+        		</rich:panel>
+        	</div>
+        	
+        </div>
+		
+		<br/>
+		<div class="row"> 
+			<div class="span6">
+				<h2>Header style</h2>
+				<h1>Header1</h1>
+				<h2>Header2</h2>
+				<h3>Header3</h3>
+				<h4>Header4</h4>
+				<h5>Header5</h5>
+				<h6>Header6</h6>
+	        </div>
+        	<div class="span5">
+        		<h2>Button style</h2>
+        		<p><a class="btn" href="#">Submit</a> a:href </p>
+		        <p><input type="button" class="btn" value="Submit" /> input </p>
+		        <p><h:commandButton styleClass="btn" value="Submit" /> h:commandButton </p>
+		        <p><a class="btn primary" href="#">Submit</a> primary</p>
+		        <p><a class="btn danger" href="#">Cancel</a> danger</p>
+		        <p><a class="btn primary disabled" href="#">Submit</a> primary disable</p>
+		        <p><a class="btn danger disabled" href="#">Cancel</a> danger disable</p>        	
+        	</div>
+        	<div class="span5">
+        		<h2>Content style</h2>
+        		<p>Hello world; Hello world; Hello world; Hello world; Hello world; Hello world; Hello world; Hello world;</p>  
+        	</div>
+        </div>
+        
+        
+        
+        
+        <footer>
+        	<p> Company 2011, we develop for fun.</p> 
+   		</footer>
+         
+	</div>
+
+	
+
+</body>
+</html>
