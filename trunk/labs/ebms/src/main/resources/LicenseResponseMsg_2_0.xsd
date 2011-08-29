@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Administrator (EMBRACE) -->
+<!-- edited by O_Pattraporn from Smart Alliance Co., Ltd. - License response message version 2.0 [11/07/2008]) -->
+<!-- update filename, namespace, root element name, version [11/07/2008] -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:eLicense="http://ebxml.customs.go.th/schema/LicenseResponse_2_0" 
+			xmlns:ds="http://www.w3.org/2000/09/xmldsig#" 
+			xmlns:ds1="http://www.ietf.org/rfc/rfc3369.txt#" 
+			targetNamespace="http://ebxml.customs.go.th/schema/LicenseResponse_2_0">
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xsd:element name="LicenseResponse">
+		<xsd:annotation>
+			<xsd:documentation>Root Element for Customs License Response</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MessageHeader" maxOccurs="5000">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="MessageType">
+								<xsd:annotation>
+									<xsd:documentation>Control (1) - M - 10A - Message Type - ประเภทของเอกสาร</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="10"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UserID">
+								<xsd:annotation>
+									<xsd:documentation>Control (2) - WCO ID (226) EDI User ID  - 17A - รหัสผู้ใช้บริการผ่านทางระบบ ebXML</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Timestamp" type="xsd:dateTime">
+								<xsd:annotation>
+									<xsd:documentation>Control (3) - M - WCO ID (156) - 15A - Time Stamp - วันเวลาที่ส่งข้อมูล</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MessageDetail">
+								<xsd:complexType>
+									<xsd:choice>
+										<xsd:element ref="eLicense:LicenseAccept"/>
+										<xsd:element ref="eLicense:LicenseReject"/>
+										<xsd:element ref="eLicense:BOIAccept"/>
+										<xsd:element ref="eLicense:BOIReject"/>
+									</xsd:choice>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LicenseAccept">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LicenseNo">
+					<xsd:annotation>
+						<xsd:documentation>Detail (1) - M - WCO ID (020) - 35A - License No -  เลขที่ใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="35"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaxReference">
+					<xsd:annotation>
+						<xsd:documentation>Detail (2) - M - 17A - License  Issue Authority -  เลขประจำตัวผู้เสียภาษีอากรของหน่วยงานผู้ออกใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="17"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CustomsStatus">
+					<xsd:annotation>
+						<xsd:documentation>Detail (3) - M - WCO ID (094) - 15A - Status - สถานะของข้อมูล</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="15"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Message">
+					<xsd:annotation>
+						<xsd:documentation>Detail (4) - M - 256A - ข้อความแสดงรายละเอียด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="256"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LicenseReject">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LicenseNo">
+					<xsd:annotation>
+						<xsd:documentation>Detail (1) - M - WCO ID (020) - 35A - License No -  เลขที่ใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="35"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaxReference">
+					<xsd:annotation>
+						<xsd:documentation>Detail (2) - M - 17A - License  Issue Authority -  เลขประจำตัวผู้เสียภาษีอากรของหน่วยงานผู้ออกใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="17"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="InvoiceNo" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Detail (3) - O - 35A - Invoice Number - เลขที่บัญชีราคาสินค้า</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="35"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="InvoiceDate" type="xsd:date" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Detail (4) - O - 8N - Invoice Date - วันที่บัญชีราคาสินค้า (CCYYMMDD)</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="InvoiceItem" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Detail (5) - O - 4N - เป็นลำดับที่ใน Invoice</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:integer">
+							<xsd:totalDigits value="4"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ErrorCode">
+					<xsd:annotation>
+						<xsd:documentation>Detail (6) - M - 10A - รหัสของข้อผิดพลาด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Message">
+					<xsd:annotation>
+						<xsd:documentation>Detail (7) - M - 256A - ข้อความแสดงรายละเอียด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="256"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BOIAccept">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LicenseNo">
+					<xsd:annotation>
+						<xsd:documentation>Detail (1) - M - WCO ID (020) - 35A - License No -  เลขที่ใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="35"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaxReference">
+					<xsd:annotation>
+						<xsd:documentation>Detail (2) - M - 17A - License  Issue Authority -  เลขประจำตัวผู้เสียภาษีอากรของหน่วยงานผู้ออกใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="17"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CustomsStatus">
+					<xsd:annotation>
+						<xsd:documentation>Detail (3) - M - WCO ID (094) - 15A - Status - สถานะของข้อมูล</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="15"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Message">
+					<xsd:annotation>
+						<xsd:documentation>Detail (4) - M - 256A - ข้อความแสดงรายละเอียด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="256"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BOIReject">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LicenseNo">
+					<xsd:annotation>
+						<xsd:documentation>Detail (1) - M - WCO ID (020) - 35A - License No -  เลขที่ใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="35"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaxReference">
+					<xsd:annotation>
+						<xsd:documentation>Detail (2) - M - 17A - License  Issue Authority -  เลขประจำตัวผู้เสียภาษีอากรของหน่วยงานผู้ออกใบอนุญาต</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="17"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LicenseDetail">
+					<xsd:annotation>
+						<xsd:documentation>Detail (3) - M - 35A - เลขที่ใบอนุญาตส่วนรายละเอียด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="35"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ErrorCode">
+					<xsd:annotation>
+						<xsd:documentation>Detail (4) - M - 10A - รหัสของข้อผิดพลาด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="10"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Message">
+					<xsd:annotation>
+						<xsd:documentation>Detail (5) - M - 256A - ข้อความแสดงรายละเอียด</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="256"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAP:Header xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/            http://www.oasis-open.org/committees/ebxml-msg/schema/envelope.xsd">
+	http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd
+	http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd"&gt;
+	<eb:MessageHeader
+		xmlns:eb="http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd"
+		SOAP:mustUnderstand="1" version="2.0">
+		<eb:From>
+			<eb:PartyId eb:type="string">DOEB_PARTYID</eb:PartyId>
+			<eb:Role>DOEB_ROLE</eb:Role>
+		</eb:From>
+		<eb:To>
+			<eb:PartyId eb:type="string">TCDNSW_PARTYID</eb:PartyId>
+			<eb:Role>TCDNSW_ROLE</eb:Role>
+		</eb:To>
+		<eb:CPAId>TCDNSW_CPAID</eb:CPAId>
+		<eb:ConversationId>123456789_1234</eb:ConversationId>
+		<eb:Service eb:type="string">TCDNSW_SERVICES</eb:Service>
+		<eb:Action>LICENSE_PERINVOICE_ACTION</eb:Action>
+		<eb:MessageData>
+			<eb:MessageId>messageId</eb:MessageId>
+			<eb:Timestamp>12-12-1999T00:00:00</eb:Timestamp>
+		</eb:MessageData>
+	</eb:MessageHeader>
+	<eb:SyncReply
+		xmlns:eb="http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd"
+		SOAP:actor="http://schema.xmlsoap.org/soap/actor/next"
+		SOAP:mustUnderstand="1" eb:version="2.0" />
+	<eb:AckRequested
+		xmlns:eb="http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd"
+		SOAP:actor="urn:oasis:names:tc:ebxml-msg:actor:toPartyMSH"
+		SOAP:mustUnderstand="1" eb:signed="false" eb:version="2.0" />
+	<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+		<ds:SignedInfo>
+			<ds:CanonicalizationMethod
+				Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+			<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+			<ds:Reference URI="">
+				<ds:Transforms>
+					<ds:Transform
+						Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+					<ds:Transform Algorithm="http://www.w3.org/TR/1999/REC-xpath-19991116">
+						<ds:XPath>not%28ancestor-or-self%3A%3Anode%28%29%5B%40soap%3Aactor%3D%22urn%3Aoasis%3Anames%3Atc%3Aebxml-msg%3Aservice%3AnextMSH%22%5D%7Cancestor-or-self%3A%3Anode%28%29%5B%40soap%3Aactor%3D%22http%3A%2F%2Fschemas.xmlsoap.org%2Fsoap%2Factor%2Fnext%22%5D%29</ds:XPath>
+					</ds:Transform>
+					<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+				</ds:Transforms>
+				<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+				<ds:DigestValue>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ds:DigestValue>
+			</ds:Reference>
+			<ds:Reference URI="cid:Payload-0">
+				<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+				<ds:DigestValue>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ds:DigestValue>
+			</ds:Reference>
+		</ds:SignedInfo>
+		<ds:SignatureValue>lQpfQaQO6sHWt8bC33pWUolUbvFC7yJ2wQhYckOwGdHz6Jl6BF/tgpovTmsE9PNHrpiyFyPN6bxq
+			thPha7WIOUXDf5UsXgQcegIYGkSaZJuf5YBse3SPj8Z31yQylDqI/6OLQvMcgp7BAfw9Ylvtwkf1
+			wLiREvVZo0XgSY14X3I=</ds:SignatureValue>
+		<ds:KeyInfo>
+			<ds:KeyValue>
+				<ds:RSAKeyValue>
+					<ds:Modulus>lRiJJsRb/ImQK1pX3YcqdFjIG7cQMAbe9/CoAqsoycNDRSr6lxIzsySku1rUsNqCV6wIiS5aWrL3
+						cPDoo1V8r19PWSNQHvl2lbY7NcE2iH8EB/rMLONPvmvYdDkipSpH0TVrRfgHn/kqdhPSTZI9gGq0
+						l0Xt6cY/QfUsxN3MtxM=</ds:Modulus>
+					<ds:Exponent>AQAB</ds:Exponent>
+				</ds:RSAKeyValue>
+			</ds:KeyValue>
+			<ds:X509Data>
+				<ds:X509IssuerSerial>
+					<ds:X509IssuerName>CN=TOT CA,OU=eBusiness Center,O=TOT Corporation
+						Public Company Limited,L=Bangkok,C=TH</ds:X509IssuerName>
+					<ds:X509SerialNumber>222214</ds:X509SerialNumber>
+				</ds:X509IssuerSerial>
+				<ds:X509SubjectName>EMAILADDRESS=ict@doeb.go.th, CN=DEPARTMENT OF
+					ENERGY BUSINESS, OU=TAXID:4030036329, O=DEPARTMENT OF ENERGY
+					BUSINESS, L=BANGKOK, C=TH</ds:X509SubjectName>
+				<ds:X509Certificate>MIIEATCCAumgAwIBAgIDA2QGMA0GCSqGSIb3DQEBBQUAMHwxCzAJBgNVBAYTAlRIMRAwDgYDVQQH
+					EwdCYW5na29rMS8wLQYDVQQKEyZUT1QgQ29ycG9yYXRpb24gUHVibGljIENvbXBhbnkgTGltaXRl
+					ZDEZMBcGA1UECxMQZUJ1c2luZXNzIENlbnRlcjEPMA0GA1UEAxMGVE9UIENBMB4XDTEwMDgyNzA0
+					NDQzOFoXDTExMDgyNzA0NDQxOFowgakxCzAJBgNVBAYTAlRIMRAwDgYDVQQHEwdCQU5HS09LMSYw
+					JAYDVQQKEx1ERVBBUlRNRU5UIE9GIEVORVJHWSBCVVNJTkVTUzEZMBcGA1UECxMQVEFYSUQ6NDAz
+					MDAzNjMyOTEmMCQGA1UEAxMdREVQQVJUTUVOVCBPRiBFTkVSR1kgQlVTSU5FU1MxHTAbBgkqhkiG
+					9w0BCQEWDmljdEBkb2ViLmdvLnRoMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCVGIkmxFv8
+					iZArWlfdhyp0WMgbtxAwBt738KgCqyjJw0NFKvqXEjOzJKS7WtSw2oJXrAiJLlpasvdw8OijVXyv
+					X09ZI1Ae+XaVtjs1wTaIfwQH+sws40++a9h0OSKlKkfRNWtF+Aef+Sp2E9JNkj2AarSXRe3pxj9B
+					9SzE3cy3EwIDAQABo4HhMIHeMAkGA1UdEwQCMAAwGQYDVR0RBBIwEIEOaWN0QGRvZWIuZ28udGgw
+					RAYDVR0gBD0wOzA5BgorBgEEAf9eZAcBMCswKQYIKwYBBQUHAgEWHWh0dHA6Ly93d3cuY2EudG90
+					LmNvLnRoL2NwY3BzMA4GA1UdDwEB/wQEAwIE8DAfBgNVHSMEGDAWgBQpdJuV9CK6WEB1TthBVKva
+					yfc4yjA/BgNVHR8EODA2MDSgMqAwhi5odHRwOi8vd3d3LmNhLnRvdC5jby50aC9kb3dubG9hZC90
+					b3RjYV9jcmwuY3JsMA0GCSqGSIb3DQEBBQUAA4IBAQBOdid9bDfCzchU6AZi1rp/dDbCY8BbcjeH
+					J5C6burqmmuqwUjcVIKD5M9Xf6NDHkwbB3Bv7PsumamcJO8JSQNThz0yRNNP0pG9FzjG/BVQNbnm
+					q+Ms0xcQ9Jj08d+KzIvf9KScEe6BpWLfC4XwuLiiPV8pUFeYkco3HZzNTwL9jVVgbiOpHolBy2Es
+					8soiPH22rq3QoB3GUt5wgD53rnNVb52liW62YGOjExd53/e77rGGrBlz5cbeD9drFs15NJomDstM
+					SLmREgC3hAOXoAPV5NJ5juYyhoQ++NBs3YW9OseqxfbFI9//AAi6k0d07F3UopohWXgqssOKgoSV
+					Pexr</ds:X509Certificate>
+			</ds:X509Data>
+		</ds:KeyInfo>
+	</ds:Signature>
+</SOAP:Header>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<LicensePerInvoice
+	xmlns="http://ebxml.customs.go.th/schema/LicensePerInvoiceMsg_2_0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<DocumentHeader xmlns="">
+		<DocumentReference>
+			<Name />
+			<UserID>USR001</UserID>
+		</DocumentReference>
+		<LicenseInfo>
+			<LicenseNo>123456</LicenseNo>
+			<TaxReference>TAX001</TaxReference>
+			<LicenseType>BB</LicenseType>
+			<IssueDate>2010-09-29</IssueDate>
+			<CountryCode>AA</CountryCode>
+			<Description>DESC</Description>
+			<EffectiveDate>2010-09-29</EffectiveDate>
+			<AuthorityID>4321</AuthorityID>
+			<AuthorityName>4321</AuthorityName>
+			<LicenseName>ABACAD</LicenseName>
+			<InspectionLevel>I1234</InspectionLevel>
+			<InspectionDesc>IDESC</InspectionDesc>
+		</LicenseInfo>
+	</DocumentHeader>
+	<DocumentDetails xmlns="">
+		<DocumentDetail>
+			<InvoiceInfo>
+				<InvoiceNumber>ITEM001</InvoiceNumber>
+				<InvoiceDate>2010-09-29</InvoiceDate>
+				<InvoiceItem>1</InvoiceItem>
+				<Description>DESC</Description>
+			</InvoiceInfo>
+			<DeclarationLineNo>12345678</DeclarationLineNo>
+			<TariffInfo>
+				<Classification>11</Classification>
+				<StatisticalCode>88</StatisticalCode>
+			</TariffInfo>
+			<ProductInfo>
+				<WeightInfo>
+					<Weight>125</Weight>
+					<UnitCode>KK</UnitCode>
+				</WeightInfo>
+				<QuantityInfo>
+					<Quantity>12</Quantity>
+					<UnitCode>KK</UnitCode>
+					<SamplingQuantity>10</SamplingQuantity>
+					<SamplingUnitCode>KK</SamplingUnitCode>
+				</QuantityInfo>
+				<RegistrationNumber>ABC1234</RegistrationNumber>
+				<BodyNo>0001</BodyNo>
+				<EngineNo>0002</EngineNo>
+				<Displacement>1221</Displacement>
+				<ModelCode>AE86</ModelCode>
+				<Year>2010</Year>
+				<BrandName>MAMA</BrandName>
+				<CountryCode>BB</CountryCode>
+				<Characteristic>CHAR</Characteristic>
+			</ProductInfo>
+			<CountryCode>BB</CountryCode>
+			<Remark>MARK</Remark>
+		</DocumentDetail>
+	</DocumentDetails>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod
+				Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+					<Transform Algorithm="http://www.w3.org/TR/1999/REC-xpath-19991116">
+						<XPath>not%28ancestor-or-self%3A%3Anode%28%29%5B%40soap%3Aactor%3D%22urn%3Aoasis%3Anames%3Atc%3Aebxml-msg%3Aservice%3AnextMSH%22%5D%7Cancestor-or-self%3A%3Anode%28%29%5B%40soap%3Aactor%3D%22http%3A%2F%2Fschemas.xmlsoap.org%2Fsoap%2Factor%2Fnext%22%5D%29</XPath>
+					</Transform>
+					<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+				<DigestValue>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>hRJ+Sp5I0DolVsNJiT6ii1jBgcHxoKeaXL/fnxziIwvsW4WfJfX5XrNDc26I+pifqyIi1M/6NVZb
+			a+x1ZdpfApYtlNn9DsWdTBAE1nF7caC5rizj2HVEprpcw8r0slcUuZdRtRsYX6zxFyZ892hduaLM
+			cNNrKZj12Wb+GOWuKm4=</SignatureValue>
+		<KeyInfo>
+			<KeyValue>
+				<RSAKeyValue>
+					<Modulus>lRiJJsRb/ImQK1pX3YcqdFjIG7cQMAbe9/CoAqsoycNDRSr6lxIzsySku1rUsNqCV6wIiS5aWrL3
+						cPDoo1V8r19PWSNQHvl2lbY7NcE2iH8EB/rMLONPvmvYdDkipSpH0TVrRfgHn/kqdhPSTZI9gGq0
+						l0Xt6cY/QfUsxN3MtxM=</Modulus>
+					<Exponent>AQAB</Exponent>
+				</RSAKeyValue>
+			</KeyValue>
+			<X509Data>
+				<X509IssuerSerial>
+					<X509IssuerName>CN=TOT CA,OU=eBusiness Center,O=TOT Corporation
+						Public Company Limited,L=Bangkok,C=TH</X509IssuerName>
+					<X509SerialNumber>222214</X509SerialNumber>
+				</X509IssuerSerial>
+				<X509SubjectName>EMAILADDRESS=ict@doeb.go.th, CN=DEPARTMENT OF
+					ENERGY BUSINESS, OU=TAXID:4030036329, O=DEPARTMENT OF ENERGY
+					BUSINESS, L=BANGKOK, C=TH</X509SubjectName>
+				<X509Certificate>MIIEATCCAumgAwIBAgIDA2QGMA0GCSqGSIb3DQEBBQUAMHwxCzAJBgNVBAYTAlRIMRAwDgYDVQQH
+					EwdCYW5na29rMS8wLQYDVQQKEyZUT1QgQ29ycG9yYXRpb24gUHVibGljIENvbXBhbnkgTGltaXRl
+					ZDEZMBcGA1UECxMQZUJ1c2luZXNzIENlbnRlcjEPMA0GA1UEAxMGVE9UIENBMB4XDTEwMDgyNzA0
+					NDQzOFoXDTExMDgyNzA0NDQxOFowgakxCzAJBgNVBAYTAlRIMRAwDgYDVQQHEwdCQU5HS09LMSYw
+					JAYDVQQKEx1ERVBBUlRNRU5UIE9GIEVORVJHWSBCVVNJTkVTUzEZMBcGA1UECxMQVEFYSUQ6NDAz
+					MDAzNjMyOTEmMCQGA1UEAxMdREVQQVJUTUVOVCBPRiBFTkVSR1kgQlVTSU5FU1MxHTAbBgkqhkiG
+					9w0BCQEWDmljdEBkb2ViLmdvLnRoMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCVGIkmxFv8
+					iZArWlfdhyp0WMgbtxAwBt738KgCqyjJw0NFKvqXEjOzJKS7WtSw2oJXrAiJLlpasvdw8OijVXyv
+					X09ZI1Ae+XaVtjs1wTaIfwQH+sws40++a9h0OSKlKkfRNWtF+Aef+Sp2E9JNkj2AarSXRe3pxj9B
+					9SzE3cy3EwIDAQABo4HhMIHeMAkGA1UdEwQCMAAwGQYDVR0RBBIwEIEOaWN0QGRvZWIuZ28udGgw
+					RAYDVR0gBD0wOzA5BgorBgEEAf9eZAcBMCswKQYIKwYBBQUHAgEWHWh0dHA6Ly93d3cuY2EudG90
+					LmNvLnRoL2NwY3BzMA4GA1UdDwEB/wQEAwIE8DAfBgNVHSMEGDAWgBQpdJuV9CK6WEB1TthBVKva
+					yfc4yjA/BgNVHR8EODA2MDSgMqAwhi5odHRwOi8vd3d3LmNhLnRvdC5jby50aC9kb3dubG9hZC90
+					b3RjYV9jcmwuY3JsMA0GCSqGSIb3DQEBBQUAA4IBAQBOdid9bDfCzchU6AZi1rp/dDbCY8BbcjeH
+					J5C6burqmmuqwUjcVIKD5M9Xf6NDHkwbB3Bv7PsumamcJO8JSQNThz0yRNNP0pG9FzjG/BVQNbnm
+					q+Ms0xcQ9Jj08d+KzIvf9KScEe6BpWLfC4XwuLiiPV8pUFeYkco3HZzNTwL9jVVgbiOpHolBy2Es
+					8soiPH22rq3QoB3GUt5wgD53rnNVb52liW62YGOjExd53/e77rGGrBlz5cbeD9drFs15NJomDstM
+					SLmREgC3hAOXoAPV5NJ5juYyhoQ++NBs3YW9OseqxfbFI9//AAi6k0d07F3UopohWXgqssOKgoSV
+					Pexr</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</LicensePerInvoice>
