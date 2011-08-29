@@ -1,0 +1,123 @@
+body { 
+	font: 12px Tahoma, sans-serif; 
+	margin: 30px;
+	color: black;
+	background-color: #CCC;
+}
+
+.container {
+	background-color: #CCC;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+header {
+	margin: 2px;
+	padding: 2px;
+	background: #CCC;
+}
+
+h2 {
+	font: 24px Tahoma, sans-serif; 
+	font-weight: bold;
+	text-shadow: 1px 1px #FFF;
+}
+
+footer {
+	text-shadow: 1px 1px #FFF;
+}
+
+div.box {
+	margin: 5px;
+	padding: 6px;
+	background: #CCC;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	box-shadow: 5px 5px 20px #666;  /*For IE9/Final CSS3 spec*/
+	-moz-box-shadow: 5px 5px 20px #666;  /*For Firefox*/
+	-webkit-box-shadow: 5px 5px 20px #666;  /*For Chrome/Safari*/	
+}
+
+input[type=text] {
+	height: 16px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	padding: 2px;
+}
+
+.label {
+    font-weight: bold;
+    color: black;
+    text-shadow: 1px 1px #FFF;
+}
+
+.button {
+	height: 30px;
+	margin: 3px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-box-shadow:0px 0px 5px #000;
+	-webkit-box-shadow:0px 0px 5px #000;
+	cursor: pointer;
+}
+
+tr {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.fieldset {
+	margin: 6px;
+    color: black;
+    outline-color: #666666;
+    border-color: #666666;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.radius {
+    -moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.listbox {
+    width: 200px;
+    height: 300px;
+    -moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Data table */
+table.dataTable { background-color: #EEEEEE; width: 100%; }
+table.dataTable tr, table.dataTable td, table.dataTable th { border:1px solid #CCCCCC; padding:0.3em; }
+table.dataTable th { text-align: center; border: 1px solid #ddd;  height: 1.5em; }
+table.dataTable th { background: #999; color: #fff; }
+table.dataTable td { text-align: left; vertical-align: top; border: 1px solid #ddd; height: 1.5em; }
+
+/* Page loading */
+.loading-screen {
+	width: auto; 
+	height: auto;	
+	background-color: #CCC; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	z-index: 4000; 
+	display: none;
+}
+
+.loading-screen-icon{
+	background: transparent url('../images/ajax-loader.gif') no-repeat top left;
+	position: absolute;
+	width: 100px; 
+	height: 100px; 
+	top: 50%; 
+	left: 50%;
+	margin-top: -100px; 
+	margin-left: -100px;
+}

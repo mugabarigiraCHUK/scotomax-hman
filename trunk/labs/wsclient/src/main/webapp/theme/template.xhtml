@@ -1,0 +1,49 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+	<h:head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	    <title>${title}</title>
+	    
+	    <!-- Style sheet -->
+	    <link rel="stylesheet" href="../styles/vader/jquery-ui-1.8.4.custom.css" type="text/css" />
+	    <link rel="stylesheet" href="../styles/stylesheet.css" type="text/css" />
+	    
+	    <!-- Java Script -->
+	    <script type="text/javascript" src="../scripts/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="../scripts/jquery-ui-1.8.4.custom.min.js"></script>
+		<script type="text/javascript" src="../scripts/ui-app.js"></script>
+
+	</h:head>
+	
+	<h:body>
+		<header>
+			<h2>${title}</h2>
+			<ui:insert name="menu"/>
+		</header>
+		
+		<hr/>
+		
+		<body class="container">
+			<ui:insert name="body"/> 
+		</body>
+		
+		<hr/>
+		
+		<footer>
+			<abbr>Developer: Sarayut Utsakoo, Latest released 2010, 14 Aug</abbr>
+			<address>By mobile-technologies</address>
+		</footer>
+		
+		<!-- Page loading -->
+		<div class='loading-screen'>
+			<div class='loading-screen-icon'></div>
+		</div>
+		
+	</h:body>
+</html>
