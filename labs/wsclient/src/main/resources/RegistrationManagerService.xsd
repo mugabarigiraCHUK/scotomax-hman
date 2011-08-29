@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT. --><xs:schema xmlns:tns="http://rm.isl.mt.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://rm.isl.mt.com/">
+
+<xs:element name="addSimAppOnSim" type="tns:addSimAppOnSim"></xs:element>
+
+<xs:element name="addSimAppOnSimResponse" type="tns:addSimAppOnSimResponse"></xs:element>
+
+<xs:element name="backupSimPhoneBooksList" type="tns:backupSimPhoneBooksList"></xs:element>
+
+<xs:element name="backupSimPhoneBooksListResponse" type="tns:backupSimPhoneBooksListResponse"></xs:element>
+
+<xs:element name="backupSimSmsList" type="tns:backupSimSmsList"></xs:element>
+
+<xs:element name="backupSimSmsListResponse" type="tns:backupSimSmsListResponse"></xs:element>
+
+<xs:element name="changePin" type="tns:changePin"></xs:element>
+
+<xs:element name="changePinResponse" type="tns:changePinResponse"></xs:element>
+
+<xs:element name="getDeviceBrandsList" type="tns:getDeviceBrandsList"></xs:element>
+
+<xs:element name="getDeviceBrandsListResponse" type="tns:getDeviceBrandsListResponse"></xs:element>
+
+<xs:element name="getDeviceModelsListByIdDeviceBrand" type="tns:getDeviceModelsListByIdDeviceBrand"></xs:element>
+
+<xs:element name="getDeviceModelsListByIdDeviceBrandResponse" type="tns:getDeviceModelsListByIdDeviceBrandResponse"></xs:element>
+
+<xs:element name="getMajorDeviceBrandsList" type="tns:getMajorDeviceBrandsList"></xs:element>
+
+<xs:element name="getMajorDeviceBrandsListResponse" type="tns:getMajorDeviceBrandsListResponse"></xs:element>
+
+<xs:element name="getNumberInventory" type="tns:getNumberInventory"></xs:element>
+
+<xs:element name="getNumberInventoryByCellId" type="tns:getNumberInventoryByCellId"></xs:element>
+
+<xs:element name="getNumberInventoryByCellIdResponse" type="tns:getNumberInventoryByCellIdResponse"></xs:element>
+
+<xs:element name="getNumberInventoryResponse" type="tns:getNumberInventoryResponse"></xs:element>
+
+<xs:element name="getRegionsList" type="tns:getRegionsList"></xs:element>
+
+<xs:element name="getRegionsListResponse" type="tns:getRegionsListResponse"></xs:element>
+
+<xs:element name="getRegistrationStatusByIccId" type="tns:getRegistrationStatusByIccId"></xs:element>
+
+<xs:element name="getRegistrationStatusByIccIdResponse" type="tns:getRegistrationStatusByIccIdResponse"></xs:element>
+
+<xs:element name="getRegistrationStatusByImsi" type="tns:getRegistrationStatusByImsi"></xs:element>
+
+<xs:element name="getRegistrationStatusByImsiResponse" type="tns:getRegistrationStatusByImsiResponse"></xs:element>
+
+<xs:element name="getRegistrationStatusByMsisdn" type="tns:getRegistrationStatusByMsisdn"></xs:element>
+
+<xs:element name="getRegistrationStatusByMsisdnResponse" type="tns:getRegistrationStatusByMsisdnResponse"></xs:element>
+
+<xs:element name="getSidTypesList" type="tns:getSidTypesList"></xs:element>
+
+<xs:element name="getSidTypesListResponse" type="tns:getSidTypesListResponse"></xs:element>
+
+<xs:element name="getSimAppGroupsList" type="tns:getSimAppGroupsList"></xs:element>
+
+<xs:element name="getSimAppGroupsListResponse" type="tns:getSimAppGroupsListResponse"></xs:element>
+
+<xs:element name="getSimAppsList" type="tns:getSimAppsList"></xs:element>
+
+<xs:element name="getSimAppsListResponse" type="tns:getSimAppsListResponse"></xs:element>
+
+<xs:element name="getSimInfo" type="tns:getSimInfo"></xs:element>
+
+<xs:element name="getSimInfoResponse" type="tns:getSimInfoResponse"></xs:element>
+
+<xs:element name="getSimPhoneBookList" type="tns:getSimPhoneBookList"></xs:element>
+
+<xs:element name="getSimPhoneBookListResponse" type="tns:getSimPhoneBookListResponse"></xs:element>
+
+<xs:element name="getSimSmsList" type="tns:getSimSmsList"></xs:element>
+
+<xs:element name="getSimSmsListResponse" type="tns:getSimSmsListResponse"></xs:element>
+
+<xs:element name="getStatus" type="tns:getStatus"></xs:element>
+
+<xs:element name="getStatusResponse" type="tns:getStatusResponse"></xs:element>
+
+<xs:element name="getTariffPlansList" type="tns:getTariffPlansList"></xs:element>
+
+<xs:element name="getTariffPlansListResponse" type="tns:getTariffPlansListResponse"></xs:element>
+
+<xs:element name="logon" type="tns:logon"></xs:element>
+
+<xs:element name="logonAndGetInfo" type="tns:logonAndGetInfo"></xs:element>
+
+<xs:element name="logonAndGetInfoNoRegion" type="tns:logonAndGetInfoNoRegion"></xs:element>
+
+<xs:element name="logonAndGetInfoNoRegionResponse" type="tns:logonAndGetInfoNoRegionResponse"></xs:element>
+
+<xs:element name="logonAndGetInfoResponse" type="tns:logonAndGetInfoResponse"></xs:element>
+
+<xs:element name="logonResponse" type="tns:logonResponse"></xs:element>
+
+<xs:element name="logout" type="tns:logout"></xs:element>
+
+<xs:element name="logoutResponse" type="tns:logoutResponse"></xs:element>
+
+<xs:element name="newRegistrationByIccId" type="tns:newRegistrationByIccId"></xs:element>
+
+<xs:element name="newRegistrationByIccIdAndCellId" type="tns:newRegistrationByIccIdAndCellId"></xs:element>
+
+<xs:element name="newRegistrationByIccIdAndCellIdResponse" type="tns:newRegistrationByIccIdAndCellIdResponse"></xs:element>
+
+<xs:element name="newRegistrationByIccIdResponse" type="tns:newRegistrationByIccIdResponse"></xs:element>
+
+<xs:element name="newRegistrationByTImsiAndTMsisdn" type="tns:newRegistrationByTImsiAndTMsisdn"></xs:element>
+
+<xs:element name="newRegistrationByTImsiAndTMsisdnResponse" type="tns:newRegistrationByTImsiAndTMsisdnResponse"></xs:element>
+
+<xs:element name="removeSimAppOnSim" type="tns:removeSimAppOnSim"></xs:element>
+
+<xs:element name="removeSimAppOnSimResponse" type="tns:removeSimAppOnSimResponse"></xs:element>
+
+<xs:element name="sendMessage" type="tns:sendMessage"></xs:element>
+
+<xs:element name="sendMessageResponse" type="tns:sendMessageResponse"></xs:element>
+
+<xs:element name="simSwap" type="tns:simSwap"></xs:element>
+
+<xs:element name="simSwapResponse" type="tns:simSwapResponse"></xs:element>
+
+<xs:complexType name="getSidTypesList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSidTypesListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="serverResponse">
+<xs:sequence>
+<xs:element name="deviceBrandsList" type="tns:deviceBrand" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="deviceModelsList" type="tns:deviceModel" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="numberInventory" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="regionsList" type="tns:region" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="responseCode" type="xs:int"></xs:element>
+<xs:element name="responseDesc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sidTypesList" type="tns:sidType" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simAppGroupsList" type="tns:simAppGroup" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simAppsList" type="tns:simApp" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simOutputData" type="tns:simOutputData" minOccurs="0"></xs:element>
+<xs:element name="simPhoneBooksList" type="tns:simPhoneBook" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simSmsList" type="tns:simSms" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="statusInformation" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tariffPlansList" type="tns:tariffPlan" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deviceBrand">
+<xs:sequence>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="deviceBrand" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idDeviceBrand" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:short"></xs:element>
+<xs:element name="majorBrand" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deviceModel">
+<xs:sequence>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="deviceBrand" type="tns:deviceBrand" minOccurs="0"></xs:element>
+<xs:element name="deviceModelExtraName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="deviceModelFullName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="deviceModelMarketingName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="deviceModelName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idDeviceModel" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:short"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="region">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="idRegion" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:boolean"></xs:element>
+<xs:element name="regionDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="regionMap" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="regionMapMimeType" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="regionMapName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="regionName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="company">
+<xs:sequence>
+<xs:element name="companyAddress" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="companyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactEmail" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idCompany" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="milenageConstant" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sidType">
+<xs:sequence>
+<xs:element name="stype" type="xs:decimal" minOccurs="0"></xs:element>
+<xs:element name="type" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="typeDesc" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simAppGroup">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="idSimAppGroup" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:boolean"></xs:element>
+<xs:element name="simAppGroupDesc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppGroupImg" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="simAppGroupImgName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppGroupName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simApp">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="idSimApp" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:boolean"></xs:element>
+<xs:element name="profileCollection" type="tns:profile" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simAppCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppData" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="simAppDataName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppDesc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppDlPrice" type="xs:decimal" minOccurs="0"></xs:element>
+<xs:element name="simAppFile" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppGroupCollection" type="tns:simAppGroup" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simAppHeader" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="simAppHeaderName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppImg" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="simAppImgName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAppSize" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="simAppUsePrice" type="xs:decimal" minOccurs="0"></xs:element>
+<xs:element name="simAppVersion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="profile">
+<xs:sequence>
+<xs:element name="availableMemory" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="electricalProfile" type="tns:electricalProfile" minOccurs="0"></xs:element>
+<xs:element name="graphicalProfile" type="tns:graphicalProfile" minOccurs="0"></xs:element>
+<xs:element name="idProfile" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="totalMemory" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="electricalProfile">
+<xs:sequence>
+<xs:element name="electricalProfileDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="electricalProfileNumber" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="idElectricalProfile" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="whitePaper" type="tns:whitePaper" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="whitePaper">
+<xs:sequence>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="electricalProfileConllection" type="tns:electricalProfile" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="graphicalProfileCollection" type="tns:graphicalProfile" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="idWhitePaper" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="whitePaperContentType" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="whitePaperData" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="whitePaperDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="whitePaperName" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="graphicalProfile">
+<xs:sequence>
+<xs:element name="graphicalProfileDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="graphicalProfileNumber" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="idGraphicalProfile" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="whitePaper" type="tns:whitePaper" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simOutputData">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="orderOutputFile" type="tns:orderOutputFile" minOccurs="0"></xs:element>
+<xs:element name="provisioningStatus" type="tns:provisioningStatus" minOccurs="0"></xs:element>
+<xs:element name="simAdm1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAdm1Count" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="simAdm2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAdm3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simAdm4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simChv1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simChv1Count" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="simChv2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simChv2Count" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="simChv3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simChv3Count" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="simChv4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simChv4Count" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="simKi" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simOtaKey1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simOtaKey2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simOutputDataPK" type="tns:simOutputDataPK" minOccurs="0"></xs:element>
+<xs:element name="simPin1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simPin2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simPuk1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simPuk2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simRecordData" type="tns:simRecordData" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="orderOutputFile">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="fileLocation" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fileName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idOrderOutputFile" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="orderLineItem" type="tns:orderLineItem" minOccurs="0"></xs:element>
+<xs:element name="provisioningStatus" type="tns:provisioningStatus" minOccurs="0"></xs:element>
+<xs:element name="recordQuantity" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="timeStampReceived" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="orderLineItem">
+<xs:sequence>
+<xs:element name="electricalProfile" type="tns:electricalProfile" minOccurs="0"></xs:element>
+<xs:element name="graphicalProfile" type="tns:graphicalProfile" minOccurs="0"></xs:element>
+<xs:element name="idOrderLineItem" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="orderQuantity" type="xs:int"></xs:element>
+<xs:element name="simOrder" type="tns:simOrder" minOccurs="0"></xs:element>
+<xs:element name="simProduct" type="tns:simProduct" minOccurs="0"></xs:element>
+<xs:element name="transportKey" type="tns:transportKey" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simOrder">
+<xs:sequence>
+<xs:element name="batch" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="idPgpKey" type="tns:simManufacturePgp" minOccurs="0"></xs:element>
+<xs:element name="idSimOrder" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="orderNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="orderTimeStamp" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="simManufacture" type="tns:simManufacture" minOccurs="0"></xs:element>
+<xs:element name="user" type="tns:user" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simManufacturePgp">
+<xs:sequence>
+<xs:element name="idPgpKey" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="pgpKeyDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pgpKeyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pgpKeyValue" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simManufacture" type="tns:simManufacture" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simManufacture">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="companyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactEmail" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimManufacture" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="inputFileMail" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="user">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="demoUser" type="xs:boolean"></xs:element>
+<xs:element name="idUser" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="userLoginName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="userName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="userPassword" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simProduct">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="idSimProduct" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="idWhitePaper" type="tns:whitePaper" minOccurs="0"></xs:element>
+<xs:element name="profile" type="tns:profile" minOccurs="0"></xs:element>
+<xs:element name="simManufactureCollection" type="tns:simManufacture" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simProductDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simProductName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simProductVersionNumber" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transportKey">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="idTransportKey" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="transportKeyAlgorithm" type="tns:transportKeyAlgorithm" minOccurs="0"></xs:element>
+<xs:element name="transportKeyLabel" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="transportKeyNumber" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="transportKeyValue" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transportKeyAlgorithm">
+<xs:sequence>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="idTransportKeyAlgorithm" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="transportKeyAlgorithmDesc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="transportKeyAlgorithmName" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="provisioningStatus">
+<xs:sequence>
+<xs:element name="idProvisioningStatus" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="provisioningStatusDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="provisioningStatusName" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simOutputDataPK">
+<xs:sequence>
+<xs:element name="idCompany" type="xs:long"></xs:element>
+<xs:element name="idSimIcc" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simRecordData">
+<xs:sequence>
+<xs:element name="availableMemory" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="lastBackup" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="orderInputFile" type="tns:orderInputFile" minOccurs="0"></xs:element>
+<xs:element name="simAppCollection" type="tns:simApp" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="simImsi" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simMsisdn" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simRecordDataPK" type="tns:simRecordDataPK" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="orderInputFile">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="fileLocation" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fileName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idOrderInputFile" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="orderLineItem" type="tns:orderLineItem" minOccurs="0"></xs:element>
+<xs:element name="recordQuantity" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simRecordDataPK">
+<xs:sequence>
+<xs:element name="idCompany" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simPhoneBook">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="contactName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contactNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="idSimPhoneBook" type="xs:decimal" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:boolean"></xs:element>
+<xs:element name="npi" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="rawData" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="simRecordData" type="tns:simRecordData" minOccurs="0"></xs:element>
+<xs:element name="ton" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simSms">
+<xs:sequence>
+<xs:element name="company" type="tns:company" minOccurs="0"></xs:element>
+<xs:element name="createdDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="idSimSms" type="xs:decimal" minOccurs="0"></xs:element>
+<xs:element name="isActive" type="xs:boolean"></xs:element>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="npi" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="rawdata" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="sentDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="simRecordData" type="tns:simRecordData" minOccurs="0"></xs:element>
+<xs:element name="source" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="ton" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="updatedDateTime" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tariffPlan">
+<xs:sequence>
+<xs:element name="description" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="enable" type="xs:short"></xs:element>
+<xs:element name="htmlFile" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="planId" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="selectNumber" type="xs:short"></xs:element>
+<xs:element name="title" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegionsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegionsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addSimAppOnSim">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimApp" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addSimAppOnSimResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logon">
+<xs:sequence>
+<xs:element name="companyId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="userId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pinCode" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logonResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDeviceBrandsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDeviceBrandsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logonAndGetInfoNoRegion">
+<xs:sequence>
+<xs:element name="companyId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="userId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pinCode" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logonAndGetInfoNoRegionResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newRegistrationByTImsiAndTMsisdn">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tImsi" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tMsisdn" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="firstName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="familyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="gender" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="birthDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="address" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="city" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="postalCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sid" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sidType" type="tns:sidType" minOccurs="0"></xs:element>
+<xs:element name="tariffPlan" type="tns:tariffPlan" minOccurs="0"></xs:element>
+<xs:element name="region" type="tns:region" minOccurs="0"></xs:element>
+<xs:element name="frontImage" type="xs:base64Binary" nillable="true" minOccurs="0"></xs:element>
+<xs:element name="backImage" type="xs:base64Binary" nillable="true" minOccurs="0"></xs:element>
+<xs:element name="msisdn" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newRegistrationByTImsiAndTMsisdnResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendMessage">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="id" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sender" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="destinationList" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="timeStamp" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="encoding" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="mediaType" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="msgType" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="dr" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="por" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendMessageResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimAppsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimAppGroup" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="idProfile" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimAppsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegistrationStatusByMsisdn">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="msisdn" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegistrationStatusByMsisdnResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="backupSimPhoneBooksList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simPhoneBooksList" type="tns:simPhoneBook" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="backupSimPhoneBooksListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newRegistrationByIccIdAndCellId">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="iccId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="firstName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="familyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="gender" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="birthDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="address" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="city" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="postalCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sid" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sidType" type="tns:sidType" minOccurs="0"></xs:element>
+<xs:element name="tariffPlan" type="tns:tariffPlan" minOccurs="0"></xs:element>
+<xs:element name="cellId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="frontImage" type="xs:base64Binary" nillable="true" minOccurs="0"></xs:element>
+<xs:element name="backImage" type="xs:base64Binary" nillable="true" minOccurs="0"></xs:element>
+<xs:element name="msisdn" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newRegistrationByIccIdAndCellIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimSmsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimSmsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="backupSimSmsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="simSmsList" type="tns:simSms" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="backupSimSmsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeSimAppOnSim">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimApp" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeSimAppOnSimResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getNumberInventory">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="maxEctract" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="maxMsisdnLenght" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="region" type="tns:region" minOccurs="0"></xs:element>
+<xs:element name="terminalId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="idType" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="keyNumb" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="booking" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getNumberInventoryResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimPhoneBookList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idSimIcc" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimPhoneBookListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegistrationStatusByImsi">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imsi" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegistrationStatusByImsiResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logonAndGetInfo">
+<xs:sequence>
+<xs:element name="companyId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="userId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pinCode" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logonAndGetInfoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDeviceModelsListByIdDeviceBrand">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idDeviceBrand" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDeviceModelsListByIdDeviceBrandResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changePin">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="newPinCode" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changePinResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTariffPlansList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTariffPlansListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getNumberInventoryByCellId">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="maxEctract" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="maxMsisdnLenght" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="cellId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="terminalId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="idType" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="keyNumb" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="booking" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getNumberInventoryByCellIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logout">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logoutResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simSwap">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="oldMsisdn" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="newIccId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="swapCode" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="simSwapResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimInfo">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="iccId" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimInfoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newRegistrationByIccId">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="iccId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="firstName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="familyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="gender" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="birthDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="address" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="city" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="postalCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sid" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sidType" type="tns:sidType" minOccurs="0"></xs:element>
+<xs:element name="tariffPlan" type="tns:tariffPlan" minOccurs="0"></xs:element>
+<xs:element name="region" type="tns:region" minOccurs="0"></xs:element>
+<xs:element name="frontImage" type="xs:base64Binary" nillable="true" minOccurs="0"></xs:element>
+<xs:element name="backImage" type="xs:base64Binary" nillable="true" minOccurs="0"></xs:element>
+<xs:element name="msisdn" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newRegistrationByIccIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMajorDeviceBrandsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMajorDeviceBrandsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegistrationStatusByIccId">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="iccId" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRegistrationStatusByIccIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStatus">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStatusResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimAppGroupsList">
+<xs:sequence>
+<xs:element name="securityToken" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSimAppGroupsListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serverResponse" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

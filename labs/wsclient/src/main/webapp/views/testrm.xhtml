@@ -1,0 +1,223 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		      xmlns:h="http://java.sun.com/jsf/html"
+		      xmlns:f="http://java.sun.com/jsf/core"
+		      xmlns:ui="http://java.sun.com/jsf/facelets"
+		      template="/theme/template.xhtml">
+	<ui:param name="title" value="Welcome to Java Server Faces 2.0" />
+	<ui:define name="menu">
+		<div id="radioset"> 
+			<input type="radio" id="radio1" name="radio" class="radio1" /><label for="radio1">Home</label> 
+			<input type="radio" id="radio2" name="radio" class="radio2" /><label for="radio2">Product</label> 
+			<input type="radio" id="radio3" name="radio" class="radio3" /><label for="radio3">Services</label>
+			<input type="radio" id="radio4" name="radio" class="radio4" /><label for="radio4">Support</label>
+			<input type="radio" id="radio5" name="radio" class="radio5" checked="checked" /><label for="radio5">RM Test</label> 
+		</div>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="rmform">
+			<div class="box">
+				<fieldset class="fieldset">
+					<legend>Welcome to logon</legend>
+					<h:panelGroup id="panelInput">
+						<h:panelGrid columns="2">
+		                    <h:outputText value="User code" styleClass="label"/>
+		                    <h:panelGroup>
+		                        <h:inputText id="inputUserCode" value="#{welcomeController.userCode}" rendered="#{empty welcomeController.securityToken}"/>
+		                        <h:outputText value="#{welcomeController.userCode}" rendered="#{not empty welcomeController.securityToken}"/>
+		                    </h:panelGroup>
+		
+		                    <h:outputText value="PIN code" styleClass="label"/>
+		                    <h:panelGroup>
+		                        <h:inputText id="inputPinCode" value="#{welcomeController.pinCode}" rendered="#{empty welcomeController.securityToken}"/>
+		                        <h:outputText value="#{welcomeController.pinCode}" rendered="#{not empty welcomeController.securityToken}"/>
+		                    </h:panelGroup>
+		
+		                    <h:outputText value="Company ID" styleClass="label"/>
+		                    <h:panelGroup>
+		                        <h:inputText id="inputCompany" value="#{welcomeController.companyId}" size="7" rendered="#{empty welcomeController.securityToken}"/>
+		                        <h:outputText value="#{welcomeController.companyId}" rendered="#{not empty welcomeController.securityToken}"/>
+		                    </h:panelGroup>
+		
+	                    	<h:outputText value="Security Taoken" styleClass="label" rendered="#{not empty welcomeController.securityToken}"/>
+	                    	<h:outputText value="#{welcomeController.securityToken}" rendered="#{not empty welcomeController.securityToken}"/>
+							
+		                    <h:outputText value=""/>
+		                    <h:panelGroup id="panelButtons">
+		                        <h:commandButton value="Logon"
+		                        				 styleClass="button" 
+		                        				 action="#{welcomeController.logon}" 
+		                        				 rendered="#{empty welcomeController.securityToken}">
+		                        	<f:ajax execute="rmform:inputUserCode rmform:inputPinCode rmform:inputCompany"
+		                        			render="rmform:panelInput rmform:panelMessage rmform:panelSubscriber rmform:panelTariff rmform:panelDevice rmform:panelProfile"
+		                        			onevent="pages.onLoad"/>				 
+		                  		</h:commandButton>
+		                        <h:commandButton value="Refresh" 
+		                        				 styleClass="button"
+		                        				 action="#{welcomeController.refresh}" 
+		                        				 rendered="#{not empty welcomeController.securityToken}">
+		                        	<f:ajax onevent="pages.onLoad" render="rmform:panelInput rmform:panelMessage rmform:panelSubscriber rmform:panelTariff rmform:panelDevice rmform:panelProfile"/>				 
+		                        </h:commandButton>
+		                        &#160;&#160;
+		                        <h:commandButton value="Logout" 
+		                        				 styleClass="button"
+		                        				 action="#{welcomeController.logout}" 
+		                        				 rendered="#{not empty welcomeController.securityToken}">
+		                        	<f:ajax onevent="pages.onLoad" render="rmform:panelInput rmform:panelMessage rmform:panelSubscriber rmform:panelTariff rmform:panelDevice rmform:panelProfile"/>				 
+		                        </h:commandButton>
+		                    </h:panelGroup>
+		
+		                </h:panelGrid>
+					</h:panelGroup>
+				</fieldset>
+			</div>
+            <br/>
+            <div class="box">
+				<fieldset class="fieldset">
+					<legend>Message</legend>
+					<h:panelGroup id="panelMessage">
+						<h:outputText value="#{welcomeController.notifyMessage}" styleClass="message"/>
+					</h:panelGroup>
+				</fieldset>
+			</div>
+            <br/>
+            
+            <div class="box">
+				<fieldset class="fieldset">
+					<legend>Subscriber ID Types</legend>
+					<h:panelGroup id="panelSubscriber">
+						<h:dataTable var="type" 
+		                			 styleClass="dataTable"
+		                             value="#{welcomeController.dtSidType}"
+		                             rendered="#{welcomeController.dtSidType != null}">
+		                    <h:column>
+		                        <f:facet name="header">ID</f:facet>
+		                        <h:outputText value="#{type.stype}"/>
+		                    </h:column>
+		                    <h:column>
+		                        <f:facet name="header">Type</f:facet>
+		                        <h:outputText value="#{type.type}"/>
+		                    </h:column>
+		                    <h:column>
+		                        <f:facet name="header">Description</f:facet>
+		                        <h:outputText value="#{type.typeDesc}"/>
+		                    </h:column>
+		                </h:dataTable>
+					</h:panelGroup>
+				</fieldset>
+			</div>
+            <br/>
+            
+            <div class="box">
+	           <fieldset class="fieldset">
+				<legend>Tariff Plan</legend>
+					<h:panelGroup id="panelTariff">
+		               <h:dataTable var="plan"
+		               				styleClass="dataTable"
+		                            value="#{welcomeController.dtTariffPlan}"
+		                            rendered="#{welcomeController.dtTariffPlan != null}">
+		                   <h:column>
+		                       <f:facet name="header">ID</f:facet>
+		                       <h:outputText value="#{plan.planId}"/>
+		                   </h:column>
+		                   <h:column>
+		                       <f:facet name="header">Title</f:facet>
+		                       <h:outputText value="#{plan.title}"/>
+		                   </h:column>
+		                   <h:column>
+		                       <f:facet name="header">Description</f:facet>
+		                       <h:outputText value="#{plan.description}"/>
+		                   </h:column>
+		               </h:dataTable>
+	               	</h:panelGroup>
+				</fieldset>
+			</div>
+            <br/>
+            
+            <div class="box">
+	            <fieldset class="fieldset">
+					<legend>Mobile Device</legend>
+					<h:panelGroup id="panelDevice">
+		                <h:panelGrid columns="3">
+		                    <h:selectOneListbox id="deviceBrands" 
+		                    					value="#{welcomeController.selectedDeviceBrand}" 
+		                                        styleClass="listbox"
+		                                        rendered="#{not empty welcomeController.selectionDeviceBrands}">
+		                        <f:selectItems value="#{welcomeController.selectionDeviceBrands}"/>
+		                    </h:selectOneListbox>
+		                    <h:commandButton id="deviceButton" 
+		                    				 value="Find" 
+		                    				 styleClass="button"
+		                                     action="#{welcomeController.changeDeviceBrand}"
+		                                     rendered="#{not empty welcomeController.selectionDeviceBrands}">
+		                    	<f:ajax onevent="pages.onLoad" execute="rmform:deviceBrands" render="rmform:panelMessage rmform:panelModel"/>
+		                    </h:commandButton>
+		                    <h:panelGroup id="panelModel">
+			                    <h:selectOneListbox id="deviceModels" 
+			                    					styleClass="listbox" 
+			                    					rendered="#{not empty welcomeController.selectionDeviceModels}">
+			                        <f:selectItems value="#{welcomeController.selectionDeviceModels}"/>
+			                    </h:selectOneListbox>
+		                    </h:panelGroup>
+		                    
+		                </h:panelGrid>
+	                </h:panelGroup>
+				</fieldset>
+			</div>
+			
+            <br/>
+            
+            <div class="box">
+	            <fieldset class="fieldset">
+					<legend>SIM application download</legend>
+					<h:panelGroup id="panelProfile">
+		                <h:panelGrid columns="2">
+		                    <h:outputText value="SIM ICCID Test case" styleClass="label"/>
+		                    <h:outputText value="8000000000000000607"/>
+		
+		                    <h:outputText value="Enter SIM ICCID" styleClass="label"/>
+		                    <h:inputText id="simiccid" value="#{welcomeController.simIccId}" styleClass="inputText" size="25"/>
+		 
+		                    <h:outputText value=""/>
+		                    <h:commandButton id="simprofileButton" value="Find" styleClass="button" action="#{welcomeController.simProfile}">
+		                    	<f:ajax onevent="pages.onLoad" execute="rmform:simiccid" render="rmform:panelMessage rmform:idProfile rmform:availableMemory rmform:totalMemory"/>
+		                    </h:commandButton>
+		
+		                    <h:outputText value="ID Profile" styleClass="label"/>
+		                    <h:outputText id="idProfile" value="#{welcomeController.idProfile}"/>
+		
+		                    <h:outputText value="Available Memory" styleClass="label"/>
+		                    <h:outputText id="availableMemory" value="#{welcomeController.availableMemory}"/>
+		
+		                    <h:outputText value="Total Memory" styleClass="label"/>
+		                    <h:outputText id="totalMemory" value="#{welcomeController.totalMemory}"/>
+		                    
+		                </h:panelGrid>
+		                <h:panelGrid columns="3">
+		                    <h:selectOneListbox id="simAppGroup" 
+		                    					value="#{welcomeController.selectedSimAppGroup}" 
+		                                        styleClass="listbox"
+		                                        rendered="#{not empty welcomeController.selectionSimAppGroups}">
+		                        <f:selectItems value="#{welcomeController.selectionSimAppGroups}"/>
+		                    </h:selectOneListbox>
+		                    <h:commandButton id="simappButton" 
+		                    				 value="Find" 
+		                    				 styleClass="button"
+		                                     action="#{welcomeController.changeSimAppGroup}"
+		                                     rendered="#{not empty welcomeController.selectionSimAppGroups}">
+		                    	<f:ajax onevent="pages.onLoad" execute="rmform:simAppGroup" render="rmform:panelMessage rmform:panelGroup"/>                 
+		                    </h:commandButton>
+		                    <h:panelGroup id="panelGroup">
+			                    <h:selectOneListbox id="simApp" 
+			                    					styleClass="listbox" 
+			                    					rendered="#{not empty welcomeController.selectionSimApplications}">
+			                        <f:selectItems value="#{welcomeController.selectionSimApplications}"/>
+			                    </h:selectOneListbox>
+		                    </h:panelGroup>
+		                    
+		                </h:panelGrid>
+	                </h:panelGroup>
+				</fieldset>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

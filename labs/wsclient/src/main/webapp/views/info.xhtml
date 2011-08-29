@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		      xmlns:h="http://java.sun.com/jsf/html"
+		      xmlns:f="http://java.sun.com/jsf/core"
+		      xmlns:ui="http://java.sun.com/jsf/facelets"
+		      template="/theme/template.xhtml">
+	<ui:param name="title" value="Welcome to MTECH-WIKI 1.0 beta" />
+	<ui:define name="menu">
+		<div id="radioset"> 
+			<input type="radio" id="radio1" name="radio" class="radio1" checked="checked" /><label for="radio1">Home</label> 
+			<input type="radio" id="radio2" name="radio" class="radio2" /><label for="radio2">Product</label> 
+			<input type="radio" id="radio3" name="radio" class="radio3" /><label for="radio3">Services</label>
+			<input type="radio" id="radio4" name="radio" class="radio4" /><label for="radio4">Support</label>
+			<input type="radio" id="radio5" name="radio" class="radio5" /><label for="radio5">RM Test</label> 
+		</div>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="home">
+			<div class="box">
+				<fieldset class="fieldset">
+					<legend>Search</legend>
+					
+					<h:panelGrid columns="2">
+						<h:inputText id="keyword" value="#{homeContoller.keyword}" size="150"/>
+						<h:commandButton value="Search" action="#{homeContoller.search}" styleClass="button">
+							<f:ajax onevent="pages.onLoad" execute="home:keyword" render="home:panelNews"/>
+						</h:commandButton>
+					</h:panelGrid>
+			
+				</fieldset>
+			</div>
+			
+			<br/>
+			
+			<div class="box">
+				<fieldset class="fieldset">
+					<legend>News</legend>
+					<h:panelGroup id="panelNews">
+						<div id="accordion"> 
+							<h3><a href="#">Section 1</a></h3> 
+							<div> 
+								<p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p> 
+							</div> 
+							<h3><a href="#">Section 2</a></h3> 
+							<div> 
+								<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p> 
+							</div> 
+							<h3><a href="#">Section 3</a></h3> 
+							<div> 
+								<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p> 
+								<ul> 
+									<li>List item one</li> 
+									<li>List item two</li> 
+									<li>List item three</li> 
+								</ul> 
+							</div>
+							<h3><a href="#">Section 4</a></h3> 
+							<div> 
+								<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p> 
+								<ul> 
+									<li>List item one</li> 
+									<li>List item two</li> 
+									<li>List item three</li> 
+								</ul> 
+							</div> 
+							<h3><a href="#">Section 5</a></h3> 
+							<div> 
+								<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p> 
+								<ul> 
+									<li>List item one</li> 
+									<li>List item two</li> 
+									<li>List item three</li> 
+								</ul> 
+							</div> 
+						</div> 
+					</h:panelGroup>
+					
+				</fieldset>
+			</div>
+            
+            <br/>
+            
+            <div class="box">
+				<fieldset class="fieldset">
+					<legend>Feeds</legend>
+					<h:panelGroup id="panelFeeds">
+		               	<div id="tabs"> 
+							<ul> 
+								<li><a href="#tabs-1">First</a></li> 
+								<li><a href="#tabs-2">Second</a></li> 
+								<li><a href="#tabs-3">Third</a></li> 
+								<li><a href="#tabs-4">Fouth</a></li>
+								<li><a href="#tabs-5">Fifth</a></li>
+							</ul> 
+							<div id="tabs-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div> 
+							<div id="tabs-2">Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</div> 
+							<div id="tabs-3">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+							<div id="tabs-4">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+							<div id="tabs-5">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div> 
+						</div>
+					</h:panelGroup>
+				</fieldset>
+			</div>
+            <br/>
+            
+		</h:form>
+	</ui:define>
+</ui:composition>
