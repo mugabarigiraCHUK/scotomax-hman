@@ -62,7 +62,7 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1>Hello, world!</h1>
-			<p>This is bootstrap for our project. {css3 + richface4 + html5}</p>
+			<p>This is bootstrap for our project. {jsf2 + css3 + richface4 + html5}</p>
 			<p>This demo show the power of grid integrate with richface4, any comment welcome</p>
 			<p>Read more on <a href="http://twitter.github.com/bootstrap/">bootstrap</a></p>
 		</div>
@@ -128,7 +128,7 @@
 	        <f:facet name="controls">
 	            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;"> X </h:outputLink>
 	        </f:facet>
-	        <p>Any content might be inside this panel.</p>
+	        <p>Any content might be inside this panel.</p> 
 	        <p>The popup panel is open and closed from the javascript function of component client side object. The following code 
 	        	<a href="#" onclick="#{rich:component('popup')}.hide()">hide this panel</a>: 
 	        	<f:verbatim>&#35;</f:verbatim>{rich:component('popup')}.hide()</p>
@@ -309,7 +309,36 @@
         	</div>
         </div>
         
-        
+        <br/>
+        <div class="row">
+        	<div class="span4">
+        		<h3>Alert Message style</h3>
+        	</div>
+        	<div class="span12">
+        		<div class="alert-message warning">
+					<a class="close" href="#">×</a>
+					<p><strong>Holy gaucamole!</strong> Best check yo self, you’re not looking too good.</p>
+				</div>
+				
+				<h:form>
+					<h:message for="username" errorClass="alert-message warning" />
+					<h:message for="username" errorClass="alert-message error" />
+					<h:message for="username" errorClass="alert-message success" />
+					<h:message for="username" errorClass="alert-message info" />
+					<div class="clearfix">
+  						<label>Enter your username</label>
+  						<div class="input">
+    						<h:inputText id="username">
+    							<f:validateLength minimum="5" maximum="20" />
+    						</h:inputText>
+						</div>
+					</div>
+					<div class="actions">
+	  					<h:commandButton styleClass="btn primary" value="Submit" />
+	  				</div>
+				</h:form>
+        	</div>
+        </div>
         
         
         <footer>
