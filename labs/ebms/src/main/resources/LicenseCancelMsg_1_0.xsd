@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- create by The Thai Customs Department. - License cancel message version 1.0 [25/09/2008) -->
+<!-- adopt by คณะทำงานด้านเทคนิคและการออกแบบระบบงาน National Single Window - License cancel message version 1.0 [09/06/2010]) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:eLicense="http://ebxml.customs.go.th/schema/LicenseCancelMsg_0_1" 
+			xmlns:ds="http://www.w3.org/2000/09/xmldsig#" 
+			xmlns:ds1="http://www.ietf.org/rfc/rfc3369.txt#" 
+			targetNamespace="http://ebxml.customs.go.th/schema/LicenseCancelMsg_0_1">
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xsd:element name="LicenseCancel" type="eLicense:LicenseType"/>
+	<xsd:complexType name="LicenseType">
+		<xsd:sequence>
+			<xsd:element name="DocumentHeader" type="eLicense:DocumentHeaderType"/>
+			<xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentHeaderType">
+		<xsd:sequence>
+			<xsd:element name="DocumentReference" type="eLicense:DocumentReferenceType"/>
+			<xsd:element name="LicenseInfo" type="eLicense:LicenseInfoType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentReferenceType">
+		<xsd:sequence>
+			<xsd:element name="UserID">
+				<xsd:annotation>
+					<xsd:documentation>(5) - M - 17A - UID Transmit - รหัสผู้ส่งข้อมูล</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="17"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LicenseInfoType">
+		<xsd:sequence>
+			<xsd:element name="LicenseNo">
+				<xsd:annotation>
+					<xsd:documentation>(1) - M - 35A - License No - เลขที่ใบอนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TaxReference">
+				<xsd:annotation>
+					<xsd:documentation>(2) - M - 17A - License Issue Authority - เลขประจำตัวผู้เสียภาษีอากรของหน่วยงานผู้ออกใบอนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IssueDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>(3) - M - 8N - Issue Date - วันที่ออกใบอนุญาต (CCYYMMDD)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DocumentType">
+				<xsd:annotation>
+					<xsd:documentation>(4) - M - 10A - Document Type - ประเภทเอกสารในการรับส่งที่ต้องการยกเลิกมีค่าดังนี้ EBLICENS - License no Detail, EBLICEINV - License per invoice</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
