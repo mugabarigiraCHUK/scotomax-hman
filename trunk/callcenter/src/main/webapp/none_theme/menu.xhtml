@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:at="http://richfaces.org/demo/app-taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div id="masthead" style="margin-top: 40px; margin-bottom: 30px; background-color: #eee"> 
+		<div class="container-fluid" >
+			<div class="row">
+				<div class="span16 columns">
+					<ul class="pills">
+						<li>
+							<a href="#">ACD</a>
+							<ul>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/acd/acdcondition.faces">Condition</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/acd/acdroute.faces">Route</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">Agent</a>
+							<ul>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentlevel.faces">Level</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentprofile.faces">Profile</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentscript.faces">Script</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentseat.faces">Seat</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentskill.faces">Skill</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agenttrigger.faces">Trigger</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentstatus.faces">Status</a></li>
+							</ul>
+						</li>
+						<li><a href="#">CRM</a></li>
+						<li><a href="#">IVR</a></li>
+						<li><a href="#">Job</a></li>
+						<li><a href="#">Knowledge</a></li>
+						<li><a href="#">Workflow</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</ui:composition>
