@@ -12,15 +12,12 @@
 		<div class="span16">
 		
 		<h:form id="acdconditionForm">
-			<rich:panel id="acdConditionPanel" header="#{msg['acdcondition.inputpanel']}">
-			
+			<rich:panel id="acdConditionPanel" header="#{msg['acdcondition.inputpanel']} - #{msg['acdcondition.datatable.legend']}">
 				<a4j:outputPanel id="acdConditionOutputPanel">
 					
 						<h:message infoClass="alert-message info" 
 								   warnClass="alert-message warning" 
 								   errorClass="alert-message info" />
-						
-						<h3><h:outputText value="#{msg['acdcondition.datatable.legend']}" /></h3>
 											
 						<rich:dataTable value="#{acdConditionController.acdConditionList}" 
 										var="data" 
@@ -87,68 +84,77 @@
 			</rich:panel>
 		
 			<rich:popupPanel id="acdConditionCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-							
-				<p><h:outputText value="#{msg['acdcondition.create.update.legend']}" /></p>
-									
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:message infoClass="alert-message info" 
-											   warnClass="alert-message warning" 
-											   errorClass="alert-message info" />
-									
-									<h:outputText value="#{msg['acdcondition.id']}" />
-									<h:inputText value="#{acdConditionController.conditionId}" rendered="#{empty acdConditionController.conditionId}"/>
-									<h:outputText value="#{acdConditionController.conditionId}" rendered="#{not empty acdConditionController.conditionId}"/>
-									
-									<h:outputText value="#{msg['acdcondition.name']}"/>
-									<h:inputText value="#{acdConditionController.conditionName}" />
-									
-									<h:outputText value="#{msg['acdcondition.description']}"/>
-									<h:inputTextarea value="#{acdConditionController.conditionDescription}" cols="30" rows="5" />
-									
-									<h:outputText value="#{msg['acdcondition.updatedate']}" rendered="#{not empty acdConditionController.conditionUpdateDate}"/>
-									<h:outputText value="#{acdConditionController.conditionUpdateDate}" rendered="#{not empty acdConditionController.conditionUpdateDate}"/>
-									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{acdConditionController.create}"
-																	  execute="acdConditionCreateUpdatePanel" 
-																	  rendered="#{empty acdConditionController.conditionId}" 
-																	  render="acdConditionOutputPanel"
-																	  oncomplete="#{rich:component('acdConditionCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{acdConditionController.update}"
-																	  execute="acdConditionCreateUpdatePanel" 
-																	  rendered="#{not empty acdConditionController.conditionId}" 
-																	  render="acdConditionOutputPanel"
-																	  oncomplete="#{rich:component('acdConditionCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('acdConditionCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-									
-								</h:panelGrid>
-						
-					
+				<f:facet name="header">
+		            <h:outputText value="#{msg['acdcondition.create.update.legend']}" />
+		        </f:facet>
+		        	
+				<h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
+				
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['acdcondition.id']}" /></label>
+					<div class="input">
+   						<h:inputText value="#{acdConditionController.conditionId}"  
+   									 disabled="#{not empty acdConditionController.conditionId}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['acdcondition.name']}" /></label>
+					<div class="input">
+   						<h:inputText value="#{acdConditionController.conditionName}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['acdcondition.description']}"/></label>
+					<div class="input">
+   						<h:inputTextarea value="#{acdConditionController.conditionDescription}" cols="30" rows="5" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['acdcondition.updatedate']}" rendered="#{not empty acdConditionController.conditionUpdateDate}"/></label>
+					<div class="input">
+   						<h:inputText value="#{acdConditionController.conditionUpdateDate}" 
+   									 rendered="#{not empty acdConditionController.conditionUpdateDate}"
+   									 disabled="true"/>
+					</div>
+				</div>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{acdConditionController.create}"
+												  execute="acdConditionCreateUpdatePanel" 
+												  rendered="#{empty acdConditionController.conditionId}" 
+												  render="acdConditionOutputPanel"
+												  oncomplete="#{rich:component('acdConditionCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+												  
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{acdConditionController.update}"
+												  execute="acdConditionCreateUpdatePanel" 
+												  rendered="#{not empty acdConditionController.conditionId}" 
+												  render="acdConditionOutputPanel"
+												  oncomplete="#{rich:component('acdConditionCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('acdConditionCreateUpdatePanel')}.hide(); return false;" 
+												  styleClass="btn"/>
+				</div>					
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="acdConditionDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['acdcondition.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['acdcondition.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{acdConditionController.delete}" 
-															  execute="acdConditionDeletePanel"
-															  render="acdConditionOutputPanel"
-															  oncomplete="#{rich:component('acdConditionDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('acdConditionDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['acdcondition.delete.legend']}" />
+		        </f:facet>
+				<p><h:outputText value="#{msg['acdcondition.delete.message']}" /></p>
+				<div class="actions">
+						<a4j:commandButton value="#{msg['button.delete']}" 
+						 				   action="#{acdConditionController.delete}" 
+										   execute="acdConditionDeletePanel"
+										   render="acdConditionOutputPanel"
+										   oncomplete="#{rich:component('acdConditionDeletePanel')}.hide(); return false;"
+										   styleClass="btn danger"/>
+						<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('acdConditionDeletePanel')}.hide(); return false;"
+										   styleClass="btn" />
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>
