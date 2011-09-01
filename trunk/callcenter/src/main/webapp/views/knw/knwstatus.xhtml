@@ -4,20 +4,22 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="knwstatusForm">
-			<rich:panel id="knwStatusPanel" header="#{msg['knwstatus.inputpanel']}">
+			<rich:panel id="knwStatusPanel" header="#{msg['knwstatus.inputpanel']} - #{msg['knwstatus.datatable.legend']}">
 				<a4j:outputPanel id="knwStatusOutputPanel">
 					
-						<h:messages/>
-						
-						<fieldset>
-							<legend><h:outputText value="#{msg['knwstatus.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty knwStatusController.knwStatusList}"/>
-							<rich:dataTable value="#{knwStatusController.knwStatusList}" var="data">
+						<h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
+							
+							<rich:dataTable value="#{knwStatusController.knwStatusList}" 
+													var="data"
+													noDataLabel="#{msg['no.found.data.message']}"
+													styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['knwstatus.table.id']}" /></f:facet>
 									<h:outputText value="#{data.statusId}" />
@@ -41,7 +43,8 @@
 																 render="knwStatusCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.statusId}">
+																 rendered="#{not empty data.statusId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.statusId}" assignTo="#{knwStatusController.selectedStatusId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -51,92 +54,103 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('knwStatusDeletePanel')}.show()"
-																  rendered="#{not empty data.statusId}">
+																  rendered="#{not empty data.statusId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.statusId}" assignTo="#{knwStatusController.selectedStatusId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{knwStatusController.edit}"
 																			 	render="knwStatusCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{knwStatusController.selectedStatusId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="knwStatusCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="knwStatusCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['knwstatus.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['knwstatus.create.update.legend']}" />
+		        </f:facet>
+		        
+		        <h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['knwstatus.id']}" />
-									<h:inputText value="#{knwStatusController.statusId}" rendered="#{empty knwStatusController.statusId}"/>
-									<h:outputText value="#{knwStatusController.statusId}" rendered="#{not empty knwStatusController.statusId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['knwstatus.id']}" /></label>
+					<div class="input"><h:inputText value="#{knwStatusController.statusId}" disabled="#{not empty knwStatusController.statusId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['knwstatus.name']}"/>
-									<h:inputText value="#{knwStatusController.statusName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['knwstatus.name']}"/></label>
+					<div class="input"><h:inputText value="#{knwStatusController.statusName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['knwstatus.description']}"/>
-									<h:inputTextarea value="#{knwStatusController.statusDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['knwstatus.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{knwStatusController.statusDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['knwstatus.updatedate']}" rendered="#{not empty knwStatusController.statusUpdateDate}"/>
-									<h:outputText value="#{knwStatusController.statusUpdateDate}" rendered="#{not empty knwStatusController.statusUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['knwstatus.updatedate']}" rendered="#{not empty knwStatusController.statusUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{knwStatusController.statusUpdateDate}" rendered="#{not empty knwStatusController.statusUpdateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{knwStatusController.create}"
-																	  execute="knwStatusCreateUpdatePanel" 
-																	  rendered="#{empty knwStatusController.statusId}" 
-																	  render="knwStatusOutputPanel"
-																	  oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{knwStatusController.update}"
-																	  execute="knwStatusCreateUpdatePanel" 
-																	  rendered="#{not empty knwStatusController.statusId}"
-																	  render="knwStatusOutputPanel" 
-																	  oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-									
-								</h:panelGrid>
-						
-					</fieldset>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{knwStatusController.create}"
+												  execute="knwStatusCreateUpdatePanel" 
+												  rendered="#{empty knwStatusController.statusId}" 
+												  render="knwStatusOutputPanel"
+												  oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{knwStatusController.update}"
+												  execute="knwStatusCreateUpdatePanel" 
+												  rendered="#{not empty knwStatusController.statusId}"
+												  render="knwStatusOutputPanel" 
+												  oncomplete="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+													onclick="#{rich:component('knwStatusCreateUpdatePanel')}.hide(); return false;" 
+													styleClass="btn"/>
+				</div>
+								
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="knwStatusDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['knwstatus.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['knwstatus.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{knwStatusController.delete}" 
-															  execute="knwStatusDeletePanel"
-															  render="knwStatusOutputPanel"
-															  oncomplete="#{rich:component('knwStatusDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('knwStatusDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['knwstatus.delete.legend']}" />
+		        </f:facet>
+		        
+				<p><h:outputText value="#{msg['knwstatus.delete.message']}" /></p>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{knwStatusController.delete}" 
+												  execute="knwStatusDeletePanel"
+												  render="knwStatusOutputPanel"
+												  oncomplete="#{rich:component('knwStatusDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('knwStatusDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
+				
 			</rich:popupPanel>
 			
 		</h:form>

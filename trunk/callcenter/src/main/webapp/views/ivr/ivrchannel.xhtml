@@ -4,20 +4,22 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="ivrchannelForm">
-			<rich:panel id="ivrChannelPanel" header="#{msg['ivrchannel.inputpanel']}">
+			<rich:panel id="ivrChannelPanel" header="#{msg['ivrchannel.inputpanel']} - #{msg['ivrchannel.datatable.legend']}">
 				<a4j:outputPanel id="ivrChannelOutputPanel">
 					
-						<h:messages/>
-						
-						<fieldset>
-							<legend><h:outputText value="#{msg['ivrchannel.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty ivrChannelController.ivrChannelList}"/>
-							<rich:dataTable value="#{ivrChannelController.ivrChannelList}" var="data">
+						<h:message infoClass="alert-message info" 
+								   warnClass="alert-message warning" 
+								   errorClass="alert-message info" />
+								   
+							<rich:dataTable value="#{ivrChannelController.ivrChannelList}" 
+												var="data"
+												noDataLabel="#{msg['no.found.data.message']}"
+												styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['ivrchannel.table.id']}" /></f:facet>
 									<h:outputText value="#{data.channelId}" />
@@ -41,7 +43,8 @@
 																 render="ivrChannelCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.channelId}">
+																 rendered="#{not empty data.channelId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.channelId}" assignTo="#{ivrChannelController.selectedChannelId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -51,92 +54,102 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('ivrChannelDeletePanel')}.show()"
-																  rendered="#{not empty data.channelId}">
+																  rendered="#{not empty data.channelId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.channelId}" assignTo="#{ivrChannelController.selectedChannelId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{ivrChannelController.edit}"
 																			 	render="ivrChannelCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{ivrChannelController.selectedChannelId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="ivrChannelCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="ivrChannelCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['ivrchannel.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['ivrchannel.create.update.legend']}" />
+		        </f:facet>
+		        
+		        <h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['ivrchannel.id']}" />
-									<h:inputText value="#{ivrChannelController.channelId}" rendered="#{empty ivrChannelController.channelId}"/>
-									<h:outputText value="#{ivrChannelController.channelId}" rendered="#{not empty ivrChannelController.channelId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrchannel.id']}" /></label>
+					<div class="input"><h:inputText value="#{ivrChannelController.channelId}" disabled="#{not empty ivrChannelController.channelId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrchannel.name']}"/>
-									<h:inputText value="#{ivrChannelController.channelName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrchannel.name']}"/></label>
+					<div class="input"><h:inputText value="#{ivrChannelController.channelName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrchannel.description']}"/>
-									<h:inputTextarea value="#{ivrChannelController.channelDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrchannel.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{ivrChannelController.channelDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrchannel.updatedate']}" rendered="#{not empty ivrChannelController.channelUpdateDate}"/>
-									<h:outputText value="#{ivrChannelController.channelUpdateDate}" rendered="#{not empty ivrChannelController.channelUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrchannel.updatedate']}" rendered="#{not empty ivrChannelController.channelUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{ivrChannelController.channelUpdateDate}" rendered="#{not empty ivrChannelController.channelUpdateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{ivrChannelController.create}"
-																	  execute="ivrChannelCreateUpdatePanel" 
-																	  rendered="#{empty ivrChannelController.channelId}" 
-																	  render="ivrChannelOutputPanel"
-																	  oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{ivrChannelController.update}"
-																	  execute="ivrChannelCreateUpdatePanel" 
-																	  rendered="#{not empty ivrChannelController.channelId}" 
-																	  render="ivrChannelOutputPanel"
-																	  oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrChannelCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-									
-								</h:panelGrid>
-						
-					</fieldset>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{ivrChannelController.create}"
+												  execute="ivrChannelCreateUpdatePanel" 
+												  rendered="#{empty ivrChannelController.channelId}" 
+												  render="ivrChannelOutputPanel"
+												  oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{ivrChannelController.update}"
+												  execute="ivrChannelCreateUpdatePanel" 
+												  rendered="#{not empty ivrChannelController.channelId}" 
+												  render="ivrChannelOutputPanel"
+												  oncomplete="#{rich:component('ivrChannelCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('ivrChannelCreateUpdatePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
+				
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="ivrChannelDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['ivrchannel.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['ivrchannel.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{ivrChannelController.delete}" 
-															  execute="ivrChannelDeletePanel"
-															  render="ivrChannelOutputPanel"
-															  oncomplete="#{rich:component('ivrChannelDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrChannelDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['ivrchannel.delete.legend']}" />
+		        </f:facet>
+		        
+				<p><h:outputText value="#{msg['ivrchannel.delete.message']}" /></p>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{ivrChannelController.delete}" 
+												  execute="ivrChannelDeletePanel"
+												  render="ivrChannelOutputPanel"
+												  oncomplete="#{rich:component('ivrChannelDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('ivrChannelDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>
