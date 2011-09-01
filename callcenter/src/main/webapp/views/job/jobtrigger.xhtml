@@ -4,20 +4,22 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="jobtriggerForm">
-			<rich:panel id="jobTriggerPanel" header="#{msg['jobtrigger.inputpanel']}">
+			<rich:panel id="jobTriggerPanel" header="#{msg['jobtrigger.inputpanel']} - #{msg['jobtrigger.datatable.legend']}">
 				<a4j:outputPanel id="jobTriggerOutputPanel">
 					
-						<h:messages/>
+						<h:message infoClass="alert-message info" 
+								   warnClass="alert-message warning" 
+								   errorClass="alert-message info" />
 						
-						<fieldset>
-							<legend><h:outputText value="#{msg['jobtrigger.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty jobTriggerController.jobTriggerList}"/>
-							<rich:dataTable value="#{jobTriggerController.jobTriggerList}" var="data">
+							<rich:dataTable value="#{jobTriggerController.jobTriggerList}" 
+												var="data"
+												noDataLabel="#{msg['no.found.data.message']}"
+												styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['jobtrigger.table.id']}" /></f:facet>
 									<h:outputText value="#{data.triggerId}" />
@@ -49,7 +51,8 @@
 																 render="jobTriggerCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.triggerId}">
+																 rendered="#{not empty data.triggerId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.triggerId}" assignTo="#{jobTriggerController.selectedTriggerId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -59,98 +62,113 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('jobTriggerDeletePanel')}.show()"
-																  rendered="#{not empty data.triggerId}">
+																  rendered="#{not empty data.triggerId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.triggerId}" assignTo="#{jobTriggerController.selectedTriggerId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{jobTriggerController.edit}"
 																			 	render="jobTriggerCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{jobTriggerController.selectedTriggerId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="jobTriggerCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="jobTriggerCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['jobtrigger.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['jobtrigger.create.update.legend']}" />
+		        </f:facet>
+		        
+		        
+				<h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['jobtrigger.id']}" />
-									<h:inputText value="#{jobTriggerController.triggerId}" rendered="#{empty jobTriggerController.triggerId}"/>
-									<h:outputText value="#{jobTriggerController.triggerId}" rendered="#{not empty jobTriggerController.triggerId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['jobtrigger.id']}" /></label>
+					<div class="input"><h:inputText value="#{jobTriggerController.triggerId}" disabled="#{not empty jobTriggerController.triggerId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobtrigger.name']}"/>
-									<h:inputText value="#{jobTriggerController.triggerName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['jobtrigger.name']}"/></label>
+					<div class="input"><h:inputText value="#{jobTriggerController.triggerName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobtrigger.description']}"/>
-									<h:inputTextarea value="#{jobTriggerController.triggerDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['jobtrigger.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{jobTriggerController.triggerDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobtrigger.command']}"/>
-									<h:inputTextarea value="#{jobTriggerController.triggerCommand}" cols="60" rows="2" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['jobtrigger.command']}"/></label>
+					<div class="input"><h:inputTextarea value="#{jobTriggerController.triggerCommand}" cols="60" rows="2" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobtrigger.createdate']}" rendered="#{not empty jobTriggerController.triggerCreateDate}"/>
-									<h:outputText value="#{jobTriggerController.triggerCreateDate}" rendered="#{not empty jobTriggerController.triggerCreateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['jobtrigger.createdate']}" rendered="#{not empty jobTriggerController.triggerCreateDate}"/></label>
+					<div class="input"><h:inputText value="#{jobTriggerController.triggerCreateDate}" rendered="#{not empty jobTriggerController.triggerCreateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobtrigger.updatedate']}" rendered="#{not empty jobTriggerController.triggerUpdateDate}"/>
-									<h:outputText value="#{jobTriggerController.triggerUpdateDate}" rendered="#{not empty jobTriggerController.triggerUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['jobtrigger.updatedate']}" rendered="#{not empty jobTriggerController.triggerUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{jobTriggerController.triggerUpdateDate}" rendered="#{not empty jobTriggerController.triggerUpdateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{jobTriggerController.create}"
-																	  execute="jobTriggerCreateUpdatePanel" 
-																	  rendered="#{empty jobTriggerController.triggerId}" 
-																	  render="jobTriggerOutputPanel"
-																	  oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{jobTriggerController.update}"
-																	  execute="jobTriggerCreateUpdatePanel" 
-																	  rendered="#{not empty jobTriggerController.triggerId}" 
-																	  render="jobTriggerOutputPanel"
-																	  oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobTriggerCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
+				<div class="action">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{jobTriggerController.create}"
+												  execute="jobTriggerCreateUpdatePanel" 
+												  rendered="#{empty jobTriggerController.triggerId}" 
+												  render="jobTriggerOutputPanel"
+												  oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{jobTriggerController.update}"
+												  execute="jobTriggerCreateUpdatePanel" 
+												  rendered="#{not empty jobTriggerController.triggerId}" 
+												  render="jobTriggerOutputPanel"
+												  oncomplete="#{rich:component('jobTriggerCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('jobTriggerCreateUpdatePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 									
-								</h:panelGrid>
-						
-					</fieldset>
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="jobTriggerDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['jobtrigger.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['jobtrigger.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{jobTriggerController.delete}" 
-															  execute="jobTriggerDeletePanel"
-															  render="jobTriggerOutputPanel"
-															  oncomplete="#{rich:component('jobTriggerDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobTriggerDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['jobtrigger.delete.legend']}" />
+		        </f:facet>
+		        
+				<p><h:outputText value="#{msg['jobtrigger.delete.message']}" /></p>
+				<div class="action">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{jobTriggerController.delete}" 
+												  execute="jobTriggerDeletePanel"
+												  render="jobTriggerOutputPanel"
+												  oncomplete="#{rich:component('jobTriggerDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('jobTriggerDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>

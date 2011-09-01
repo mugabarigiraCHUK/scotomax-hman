@@ -4,20 +4,22 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="ivrvoiceForm">
-			<rich:panel id="ivrVoicePanel" header="#{msg['ivrvoice.inputpanel']}">
+			<rich:panel id="ivrVoicePanel" header="#{msg['ivrvoice.inputpanel']} - #{msg['ivrvoice.datatable.legend']}">
 				<a4j:outputPanel id="ivrVoiceOutputPanel">
 					
-						<h:messages/>
-						
-						<fieldset>
-							<legend><h:outputText value="#{msg['ivrvoice.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty ivrVoicepromptController.ivrVoicepromptList}"/>
-							<rich:dataTable value="#{ivrVoicepromptController.ivrVoicepromptList}" var="data">
+					<h:message infoClass="alert-message info" 
+								   warnClass="alert-message warning" 
+								   errorClass="alert-message info" />
+								   
+							<rich:dataTable value="#{ivrVoicepromptController.ivrVoicepromptList}" 
+												var="data"
+												noDataLabel="#{msg['no.found.data.message']}"
+												styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['ivrvoice.table.id']}" /></f:facet>
 									<h:outputText value="#{data.voiceId}" />
@@ -49,7 +51,8 @@
 																 render="ivrVoiceCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.voiceId}">
+																 rendered="#{not empty data.voiceId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.voiceId}" assignTo="#{ivrVoicepromptController.selectedVoiceId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -59,98 +62,111 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('ivrVoiceDeletePanel')}.show()"
-																  rendered="#{not empty data.voiceId}">
+																  rendered="#{not empty data.voiceId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.voiceId}" assignTo="#{ivrVoicepromptController.selectedVoiceId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{ivrVoicepromptController.edit}"
 																			 	render="ivrVoiceCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{ivrVoicepromptController.selectedVoiceId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="ivrVoiceCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="ivrVoiceCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['ivrvoice.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['ivrvoice.create.update.legend']}" />
+		        </f:facet>
+		        
+				<h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['ivrvoice.id']}" />
-									<h:inputText value="#{ivrVoicepromptController.voiceId}" rendered="#{empty ivrVoicepromptController.voiceId}"/>
-									<h:outputText value="#{ivrVoicepromptController.voiceId}" rendered="#{not empty ivrVoicepromptController.voiceId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrvoice.id']}" /></label>
+					<div class="input"><h:inputText value="#{ivrVoicepromptController.voiceId}" disabled="#{not empty ivrVoicepromptController.voiceId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrvoice.name']}"/>
-									<h:inputText value="#{ivrVoicepromptController.voiceName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrvoice.name']}"/></label>
+					<div class="input"><h:inputText value="#{ivrVoicepromptController.voiceName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrvoice.description']}"/>
-									<h:inputTextarea value="#{ivrVoicepromptController.voiceDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrvoice.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{ivrVoicepromptController.voiceDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrvoice.filename']}"/>
-									<h:inputText value="#{ivrVoicepromptController.voiceFilename}" size="50"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrvoice.filename']}"/></label>
+					<div class="input"><h:inputText value="#{ivrVoicepromptController.voiceFilename}" size="50"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrvoice.createdate']}" rendered="#{not empty ivrVoicepromptController.voiceCreateDate}"/>
-									<h:outputText value="#{ivrVoicepromptController.voiceCreateDate}" rendered="#{not empty ivrVoicepromptController.voiceCreateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrvoice.createdate']}" rendered="#{not empty ivrVoicepromptController.voiceCreateDate}"/></label>
+					<div class="input"><h:inputText value="#{ivrVoicepromptController.voiceCreateDate}" rendered="#{not empty ivrVoicepromptController.voiceCreateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrvoice.updatedate']}" rendered="#{not empty ivrVoicepromptController.voiceUpdateDate}"/>
-									<h:outputText value="#{ivrVoicepromptController.voiceUpdateDate}" rendered="#{not empty ivrVoicepromptController.voiceUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrvoice.updatedate']}" rendered="#{not empty ivrVoicepromptController.voiceUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{ivrVoicepromptController.voiceUpdateDate}" rendered="#{not empty ivrVoicepromptController.voiceUpdateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{ivrVoicepromptController.create}"
-																	  execute="ivrVoiceCreateUpdatePanel" 
-																	  rendered="#{empty ivrVoicepromptController.voiceId}" 
-																	  render="ivrVoiceOutputPanel"
-																	  oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{ivrVoicepromptController.update}"
-																	  execute="ivrVoiceCreateUpdatePanel" 
-																	  rendered="#{not empty ivrVoicepromptController.voiceId}" 
-																	  render="ivrVoiceOutputPanel"
-																	  oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrVoiceCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-									
-								</h:panelGrid>
-						
-					</fieldset>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{ivrVoicepromptController.create}"
+												  execute="ivrVoiceCreateUpdatePanel" 
+												  rendered="#{empty ivrVoicepromptController.voiceId}" 
+												  render="ivrVoiceOutputPanel"
+												  oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{ivrVoicepromptController.update}"
+												  execute="ivrVoiceCreateUpdatePanel" 
+												  rendered="#{not empty ivrVoicepromptController.voiceId}" 
+												  render="ivrVoiceOutputPanel"
+												  oncomplete="#{rich:component('ivrVoiceCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('ivrVoiceCreateUpdatePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="ivrVoiceDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['ivrvoice.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['ivrvoice.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{ivrVoicepromptController.delete}" 
-															  execute="ivrVoiceDeletePanel"
-															  render="ivrVoiceOutputPanel"
-															  oncomplete="#{rich:component('ivrVoiceDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrVoiceDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['ivrvoice.delete.legend']}" />
+		        </f:facet>
+		        
+		        <p><h:outputText value="#{msg['ivrvoice.delete.message']}" /></p>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{ivrVoicepromptController.delete}" 
+												  execute="ivrVoiceDeletePanel"
+												  render="ivrVoiceOutputPanel"
+												  oncomplete="#{rich:component('ivrVoiceDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('ivrVoiceDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>

@@ -4,20 +4,22 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="ivrdtmfForm">
-			<rich:panel id="ivrDtmfPanel" header="#{msg['ivrdtmf.inputpanel']}">
+			<rich:panel id="ivrDtmfPanel" header="#{msg['ivrdtmf.inputpanel']} - #{msg['ivrdtmf.datatable.legend']}">
 				<a4j:outputPanel id="ivrdtmfOutputPanel">
 					
-						<h:messages/>
-						
-						<fieldset>
-							<legend><h:outputText value="#{msg['ivrdtmf.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty ivrDtmfController.listIvrDtmf}"/>
-							<rich:dataTable value="#{ivrDtmfController.listIvrDtmf}" var="data">
+						<h:message infoClass="alert-message info" 
+								   warnClass="alert-message warning" 
+								   errorClass="alert-message info" />
+								   
+							<rich:dataTable value="#{ivrDtmfController.listIvrDtmf}" 
+												var="data"
+												noDataLabel="#{msg['no.found.data.message']}"
+												styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['ivrdtmf.table.id']}" /></f:facet>
 									<h:outputText value="#{data.dtmfId}" />
@@ -49,7 +51,8 @@
 																 render="ivrDtmfCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.dtmfId}">
+																 rendered="#{not empty data.dtmfId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.dtmfId}" assignTo="#{ivrDtmfController.selectedDtmfId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -59,98 +62,111 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('ivrDtmfDeletePanel')}.show()"
-																  rendered="#{not empty data.dtmfId}">
+																  rendered="#{not empty data.dtmfId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.dtmfId}" assignTo="#{ivrDtmfController.selectedDtmfId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{ivrDtmfController.edit}"
 																			 	render="ivrDtmfCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{ivrDtmfController.selectedDtmfId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="ivrDtmfCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="ivrDtmfCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['ivrdtmf.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['ivrdtmf.create.update.legend']}" />
+		        </f:facet>
+		        
+		        <h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['ivrdtmf.id']}" />
-									<h:inputText value="#{ivrDtmfController.dtmfId}" rendered="#{empty ivrDtmfController.dtmfId}"/>
-									<h:outputText value="#{ivrDtmfController.dtmfId}" rendered="#{not empty ivrDtmfController.dtmfId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrdtmf.id']}" /></label>
+					<div class="input"><h:inputText value="#{ivrDtmfController.dtmfId}" disabled="#{not empty ivrDtmfController.dtmfId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrdtmf.name']}"/>
-									<h:inputText value="#{ivrDtmfController.dtmfName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrdtmf.name']}"/></label>
+					<div class="input"><h:inputText value="#{ivrDtmfController.dtmfName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrdtmf.description']}"/>
-									<h:inputTextarea value="#{ivrDtmfController.dtmfDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrdtmf.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{ivrDtmfController.dtmfDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrdtmf.digit']}"/>
-									<h:inputText value="#{ivrDtmfController.dtmfDigit}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrdtmf.digit']}"/></label>
+					<div class="input"><h:inputText value="#{ivrDtmfController.dtmfDigit}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrdtmf.createdate']}" rendered="#{not empty ivrDtmfController.dtmfCreateDate}"/>
-									<h:outputText value="#{ivrDtmfController.dtmfCreateDate}" rendered="#{not empty ivrDtmfController.dtmfCreateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrdtmf.createdate']}" rendered="#{not empty ivrDtmfController.dtmfCreateDate}"/></label>
+					<div class="input"><h:inputText value="#{ivrDtmfController.dtmfCreateDate}" rendered="#{not empty ivrDtmfController.dtmfCreateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['ivrdtmf.updatedate']}" rendered="#{not empty ivrDtmfController.dtmfUpdateDate}"/>
-									<h:outputText value="#{ivrDtmfController.dtmfUpdateDate}" rendered="#{not empty ivrDtmfController.dtmfUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['ivrdtmf.updatedate']}" rendered="#{not empty ivrDtmfController.dtmfUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{ivrDtmfController.dtmfUpdateDate}" rendered="#{not empty ivrDtmfController.dtmfUpdateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{ivrDtmfController.create}"
-																	  execute="ivrDtmfCreateUpdatePanel" 
-																	  rendered="#{empty ivrDtmfController.dtmfId}" 
-																	  render="ivrDtmfOutputPanel"
-																	  oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{ivrDtmfController.update}"
-																	  execute="ivrDtmfCreateUpdatePanel" 
-																	  rendered="#{not empty ivrDtmfController.dtmfId}" 
-																	  render="ivrDtmfOutputPanel"
-																	  oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrDtmfCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-									
-								</h:panelGrid>
-						
-					</fieldset>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{ivrDtmfController.create}"
+												  execute="ivrDtmfCreateUpdatePanel" 
+												  rendered="#{empty ivrDtmfController.dtmfId}" 
+												  render="ivrDtmfOutputPanel"
+												  oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{ivrDtmfController.update}"
+												  execute="ivrDtmfCreateUpdatePanel" 
+												  rendered="#{not empty ivrDtmfController.dtmfId}" 
+												  render="ivrDtmfOutputPanel"
+												  oncomplete="#{rich:component('ivrDtmfCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('ivrDtmfCreateUpdatePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+					</div>
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="ivrDtmfDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['ivrdtmf.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['ivrdtmf.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{ivrDtmfController.delete}" 
-															  execute="ivrDtmfDeletePanel"
-															  render="ivrDtmfOutputPanel"
-															  oncomplete="#{rich:component('ivrDtmfDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('ivrDtmfDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['ivrdtmf.delete.legend']}" />
+		        </f:facet>
+		        
+				<p><h:outputText value="#{msg['ivrdtmf.delete.message']}" /></p>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{ivrDtmfController.delete}" 
+												  execute="ivrDtmfDeletePanel"
+												  render="ivrDtmfOutputPanel"
+												  oncomplete="#{rich:component('ivrDtmfDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('ivrDtmfDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>
