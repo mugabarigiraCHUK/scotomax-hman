@@ -709,6 +709,11 @@ form label {
 form div.input {
   margin-left: 150px !important;
 }
+form div.output {
+	margin-left: 150px !important;
+	margin-top: 8px !important;
+	margin-left: 150px !important;
+}
 form input[type=checkbox], form input[type=radio] {
   cursor: pointer !important;
 }
