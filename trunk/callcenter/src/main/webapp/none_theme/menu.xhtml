@@ -30,11 +30,54 @@
 								<li><a href="#{facesContext.externalContext.requestContextPath}/views/agent/agentstatus.faces">Status</a></li>
 							</ul>
 						</li>
-						<li><a href="#">CRM</a></li>
-						<li><a href="#">IVR</a></li>
-						<li><a href="#">Job</a></li>
-						<li><a href="#">Knowledge</a></li>
-						<li><a href="#">Workflow</a></li>
+						<li>
+							<a href="#">CRM</a>
+							<ul>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/crm/crmbusiness.faces">Business</a></li>
+								<li><a href="#">Customer</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/crm/crmstatus.faces">Status</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">IVR</a>
+							<ul>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/ivr/ivrcallflow.faces">Call flow</a></li>
+								<li><a href="#">Call route</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/ivr/ivrchannel.faces">Channel</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/ivr/ivrdtmf.faces">DTMF</a></li>
+								<li><a href="#">PABX</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/ivr/ivrprotocol.faces">Protocol</a></li>
+								<li><a href="#">Schedule</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/ivr/ivrvoiceprompt.faces">Voice prompt</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">Job</a>
+							<ul>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/job/jobstatus.faces">Status</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/job/jobticket.faces">Ticket</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/job/jobtrigger.faces">Trigger</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">Knowledge</a>
+							<ul>
+								<li><a href="#">Category</a></li>
+								<li><a href="#">Solution</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/knw/knwstatus.faces">Status</a></li>
+								<li><a href="#">Topic</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">Workflow</a>
+							<ul>
+								<li><a href="#">Calendar</a></li>
+								<li><a href="#">Holiday</a></li>
+								<li><a href="#">Request</a></li>
+								<li><a href="#{facesContext.externalContext.requestContextPath}/views/wkf/wkfstatus.faces">Status</a></li>
+								<li><a href="#">Work plan</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
