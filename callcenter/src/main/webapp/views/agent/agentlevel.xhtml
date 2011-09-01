@@ -12,72 +12,72 @@
 			<rich:panel id="agentLevelPanel" header="#{msg['agentlevel.inputpanel']} - #{msg['agentlevel.datatable.legend']}">
 				<a4j:outputPanel id="agentLevelOutputPanel">
 					
-						<h:message infoClass="alert-message info" 
-								   warnClass="alert-message warning" 
-								   errorClass="alert-message info" />
+				<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
+				
+				<rich:dataTable value="#{agentLevelController.agentLevelList}" 
+										var="data"
+										noDataLabel="#{msg['no.found.data.message']}"
+										styleClass="common-table table zebra-striped">
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.id']}" /></f:facet>
+							<h:outputText value="#{data.levelId}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.name']}" /></f:facet>
+							<h:outputText value="#{data.levelName}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.description']}" /></f:facet>
+							<h:outputText value="#{data.levelDescription}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.updatedate']}" /></f:facet>
+							<h:outputText value="#{data.levelUpdateDate}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.edit']}" /></f:facet>
+							<a4j:commandButton value="#{msg['button.edit']}" 
+														 action="#{agentLevelController.edit}" 
+														 render="agentLevelCreateUpdatePanel" 
+														 execute="@this" 
+														 oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()"
+														 rendered="#{not empty data.levelId}"
+														 styleClass="btn">
+								<a4j:param value="#{data.levelId}" assignTo="#{agentLevelController.selectedLevelId}"/>
+							</a4j:commandButton>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.delete']}" /></f:facet>
+							<a4j:commandButton value="#{msg['button.delete']}" 
+														  render="@none" 
+														  execute="@this" 
+														  oncomplete="#{rich:component('agentLevelDeletePanel')}.show()"
+														  rendered="#{not empty data.levelId}"
+														  styleClass="btn">
+								<a4j:param value="#{data.levelId}" assignTo="#{agentLevelController.selectedLevelId}"/>
+							</a4j:commandButton>
+						</rich:column>
 						
-						<rich:dataTable value="#{agentLevelController.agentLevelList}" 
-												var="data"
-												noDataLabel="#{msg['no.found.data.message']}"
-												styleClass="common-table table zebra-striped">
-								<rich:column>
-									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.id']}" /></f:facet>
-									<h:outputText value="#{data.levelId}" />
-								</rich:column>
-								<rich:column>
-									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.name']}" /></f:facet>
-									<h:outputText value="#{data.levelName}" />
-								</rich:column>
-								<rich:column>
-									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.description']}" /></f:facet>
-									<h:outputText value="#{data.levelDescription}" />
-								</rich:column>
-								<rich:column>
-									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.updatedate']}" /></f:facet>
-									<h:outputText value="#{data.levelUpdateDate}" />
-								</rich:column>
-								<rich:column>
-									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.edit']}" /></f:facet>
-									<a4j:commandButton value="#{msg['button.edit']}" 
-																 action="#{agentLevelController.edit}" 
-																 render="agentLevelCreateUpdatePanel" 
-																 execute="@this" 
-																 oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.levelId}"
-																 styleClass="btn">
-										<a4j:param value="#{data.levelId}" assignTo="#{agentLevelController.selectedLevelId}"/>
-									</a4j:commandButton>
-								</rich:column>
-								<rich:column>
-									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.delete']}" /></f:facet>
-									<a4j:commandButton value="#{msg['button.delete']}" 
-																  render="@none" 
-																  execute="@this" 
-																  oncomplete="#{rich:component('agentLevelDeletePanel')}.show()"
-																  rendered="#{not empty data.levelId}"
-																  styleClass="btn">
-										<a4j:param value="#{data.levelId}" assignTo="#{agentLevelController.selectedLevelId}"/>
-									</a4j:commandButton>
-								</rich:column>
-								
-								<f:facet name="footer">
-									<div class="actions">
-										<a4j:commandButton value="#{msg['button.create']}" 
-									                							action="#{agentLevelController.edit}"
-																			 	render="agentLevelCreateUpdatePanel" 
-																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()"
-																			 	styleClass="btn primary">
-														<a4j:param value="-1" assignTo="#{agentLevelController.selectedLevelId}"/>
-										</a4j:commandButton>
-										<a4j:commandButton value="#{msg['button.refresh']}" 
-																			 	render="agentLevelCreateUpdatePanel" 
-																			 	execute="@this"
-																			 	styleClass="btn"/>
-									</div>
-								</f:facet>
-								
-							</rich:dataTable>
+						<f:facet name="footer">
+							<div class="actions">
+								<a4j:commandButton value="#{msg['button.create']}" 
+							                							action="#{agentLevelController.edit}"
+																	 	render="agentLevelCreateUpdatePanel" 
+																	 	execute="@this" 
+																	 	oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()"
+																	 	styleClass="btn primary">
+												<a4j:param value="-1" assignTo="#{agentLevelController.selectedLevelId}"/>
+								</a4j:commandButton>
+								<a4j:commandButton value="#{msg['button.refresh']}" 
+																	 	render="agentLevelCreateUpdatePanel" 
+																	 	execute="@this"
+																	 	styleClass="btn"/>
+							</div>
+						</f:facet>
+						
+					</rich:dataTable>
 						
 				</a4j:outputPanel>
 			</rich:panel>
