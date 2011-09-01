@@ -13,131 +13,158 @@
 					<rich:panel id="wkfStatusPanel" header="#{msg['wkfstatus.inputpanel']}">
 						<a4j:outputPanel id="wkfStatusOutputPanel">
 								
-								<h:message infoClass="alert-message info" 
-								   	warnClass="alert-message warning" 
-								   	errorClass="alert-message info" />
-								
-								<rich:dataTable value="#{wkfStatusController.wkfStatusList}" var="data"
-										noDataLabel="#{msg['no.found.data.message']}"
-										styleClass="common-table table zebra-striped">
-										<rich:column>
-											<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.id']}" /></f:facet>
-											<h:outputText value="#{data.statusId}" />
-										</rich:column>
-										<rich:column>
-											<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.name']}" /></f:facet>
-											<h:outputText value="#{data.statusName}" />
-										</rich:column>
-										<rich:column>
-											<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.description']}" /></f:facet>
-											<h:outputText value="#{data.statusDescription}" />
-										</rich:column>
-										<rich:column>
-											<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.updatedate']}" /></f:facet>
-											<h:outputText value="#{data.statusUpdateDate}" />
-										</rich:column>
-										<rich:column>
-											<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.edit']}" /></f:facet>
-											<a4j:commandButton value="#{msg['button.edit']}" 
-											 		action="#{wkfStatusController.edit}" 
-											 		render="wkfStatusCreateUpdatePanel" 
-											 		execute="@this" 
-											 		oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.show()"
-											 		rendered="#{not empty data.statusId}">
-												<a4j:param value="#{data.statusId}" assignTo="#{wkfStatusController.selectedStatusId}"/>
+							<h:message infoClass="alert-message info" 
+							   		warnClass="alert-message warning" 
+							   		errorClass="alert-message info" />
+							
+							<rich:dataTable value="#{wkfStatusController.wkfStatusList}" var="data"
+									noDataLabel="#{msg['no.found.data.message']}"
+									styleClass="common-table table zebra-striped">
+									<rich:column>
+										<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.id']}" /></f:facet>
+										<h:outputText value="#{data.statusId}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.name']}" /></f:facet>
+										<h:outputText value="#{data.statusName}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.description']}" /></f:facet>
+										<h:outputText value="#{data.statusDescription}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.updatedate']}" /></f:facet>
+										<h:outputText value="#{data.statusUpdateDate}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.edit']}" /></f:facet>
+										<a4j:commandButton value="#{msg['button.edit']}" 
+										 		action="#{wkfStatusController.edit}" 
+										 		render="wkfStatusCreateUpdatePanel" 
+										 		execute="@this" 
+										 		oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.show()"
+										 		rendered="#{not empty data.statusId}"
+												styleClass="btn">
+											<a4j:param value="#{data.statusId}" assignTo="#{wkfStatusController.selectedStatusId}"/>
+										</a4j:commandButton>
+									</rich:column>
+									<rich:column>
+										<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.delete']}" /></f:facet>
+										<a4j:commandButton value="#{msg['button.delete']}" 
+											  	render="@none" 
+											  	execute="@this" 
+											  	oncomplete="#{rich:component('wkfStatusDeletePanel')}.show()"
+												rendered="#{not empty data.statusId}"
+												styleClass="btn">
+											<a4j:param value="#{data.statusId}" assignTo="#{wkfStatusController.selectedStatusId}"/>
+										</a4j:commandButton>
+									</rich:column>
+									
+									<f:facet name="footer">
+										<div class="actions">
+											<a4j:commandButton value="#{msg['button.create']}" 
+		                							action="#{wkfStatusController.edit}"
+												 	render="wkfStatusCreateUpdatePanel" 
+												 	execute="@this" 
+												 	oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.show()"
+												 	styleClass="btn primary">
+												<a4j:param value="-1" assignTo="#{wkfStatusController.selectedStatusId}"/>
 											</a4j:commandButton>
-										</rich:column>
-										<rich:column>
-											<f:facet name="header"><h:outputText value="#{msg['wkfstatus.table.delete']}" /></f:facet>
-											<a4j:commandButton value="#{msg['button.delete']}" 
-												  	render="@none" 
-												  	execute="@this" 
-												  	oncomplete="#{rich:component('wkfStatusDeletePanel')}.show()"
-													rendered="#{not empty data.statusId}">
-												<a4j:param value="#{data.statusId}" assignTo="#{wkfStatusController.selectedStatusId}"/>
-											</a4j:commandButton>
-										</rich:column>
-										
-										<f:facet name="footer">
-											<div class="actions">
-												<a4j:commandButton value="#{msg['button.create']}" 
-			                							action="#{wkfStatusController.edit}"
-													 	render="wkfStatusCreateUpdatePanel" 
-													 	execute="@this" 
-													 	oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.show()"
-													 	styleClass="btn primary">
-													<a4j:param value="-1" assignTo="#{wkfStatusController.selectedStatusId}"/>
-												</a4j:commandButton>
-												<a4j:commandButton value="#{msg['button.refresh']}" 
-													 	render="wkfStatusCreateUpdatePanel" 
-													 	execute="@this"
-													 	styleClass="btn"/>
-											</div>
-										</f:facet>
-									</rich:dataTable>
+											<a4j:commandButton value="#{msg['button.refresh']}" 
+												 	render="wkfStatusCreateUpdatePanel" 
+												 	execute="@this"
+												 	styleClass="btn"/>
+										</div>
+									</f:facet>
+								</rich:dataTable>
 						</a4j:outputPanel>
 					</rich:panel>
 				
 					<rich:popupPanel id="wkfStatusCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-						<fieldset>
-								<legend><h:outputText value="#{msg['wkfstatus.create.update.legend']}" /></legend>
-							
-										<h:panelGrid columns="2" styleClass="inputtable">
-											<h:column/>
-											<h:messages/>
-											
-											<h:outputText value="#{msg['wkfstatus.id']}" />
-											<h:inputText value="#{wkfStatusController.statusId}" rendered="#{empty wkfStatusController.statusId}"/>
-											<h:outputText value="#{wkfStatusController.statusId}" rendered="#{not empty wkfStatusController.statusId}"/>
-											
-											<h:outputText value="#{msg['wkfstatus.name']}"/>
-											<h:inputText value="#{wkfStatusController.statusName}" />
-											
-											<h:outputText value="#{msg['wkfstatus.description']}"/>
-											<h:inputTextarea value="#{wkfStatusController.statusDescription}" cols="30" rows="5" />
-											
-											<h:outputText value="#{msg['wkfstatus.updatedate']}" rendered="#{not empty wkfStatusController.statusUpdateDate}"/>
-											<h:outputText value="#{wkfStatusController.statusUpdateDate}" rendered="#{not empty wkfStatusController.statusUpdateDate}"/>
-											
-											<h:column/>
-											<h:panelGroup>
-												<a4j:commandButton value="#{msg['button.create']}" 
-																			  action="#{wkfStatusController.create}"
-																			  execute="wkfStatusCreateUpdatePanel" 
-																			  rendered="#{empty wkfStatusController.statusId}" 
-																			  render="wkfStatusOutputPanel"
-																			  oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"/>
-												<a4j:commandButton value="#{msg['button.update']}" 
-																			  action="#{wkfStatusController.update}"
-																			  execute="wkfStatusCreateUpdatePanel" 
-																			  rendered="#{not empty wkfStatusController.statusId}" 
-																			  render="wkfStatusOutputPanel"
-																			  oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"/>
-												<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;" />
-											</h:panelGroup>
-											
-										</h:panelGrid>
+						<f:facet name="header">
+				            <h:outputText value="#{msg['wkfstatus.create.update.legend']}" />
+				        </f:facet>
+				        	
+						<h:message infoClass="alert-message info" 
+								warnClass="alert-message warning" 
+								errorClass="alert-message info" />
 								
-							</fieldset>
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['wkfstatus.id']}" /></label>
+							<div class="input">
+		   						<h:inputText value="#{wkfStatusController.statusId}"  
+		   								disabled="#{not empty wkfStatusController.statusId}" />
+							</div>
+						</div>
+						
+						<div class="clearfix">	
+							<label><h:outputText value="#{msg['wkfstatus.name']}" /></label>
+							<div class="input">
+		   						<h:inputText value="#{wkfStatusController.statusName}"/>
+							</div>
+						</div>
+							
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['wkfstatus.description']}" /></label>
+							<div class="input">
+		   						<h:inputTextarea value="#{wkfStatusController.statusDescription}" cols="30" rows="5" />
+							</div>
+						</div>
+							
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['wkfstatus.updatedate']}" 
+									rendered="#{not empty wkfStatusController.statusUpdateDate}"/></label>
+							<div class="input">
+		   						<h:outputText value="#{wkfStatusController.statusUpdateDate}" 
+		   								rendered="#{not empty wkfStatusController.statusUpdateDate}"/>
+							</div>
+						</div>
+						
+						<div class="actions">
+							<a4j:commandButton value="#{msg['button.create']}" 
+								  	action="#{wkfStatusController.create}"
+								  	execute="wkfStatusCreateUpdatePanel" 
+								  	rendered="#{empty wkfStatusController.statusId}" 
+								  	render="wkfStatusOutputPanel"
+								  	oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"
+								  	styleClass="btn primary"/>
+							<a4j:commandButton value="#{msg['button.update']}" 
+						  			action="#{wkfStatusController.update}"
+						  			execute="wkfStatusCreateUpdatePanel" 
+								  	rendered="#{not empty wkfStatusController.statusId}" 
+								  	render="wkfStatusOutputPanel"
+								  	oncomplete="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"
+								  	styleClass="btn primary"/>
+							<a4j:commandButton value="#{msg['button.cancel']}" 
+									onclick="#{rich:component('wkfStatusCreateUpdatePanel')}.hide(); return false;"
+									styleClass="btn"/>
+						</div>
 					</rich:popupPanel>
 					
 					<rich:popupPanel id="wkfStatusDeletePanel" domElementAttachment="parent" autosized="true">
-						<fieldset>
-							<legend><h:outputText value="#{msg['wkfstatus.delete.legend']}" /></legend>
-				
-								<h:panelGrid columns="1" styleClass="inputtable">
-									<h:outputText value="#{msg['wkfstatus.delete.message']}" />
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.delete']}" 
-																	  action="#{wkfStatusController.delete}" 
-																	  execute="wkfStatusDeletePanel"
-																	  render="wkfStatusOutputPanel"
-																	  oncomplete="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;" />
-									</h:panelGroup>
-								</h:panelGrid>
-		
-						</fieldset>
+						<f:facet name="header">
+				            <h:outputText value="#{msg['wkfstatus.delete.legend']}" />
+				        </f:facet>
+				        	
+						<h:message infoClass="alert-message info" 
+								warnClass="alert-message warning" 
+								errorClass="alert-message info" />
+					
+						<div class="clearfix">
+							<h:outputText value="#{msg['wkfstatus.delete.message']}" />
+						</div>
+						
+						<div class="actions">
+							<a4j:commandButton value="#{msg['button.delete']}" 
+									action="#{wkfStatusController.delete}" 
+								  	execute="wkfStatusDeletePanel"
+								  	render="wkfStatusOutputPanel"
+								  	oncomplete="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;"
+								  	styleClass="btn primary"/>
+							<a4j:commandButton value="#{msg['button.cancel']}" 
+									onclick="#{rich:component('wkfStatusDeletePanel')}.hide(); return false;"
+									styleClass="btn"/>
+						</div>
 					</rich:popupPanel>
 					
 				</h:form>
