@@ -9,15 +9,17 @@
 	<ui:define name="body">
 	
 		<h:form id="agentskillForm">
-			<rich:panel id="agentSkillPanel" header="#{msg['agentskill.inputpanel']}">
+			<rich:panel id="agentSkillPanel" header="#{msg['agentskill.inputpanel']} - #{msg['agentskill.datatable.legend']}">
 				<a4j:outputPanel id="agentSkillOutputPanel">
 					
-						<h:messages/>
+					<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 						
-						<fieldset>
-							<legend><h:outputText value="#{msg['agentskill.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentSkillController.agentSkillList}"/>
-							<rich:dataTable value="#{agentSkillController.agentSkillList}" var="data">
+							<rich:dataTable value="#{agentSkillController.agentSkillList}" 
+													var="data"
+													noDataLabel="#{msg['no.found.data.message']}"
+													styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['agentskill.table.id']}" /></f:facet>
 									<h:outputText value="#{data.skillId}" />
@@ -41,7 +43,8 @@
 																 render="agentSkillCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.skillId}">
+																 rendered="#{not empty data.skillId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.skillId}" assignTo="#{agentSkillController.selectedSkillId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -51,92 +54,103 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('agentSkillDeletePanel')}.show()"
-																  rendered="#{not empty data.skillId}">
+																  rendered="#{not empty data.skillId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.skillId}" assignTo="#{agentSkillController.selectedSkillId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{agentSkillController.edit}"
 																			 	render="agentSkillCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{agentSkillController.selectedSkillId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="agentSkillCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="agentSkillCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['agentskill.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['agentskill.create.update.legend']}" />
+		        </f:facet>
+		        
+				<h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['agentskill.id']}" />
-									<h:inputText value="#{agentSkillController.skillId}" rendered="#{empty agentSkillController.skillId}"/>
-									<h:outputText value="#{agentSkillController.skillId}" rendered="#{not empty agentSkillController.skillId}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentskill.id']}" /></label>
+						<div class="input"><h:inputText value="#{agentSkillController.skillId}" disabled="#{not empty agentSkillController.skillId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentskill.name']}"/>
-									<h:inputText value="#{agentSkillController.skillName}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentskill.name']}"/></label>
+						<div class="input"><h:inputText value="#{agentSkillController.skillName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentskill.description']}"/>
-									<h:inputTextarea value="#{agentSkillController.skillDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentskill.description']}"/></label>
+						<div class="input"><h:inputTextarea value="#{agentSkillController.skillDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentskill.updatedate']}" rendered="#{not empty agentSkillController.skillUpdateDate}"/>
-									<h:outputText value="#{agentSkillController.skillUpdateDate}" rendered="#{not empty agentSkillController.skillUpdateDate}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentskill.updatedate']}" rendered="#{not empty agentSkillController.skillUpdateDate}"/></label>
+						<div class="input"><h:outputText value="#{agentSkillController.skillUpdateDate}" rendered="#{not empty agentSkillController.skillUpdateDate}"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 																	  action="#{agentSkillController.create}"
 																	  execute="agentSkillCreateUpdatePanel" 
 																	  rendered="#{empty agentSkillController.skillId}" 
 																	  render="agentSkillOutputPanel"
-																	  oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.hide(); return false;"/>
+																	  oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.hide(); return false;"
+																	  styleClass="btn primary"/>
 										<a4j:commandButton value="#{msg['button.update']}" 
 																	  action="#{agentSkillController.update}"
 																	  execute="agentSkillCreateUpdatePanel" 
 																	  rendered="#{not empty agentSkillController.skillId}" 
 																	  render="agentSkillOutputPanel"
-																	  oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentSkillCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
+																	  oncomplete="#{rich:component('agentSkillCreateUpdatePanel')}.hide(); return false;"
+																	  styleClass="btn primary"/>
+										<a4j:commandButton value="#{msg['button.cancel']}" 
+																		onclick="#{rich:component('agentSkillCreateUpdatePanel')}.hide(); return false;" 
+																		styleClass="btn"/>
+									</div>
 									
-								</h:panelGrid>
-						
-					</fieldset>
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="agentSkillDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['agentskill.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['agentskill.delete.message']}" />
-							<h:panelGroup>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['agentskill.delete.legend']}" />
+		        </f:facet>
+		        
+				<p><h:outputText value="#{msg['agentskill.delete.message']}" /></p>
+				<div class="actions">
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  action="#{agentSkillController.delete}" 
 															  execute="agentSkillDeletePanel"
 															  render="agentSkillOutputPanel"
-															  oncomplete="#{rich:component('agentSkillDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentSkillDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+															  oncomplete="#{rich:component('agentSkillDeletePanel')}.hide(); return false;"
+															  styleClass="btn danger"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" 
+																onclick="#{rich:component('agentSkillDeletePanel')}.hide(); return false;" 
+																styleClass="btn"/>
+				</div>
+				
 			</rich:popupPanel>
 			
 		</h:form>
