@@ -144,12 +144,12 @@
 							
 							<div class="clearfix">
 								<label><h:outputText value="#{msg['acdroute.createdate']}" rendered="#{not empty acdRouteController.routeCreateDate}"/></label>
-								<div class="input"><h:outputText value="#{acdRouteController.routeCreateDate}" rendered="#{not empty acdRouteController.routeCreateDate}"/></div>
+								<div class="input"><h:inputText value="#{acdRouteController.routeCreateDate}" rendered="#{not empty acdRouteController.routeCreateDate}" disabled="true"/></div>
 							</div>
 									
 							<div class="clearfix">
 								<label><h:outputText value="#{msg['acdroute.updatedate']}" rendered="#{not empty acdRouteController.routeUpdateDate}"/></label>
-								<div class="input"><h:outputText value="#{acdRouteController.routeUpdateDate}" rendered="#{not empty acdRouteController.routeUpdateDate}"/></div>
+								<div class="input"><h:inputText value="#{acdRouteController.routeUpdateDate}" rendered="#{not empty acdRouteController.routeUpdateDate}" disabled="true"/></div>
 							</div>
 									
 							<div class="actions">

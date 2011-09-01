@@ -4,20 +4,22 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="agentlevelForm">
-			<rich:panel id="agentLevelPanel" header="#{msg['agentlevel.inputpanel']}">
+			<rich:panel id="agentLevelPanel" header="#{msg['agentlevel.inputpanel']} - #{msg['agentlevel.datatable.legend']}">
 				<a4j:outputPanel id="agentLevelOutputPanel">
 					
-						<h:messages/>
+						<h:message infoClass="alert-message info" 
+								   warnClass="alert-message warning" 
+								   errorClass="alert-message info" />
 						
-						<fieldset>
-							<legend><h:outputText value="#{msg['agentlevel.datatable.legend']}" /></legend>
-							<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentLevelController.agentLevelList}"/>
-							<rich:dataTable value="#{agentLevelController.agentLevelList}" var="data">
+						<rich:dataTable value="#{agentLevelController.agentLevelList}" 
+												var="data"
+												noDataLabel="#{msg['no.found.data.message']}"
+												styleClass="common-table table zebra-striped">
 								<rich:column>
 									<f:facet name="header"><h:outputText value="#{msg['agentlevel.table.id']}" /></f:facet>
 									<h:outputText value="#{data.levelId}" />
@@ -41,7 +43,8 @@
 																 render="agentLevelCreateUpdatePanel" 
 																 execute="@this" 
 																 oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()"
-																 rendered="#{not empty data.levelId}">
+																 rendered="#{not empty data.levelId}"
+																 styleClass="btn">
 										<a4j:param value="#{data.levelId}" assignTo="#{agentLevelController.selectedLevelId}"/>
 									</a4j:commandButton>
 								</rich:column>
@@ -51,92 +54,101 @@
 																  render="@none" 
 																  execute="@this" 
 																  oncomplete="#{rich:component('agentLevelDeletePanel')}.show()"
-																  rendered="#{not empty data.levelId}">
+																  rendered="#{not empty data.levelId}"
+																  styleClass="btn">
 										<a4j:param value="#{data.levelId}" assignTo="#{agentLevelController.selectedLevelId}"/>
 									</a4j:commandButton>
 								</rich:column>
 								
 								<f:facet name="footer">
-									<h:panelGrid columns="2" styleClass="inputtable">
+									<div class="actions">
 										<a4j:commandButton value="#{msg['button.create']}" 
 									                							action="#{agentLevelController.edit}"
 																			 	render="agentLevelCreateUpdatePanel" 
 																			 	execute="@this" 
-																			 	oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()">
+																			 	oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
 														<a4j:param value="-1" assignTo="#{agentLevelController.selectedLevelId}"/>
 										</a4j:commandButton>
 										<a4j:commandButton value="#{msg['button.refresh']}" 
 																			 	render="agentLevelCreateUpdatePanel" 
-																			 	execute="@this"/>
-									</h:panelGrid>
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
 								</f:facet>
 								
 							</rich:dataTable>
-						</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="agentLevelCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-						<legend><h:outputText value="#{msg['agentlevel.create.update.legend']}" /></legend>
-					
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['agentlevel.create.update.legend']}" />
+		        </f:facet>
+		        
+		        <h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
+				
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentlevel.id']}" /></label>
+					<div class="input"><h:inputText value="#{agentLevelController.levelId}" disabled="#{not empty agentLevelController.levelId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentlevel.id']}" />
-									<h:inputText value="#{agentLevelController.levelId}" rendered="#{empty agentLevelController.levelId}"/>
-									<h:outputText value="#{agentLevelController.levelId}" rendered="#{not empty agentLevelController.levelId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentlevel.name']}"/></label>
+					<div class="input"><h:inputText value="#{agentLevelController.levelName}" /></div>
+				</div>					
 									
-									<h:outputText value="#{msg['agentlevel.name']}"/>
-									<h:inputText value="#{agentLevelController.levelName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentlevel.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{agentLevelController.levelDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentlevel.description']}"/>
-									<h:inputTextarea value="#{agentLevelController.levelDescription}" cols="30" rows="5" />
-									
-									<h:outputText value="#{msg['agentlevel.updatedate']}" rendered="#{not empty agentLevelController.levelUpdateDate}"/>
-									<h:outputText value="#{agentLevelController.levelUpdateDate}" rendered="#{not empty agentLevelController.levelUpdateDate}"/>
-									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{agentLevelController.create}"
-																	  execute="agentLevelCreateUpdatePanel" 
-																	  rendered="#{empty agentLevelController.levelId}" 
-																	  render="agentLevelOutputPanel"
-																	  oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{agentLevelController.update}"
-																	  execute="agentLevelCreateUpdatePanel" 
-																	  rendered="#{not empty agentLevelController.levelId}" 
-																	  render="agentLevelOutputPanel"
-																	  oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentLevelCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-									
-								</h:panelGrid>
-						
-					</fieldset>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentlevel.updatedate']}" rendered="#{not empty agentLevelController.levelUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{agentLevelController.levelUpdateDate}" rendered="#{not empty agentLevelController.levelUpdateDate}" disabled="true"/></div>
+				</div>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{agentLevelController.create}"
+												  execute="agentLevelCreateUpdatePanel" 
+												  rendered="#{empty agentLevelController.levelId}" 
+												  render="agentLevelOutputPanel"
+												  oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{agentLevelController.update}"
+												  execute="agentLevelCreateUpdatePanel" 
+												  rendered="#{not empty agentLevelController.levelId}" 
+												  render="agentLevelOutputPanel"
+												  oncomplete="#{rich:component('agentLevelCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+													onclick="#{rich:component('agentLevelCreateUpdatePanel')}.hide(); return false;" 
+													styleClass="btn"/>
+				</div>			
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="agentLevelDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['agentlevel.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['agentlevel.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{agentLevelController.delete}" 
-															  execute="agentLevelDeletePanel"
-															  render="agentLevelOutputPanel"
-															  oncomplete="#{rich:component('agentLevelDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentLevelDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+		            <h:outputText value="#{msg['agentlevel.delete.legend']}" />
+		        </f:facet>
+		        
+				<p><h:outputText value="#{msg['agentlevel.delete.message']}" /></p>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{agentLevelController.delete}" 
+												  execute="agentLevelDeletePanel"
+												  render="agentLevelOutputPanel"
+												  oncomplete="#{rich:component('agentLevelDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+													onclick="#{rich:component('agentLevelDeletePanel')}.hide(); return false;" 
+													styleClass="btn"/>
+				</div>
+				
 			</rich:popupPanel>
 			
 		</h:form>
