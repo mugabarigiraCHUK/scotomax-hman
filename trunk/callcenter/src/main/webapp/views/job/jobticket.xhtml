@@ -4,86 +4,104 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="jobticketForm">
-			<rich:panel id="jobTicketPanel" header="#{msg['jobticket.panel.input']}">
+			<rich:panel id="jobTicketPanel" header="#{msg['jobticket.panel.input']} - #{msg['jobticket.panel.search']}">
 				<a4j:outputPanel id="jobTicketOutputPanel">
 					
-					<fieldset>
-							<legend><h:outputText value="#{msg['jobticket.panel.search']}" /></legend>
-							<h:messages/>
-							
-							<h:panelGrid columns="2" styleClass="inputtable">
+					<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 								
-								<h:outputText value="#{msg['jobticket.agentprofile']}"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.agentprofile']}"/></label>
+						<div class="input">
 								<h:selectOneMenu value="#{jobTicketController.agentProfile}">
 									<f:converter converterId="agentProfileConverter"/>
 									<f:selectItem itemLabel=" -- All -- " itemValue="-1"/>
 									<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
 								</h:selectOneMenu>
+						</div>
+					</div>			
 								
-								<h:outputText value="#{msg['jobticket.agentlevel']}"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.agentlevel']}"/></label>
+						<div class="input">
 								<h:selectOneMenu value="#{jobTicketController.agentLevel}">
 									<f:converter converterId="agentLevelConverter"/>
 									<f:selectItem itemLabel=" -- All -- " itemValue="-1"/>
 									<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
 								</h:selectOneMenu>
+						</div>		
+					</div>
 								
-								<h:outputText value="#{msg['jobticket.agentseat']}"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.agentseat']}"/></label>
+						<div class="input">
 								<h:selectOneMenu value="#{jobTicketController.agentSeat}">
 									<f:converter converterId="agentSeatConverter"/>
 									<f:selectItem itemLabel=" -- All -- " itemValue="-1"/>
 									<f:selectItems value="#{dataLoadController.agentSeatSelectItems}"/>
 								</h:selectOneMenu>
+						</div>
+					</div>
 								
-								<h:outputText value="#{msg['jobticket.customer']}"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.customer']}"/></label>
+						<div class="input">
 								<h:selectOneMenu value="#{jobTicketController.customer}">
 									<f:converter converterId="crmCustomerConverter"/>
 									<f:selectItem itemLabel=" -- All -- " itemValue="-1"/>
 									<f:selectItems value="#{dataLoadController.crmCustomerSelectItems}"/>
 								</h:selectOneMenu>
+						</div>
+					</div>			
 								
-								<h:outputText value="#{msg['jobticket.status']}"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.status']}"/></label>
+						<div class="input">
 								<h:selectOneMenu value="#{jobTicketController.status}">
 									<f:converter converterId="jobStatusConverter"/>
 									<f:selectItem itemLabel=" -- All -- " itemValue="-1"/>
 									<f:selectItems value="#{dataLoadController.jobStatusSelectItems}"/>
 								</h:selectOneMenu>
+						</div>		
+					</div>
 								
-								<h:outputText value="#{msg['jobticket.name']}"/>
-								<h:inputText value="#{jobTicketController.jobName}" size="30"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.name']}"/></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobName}" size="30"/></div>
+					</div>
 								
-								<h:column/>
-								<h:panelGrid columns="3" styleClass="inputtable">
-									<a4j:commandButton value="#{msg['button.search']}" 
-					                							action="#{jobTicketController.search}"
-															 	render="jobTicketCreateUpdatePanel" 
-															 	execute="jobTicketOutputPanel">
-									</a4j:commandButton>
-									<a4j:commandButton value="#{msg['button.create']}" 
-					                							action="#{jobTicketController.edit}"
-															 	render="jobTicketCreateUpdatePanel" 
-															 	execute="@this" 
-															 	oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.show()">
-													<a4j:param value="-1" assignTo="#{jobTicketController.selectedJobId}"/>
-									</a4j:commandButton>
-									<a4j:commandButton value="#{msg['button.refresh']}"
-																action="#{jobTicketController.clear}" 
-															 	render="jobTicketCreateUpdatePanel" 
-															 	execute="@this"/>
-								</h:panelGrid>
-							</h:panelGrid>
-							
-					</fieldset>
+					<div class="actions">
+						<a4j:commandButton value="#{msg['button.search']}" 
+		                							action="#{jobTicketController.search}"
+												 	render="jobTicketCreateUpdatePanel" 
+												 	execute="jobTicketOutputPanel"
+												 	styleClass="btn">
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg['button.create']}" 
+		                							action="#{jobTicketController.edit}"
+												 	render="jobTicketCreateUpdatePanel" 
+												 	execute="@this" 
+												 	oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.show()"
+												 	styleClass="btn primary">
+										<a4j:param value="-1" assignTo="#{jobTicketController.selectedJobId}"/>
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg['button.refresh']}"
+													action="#{jobTicketController.clear}" 
+												 	render="jobTicketCreateUpdatePanel" 
+												 	execute="@this"
+												 	styleClass="btn"/>
+					</div>
 					
-					<fieldset>
-						<legend><h:outputText value="#{msg['jobticket.datatable.legend']}" /></legend>
-
-						<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty jobTicketController.jobTicketList}"/>
-						<rich:dataTable value="#{jobTicketController.jobTicketList}" var="data" rendered="#{not empty jobTicketController.jobTicketList}">
+						<rich:dataTable value="#{jobTicketController.jobTicketList}" 
+												var="data" 
+												noDataLabel="#{msg['no.found.data.message']}" 
+												styleClass="common-table table zebra-striped">
 							<rich:column>
 								<f:facet name="header"><h:outputText value="#{msg['jobticket.table.id']}" /></f:facet>
 								<h:outputText value="#{data.jobId}" />
@@ -127,7 +145,8 @@
 															 render="jobTicketCreateUpdatePanel" 
 															 execute="@this" 
 															 oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.show()"
-															 rendered="#{not empty data.jobId}">
+															 rendered="#{not empty data.jobId}"
+															 styleClass="btn">
 									<a4j:param value="#{data.jobId}" assignTo="#{jobTicketController.selectedJobId}"/>
 								</a4j:commandButton>
 							</rich:column>
@@ -137,137 +156,170 @@
 															  render="@none" 
 															  execute="@this" 
 															  oncomplete="#{rich:component('jobTicketDeletePanel')}.show()"
-															  rendered="#{not empty data.jobId}">
+															  rendered="#{not empty data.jobId}"
+															  styleClass="btn">
 									<a4j:param value="#{data.jobId}" assignTo="#{jobTicketController.selectedJobId}"/>
 								</a4j:commandButton>
 							</rich:column>
 							
 						</rich:dataTable>
-					</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="jobTicketCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<h:panelGrid columns="2" styleClass="inputtable">
-					<h:panelGroup>
-						<fieldset>
-							<legend><h:outputText value="#{msg['jobticket.create.update.legend']}" /></legend>
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+					<h:outputText value="#{msg['jobticket.create.update.legend']}" />
+				</f:facet>
+			
+				<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['jobticket.id']}" />
-									<h:inputText value="#{jobTicketController.jobId}" rendered="#{empty jobTicketController.jobId}"/>
-									<h:outputText value="#{jobTicketController.jobId}" rendered="#{not empty jobTicketController.jobId}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.id']}" /></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobId}" disabled="#{not empty jobTicketController.jobId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.name']}"/>
-									<h:inputText value="#{jobTicketController.jobName}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.name']}"/></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobName}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.description']}"/>
-									<h:inputTextarea value="#{jobTicketController.jobDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.description']}"/></label>
+						<div class="input"><h:inputTextarea value="#{jobTicketController.jobDescription}" cols="30" rows="5" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.voicerecordfile']}"/>
-									<h:inputText value="#{jobTicketController.jobVoiceRecordFile}" size="30"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.voicerecordfile']}"/></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobVoiceRecordFile}" size="30"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.alertenable']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.alertenable']}"/></label>
+						<div class="input">
 									<h:selectOneRadio value="#{jobTicketController.jobAlertEnable}" layout="lineDirection">
 										<f:selectItem itemLabel="Yes" itemValue="true"/>
 										<f:selectItem itemLabel="No" itemValue="false"/>
 									</h:selectOneRadio>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.createdate']}" rendered="#{not empty jobTicketController.jobCreateDate}"/>
-									<h:outputText value="#{jobTicketController.jobCreateDate}" rendered="#{not empty jobTicketController.jobCreateDate}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.createdate']}" rendered="#{not empty jobTicketController.jobCreateDate}"/></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobCreateDate}" rendered="#{not empty jobTicketController.jobCreateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.updatedate']}" rendered="#{not empty jobTicketController.jobUpdateDate}"/>
-									<h:outputText value="#{jobTicketController.jobUpdateDate}" rendered="#{not empty jobTicketController.jobUpdateDate}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.updatedate']}" rendered="#{not empty jobTicketController.jobUpdateDate}"/></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobUpdateDate}" rendered="#{not empty jobTicketController.jobUpdateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.closedate']}" rendered="#{not empty jobTicketController.jobCloseDate}"/>
-									<h:outputText value="#{jobTicketController.jobCloseDate}" rendered="#{not empty jobTicketController.jobCloseDate}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.closedate']}" rendered="#{not empty jobTicketController.jobCloseDate}"/></label>
+						<div class="input"><h:inputText value="#{jobTicketController.jobCloseDate}" rendered="#{not empty jobTicketController.jobCloseDate}" disabled="true"/></div>
+				</div>					
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{jobTicketController.create}"
-																	  execute="jobTicketCreateUpdatePanel" 
-																	  rendered="#{empty jobTicketController.jobId}" 
-																	  render="jobTicketOutputPanel"
-																	  oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{jobTicketController.update}"
-																	  execute="jobTicketCreateUpdatePanel" 
-																	  rendered="#{not empty jobTicketController.jobId}" 
-																	  render="jobTicketOutputPanel"
-																	  oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobTicketCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-								</h:panelGrid>
-						</fieldset>
-					</h:panelGroup>
-					<h:panelGroup>
-						<fieldset>
-							<legend><h:outputText value="#{msg['jobticket.referend.data.legend']}" /></legend>
-								<h:panelGrid columns="2" styleClass="inputtable">
-					
-									<h:outputText value="#{msg['jobticket.agentprofile']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.agentprofile']}"/></label>
+						<div class="input">
 									<h:selectOneMenu value="#{jobTicketController.agentProfile}">
 										<f:converter converterId="agentProfileConverter"/>
 										<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
 									</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.agentlevel']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.agentlevel']}"/></label>
+						<div class="input">
 									<h:selectOneMenu value="#{jobTicketController.agentLevel}">
 										<f:converter converterId="agentLevelConverter"/>
 										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
 									</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.agentseat']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.agentseat']}"/></label>
+						<div class="input">
 									<h:selectOneMenu value="#{jobTicketController.agentSeat}">
 										<f:converter converterId="agentSeatConverter"/>
 										<f:selectItems value="#{dataLoadController.agentSeatSelectItems}"/>
 									</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.customer']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.customer']}"/></label>
+						<div class="input">
 									<h:selectOneMenu value="#{jobTicketController.customer}">
 										<f:converter converterId="crmCustomerConverter"/>
 										<f:selectItems value="#{dataLoadController.crmCustomerSelectItems}"/>
 									</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.status']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.status']}"/></label>
+						<div class="input">
 									<h:selectOneMenu value="#{jobTicketController.status}">
 										<f:converter converterId="jobStatusConverter"/>
 										<f:selectItems value="#{dataLoadController.jobStatusSelectItems}"/>
 									</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['jobticket.solution']}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['jobticket.solution']}"/></label>
+						<div class="input">
 									<h:selectOneMenu value="#{jobTicketController.solution}">
 										<f:converter converterId="knwSolutionConverter"/>
 										<f:selectItems value="#{dataLoadController.knwSolutionSelectItems}"/>
 									</h:selectOneMenu>
+						</div>
+				</div>
 									
-								</h:panelGrid>	
-						</fieldset>
-					</h:panelGroup>
-				</h:panelGrid>
+					<div class="actions">
+						<a4j:commandButton value="#{msg['button.create']}" 
+													  action="#{jobTicketController.create}"
+													  execute="jobTicketCreateUpdatePanel" 
+													  rendered="#{empty jobTicketController.jobId}" 
+													  render="jobTicketOutputPanel"
+													  oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.hide(); return false;"
+													  styleClass="btn primary"/>
+						<a4j:commandButton value="#{msg['button.update']}" 
+													  action="#{jobTicketController.update}"
+													  execute="jobTicketCreateUpdatePanel" 
+													  rendered="#{not empty jobTicketController.jobId}" 
+													  render="jobTicketOutputPanel"
+													  oncomplete="#{rich:component('jobTicketCreateUpdatePanel')}.hide(); return false;"
+													  styleClass="btn primary"/>
+						<a4j:commandButton value="#{msg['button.cancel']}" 
+													onclick="#{rich:component('jobTicketCreateUpdatePanel')}.hide(); return false;" 
+													styleClass="btn"/>
+					</div>
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="jobTicketDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['jobticket.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['jobticket.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{jobTicketController.delete}" 
-															  execute="jobTicketDeletePanel"
-															  render="jobTicketOutputPanel"
-															  oncomplete="#{rich:component('jobTicketDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('jobTicketDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+					<h:outputText value="#{msg['jobticket.delete.legend']}" />
+				</f:facet>
+				
+				<p><h:outputText value="#{msg['jobticket.delete.message']}" /></p>
+				
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{jobTicketController.delete}" 
+												  execute="jobTicketDeletePanel"
+												  render="jobTicketOutputPanel"
+												  oncomplete="#{rich:component('jobTicketDeletePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('jobTicketDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>
