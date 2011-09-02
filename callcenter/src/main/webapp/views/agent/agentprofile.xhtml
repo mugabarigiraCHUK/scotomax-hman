@@ -4,54 +4,55 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="agentprofileForm">
-			<rich:panel id="agentProfilePanel" header="#{msg['agentprofile.panel.input']}">
+			<rich:panel id="agentProfilePanel" header="#{msg['agentprofile.panel.input']} - #{msg['agentprofile.panel.search']}">
 				<a4j:outputPanel id="agentProfileOutputPanel">
 					
-					<fieldset>
-							<legend><h:outputText value="#{msg['agentprofile.panel.search']}" /></legend>
-							<h:messages/>
-							
-							<h:panelGrid columns="2" styleClass="inputtable">
+					<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 								
-								<h:outputText value="#{msg['agentprofile.fullname']}"/>
-								<h:inputText value="#{agentProfileController.agentFullname}" />
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.fullname']}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentFullname}" /></div>
+					</div>
 								
-								<h:outputText value="#{msg['agentprofile.username']}"/>
-								<h:inputText value="#{agentProfileController.agentUsername}" />
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.username']}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentUsername}" /></div>
+					</div>
 								
-								<h:column/>
-								<h:panelGrid columns="3" styleClass="inputtable">
-									<a4j:commandButton value="#{msg['button.search']}" 
-					                							action="#{agentProfileController.search}"
-															 	render="agentProfileCreateUpdatePanel" 
-															 	execute="agentProfileOutputPanel">
-									</a4j:commandButton>
-									<a4j:commandButton value="#{msg['button.create']}" 
-					                							action="#{agentProfileController.edit}"
-															 	render="agentProfileCreateUpdatePanel" 
-															 	execute="@this" 
-															 	oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.show()">
-													<a4j:param value="-1" assignTo="#{agentProfileController.selectedAgentId}"/>
-									</a4j:commandButton>
-									<a4j:commandButton value="#{msg['button.refresh']}"
-																action="#{agentProfileController.clear}" 
-															 	render="agentProfileCreateUpdatePanel" 
-															 	execute="@this"/>
-								</h:panelGrid>
-							</h:panelGrid>
-							
-					</fieldset>
+					<div class="actions">			
+						<a4j:commandButton value="#{msg['button.search']}" 
+		                							action="#{agentProfileController.search}"
+												 	render="agentProfileCreateUpdatePanel" 
+												 	execute="agentProfileOutputPanel"
+												 	styleClass="btn">
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg['button.create']}" 
+		                							action="#{agentProfileController.edit}"
+												 	render="agentProfileCreateUpdatePanel" 
+												 	execute="@this" 
+												 	oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.show()"
+												 	styleClass="btn primary">
+										<a4j:param value="-1" assignTo="#{agentProfileController.selectedAgentId}"/>
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg['button.refresh']}"
+													action="#{agentProfileController.clear}" 
+												 	render="agentProfileCreateUpdatePanel" 
+												 	execute="@this"
+												 	styleClass="btn"/>
+					</div>
 					
-					<fieldset>
-						<legend><h:outputText value="#{msg['agentprofile.datatable.legend']}" /></legend>
 
-						<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentProfileController.agentProfileList}"/>
-						<rich:dataTable value="#{agentProfileController.agentProfileList}" var="data" rendered="#{not empty agentProfileController.agentProfileList}">
+						<rich:dataTable value="#{agentProfileController.agentProfileList}" 
+												var="data"
+												noDataLabel="#{msg['no.found.data.message']}" 
+												styleClass="common-table table zebra-striped">
 							<rich:column>
 								<f:facet name="header"><h:outputText value="#{msg['agentprofile.table.id']}" /></f:facet>
 								<h:outputText value="#{data.agentId}" />
@@ -87,7 +88,8 @@
 															 render="agentProfileCreateUpdatePanel" 
 															 execute="@this" 
 															 oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.show()"
-															 rendered="#{not empty data.agentId}">
+															 rendered="#{not empty data.agentId}"
+															 styleClass="btn">
 									<a4j:param value="#{data.agentId}" assignTo="#{agentProfileController.selectedAgentId}"/>
 								</a4j:commandButton>
 							</rich:column>
@@ -97,131 +99,162 @@
 															  render="@none" 
 															  execute="@this" 
 															  oncomplete="#{rich:component('agentProfileDeletePanel')}.show()"
-															  rendered="#{not empty data.agentId}">
+															  rendered="#{not empty data.agentId}"
+															  styleClass="btn">
 									<a4j:param value="#{data.agentId}" assignTo="#{agentProfileController.selectedAgentId}"/>
 								</a4j:commandButton>
 							</rich:column>
 							
 						</rich:dataTable>
-					</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
 			<rich:popupPanel id="agentProfileCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<h:panelGrid columns="2" styleClass="inputtable">
-					<h:panelGroup>
-						<fieldset>
-							<legend><h:outputText value="#{msg['agentprofile.create.update.legend']}" /></legend>
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+				<f:facet name="header">
+					<h:outputText value="#{msg['agentprofile.create.update.legend']}" />
+				</f:facet>
+			
+				<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['agentprofile.id']}" />
-									<h:inputText value="#{agentProfileController.agentId}" rendered="#{empty agentProfileController.agentId}"/>
-									<h:outputText value="#{agentProfileController.agentId}" rendered="#{not empty agentProfileController.agentId}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.id']}" /></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentId}" disabled="#{not empty agentProfileController.agentId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.fullname']}"/>
-									<h:inputText value="#{agentProfileController.agentFullname}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.fullname']}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentFullname}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.username']}"/>
-									<h:inputText value="#{agentProfileController.agentUsername}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.username']}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentUsername}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.password']}"/>
-									<h:inputSecret value="#{agentProfileController.agentPassword}" />
 									
-									<h:outputText value="#{msg['agentprofile.confirm.password']}"/>
-									<h:inputSecret value="#{agentProfileController.confirmPassword}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.password']}"/></label>
+						<div class="input"><h:inputSecret value="#{agentProfileController.agentPassword}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.maxcall']}"/>
-									<h:inputText value="#{agentProfileController.agentMaxCall}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.confirm.password']}"/></label>
+						<div class="input"><h:inputSecret value="#{agentProfileController.confirmPassword}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.allowoutbound']}"/>
-									<h:inputText value="#{agentProfileController.agentAllowOutbound}" />
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.maxcall']}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentMaxCall}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.createdate']}" rendered="#{not empty agentProfileController.agentCreateDate}"/>
-									<h:outputText value="#{agentProfileController.agentCreateDate}" rendered="#{not empty agentProfileController.agentCreateDate}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.allowoutbound']}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentAllowOutbound}" /></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.updatedate']}" rendered="#{not empty agentProfileController.agentUpdateDate}"/>
-									<h:outputText value="#{agentProfileController.agentUpdateDate}" rendered="#{not empty agentProfileController.agentUpdateDate}"/>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.createdate']}" rendered="#{not empty agentProfileController.agentCreateDate}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentCreateDate}" rendered="#{not empty agentProfileController.agentCreateDate}" disabled="true"/></div>
+				</div>
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{agentProfileController.create}"
-																	  execute="agentProfileCreateUpdatePanel" 
-																	  rendered="#{empty agentProfileController.agentId}" 
-																	  render="agentProfileOutputPanel"
-																	  oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{agentProfileController.update}"
-																	  execute="agentProfileCreateUpdatePanel" 
-																	  rendered="#{not empty agentProfileController.agentId}" 
-																	  render="agentProfileOutputPanel"
-																	  oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentProfileCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-								</h:panelGrid>
-						</fieldset>
-					</h:panelGroup>
-					<h:panelGroup>
-						<fieldset>
-							<legend><h:outputText value="#{msg['agentprofile.referend.data.legend']}" /></legend>
-								<h:panelGrid columns="2" styleClass="inputtable">
-					
-									<h:outputText value="#{msg['agentprofile.supervisor']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentProfile}">
-										<f:converter converterId="agentProfileConverter"/>
-										<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
-									</h:selectOneMenu>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.updatedate']}" rendered="#{not empty agentProfileController.agentUpdateDate}"/></label>
+						<div class="input"><h:inputText value="#{agentProfileController.agentUpdateDate}" rendered="#{not empty agentProfileController.agentUpdateDate}" disabled="true"/></div>
+				</div>
+				
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.supervisor']}"/></label>
+						<div class="input">
+							<h:selectOneMenu value="#{agentProfileController.agentProfile}">
+								<f:converter converterId="agentProfileConverter"/>
+								<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
+							</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.level']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentLevel}">
-										<f:converter converterId="agentLevelConverter"/>
-										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
-									</h:selectOneMenu>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.level']}"/></label>
+						<div class="input">
+							<h:selectOneMenu value="#{agentProfileController.agentLevel}">
+								<f:converter converterId="agentLevelConverter"/>
+								<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
+							</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.skill']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentSkill}">
-										<f:converter converterId="agentSkillConverter"/>
-										<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
-									</h:selectOneMenu>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.skill']}"/></label>
+						<div class="input">
+							<h:selectOneMenu value="#{agentProfileController.agentSkill}">
+								<f:converter converterId="agentSkillConverter"/>
+								<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
+							</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.status']}"/>
-									<h:selectOneMenu value="#{agentProfileController.agentStatus}">
-										<f:converter converterId="agentStatusConverter"/>
-										<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
-									</h:selectOneMenu>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.status']}"/></label>
+						<div class="input">
+							<h:selectOneMenu value="#{agentProfileController.agentStatus}">
+								<f:converter converterId="agentStatusConverter"/>
+								<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
+							</h:selectOneMenu>
+						</div>
+				</div>
 									
-									<h:outputText value="#{msg['agentprofile.workplan']}"/>
-									<h:selectOneMenu value="#{agentProfileController.wkfWorkplan}">
-										<f:converter converterId="wkfWorkplanConverter"/>
-										<f:selectItems value="#{dataLoadController.wkfWorkplanSelectItems}"/>
-									</h:selectOneMenu>
+				<div class="clearfix">
+						<label><h:outputText value="#{msg['agentprofile.workplan']}"/></label>
+						<div class="input">
+							<h:selectOneMenu value="#{agentProfileController.wkfWorkplan}">
+								<f:converter converterId="wkfWorkplanConverter"/>
+								<f:selectItems value="#{dataLoadController.wkfWorkplanSelectItems}"/>
+							</h:selectOneMenu>
+						</div>
+				</div>
 									
-								</h:panelGrid>	
-						</fieldset>
-					</h:panelGroup>
-				</h:panelGrid>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{agentProfileController.create}"
+												  execute="agentProfileCreateUpdatePanel" 
+												  rendered="#{empty agentProfileController.agentId}" 
+												  render="agentProfileOutputPanel"
+												  oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{agentProfileController.update}"
+												  execute="agentProfileCreateUpdatePanel" 
+												  rendered="#{not empty agentProfileController.agentId}" 
+												  render="agentProfileOutputPanel"
+												  oncomplete="#{rich:component('agentProfileCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('agentProfileCreateUpdatePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
+				
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="agentProfileDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['agentprofile.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['agentprofile.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{agentProfileController.delete}" 
-															  execute="agentProfileDeletePanel"
-															  render="agentProfileOutputPanel"
-															  oncomplete="#{rich:component('agentProfileDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentProfileDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+					<h:outputText value="#{msg['agentprofile.delete.legend']}" />
+				</f:facet>
+				
+				<p><h:outputText value="#{msg['agentprofile.delete.message']}" /></p>
+				
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{agentProfileController.delete}" 
+												  execute="agentProfileDeletePanel"
+												  render="agentProfileOutputPanel"
+												  oncomplete="#{rich:component('agentProfileDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('agentProfileDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>

@@ -5,9 +5,24 @@
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
 		template="/none_theme/template.xhtml">
+	
+	<ui:define name="head">
+		
+		<!-- calendar -->
+		<h:outputStylesheet library="css" name="fullcalendar/fullcalendar.css" />
+		<h:outputStylesheet library="css" name="fullcalendar/fullcalendar.print.css" media="print"/>
+		<h:outputScript library="js" name="fullcalendar/fullcalendar.min.js"/>
+		
+	</ui:define>
 
 	<ui:define name="body">
-		<script type='text/javascript'>
+		<h:outputStylesheet>
+			#calendar {
+				width: 900px;
+				margin: 0 auto;
+			}
+		</h:outputStylesheet>
+		<h:outputScript>
 			$.noConflict();
 			
 			$(document).ready(function() {
@@ -90,13 +105,8 @@
 				});
 				
 			});
-		</script>
-		<style type='text/css'>
-			#calendar {
-				width: 900px;
-				margin: 0 auto;
-			}
-		</style>
+		</h:outputScript>
+	
 		<div class="row">
 			<div class="span16">
 				<h:form id="wkfcalendarForm">
