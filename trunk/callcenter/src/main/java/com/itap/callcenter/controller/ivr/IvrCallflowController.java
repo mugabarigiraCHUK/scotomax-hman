@@ -47,7 +47,8 @@ public class IvrCallflowController extends IvrCallflowBean {
 	
 	private List<SelectItem> listIvrVoiceprompt = new ArrayList<SelectItem>();
 	private List<SelectItem> listIvrCallflow = new ArrayList<SelectItem>();
-	private List<SelectItem> listIvrDtmf = new ArrayList<SelectItem>();
+	private List<IvrDtmf> listAllIvrDtmf = new ArrayList<IvrDtmf>();
+	private String[] dtmfs;
 	
 	@PostConstruct
 	private void factoryListItem() {
@@ -55,7 +56,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 		try {
 			listIvrVoiceprompt = new ArrayList<SelectItem>();
 			listIvrCallflow = new ArrayList<SelectItem>();
-			listIvrDtmf = new ArrayList<SelectItem>();
+			setListIvrDtmf(new ArrayList<IvrDtmf>());
 			List<IvrVoiceprompt> queryListIvrVoiceprompt = ivrVoicepromptDao.findAll();
 			for (IvrVoiceprompt ivrVoiceprompt : queryListIvrVoiceprompt) {
 				listIvrVoiceprompt.add(new SelectItem(ivrVoiceprompt, ivrVoiceprompt.getVoiceName()));
@@ -64,10 +65,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 			for (IvrCallflow ivrCallflow : queryListIvrCallflow) {
 				listIvrCallflow.add(new SelectItem(ivrCallflow, ivrCallflow.getCallflowName()));
 			}
-			List<IvrDtmf> queryListIvrDtmf = ivrDtmfDao.findAll();
-			for (IvrDtmf ivrDtmf : queryListIvrDtmf) {
-				listIvrDtmf.add(new SelectItem(ivrDtmf, "#" + ivrDtmf.getDtmfDigit() + " - " + ivrDtmf.getDtmfName()));
-			}
+			listAllIvrDtmf = ivrDtmfDao.findAll();
 		} catch (Exception e) {
 			logger.error("error, load data when init page");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("error, load data when init page" + e.getMessage()));
@@ -100,6 +98,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 	public void create() {
 		logger.debug("call create action");
 		logger.debug("callflowName: " + callflowName);
+		logger.debug("dtmfs: " + (dtmfs == null ? "(0)" : "(" + dtmfs.length + ")"));
 		try{
 			IvrCallflow ivrCallflow = new IvrCallflow();
 			ivrCallflow.setCallflowId(ivrCallflowDao.findAll().size()+1);
@@ -110,11 +109,19 @@ public class IvrCallflowController extends IvrCallflowBean {
 			ivrCallflow.setCallflowTimeout(callflowTimeout);
 			ivrCallflow.setCallflowBack(callflowBack == null ? null : ivrCallflowDao.findById(callflowBack.getCallflowId()));
 			ivrCallflow.setVoicePrompt(ivrVoicepromptDao.findById(ivrVoiceprompt.getVoiceId()));
-			// TODO add dtmf
 			ivrCallflow.setCallflowCreateDate(new Date());
+			if (dtmfs != null && dtmfs.length > 0) {
+				List<IvrDtmf> listIvrDtmf = new ArrayList<IvrDtmf>();
+				for (String dtmfId : dtmfs) {
+					IvrDtmf ivrDtmf = ivrDtmfDao.findById(Integer.parseInt(dtmfId));
+					listIvrDtmf.add(ivrDtmf);
+				}
+				ivrCallflow.setListDtmf(listIvrDtmf);
+			}
 			ivrCallflowDao.save(ivrCallflow);
 			createable = false;
-			reset();
+			reset(); dtmfs = null;
+			setSelectedCallflowId(ivrCallflow.getCallflowId());
 			logger.debug("callflow have created");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
 		} catch (Exception ex) {
@@ -126,6 +133,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 	public void update() {
 		logger.debug("call update action");
 		logger.debug("callflowName: " + callflowName);
+		logger.debug("dtmfs: " + (dtmfs == null ? "(0)" : "(" + dtmfs.length + ")"));
 		try{
 			IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
 			ivrCallflow.setCallflowName(callflowName);
@@ -134,12 +142,22 @@ public class IvrCallflowController extends IvrCallflowBean {
 			ivrCallflow.setCallflowTimeout(callflowTimeout);
 			ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
 			ivrCallflow.setCallflowBack(callflowBack);
-			ivrCallflow.setVoicePrompt(ivrVoiceprompt);
-			// TODO add dtmf		
+			ivrCallflow.setVoicePrompt(ivrVoiceprompt);		
 			ivrCallflow.setCallflowUpdateDate(new Date());
+			if (dtmfs != null && dtmfs.length > 0) {
+				List<IvrDtmf> listIvrDtmf = new ArrayList<IvrDtmf>();
+				for (String dtmfId : dtmfs) {
+					IvrDtmf ivrDtmf = ivrDtmfDao.findById(Integer.parseInt(dtmfId));
+					listIvrDtmf.add(ivrDtmf);
+				}
+				ivrCallflow.setListDtmf(listIvrDtmf);
+			}
 			ivrCallflowDao.update(ivrCallflow);
 			editable = false;
-			reset();
+			reset(); dtmfs = null;
+			if (selectedCallflowId != null) {
+				setSelectedCallflowId(selectedCallflowId);
+			}
 			logger.debug("callflow have updated");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
 		} catch (Exception ex) {
@@ -153,7 +171,8 @@ public class IvrCallflowController extends IvrCallflowBean {
 		logger.debug("selectedCallflowId: " + selectedCallflowId);
 		try {
 			ivrCallflowDao.deleteById(selectedCallflowId); 
-			reset();
+			reset(); dtmfs = null; 
+			selectedCallflowId = null;
 			logger.debug("callflow have deleted");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
 		} catch (Exception ex) {
@@ -165,7 +184,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 	
 	public void createNew() {
 		logger.debug("field can create new");
-		reset();
+		reset(); dtmfs = null;
 		createable = true;
 		
 	}
@@ -179,6 +198,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 		logger.debug("field cannot edit");
 		editable = false;
 		createable = false;
+		reset(); dtmfs = null;
 		if (selectedCallflowId != null) {
 			setSelectedCallflowId(selectedCallflowId);
 		}
@@ -219,7 +239,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 
 	public void setSelectedCallflowId(Integer selectedCallflowId) {
 		logger.debug("selected callflow id: " + selectedCallflowId);
-		reset();
+		reset(); dtmfs = null;
 		this.selectedCallflowId = selectedCallflowId;
 		IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
 		this.callflowId = ivrCallflow.getCallflowId();
@@ -236,12 +256,37 @@ public class IvrCallflowController extends IvrCallflowBean {
 		}
 		this.ivrVoiceprompt = ivrCallflow.getVoicePrompt();
 		this.callflowBack = ivrCallflow.getCallflowBack();
+		logger.debug("ivrCallflow.getListDtmf(): " + ivrCallflow.getListDtmf());
+		this.listIvrDtmf = ivrCallflow.getListDtmf();
+		if (ivrCallflow.getListDtmf() != null && !ivrCallflow.getListDtmf().isEmpty()) {
+			dtmfs = new String[ivrCallflow.getListDtmf().size()];
+			int i = 0;
+			for (IvrDtmf ivrDtmf : ivrCallflow.getListDtmf()) {
+				dtmfs[i++] = String.valueOf(ivrDtmf.getDtmfId());
+			}
+		}
 		editable = false;
 		createable = false;
 	}
 	
 	public Integer getSelectedCallflowId() {
 		return selectedCallflowId;
+	}
+
+	public void setListAllIvrDtmf(List<IvrDtmf> listAllIvrDtmf) {
+		this.listAllIvrDtmf = listAllIvrDtmf;
+	}
+
+	public List<IvrDtmf> getListAllIvrDtmf() {
+		return listAllIvrDtmf;
+	}
+
+	public String[] getDtmfs() {
+		return dtmfs;
+	}
+
+	public void setDtmfs(String[] dtmfs) {
+		this.dtmfs = dtmfs;
 	}
 
 	
