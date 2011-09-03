@@ -101,109 +101,110 @@
 				</a4j:outputPanel>
 			</rich:panel>
 		
-			<rich:popupPanel id="agentSeatCreateUpdatePanel" domElementAttachment="parent" autosized="true">
-				<f:facet name="header">
-					<h:outputText value="#{msg['agentseat.create.update.legend']}" />
-				</f:facet>
-			
+			<rich:popupPanel id="agentSeatCreateUpdatePanel" domElementAttachment="parent" autosized="true" header="#{msg['agentseat.create.update.legend']}">			
 				<h:message infoClass="alert-message info" 
 						   warnClass="alert-message warning" 
 						   errorClass="alert-message info" />
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.id']}" /></label>
-						<div class="input"><h:inputText value="#{agentSeatController.seatId}" disabled="#{not empty agentSeatController.seatId}"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.name']}"/></label>
-						<div class="input"><h:inputText value="#{agentSeatController.seatName}" /></div>
-				</div>					
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.description']}"/></label>
-						<div class="input"><h:inputTextarea value="#{agentSeatController.seatDescription}" cols="30" rows="5" /></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.startperiod']}"/></label>
-						<div class="input">
-							<rich:calendar value="#{agentSeatController.seatStartPeriod}"
-								                    locale="#{userController.locale}" 
-								                    popup="true"
-								                    datePattern="dd/MM/yy HH:mm"
-								                    showApplyButton="true" 
-								                    cellWidth="24px"
-								                    cellHeight="22px" 
-								                    style="width:200px">
-			                </rich:calendar>
-					     </div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.endperiod']}"/></label>
-						<div class="input">
-							<rich:calendar value="#{agentSeatController.seatEndPeriod}"
-								                    locale="#{userController.locale}" 
-								                    popup="true"
-								                    datePattern="dd/MM/yy HH:mm"
-								                    showApplyButton="true" 
-								                    cellWidth="24px"
-								                    cellHeight="22px" 
-								                    style="width:200px">
-			                </rich:calendar>
-					     </div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.maxcall']}"/></label>
-						<div class="input"><h:inputText value="#{agentSeatController.seatMaxCall}" /></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.allowoutbound']}"/></label>
-						<div class="input"><h:inputText value="#{agentSeatController.seatAllowOutbound}" /></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.createdate']}" rendered="#{not empty agentSeatController.seatUpdateDate}"/></label>
-						<div class="input"><h:inputText value="#{agentSeatController.seatCreateDate}" rendered="#{not empty agentSeatController.seatUpdateDate}" disabled="true"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.updatedate']}" rendered="#{not empty agentSeatController.seatUpdateDate}"/></label>
-						<div class="input"><h:inputText value="#{agentSeatController.seatUpdateDate}" rendered="#{not empty agentSeatController.seatUpdateDate}" disabled="true"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.level']}"/></label>
-						<div class="input">
-							<h:selectOneMenu value="#{agentSeatController.agentLevel}">
-								<f:converter converterId="agentLevelConverter"/>
-								<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
-							</h:selectOneMenu>
+
+				<h:panelGrid columns="2" columnClasses="vtop,vtop">
+					<h:panelGroup>
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.id']}" /></label>
+								<div class="input"><h:inputText value="#{agentSeatController.seatId}" disabled="#{not empty agentSeatController.seatId}"/></div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.skill']}"/></label>
-						<div class="input">
-							<h:selectOneMenu value="#{agentSeatController.agentSkill}">
-								<f:converter converterId="agentSkillConverter"/>
-								<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
-							</h:selectOneMenu>
-						</div>			
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['agentseat.status']}"/></label>
-						<div class="input">
-							<h:selectOneMenu value="#{agentSeatController.agentStatus}">
-								<f:converter converterId="agentStatusConverter"/>
-								<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
-							</h:selectOneMenu>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.name']}"/></label>
+								<div class="input"><h:inputText value="#{agentSeatController.seatName}" /></div>
+						</div>					
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.description']}"/></label>
+								<div class="input"><h:inputTextarea value="#{agentSeatController.seatDescription}" cols="30" rows="5" /></div>
 						</div>
-				</div>					
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.startperiod']}"/></label>
+								<div class="input">
+									<rich:calendar value="#{agentSeatController.seatStartPeriod}"
+										                    locale="#{userController.locale}" 
+										                    popup="true"
+										                    datePattern="dd/MM/yy HH:mm"
+										                    showApplyButton="true" 
+										                    cellWidth="24px"
+										                    cellHeight="22px" 
+										                    style="width:200px">
+					                </rich:calendar>
+							     </div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.endperiod']}"/></label>
+								<div class="input">
+									<rich:calendar value="#{agentSeatController.seatEndPeriod}"
+										                    locale="#{userController.locale}" 
+										                    popup="true"
+										                    datePattern="dd/MM/yy HH:mm"
+										                    showApplyButton="true" 
+										                    cellWidth="24px"
+										                    cellHeight="22px" 
+										                    style="width:200px">
+					                </rich:calendar>
+							     </div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.maxcall']}"/></label>
+								<div class="input"><h:inputText value="#{agentSeatController.seatMaxCall}" /></div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.allowoutbound']}"/></label>
+								<div class="input"><h:inputText value="#{agentSeatController.seatAllowOutbound}" /></div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.createdate']}" rendered="#{not empty agentSeatController.seatUpdateDate}"/></label>
+								<div class="input"><h:inputText value="#{agentSeatController.seatCreateDate}" rendered="#{not empty agentSeatController.seatUpdateDate}" disabled="true"/></div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.updatedate']}" rendered="#{not empty agentSeatController.seatUpdateDate}"/></label>
+								<div class="input"><h:inputText value="#{agentSeatController.seatUpdateDate}" rendered="#{not empty agentSeatController.seatUpdateDate}" disabled="true"/></div>
+						</div>
+					</h:panelGroup>				
+					<h:panelGroup>
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.level']}"/></label>
+								<div class="input">
+									<h:selectOneMenu value="#{agentSeatController.agentLevel}">
+										<f:converter converterId="agentLevelConverter"/>
+										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
+									</h:selectOneMenu>
+								</div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.skill']}"/></label>
+								<div class="input">
+									<h:selectOneMenu value="#{agentSeatController.agentSkill}">
+										<f:converter converterId="agentSkillConverter"/>
+										<f:selectItems value="#{dataLoadController.agentSkillSelectItems}"/>
+									</h:selectOneMenu>
+								</div>			
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['agentseat.status']}"/></label>
+								<div class="input">
+									<h:selectOneMenu value="#{agentSeatController.agentStatus}">
+										<f:converter converterId="agentStatusConverter"/>
+										<f:selectItems value="#{dataLoadController.agentStatusSelectItems}"/>
+									</h:selectOneMenu>
+								</div>
+						</div>	
+					</h:panelGroup>
+				</h:panelGrid>				
 									
 				<div class="actions">
 					<a4j:commandButton value="#{msg['button.create']}" 
