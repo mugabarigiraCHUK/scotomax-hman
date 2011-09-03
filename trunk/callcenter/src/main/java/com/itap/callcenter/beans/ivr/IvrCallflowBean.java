@@ -2,10 +2,12 @@ package com.itap.callcenter.beans.ivr;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
 import com.itap.callcenter.entity.apc.ivr.IvrCallflow;
+import com.itap.callcenter.entity.apc.ivr.IvrDtmf;
 import com.itap.callcenter.entity.apc.ivr.IvrVoiceprompt;
 
 /**
@@ -30,7 +32,7 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 	
 	protected IvrVoiceprompt ivrVoiceprompt;
 	protected IvrCallflow callflowBack;
-//	protected IvrCallflow callflowNext;
+	protected List<IvrDtmf> listIvrDtmf;
 	
 	
 	protected void reset() {
@@ -46,6 +48,7 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 		parentCallflowName = null;
 		ivrVoiceprompt = null;
 		callflowBack = null;
+		listIvrDtmf = null;
 	}
 	
 }
