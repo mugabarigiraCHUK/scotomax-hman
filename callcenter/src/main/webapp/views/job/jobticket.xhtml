@@ -175,111 +175,118 @@
 				<h:message infoClass="alert-message info" 
 						   warnClass="alert-message warning" 
 						   errorClass="alert-message info" />
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.id']}" /></label>
-						<div class="input"><h:inputText value="#{jobTicketController.jobId}" disabled="#{not empty jobTicketController.jobId}"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.name']}"/></label>
-						<div class="input"><h:inputText value="#{jobTicketController.jobName}" /></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.description']}"/></label>
-						<div class="input"><h:inputTextarea value="#{jobTicketController.jobDescription}" cols="30" rows="5" /></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.voicerecordfile']}"/></label>
-						<div class="input"><h:inputText value="#{jobTicketController.jobVoiceRecordFile}" size="30"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.alertenable']}"/></label>
-						<div class="input">
-									<h:selectOneRadio value="#{jobTicketController.jobAlertEnable}" layout="lineDirection">
-										<f:selectItem itemLabel="Yes" itemValue="true"/>
-										<f:selectItem itemLabel="No" itemValue="false"/>
-									</h:selectOneRadio>
+		
+				<h:panelGrid columns="2" columnClasses="vtop,vtop">
+					<h:panelGroup>							
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.id']}" /></label>
+								<div class="input"><h:inputText value="#{jobTicketController.jobId}" disabled="#{not empty jobTicketController.jobId}"/></div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.createdate']}" rendered="#{not empty jobTicketController.jobCreateDate}"/></label>
-						<div class="input"><h:inputText value="#{jobTicketController.jobCreateDate}" rendered="#{not empty jobTicketController.jobCreateDate}" disabled="true"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.updatedate']}" rendered="#{not empty jobTicketController.jobUpdateDate}"/></label>
-						<div class="input"><h:inputText value="#{jobTicketController.jobUpdateDate}" rendered="#{not empty jobTicketController.jobUpdateDate}" disabled="true"/></div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.closedate']}" rendered="#{not empty jobTicketController.jobCloseDate}"/></label>
-						<div class="input"><h:inputText value="#{jobTicketController.jobCloseDate}" rendered="#{not empty jobTicketController.jobCloseDate}" disabled="true"/></div>
-				</div>					
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.agentprofile']}"/></label>
-						<div class="input">
-									<h:selectOneMenu value="#{jobTicketController.agentProfile}">
-										<f:converter converterId="agentProfileConverter"/>
-										<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
-									</h:selectOneMenu>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.name']}"/></label>
+								<div class="input"><h:inputText value="#{jobTicketController.jobName}" /></div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.agentlevel']}"/></label>
-						<div class="input">
-									<h:selectOneMenu value="#{jobTicketController.agentLevel}">
-										<f:converter converterId="agentLevelConverter"/>
-										<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
-									</h:selectOneMenu>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.description']}"/></label>
+								<div class="input"><h:inputTextarea value="#{jobTicketController.jobDescription}" cols="30" rows="5" /></div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.agentseat']}"/></label>
-						<div class="input">
-									<h:selectOneMenu value="#{jobTicketController.agentSeat}">
-										<f:converter converterId="agentSeatConverter"/>
-										<f:selectItems value="#{dataLoadController.agentSeatSelectItems}"/>
-									</h:selectOneMenu>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.voicerecordfile']}"/></label>
+								<div class="input"><h:inputText value="#{jobTicketController.jobVoiceRecordFile}" size="30"/></div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.customer']}"/></label>
-						<div class="input">
-									<h:selectOneMenu value="#{jobTicketController.customer}">
-										<f:converter converterId="crmCustomerConverter"/>
-										<f:selectItems value="#{dataLoadController.crmCustomerSelectItems}"/>
-									</h:selectOneMenu>
+						
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.alertenable']}"/></label>
+								<div class="input">
+											<h:selectOneRadio value="#{jobTicketController.jobAlertEnable}" layout="lineDirection">
+												<f:selectItem itemLabel="Yes" itemValue="true"/>
+												<f:selectItem itemLabel="No" itemValue="false"/>
+											</h:selectOneRadio>
+								</div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.status']}"/></label>
-						<div class="input">
-									<h:selectOneMenu value="#{jobTicketController.status}">
-										<f:converter converterId="jobStatusConverter"/>
-										<f:selectItems value="#{dataLoadController.jobStatusSelectItems}"/>
-									</h:selectOneMenu>
+						
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.createdate']}" rendered="#{not empty jobTicketController.jobCreateDate}"/></label>
+								<div class="input"><h:inputText value="#{jobTicketController.jobCreateDate}" rendered="#{not empty jobTicketController.jobCreateDate}" disabled="true"/></div>
 						</div>
-				</div>
-									
-				<div class="clearfix">
-						<label><h:outputText value="#{msg['jobticket.solution']}"/></label>
-						<div class="input">
-									<h:selectOneMenu value="#{jobTicketController.solution}">
-										<f:converter converterId="knwSolutionConverter"/>
-										<f:selectItems value="#{dataLoadController.knwSolutionSelectItems}"/>
-									</h:selectOneMenu>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.updatedate']}" rendered="#{not empty jobTicketController.jobUpdateDate}"/></label>
+								<div class="input"><h:inputText value="#{jobTicketController.jobUpdateDate}" rendered="#{not empty jobTicketController.jobUpdateDate}" disabled="true"/></div>
 						</div>
-				</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.closedate']}" rendered="#{not empty jobTicketController.jobCloseDate}"/></label>
+								<div class="input"><h:inputText value="#{jobTicketController.jobCloseDate}" rendered="#{not empty jobTicketController.jobCloseDate}" disabled="true"/></div>
+						</div>					
+					</h:panelGroup>
+					<h:panelGroup>
+									
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.agentprofile']}"/></label>
+								<div class="input">
+											<h:selectOneMenu value="#{jobTicketController.agentProfile}">
+												<f:converter converterId="agentProfileConverter"/>
+												<f:selectItems value="#{dataLoadController.agentProfileSelectItems}"/>
+											</h:selectOneMenu>
+								</div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.agentlevel']}"/></label>
+								<div class="input">
+											<h:selectOneMenu value="#{jobTicketController.agentLevel}">
+												<f:converter converterId="agentLevelConverter"/>
+												<f:selectItems value="#{dataLoadController.agentLevelSelectItems}"/>
+											</h:selectOneMenu>
+								</div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.agentseat']}"/></label>
+								<div class="input">
+											<h:selectOneMenu value="#{jobTicketController.agentSeat}">
+												<f:converter converterId="agentSeatConverter"/>
+												<f:selectItems value="#{dataLoadController.agentSeatSelectItems}"/>
+											</h:selectOneMenu>
+								</div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.customer']}"/></label>
+								<div class="input">
+											<h:selectOneMenu value="#{jobTicketController.customer}">
+												<f:converter converterId="crmCustomerConverter"/>
+												<f:selectItems value="#{dataLoadController.crmCustomerSelectItems}"/>
+											</h:selectOneMenu>
+								</div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.status']}"/></label>
+								<div class="input">
+											<h:selectOneMenu value="#{jobTicketController.status}">
+												<f:converter converterId="jobStatusConverter"/>
+												<f:selectItems value="#{dataLoadController.jobStatusSelectItems}"/>
+											</h:selectOneMenu>
+								</div>
+						</div>
+											
+						<div class="clearfix">
+								<label><h:outputText value="#{msg['jobticket.solution']}"/></label>
+								<div class="input">
+											<h:selectOneMenu value="#{jobTicketController.solution}">
+												<f:converter converterId="knwSolutionConverter"/>
+												<f:selectItems value="#{dataLoadController.knwSolutionSelectItems}"/>
+											</h:selectOneMenu>
+								</div>
+						</div>
+					</h:panelGroup>
+				</h:panelGrid>		
 									
 					<div class="actions">
 						<a4j:commandButton value="#{msg['button.create']}" 
