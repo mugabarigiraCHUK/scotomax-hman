@@ -4,62 +4,66 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:a4j="http://richfaces.org/a4j"
 		xmlns:rich="http://richfaces.org/rich" 
-		template="/theme/template.xhtml">
+		template="/none_theme/template.xhtml">
 
 	<ui:define name="body">
 	
 		<h:form id="agentscriptForm">
-			<rich:panel id="agentScriptPanel" header="#{msg['agentscript.panel.input']}">
+			<rich:panel id="agentScriptPanel" header="#{msg['agentscript.panel.input']} - #{msg['agentscript.panel.search']}">
 				<a4j:outputPanel id="agentScriptOutputPanel">
 					
-					<fieldset>
-							<legend><h:outputText value="#{msg['agentscript.panel.search']}" /></legend>
-							<h:messages/>
-							
-							<h:panelGrid columns="2" styleClass="inputtable">
+					<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 								
-								<h:outputText value="#{msg['agentscript.business']}"/>
-								<h:selectOneMenu value="#{agentScriptController.business}">
-									<f:converter converterId="crmBusinessConverter"/>
-									<f:selectItem itemLabel="- Select -" itemValue="-1" />
-									<f:selectItems value="#{dataLoadController.crmBusinessSelectItems}" />
-								</h:selectOneMenu>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['agentscript.business']}"/></label>
+						<div class="input">
+							<h:selectOneMenu value="#{agentScriptController.business}">
+								<f:converter converterId="crmBusinessConverter"/>
+								<f:selectItem itemLabel="- Select -" itemValue="-1" />
+								<f:selectItems value="#{dataLoadController.crmBusinessSelectItems}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
 								
-								<h:outputText value="#{msg['agentscript.topic']}"/>
+					<div class="clearfix">
+						<label><h:outputText value="#{msg['agentscript.topic']}"/></label>
+						<div class="input">
 								<h:selectOneMenu value="#{agentScriptController.topic}">
 									<f:converter converterId="knwTopicConverter"/>
 									<f:selectItem itemLabel="- Select -" itemValue="-1" />
 									<f:selectItems value="#{dataLoadController.knwTopicSelectItems}"></f:selectItems>
 								</h:selectOneMenu>
+						</div>
+					</div>	
 								
-								<h:column/>
-								<h:panelGrid columns="3" styleClass="inputtable">
-									<a4j:commandButton value="#{msg['button.search']}" 
-					                							action="#{agentScriptController.search}"
-															 	render="agentScriptCreateUpdatePanel" 
-															 	execute="@this">
-									</a4j:commandButton>
-									<a4j:commandButton value="#{msg['button.create']}" 
-					                							action="#{agentScriptController.edit}"
-															 	render="agentScriptCreateUpdatePanel" 
-															 	execute="@this"
-															 	oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.show()">
-										<a4j:param value="-1" assignTo="#{agentScriptController.selectedScriptId}"/>
-									</a4j:commandButton>
-									<a4j:commandButton value="#{msg['button.refresh']}"
-																action="#{agentScriptController.clear}" 
-															 	render="agentScriptCreateUpdatePanel" 
-															 	execute="@this"/>
-								</h:panelGrid>
-							</h:panelGrid>
-							
-					</fieldset>
+					<div class="actions">
+						<a4j:commandButton value="#{msg['button.search']}" 
+		                							action="#{agentScriptController.search}"
+												 	render="agentScriptCreateUpdatePanel" 
+												 	execute="@this"
+												 	styleClass="btn">
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg['button.create']}" 
+		                							action="#{agentScriptController.edit}"
+												 	render="agentScriptCreateUpdatePanel" 
+												 	execute="@this"
+												 	oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.show()"
+												 	styleClass="btn primary">
+							<a4j:param value="-1" assignTo="#{agentScriptController.selectedScriptId}"/>
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg['button.refresh']}"
+													action="#{agentScriptController.clear}" 
+												 	render="agentScriptCreateUpdatePanel" 
+												 	execute="@this"
+												 	styleClass="btn"/>
+					</div>
 					
-					<fieldset>
-						<legend><h:outputText value="#{msg['agentscript.datatable.legend']}" /></legend>
-
-						<h:outputText value="#{msg['no.found.data.message']}" rendered="#{empty agentScriptController.agentScripts}"/>
-						<rich:dataTable value="#{agentScriptController.agentScripts}" var="data" rendered="#{not empty agentScriptController.agentScripts}">
+						<rich:dataTable value="#{agentScriptController.agentScripts}" 
+												var="data" 
+												noDataLabel="#{msg['no.found.data.message']}" 
+												styleClass="common-table table zebra-striped">
 							<rich:column>
 								<f:facet name="header"><h:outputText value="#{msg['agentscript.table.step']}" /></f:facet>
 								<h:outputText value="#{data.scriptStep}" />
@@ -91,7 +95,8 @@
 															 render="agentScriptCreateUpdatePanel" 
 															 execute="@this" 
 															 oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.show()"
-															 rendered="#{not empty data.scriptId}">
+															 rendered="#{not empty data.scriptId}"
+															 styleClass="btn">
 									<a4j:param value="#{data.agentId}" assignTo="#{agentScriptController.selectedScriptId}"/>
 								</a4j:commandButton>
 							</rich:column>
@@ -101,103 +106,111 @@
 															  render="@none" 
 															  execute="@this" 
 															  oncomplete="#{rich:component('agentScriptDeletePanel')}.show()"
-															  rendered="#{not empty data.levelId}">
+															  rendered="#{not empty data.levelId}"
+															  styleClass="btn">
 									<a4j:param value="#{data.agentId}" assignTo="#{agentScriptController.selectedScriptId}"/>
 								</a4j:commandButton>
 							</rich:column>
 							
 						</rich:dataTable>
-					</fieldset>
 						
 				</a4j:outputPanel>
 			</rich:panel>
 		
-			<rich:popupPanel id="agentScriptCreateUpdatePanel" 
-								   domElementAttachment="parent" 
-								   autosized="true">
-				<h:panelGrid columns="2" styleClass="inputtable">
-					<h:panelGroup>
-						<fieldset>
-							<legend><h:outputText value="#{msg['agentscript.create.update.legend']}" /></legend>
-								<h:panelGrid columns="2" styleClass="inputtable">
-									<h:column/>
-									<h:messages/>
+			<rich:popupPanel id="agentScriptCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<f:facet name="header">
+					<h:outputText value="#{msg['agentscript.create.update.legend']}" />	
+				</f:facet>
+			
+				<h:message infoClass="alert-message info" 
+						   warnClass="alert-message warning" 
+						   errorClass="alert-message info" />
 									
-									<h:outputText value="#{msg['agentscript.id']}" />
-									<h:inputText value="#{agentScriptController.scriptId}" rendered="#{empty agentScriptController.scriptId}"/>
-									<h:outputText value="#{agentScriptController.scriptId}" rendered="#{not empty agentScriptController.scriptId}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.id']}" /></label>
+					<div class="input"><h:inputText value="#{agentScriptController.scriptId}" disabled="#{not empty agentScriptController.scriptId}"/></div>
+				</div>
 									
-									<h:outputText value="#{msg['agentscript.name']}"/>
-									<h:inputText value="#{agentScriptController.scriptName}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.name']}"/></label>
+					<div class="input"><h:inputText value="#{agentScriptController.scriptName}" /></div>
+				</div>					
 									
-									<h:outputText value="#{msg['agentscript.description']}"/>
-									<h:inputTextarea value="#{agentScriptController.scriptDescription}" cols="30" rows="5" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.description']}"/></label>
+					<div class="input"><h:inputTextarea value="#{agentScriptController.scriptDescription}" cols="30" rows="5" /></div>
+				</div>					
 									
-									<h:outputText value="#{msg['agentscript.step']}"/>
-									<h:inputText value="#{agentScriptController.scriptStep}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.step']}"/></label>
+					<div class="input"><h:inputText value="#{agentScriptController.scriptStep}" /></div>
+				</div>					
 									
-									<h:outputText value="#{msg['agentscript.message']}"/>
-									<h:inputText value="#{agentScriptController.scriptMessage}" />
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.message']}"/></label>
+					<div class="input"><h:inputText value="#{agentScriptController.scriptMessage}" /></div>
+				</div>					
 									
-									<h:outputText value="#{msg['agentscript.createdate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/>
-									<h:outputText value="#{agentScriptController.scriptCreateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.createdate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{agentScriptController.scriptCreateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}" disabled="true"/></div>
+				</div>					
 									
-									<h:outputText value="#{msg['agentscript.updatedate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/>
-									<h:outputText value="#{agentScriptController.scriptUpdateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.updatedate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/></label>
+					<div class="input"><h:inputText value="#{agentScriptController.scriptUpdateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}" disabled="true"/></div>
+				</div>					
+			
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.business']}"/></label>
+					<div class="input"><h:outputText value="#{agentScriptController.business.businessName}" /></div>
+				</div>					
 									
-									<h:column/>
-									<h:panelGroup>
-										<a4j:commandButton value="#{msg['button.create']}" 
-																	  action="#{agentScriptController.create}"
-																	  execute="agentScriptCreateUpdatePanel" 
-																	  rendered="#{empty agentScriptController.scriptId}" 
-																	  render="agentScriptOutputPanel"
-																	  oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.update']}" 
-																	  action="#{agentScriptController.update}"
-																	  execute="agentScriptCreateUpdatePanel" 
-																	  rendered="#{not empty agentScriptController.scriptId}" 
-																	  render="agentScriptOutputPanel"
-																	  oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.hide(); return false;"/>
-										<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentScriptCreateUpdatePanel')}.hide(); return false;" />
-									</h:panelGroup>
-								</h:panelGrid>
-						</fieldset>
-					</h:panelGroup>
-					<h:panelGroup>
-						<fieldset>
-							<legend><h:outputText value="#{msg['agentscript.referend.data.legend']}" /></legend>
-								<h:panelGrid columns="2" styleClass="inputtable">
-					
-									<h:outputText value="#{msg['agentscript.business']}"/>
-									<h:outputText value="#{agentScriptController.business.businessName}" />
-									
-									<h:outputText value="#{msg['agentscript.topic']}"/>
-									<h:outputText value="#{agentScriptController.topic.topicName}" />
-									
-								</h:panelGrid>	
-						</fieldset>
-					</h:panelGroup>
-				</h:panelGrid>
+				<div class="clearfix">
+					<label><h:outputText value="#{msg['agentscript.topic']}"/></label>
+					<div class="input"><h:outputText value="#{agentScriptController.topic.topicName}" /></div>
+				</div>					
+															
+					<div class="actions">
+							<a4j:commandButton value="#{msg['button.create']}" 
+														  action="#{agentScriptController.create}"
+														  execute="agentScriptCreateUpdatePanel" 
+														  rendered="#{empty agentScriptController.scriptId}" 
+														  render="agentScriptOutputPanel"
+														  oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.hide(); return false;"
+														  styleClass="btn primary"/>
+							<a4j:commandButton value="#{msg['button.update']}" 
+														  action="#{agentScriptController.update}"
+														  execute="agentScriptCreateUpdatePanel" 
+														  rendered="#{not empty agentScriptController.scriptId}" 
+														  render="agentScriptOutputPanel"
+														  oncomplete="#{rich:component('agentScriptCreateUpdatePanel')}.hide(); return false;"
+														  styleClass="btn primary"/>
+							<a4j:commandButton value="#{msg['button.cancel']}" 
+														onclick="#{rich:component('agentScriptCreateUpdatePanel')}.hide(); return false;" 
+														styleClass="btn"/>
+					</div>
+			
 			</rich:popupPanel>
 			
 			<rich:popupPanel id="agentScriptDeletePanel" domElementAttachment="parent" autosized="true">
-				<fieldset>
-					<legend><h:outputText value="#{msg['agentscript.delete.legend']}" /></legend>
-		
-						<h:panelGrid columns="1" styleClass="inputtable">
-							<h:outputText value="#{msg['agentscript.delete.message']}" />
-							<h:panelGroup>
-								<a4j:commandButton value="#{msg['button.delete']}" 
-															  action="#{agentScriptController.delete}" 
-															  execute="agentScriptDeletePanel"
-															  render="agentScriptOutputPanel"
-															  oncomplete="#{rich:component('agentScriptDeletePanel')}.hide(); return false;"/>
-								<a4j:commandButton value="#{msg['button.cancel']}" onclick="#{rich:component('agentScriptDeletePanel')}.hide(); return false;" />
-							</h:panelGroup>
-						</h:panelGrid>
-
-				</fieldset>
+				<f:facet name="header">
+					<h:outputText value="#{msg['agentscript.delete.legend']}" />
+				</f:facet>
+			
+				<p><h:outputText value="#{msg['agentscript.delete.message']}" /></p>
+				
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{agentScriptController.delete}" 
+												  execute="agentScriptDeletePanel"
+												  render="agentScriptOutputPanel"
+												  oncomplete="#{rich:component('agentScriptDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												onclick="#{rich:component('agentScriptDeletePanel')}.hide(); return false;" 
+												styleClass="btn"/>
+				</div>
 			</rich:popupPanel>
 			
 		</h:form>
