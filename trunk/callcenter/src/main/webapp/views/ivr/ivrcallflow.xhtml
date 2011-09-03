@@ -116,6 +116,21 @@
 					</div>
 					
 					<div class="clearfix">
+						<label><h:outputText value="DTMF: " /></label>
+						<div class="input">
+							<h:selectManyListbox style="height: 100% !important"
+													value="#{ivrCallflowController.dtmfs}"
+													disabled="#{!ivrCallflowController.editable and !ivrCallflowController.createable}"
+													rendered="#{ivrCallflowController.editable or ivrCallflowController.createable or ivrCallflowController.selectedCallflowId != null}">
+					   			<f:selectItems value="#{ivrCallflowController.listAllIvrDtmf}" var="dtmf" 
+												itemLabel="# #{dtmf.dtmfDigit} - #{dtmf.dtmfName}" 
+												itemValue="#{dtmf.dtmfId}" />
+								<!-- <f:converter converterId="ivrDtmfConverter"/> -->
+					   		</h:selectManyListbox>
+						</div>
+					</div>
+					
+					<div class="clearfix">
 						<label><h:outputText value="Created date:" /></label>
 						<div class="output">
 							<h:outputText value="#{ivrCallflowController.callflowCreateDate}" />
@@ -156,7 +171,7 @@
 		        <h:form>
 			        <div class="actions">
 		        		<h:commandButton value="Submit" action="#{ivrCallflowController.delete}" oncomplete="#{rich:component('deletePopup')}.hide(); return false;" render="callflowTreePanel, callflowManage" styleClass="btn danger" />
-		        			<a4j:commandButton value="Cancel" onclick="#{rich:component('deletePopup')}.hide(); return false;" styleClass="btn" />
+		        		<a4j:commandButton value="Cancel" onclick="#{rich:component('deletePopup')}.hide(); return false;" styleClass="btn" />
 	        		</div>
         		</h:form>
     		</rich:popupPanel>
