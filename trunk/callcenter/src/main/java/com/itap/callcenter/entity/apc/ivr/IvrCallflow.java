@@ -6,11 +6,16 @@ package com.itap.callcenter.entity.apc.ivr;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,7 +39,6 @@ import com.itap.callcenter.entity.DomainObject;
 @XmlRootElement
 public class IvrCallflow implements Serializable, DomainObject {
 	
-    private static final long serialVersionUID = 1L;
     
     @Id
     @Column(name = "callflow_id", length = 11, nullable = false)
@@ -81,6 +85,13 @@ public class IvrCallflow implements Serializable, DomainObject {
     @Column(name = "callflow_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date callflowUpdateDate;
+    
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(
+        name="ivr_callflow_dtmf",
+        joinColumns={@JoinColumn(name="callflow_id", referencedColumnName="callflow_id")},
+        inverseJoinColumns={@JoinColumn(name="dtmf_id", referencedColumnName="dtmf_id")})
+    private List<IvrDtmf> listDtmf;
 
     public IvrCallflow() {
     }
@@ -101,8 +112,18 @@ public class IvrCallflow implements Serializable, DomainObject {
         this.callflowCreateDate = callflowCreateDate;
         this.callflowUpdateDate = callflowUpdateDate;
     }
+    
+    
 
-    public Integer getCallflowId() {
+    public List<IvrDtmf> getListDtmf() {
+		return listDtmf;
+	}
+
+	public void setListDtmf(List<IvrDtmf> listDtmf) {
+		this.listDtmf = listDtmf;
+	}
+
+	public Integer getCallflowId() {
         return callflowId;
     }
 
