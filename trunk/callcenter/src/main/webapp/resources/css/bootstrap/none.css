@@ -71,3 +71,7 @@
 .rf-pp-hdr-cntrls {
 	padding: 5px 10px;
 }
+
+.vtop {
+	vertical-align: top;
+}
