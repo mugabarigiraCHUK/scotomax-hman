@@ -27,7 +27,8 @@ public class IvrDtmfConverter implements Converter {
 		logger.debug("value: " + value + " to " + IvrDtmfConverter.class.getSimpleName());
 		try {
 			IvrDtmfDao ivrDtmfDao = (IvrDtmfDao) FacesContextUtils.getWebApplicationContext(context).getBean("ivrDtmfDaoImpl");
-			return ivrDtmfDao.findById(Integer.parseInt(value));
+			IvrDtmf result = ivrDtmfDao.findById(Integer.parseInt(value));
+			return result;
 		} catch (Exception e) {
 			logger.error("The string value is empty or non-numberic.");
 			return null;
@@ -36,7 +37,8 @@ public class IvrDtmfConverter implements Converter {
 	
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		logger.debug("getAsString");
+//		logger.debug("getAsString");
+//		logger.debug("value class: " + value == null ? "null" : value.getClass().getSimpleName());
 		if ( value != null && value instanceof IvrDtmf )  
 			return String.valueOf( ( ( IvrDtmf ) value ).getDtmfId() );
 		else {

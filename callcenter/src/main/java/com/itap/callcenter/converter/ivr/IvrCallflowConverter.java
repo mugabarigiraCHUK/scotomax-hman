@@ -39,11 +39,12 @@ public class IvrCallflowConverter implements Converter {
 	
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		logger.debug("getAsString");
+//		logger.debug("getAsString");
+//		logger.debug("value class: " + value == null ? "null" : value.getClass().getSimpleName());
 		if ( value != null && value instanceof IvrCallflow )  
 			return String.valueOf( ( ( IvrCallflow ) value ).getCallflowId() );
 		else {
-			logger.error("The object value is null or non " + IvrVoiceprompt.class.getSimpleName());
+			logger.error("The object value is null or non " + IvrCallflow.class.getSimpleName());
 			return null;
 		}
 		
