@@ -9,13 +9,21 @@
 
 	<h:head>
 		<title>Bootstrap, from Callcenter</title>
-		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+		
+		
+		<!-- jQuery -->
+		<h:outputScript library="js" name="jquery.min.1.5.1.js" />
+		<h:outputScript library="js" name="jquery-ui.min.1.8.11.js" />
+
+		<!-- none theme -->
 		<h:outputStylesheet library="css" name="bootstrap/bootstrap-1.1.0.css" />
 		<h:outputStylesheet library="css" name="bootstrap/none.css" />
+		
+		
 	</h:head>
 	
 <body>
-	
+
 	<div class="topbar">
 		<div class="fill">
 			<div class="container"> 
@@ -32,7 +40,7 @@
 	</div>	
 	
 	
-	<div id="masthead" style="margin-top: 40px; background-color: #eee"> 
+	<div id="masthead" style="margin-top: 40px; margin-bottom: 30px; background-color: #eee"> 
 		<div class="container-fluid" >
 			<div class="row">
 				<div class="span16 columns">
@@ -272,6 +280,16 @@
 	  							<rich:calendar locale="en" popup="true" />
 	  						</div>
 	  					</div>
+	  					<div class="clearfix">
+	  						<label>h:selectManyListbox</label>
+	  						<div class="input">
+		  							<h:selectManyListbox style="height: 100% !important">
+							   			<f:selectItem itemValue="Fry Checken" itemLabel="Food1 - Fry Checken" />
+							   			<f:selectItem itemValue="Tomyam Soup" itemLabel="Food1 - Tomyam Soup" />
+							   			<f:selectItem itemValue="Mixed Rice" itemLabel="Food1 - Mixed Rice" />
+							   		</h:selectManyListbox>
+	  						</div>
+	  					</div>
 	  					<div class="actions">
 	  						<h:commandButton styleClass="btn primary" value="Save change" />
 	  						<h:commandButton styleClass="btn" value="Cancel" />
@@ -325,7 +343,7 @@
 					<h:message for="username" errorClass="alert-message error" />
 					<h:message for="username" errorClass="alert-message success" />
 					<h:message for="username" errorClass="alert-message info" />
-					<h:message for="username" infoClass="alert-message info" 
+					<h:message id="msg" for="username" infoClass="alert-message info" 
 											  warnClass="alert-message warning" 
 											  errorClass="alert-message info" />
 					<div class="clearfix">
@@ -337,11 +355,14 @@
 						</div>
 					</div>
 					<div class="actions">
-	  					<h:commandButton styleClass="btn primary" value="Submit" />
+	  					<h:commandButton styleClass="btn primary" value="Submit">
+	  						
+	  					</h:commandButton>
 	  				</div>
 				</h:form>
         	</div>
         </div>
+        
         
         
         <footer>
