@@ -37,7 +37,8 @@ public class IvrVoicepromptConverter implements Converter {
 	
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		logger.debug("getAsString");
+//		logger.debug("getAsString");
+//		logger.debug("value class: " + value == null ? "null" : value.getClass().getSimpleName());
 		if ( value != null && value instanceof IvrVoiceprompt )  
 			return String.valueOf( ( ( IvrVoiceprompt ) value ).getVoiceId() );
 		else {
