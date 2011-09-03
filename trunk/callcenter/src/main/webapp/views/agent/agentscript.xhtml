@@ -126,50 +126,59 @@
 						   warnClass="alert-message warning" 
 						   errorClass="alert-message info" />
 									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.id']}" /></label>
-					<div class="input"><h:inputText value="#{agentScriptController.scriptId}" disabled="#{not empty agentScriptController.scriptId}"/></div>
-				</div>
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.name']}"/></label>
-					<div class="input"><h:inputText value="#{agentScriptController.scriptName}" /></div>
-				</div>					
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.description']}"/></label>
-					<div class="input"><h:inputTextarea value="#{agentScriptController.scriptDescription}" cols="30" rows="5" /></div>
-				</div>					
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.step']}"/></label>
-					<div class="input"><h:inputText value="#{agentScriptController.scriptStep}" /></div>
-				</div>					
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.message']}"/></label>
-					<div class="input"><h:inputText value="#{agentScriptController.scriptMessage}" /></div>
-				</div>					
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.createdate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/></label>
-					<div class="input"><h:inputText value="#{agentScriptController.scriptCreateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}" disabled="true"/></div>
-				</div>					
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.updatedate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/></label>
-					<div class="input"><h:inputText value="#{agentScriptController.scriptUpdateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}" disabled="true"/></div>
-				</div>					
-			
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.business']}"/></label>
-					<div class="input"><h:outputText value="#{agentScriptController.business.businessName}" /></div>
-				</div>					
-									
-				<div class="clearfix">
-					<label><h:outputText value="#{msg['agentscript.topic']}"/></label>
-					<div class="input"><h:outputText value="#{agentScriptController.topic.topicName}" /></div>
-				</div>					
+				<h:panelGrid columns="2" columnClasses="vtop,vtop">
+					<h:panelGroup>					
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.id']}" /></label>
+							<div class="input"><h:inputText value="#{agentScriptController.scriptId}" disabled="#{not empty agentScriptController.scriptId}"/></div>
+						</div>
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.name']}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.scriptName}" /></div>
+						</div>					
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.description']}"/></label>
+							<div class="input"><h:inputTextarea value="#{agentScriptController.scriptDescription}" cols="30" rows="5" /></div>
+						</div>					
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.step']}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.scriptStep}" /></div>
+						</div>					
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.message']}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.scriptMessage}" /></div>
+						</div>					
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.createdate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.scriptCreateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}" disabled="true"/></div>
+						</div>					
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.updatedate']}" rendered="#{not empty agentScriptController.scriptUpdateDate}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.scriptUpdateDate}" rendered="#{not empty agentScriptController.scriptUpdateDate}" disabled="true"/></div>
+						</div>
+						
+					</h:panelGroup>
+					
+					<h:panelGroup>						
+		
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.business']}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.business.businessName}" disabled="true"/></div>
+						</div>					
+											
+						<div class="clearfix">
+							<label><h:outputText value="#{msg['agentscript.topic']}"/></label>
+							<div class="input"><h:inputText value="#{agentScriptController.topic.topicName}" disabled="true"/></div>
+						</div>
+						
+					</h:panelGroup>
+				</h:panelGrid>							
 															
 					<div class="actions">
 							<a4j:commandButton value="#{msg['button.create']}" 
