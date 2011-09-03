@@ -53,15 +53,15 @@ public class IvrDtmf implements Serializable, DomainObject {
     @NotNull
     private String dtmfDigit;
     
-    @ManyToOne
-    @JoinColumn(name = "dtmf_correct_callflow_id")
+//    @ManyToOne
+//    @JoinColumn(name = "dtmf_correct_callflow_id")
 //    @NotNull
-    private IvrCallflow dtmfCorrectCallflow;
+//    private IvrCallflow dtmfCorrectCallflow;
     
-    @ManyToOne
-    @JoinColumn(name = "dtmf_error_callflow_id")
+//    @ManyToOne
+//    @JoinColumn(name = "dtmf_error_callflow_id")
 //    @NotNull
-    private IvrCallflow dtmfErrorCallflow;
+//    private IvrCallflow dtmfErrorCallflow;
     
     @Column(name = "dtmf_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -83,8 +83,8 @@ public class IvrDtmf implements Serializable, DomainObject {
         this.dtmfId = dtmfId;
         this.dtmfName = dtmfName;
         this.dtmfDigit = dtmfDigit;
-        this.dtmfCorrectCallflow = dtmfCorrectCallflow;
-        this.dtmfErrorCallflow = dtmfErrorCallflow;
+//        this.dtmfCorrectCallflow = dtmfCorrectCallflow;
+//        this.dtmfErrorCallflow = dtmfErrorCallflow;
         this.dtmfCreateDate = dtmfCreateDate;
         this.dtmfUpdateDate = dtmfUpdateDate;
     }
@@ -121,21 +121,21 @@ public class IvrDtmf implements Serializable, DomainObject {
         this.dtmfDigit = dtmfDigit;
     }
 
-    public IvrCallflow getDtmfCorrectCallflow() {
-		return dtmfCorrectCallflow;
-	}
-
-	public void setDtmfCorrectCallflow(IvrCallflow dtmfCorrectCallflow) {
-		this.dtmfCorrectCallflow = dtmfCorrectCallflow;
-	}
-
-	public IvrCallflow getDtmfErrorCallflow() {
-		return dtmfErrorCallflow;
-	}
-
-	public void setDtmfErrorCallflow(IvrCallflow dtmfErrorCallflow) {
-		this.dtmfErrorCallflow = dtmfErrorCallflow;
-	}
+//    public IvrCallflow getDtmfCorrectCallflow() {
+//		return dtmfCorrectCallflow;
+//	}
+//
+//	public void setDtmfCorrectCallflow(IvrCallflow dtmfCorrectCallflow) {
+//		this.dtmfCorrectCallflow = dtmfCorrectCallflow;
+//	}
+//
+//	public IvrCallflow getDtmfErrorCallflow() {
+//		return dtmfErrorCallflow;
+//	}
+//
+//	public void setDtmfErrorCallflow(IvrCallflow dtmfErrorCallflow) {
+//		this.dtmfErrorCallflow = dtmfErrorCallflow;
+//	}
 
 	public Date getDtmfCreateDate() {
         return dtmfCreateDate;
