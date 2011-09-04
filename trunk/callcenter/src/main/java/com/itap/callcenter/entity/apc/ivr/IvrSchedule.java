@@ -59,7 +59,7 @@ public class IvrSchedule implements Serializable, DomainObject {
     @ManyToOne
     @JoinColumn(name = "schedule_channel", nullable = false)
     @NotNull
-    private IvrSchedule scheduleChannel;
+    private IvrChannel scheduleChannel;
     
     @Column(name = "schedule_start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -68,16 +68,15 @@ public class IvrSchedule implements Serializable, DomainObject {
     
     @Column(name = "schedule_retry_time", length = 11, nullable = false)
     @NotNull
-    private int scheduleRetryTime;
+    private Integer scheduleRetryTime;
     
     @Column(name = "schedule_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date scheduleCreateDate;
     
-    @Column(name = "schedule_update_date", nullable = false)
+    @Column(name = "schedule_update_date")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date scheduleUpdateDate;
 
     public IvrSchedule() {
@@ -87,7 +86,7 @@ public class IvrSchedule implements Serializable, DomainObject {
         this.scheduleId = scheduleId;
     }
 
-    public IvrSchedule(Integer scheduleId, String scheduleName, String scheduleCaller, String scheduleCalled, IvrSchedule scheduleChannel, Date scheduleStartDate, int scheduleRetryTime, Date scheduleCreateDate, Date scheduleUpdateDate) {
+    public IvrSchedule(Integer scheduleId, String scheduleName, String scheduleCaller, String scheduleCalled, IvrChannel scheduleChannel, Date scheduleStartDate, Integer scheduleRetryTime, Date scheduleCreateDate, Date scheduleUpdateDate) {
         this.scheduleId = scheduleId;
         this.scheduleName = scheduleName;
         this.scheduleCaller = scheduleCaller;
@@ -139,11 +138,11 @@ public class IvrSchedule implements Serializable, DomainObject {
         this.scheduleCalled = scheduleCalled;
     }
 
-    public IvrSchedule getScheduleChannel() {
+    public IvrChannel getScheduleChannel() {
         return scheduleChannel;
     }
 
-    public void setScheduleChannel(IvrSchedule scheduleChannel) {
+    public void setScheduleChannel(IvrChannel scheduleChannel) {
         this.scheduleChannel = scheduleChannel;
     }
 
@@ -155,11 +154,11 @@ public class IvrSchedule implements Serializable, DomainObject {
         this.scheduleStartDate = scheduleStartDate;
     }
 
-    public int getScheduleRetryTime() {
+    public Integer getScheduleRetryTime() {
         return scheduleRetryTime;
     }
 
-    public void setScheduleRetryTime(int scheduleRetryTime) {
+    public void setScheduleRetryTime(Integer scheduleRetryTime) {
         this.scheduleRetryTime = scheduleRetryTime;
     }
 
