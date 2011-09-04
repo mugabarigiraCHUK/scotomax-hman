@@ -9,7 +9,7 @@
 	<ui:define name="body">
 		<h:form id="ivrScheduleForm">
 	
-			<h:messages	infoClass="alert-message info" 
+			<rich:messages	infoClass="alert-message info" 
 						warnClass="alert-message warning" 
 						errorClass="alert-message info" />
 	
@@ -63,7 +63,6 @@
 								<span style="padding-left: 10px;" />
 								<a4j:commandButton value="#{msg['button.delete']}" 
 															  render="ivrScheduleDeletePanel"
-															  execute="@this" 
 															  oncomplete="#{rich:component('ivrScheduleDeletePanel')}.show()"
 															  rendered="#{not empty data.scheduleId}"
 															  styleClass="btn">
@@ -76,9 +75,7 @@
 															 action="#{ivrScheduleController.prepareCreate}" 
 															 render="ivrScheduleCreateUpdatePanel"
 															 oncomplete="#{rich:component('ivrScheduleCreateUpdatePanel')}.show()"
-															 styleClass="btn primary">
-										<a4j:param value="#{data.scheduleId}" assignTo="#{ivrScheduleController.selectedScheduleId}"/>
-									</a4j:commandButton>
+															 styleClass="btn primary" />
 									
 									<a4j:commandButton value="#{msg['button.refresh']}" 
 													 	render="ivrSchedulePanel" 
