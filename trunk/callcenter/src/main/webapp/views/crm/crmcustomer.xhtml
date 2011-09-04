@@ -1,0 +1,202 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/none_theme/template.xhtml"> 
+
+	<ui:define name="body">
+		<h:form id="ivrCustomerForm">
+			
+			<h:commandButton value="test" action="#{crmCustomerController.prepareCreate}" />
+			
+			<rich:messages	infoClass="alert-message info" 
+						warnClass="alert-message warning" 
+						errorClass="alert-message info" />
+						
+			<div class="row">
+				<div class="span16">
+					<!-- Output Panel -->
+					<rich:panel id="crmCustomerPanel" header="Customer - Data table">
+						<rich:dataTable value="#{crmCustomerController.listCrmCustomer}" 
+										var="data" 
+										noDataLabel="#{msg['no.found.data.message']}"
+										styleClass="common-table table zebra-striped">
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Fullname" /></f:facet>
+								<h:outputText value="#{data.customerFullname}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Gender" /></f:facet>
+								<h:outputText value="#{data.customerGender}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Address" /></f:facet>
+								<h:outputText value="#{data.customerAddress}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Phone" /></f:facet>
+								<h:outputText value="#{data.customerPhone}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Email" /></f:facet>
+								<h:outputText value="#{data.customerEmail}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Business" /></f:facet>
+								<h:outputText value="#{data.business.businessName}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Status" /></f:facet>
+								<h:outputText value="#{data.status.statusName}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Actions" /></f:facet>
+								<a4j:commandButton value="#{msg['button.edit']}" 
+															 action="#{crmCustomerController.prepareUpdate}" 
+															 render="crmCustomerCreateUpdatePanel"
+															 oncomplete="#{rich:component('crmCustomerCreateUpdatePanel')}.show()"
+															 rendered="#{not empty data.customerId}"
+															 styleClass="btn">
+									<a4j:param value="#{data.customerId}" assignTo="#{crmCustomerController.inputCrmCustomer.customerId}"/>
+								</a4j:commandButton>
+								
+								<span style="padding-left: 10px;" />
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  render="crmCustomerDeletePanel"
+															  oncomplete="#{rich:component('crmCustomerDeletePanel')}.show()"
+															  rendered="#{not empty data.customerId}"
+															  styleClass="btn">
+									<a4j:param value="#{data.customerId}" assignTo="#{crmCustomerController.inputCrmCustomer.customerId}"/>
+								</a4j:commandButton>
+							</rich:column>
+							<f:facet name="footer">
+								<div class="actions">
+									<a4j:commandButton value="#{msg['button.create']}" 
+															 action="#{crmCustomerController.prepareCreate}" 
+															 render="crmCustomerCreateUpdatePanel"
+															 oncomplete="#{rich:component('crmCustomerCreateUpdatePanel')}.show()"
+															 styleClass="btn primary" />
+									
+									<a4j:commandButton value="#{msg['button.refresh']}" 
+													 	render="crmCustomerPanel" 
+													 	styleClass="btn" />
+								</div>
+							</f:facet>
+						</rich:dataTable>
+					</rich:panel>
+				</div>
+			</div>
+			
+			<!-- Create/Update Panel -->
+			<rich:popupPanel id="crmCustomerCreateUpdatePanel" domElementAttachment="parent" autosized="true" 
+						header="Customer - Create/Update">
+				<div class="clearfix">
+					<label><h:outputText value="Fullname:" /></label>
+					<div class="input">
+   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerFullname}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Gender:" /></label>
+					<div class="input">
+   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerGender}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Address:" /></label>
+					<div class="input">
+   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerAddress}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Birthday" /></label>
+					<div class="input">
+   						<rich:calendar value="#{crmCustomerController.inputCrmCustomer.customerBirthday}"
+								                    locale="#{userController.locale}" popup="true"
+								                    datePattern="dd/MM/yy HH:mm" 
+								                    cellWidth="24px" cellHeight="22px" style="width:200px" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Phone" /></label>
+					<div class="input">
+   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerPhone}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Email:" /></label>
+					<div class="input">
+   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerEmail}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Business:" /></label>
+					<div class="input">
+   						<h:selectOneMenu value="#{crmCustomerController.inputCrmCustomer.business}"> 
+							<f:converter converterId="crmBusinessConverter"/>
+							<f:selectItems value="#{crmCustomerController.listCrmBusiness}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Status:" /></label>
+					<div class="input">
+   						<h:selectOneMenu value="#{crmCustomerController.inputCrmCustomer.status}"> 
+							<f:converter converterId="crmStatusConverter"/>
+							<f:selectItems value="#{crmCustomerController.listCrmStatus}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Create date:" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" /></label>
+					<div class="output">
+   						<h:outputText value="#{crmCustomerController.customerCreateDate}" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Update date:" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" /></label>
+					<div class="output">
+   						<h:outputText value="#{crmCustomerController.customerUpdateDate}" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" />
+					</div>
+				</div>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{crmCustomerController.create}"
+												  execute="crmCustomerCreateUpdatePanel" 
+												  rendered="#{empty crmCustomerController.inputCrmCustomer.customerId}" 
+												  render="crmCustomerPanel"
+												  oncomplete="#{rich:component('crmCustomerCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+												  
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{crmCustomerController.update}"
+												  execute="crmCustomerCreateUpdatePanel" 
+												  rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" 
+												  render="crmCustomerPanel"
+												  oncomplete="#{rich:component('crmCustomerCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+												  
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+										onclick="#{rich:component('crmCustomerCreateUpdatePanel')}.hide(); return false;" 
+										styleClass="btn"/>
+				</div>
+			</rich:popupPanel>
+			
+			<!-- Delete Panel -->
+			<rich:popupPanel id="crmCustomerDeletePanel" domElementAttachment="parent" autosized="true"
+								header="Customer - Confirm Delete">
+				<f:facet name="controls">
+		            <h:outputLink value="#" onclick="#{rich:component('crmCustomerDeletePanel')}.hide(); return false;"> X </h:outputLink>
+		        </f:facet>
+		        <p><h:outputText value="Do you want to delete customer ?" /></p>
+			        <div class="actions">
+		        		<h:commandButton value="Submit" action="#{crmCustomerController.delete}" oncomplete="#{rich:component('crmCustomerDeletePanel')}.hide(); return false;" render="crmCustomerPanel" styleClass="btn danger" />
+		        		<a4j:commandButton value="Cancel" onclick="#{rich:component('crmCustomerDeletePanel')}.hide(); return false;" styleClass="btn" />
+	        		</div>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
