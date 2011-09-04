@@ -126,13 +126,13 @@
 			 	<h:commandButton value="Call the popup" styleClass="btn">
 					<rich:componentControl target="popup" operation="show" />
 				</h:commandButton>
+				<h:commandButton value="Call 2 columns" styleClass="btn">
+					<rich:componentControl target="popup2Cols" operation="show" />
+				</h:commandButton>
 			</div>
 		</div>
 		
-		<rich:popupPanel id="popup" modal="false" autosized="true" resizeable="false">
-	        <f:facet name="header">
-	            <h:outputText value="Simple popup panel" />
-	        </f:facet>
+		<rich:popupPanel id="popup" modal="false" autosized="true" resizeable="false" header="Simple popup panel">
 	        <f:facet name="controls">
 	            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;"> X </h:outputLink>
 	        </f:facet>
@@ -142,6 +142,18 @@
 	        	<f:verbatim>&#35;</f:verbatim>{rich:component('popup')}.hide()</p>
     	</rich:popupPanel>
 		
+		<rich:popupPanel id="popup2Cols" modal="false" autosized="true" resizeable="false" header="2 columns">
+	        <h:panelGrid columns="2" columnClasses="vtop,vtop">
+				<h:panelGroup>
+					<p>column1</p><p>column1</p><p>column1</p><p>column1</p><p>column1</p>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p>column2</p><p>column2</p><p>column2</p><p>column2</p><p>column2</p>
+				</h:panelGroup>
+			</h:panelGrid>
+        	<a href="#" onclick="#{rich:component('popup2Cols')}.hide()">hide this panel</a>: 
+        	<f:verbatim>&#35;</f:verbatim>{rich:component('popup')}.hide()
+    	</rich:popupPanel>
 		
 		<br/>
 		<div class="row">
@@ -346,6 +358,9 @@
 					<h:message id="msg" for="username" infoClass="alert-message info" 
 											  warnClass="alert-message warning" 
 											  errorClass="alert-message info" />
+					<h:messages infoClass="alert-message info" 
+								warnClass="alert-message warning" 
+								errorClass="alert-message info" />
 					<div class="clearfix">
   						<label>Enter your username</label>
   						<div class="input">
@@ -362,7 +377,6 @@
 				</h:form>
         	</div>
         </div>
-        
         
         
         <footer>
