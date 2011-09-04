@@ -57,7 +57,7 @@ public class CrmCustomer implements Serializable, DomainObject {
     
     @Column(name = "customer_gender", length = 11, nullable = false)
     @NotNull
-    private int customerGender;
+    private Integer customerGender;
     
     @Column(name = "customer_address", length = 500, nullable = false)
     @NotNull
@@ -91,7 +91,7 @@ public class CrmCustomer implements Serializable, DomainObject {
         this.customerId = customerId;
     }
 
-    public CrmCustomer(Integer customerId, CrmBusiness business, CrmStatus status, String customerFullname, int customerGender, Date customerCreateDate, Date customerUpdateDate) {
+    public CrmCustomer(Integer customerId, CrmBusiness business, CrmStatus status, String customerFullname, Integer customerGender, Date customerCreateDate, Date customerUpdateDate) {
         this.customerId = customerId;
         this.business = business;
         this.status = status;
@@ -133,11 +133,11 @@ public class CrmCustomer implements Serializable, DomainObject {
         this.customerFullname = customerFullname;
     }
 
-    public int getCustomerGender() {
+    public Integer getCustomerGender() {
         return customerGender;
     }
 
-    public void setCustomerGender(int customerGender) {
+    public void setCustomerGender(Integer customerGender) {
         this.customerGender = customerGender;
     }
 
