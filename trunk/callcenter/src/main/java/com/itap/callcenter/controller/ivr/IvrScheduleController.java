@@ -73,7 +73,6 @@ public class IvrScheduleController extends IvrScheduleBean {
 		logger.debug("scheduleName: " + scheduleName);
 		try {
 			IvrSchedule ivrSchedule = new IvrSchedule();
-			ivrSchedule.setScheduleId(ivrScheduleDao.findAll().size()+1);
 			ivrSchedule.setScheduleName(scheduleName);
 			ivrSchedule.setScheduleDescription(scheduleDescription);
 			ivrSchedule.setScheduleCaller(scheduleCaller);
@@ -87,7 +86,7 @@ public class IvrScheduleController extends IvrScheduleBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data have been created successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot create", "Failed to insert the data into db, Cause: "+ex.getMessage()));
 		}
 	}
 	public void update() {
@@ -110,7 +109,7 @@ public class IvrScheduleController extends IvrScheduleBean {
 		}
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot update", "Failed to insert the data into db, Cause: "+ex.getMessage()));
 		}
 	}
 	public void delete() {
@@ -122,7 +121,7 @@ public class IvrScheduleController extends IvrScheduleBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data have been deleted successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot delete", "Failed to delete the data, Cause: "+ex.getMessage()));
 		}
 	}
 	
