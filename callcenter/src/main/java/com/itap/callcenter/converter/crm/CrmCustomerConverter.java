@@ -41,7 +41,6 @@ public class CrmCustomerConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		try {
-			logger.debug("The object value getting from faces context, " + value);
 			if ( value != null && value instanceof CrmCustomer )  
 				return String.valueOf( ( ( CrmCustomer ) value ).getCustomerId() );
 			else throw new RuntimeException("The object value is null or non-CrmCustomer.class");
