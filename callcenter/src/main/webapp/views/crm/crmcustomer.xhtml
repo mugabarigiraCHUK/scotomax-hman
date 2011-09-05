@@ -8,9 +8,7 @@
 
 	<ui:define name="body">
 		<h:form id="ivrCustomerForm">
-			
-			<h:commandButton value="test" action="#{crmCustomerController.prepareCreate}" />
-			
+						
 			<rich:messages	infoClass="alert-message info" 
 						warnClass="alert-message warning" 
 						errorClass="alert-message info" />
@@ -101,13 +99,17 @@
 				<div class="clearfix">
 					<label><h:outputText value="Gender:" /></label>
 					<div class="input">
-   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerGender}" />
+   						<!-- <h:inputText value="#{crmCustomerController.inputCrmCustomer.customerGender}" /> -->
+   						<h:selectOneMenu value="#{crmCustomerController.inputCrmCustomer.customerGender}">
+   							<f:selectItem itemValue="1" itemLabel="Male" /> 
+							<f:selectItem itemValue="2" itemLabel="Female" />
+						</h:selectOneMenu>
 					</div>
 				</div>
 				<div class="clearfix">
 					<label><h:outputText value="Address:" /></label>
 					<div class="input">
-   						<h:inputText value="#{crmCustomerController.inputCrmCustomer.customerAddress}" />
+   						<h:inputTextarea value="#{crmCustomerController.inputCrmCustomer.customerAddress}" />
 					</div>
 				</div>
 				<div class="clearfix">
@@ -152,13 +154,13 @@
 				<div class="clearfix">
 					<label><h:outputText value="Create date:" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" /></label>
 					<div class="output">
-   						<h:outputText value="#{crmCustomerController.customerCreateDate}" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" />
+   						<h:outputText value="#{crmCustomerController.inputCrmCustomer.customerCreateDate}" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" />
 					</div>
 				</div>
 				<div class="clearfix">
 					<label><h:outputText value="Update date:" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" /></label>
 					<div class="output">
-   						<h:outputText value="#{crmCustomerController.customerUpdateDate}" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" />
+   						<h:outputText value="#{crmCustomerController.inputCrmCustomer.customerUpdateDate}" rendered="#{not empty crmCustomerController.inputCrmCustomer.customerId}" />
 					</div>
 				</div>
 				<div class="actions">
