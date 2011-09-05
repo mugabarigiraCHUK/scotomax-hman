@@ -12,9 +12,9 @@
 			<rich:panel id="ivrChannelPanel" header="#{msg['ivrchannel.inputpanel']} - #{msg['ivrchannel.datatable.legend']}">
 				<a4j:outputPanel id="ivrChannelOutputPanel">
 					
-						<h:message infoClass="alert-message info" 
-								   warnClass="alert-message warning" 
-								   errorClass="alert-message info" />
+						<rich:messages	infoClass="alert-message info" 
+										warnClass="alert-message warning" 
+										errorClass="alert-message error" />
 								   
 							<rich:dataTable value="#{ivrChannelController.ivrChannelList}" 
 												var="data"

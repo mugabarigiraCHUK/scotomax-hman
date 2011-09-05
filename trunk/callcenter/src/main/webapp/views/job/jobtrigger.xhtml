@@ -12,9 +12,9 @@
 			<rich:panel id="jobTriggerPanel" header="#{msg['jobtrigger.inputpanel']} - #{msg['jobtrigger.datatable.legend']}">
 				<a4j:outputPanel id="jobTriggerOutputPanel">
 					
-						<h:message infoClass="alert-message info" 
-								   warnClass="alert-message warning" 
-								   errorClass="alert-message info" />
+						<rich:messages	infoClass="alert-message info" 
+										warnClass="alert-message warning" 
+										errorClass="alert-message error" />
 						
 							<rich:dataTable value="#{jobTriggerController.jobTriggerList}" 
 												var="data"

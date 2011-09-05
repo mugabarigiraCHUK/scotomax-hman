@@ -12,9 +12,9 @@
 			<rich:panel id="agentScriptPanel" header="#{msg['agentscript.panel.input']} - #{msg['agentscript.panel.search']}">
 				<a4j:outputPanel id="agentScriptOutputPanel">
 					
-					<h:message infoClass="alert-message info" 
-						   warnClass="alert-message warning" 
-						   errorClass="alert-message info" />
+					<rich:messages	infoClass="alert-message info" 
+									warnClass="alert-message warning" 
+									errorClass="alert-message error" />
 								
 					<div class="clearfix">
 						<label><h:outputText value="#{msg['agentscript.business']}"/></label>

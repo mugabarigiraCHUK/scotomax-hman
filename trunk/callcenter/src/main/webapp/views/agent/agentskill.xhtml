@@ -12,9 +12,9 @@
 			<rich:panel id="agentSkillPanel" header="#{msg['agentskill.inputpanel']} - #{msg['agentskill.datatable.legend']}">
 				<a4j:outputPanel id="agentSkillOutputPanel">
 					
-					<h:message infoClass="alert-message info" 
-						   warnClass="alert-message warning" 
-						   errorClass="alert-message info" />
+					<rich:messages	infoClass="alert-message info" 
+									warnClass="alert-message warning" 
+									errorClass="alert-message error" />
 						
 							<rich:dataTable value="#{agentSkillController.agentSkillList}" 
 													var="data"

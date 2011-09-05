@@ -12,9 +12,9 @@
 			<rich:panel id="jobTicketPanel" header="#{msg['jobticket.panel.input']} - #{msg['jobticket.panel.search']}">
 				<a4j:outputPanel id="jobTicketOutputPanel">
 					
-					<h:message infoClass="alert-message info" 
-						   warnClass="alert-message warning" 
-						   errorClass="alert-message info" />
+					<rich:messages	infoClass="alert-message info" 
+									warnClass="alert-message warning" 
+									errorClass="alert-message error" />
 								
 					<div class="clearfix">
 						<label><h:outputText value="#{msg['jobticket.agentprofile']}"/></label>
