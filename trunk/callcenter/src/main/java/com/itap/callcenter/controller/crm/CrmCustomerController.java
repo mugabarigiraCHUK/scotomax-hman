@@ -32,6 +32,8 @@ import com.itap.callcenter.entity.apc.crm.CrmStatus;
 @ManagedBean(name = "crmCustomerController")
 public class CrmCustomerController implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private Logger logger = LoggerFactory.getLogger(CrmCustomerController.class);
 	
 	@ManagedProperty(value="#{crmStatusDaoImpl}")
