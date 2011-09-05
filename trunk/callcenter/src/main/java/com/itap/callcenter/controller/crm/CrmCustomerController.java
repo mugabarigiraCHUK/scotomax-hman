@@ -112,6 +112,7 @@ public class CrmCustomerController implements Serializable {
 		logger.debug("process update");
 		logger.debug("customerId: " + inputCrmCustomer.getCustomerId());
 		try {
+			inputCrmCustomer.setCustomerUpdateDate(new Date());
 			crmCustomerDao.update(inputCrmCustomer);
 			inputCrmCustomer = new CrmCustomer();
 			logger.debug("The data have been updated successfully.");
