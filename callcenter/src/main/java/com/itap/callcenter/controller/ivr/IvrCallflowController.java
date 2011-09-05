@@ -101,7 +101,6 @@ public class IvrCallflowController extends IvrCallflowBean {
 		logger.debug("dtmfs: " + (dtmfs == null ? "(0)" : "(" + dtmfs.length + ")"));
 		try{
 			IvrCallflow ivrCallflow = new IvrCallflow();
-			ivrCallflow.setCallflowId(ivrCallflowDao.findAll().size()+1);
 			ivrCallflow.setCallflowName(callflowName);
 			ivrCallflow.setCallflowDescription(callflowDescription);
 			ivrCallflow.setCallflowStep(callflowStep);
@@ -126,7 +125,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot create", "Failed to insert the data into db, Cause: "+ex.getMessage()));
 		}
 	}
 	
@@ -162,7 +161,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot update", "Failed to insert the data into db, Cause: "+ex.getMessage()));
 		}
 	}
 	
@@ -177,7 +176,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot delete", "Failed to delete the data, Cause: "+ex.getMessage()));
 		}
 	}
 	
