@@ -1,0 +1,146 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/none_theme/template.xhtml"> 
+
+	<ui:define name="body">
+		<h:form id="ivrPabxForm">
+	
+			<rich:messages	infoClass="alert-message info" 
+						warnClass="alert-message warning" 
+						errorClass="alert-message error" />
+						
+			<div class="row">
+				<div class="span16">
+					<!-- Output Panel -->
+					<rich:panel id="ivrPabxPanel" header="Pabx - Data table">
+						<rich:dataTable value="#{ivrPabxController.listIvrPabx}" 
+										var="data" 
+										noDataLabel="#{msg['no.found.data.message']}"
+										styleClass="common-table table zebra-striped">
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Name" /></f:facet>
+								<h:outputText value="#{data.pabxName}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Description" /></f:facet>
+								<h:outputText value="#{data.pabxDescription}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Protocol" /></f:facet>
+								<h:outputText value="#{data.protocol.protocolName}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Updated Date" /></f:facet>
+								<h:outputText value="#{data.pabxUpdateDate}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header"><h:outputText value="Actions" /></f:facet>
+								<a4j:commandButton value="#{msg['button.edit']}" 
+															 action="#{ivrPabxController.prepareUpdate}" 
+															 render="ivrPabxCreateUpdatePanel"
+															 oncomplete="#{rich:component('ivrPabxCreateUpdatePanel')}.show()"
+															 rendered="#{not empty data.pabxId}"
+															 styleClass="btn">
+									<a4j:param value="#{data.pabxId}" assignTo="#{ivrPabxController.inputIvrPabx.pabxId}"/>
+								</a4j:commandButton>
+								
+								<span style="padding-left: 10px;" />
+								<a4j:commandButton value="#{msg['button.delete']}" 
+															  render="ivrPabxDeletePanel"
+															  oncomplete="#{rich:component('ivrPabxDeletePanel')}.show()"
+															  rendered="#{not empty data.pabxId}"
+															  styleClass="btn">
+									<a4j:param value="#{data.pabxId}" assignTo="#{ivrPabxController.inputIvrPabx.pabxId}"/>
+								</a4j:commandButton>
+							</rich:column>
+							<f:facet name="footer">
+								<div class="actions">
+									<a4j:commandButton value="#{msg['button.create']}" 
+															 action="#{ivrPabxController.prepareCreate}" 
+															 render="ivrPabxCreateUpdatePanel"
+															 oncomplete="#{rich:component('ivrPabxCreateUpdatePanel')}.show()"
+															 styleClass="btn primary" />
+									
+									<a4j:commandButton value="#{msg['button.refresh']}" 
+													 	render="ivrPabxPanel" 
+													 	styleClass="btn" />
+								</div>
+							</f:facet>
+						</rich:dataTable>
+					</rich:panel>
+				</div>
+			</div>
+			
+			<!-- Create/Update Panel -->
+			<rich:popupPanel id="ivrPabxCreateUpdatePanel" domElementAttachment="parent" autosized="true" 
+						header="Pabx - Create/Update">
+				<div class="clearfix">
+					<label><h:outputText value="Name:" /></label>
+					<div class="input">
+   						<h:inputText value="#{ivrPabxController.inputIvrPabx.pabxName}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Description:" /></label>
+					<div class="input">
+   						<h:inputTextarea value="#{ivrPabxController.inputIvrPabx.pabxDescription}" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Protocol:" /></label>
+					<div class="input">
+   						<h:selectOneMenu value="#{ivrPabxController.inputIvrPabx.protocol}"> 
+							<f:converter converterId="ivrProtocolConverter"/>
+							<f:selectItems value="#{ivrPabxController.listIvrProtocol}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<div class="clearfix">
+					<label><h:outputText value="Update date:" rendered="#{not empty ivrPabxController.inputIvrPabx.pabxId}" /></label>
+					<div class="output">
+   						<h:outputText value="#{ivrPabxController.inputIvrPabx.pabxUpdateDate}" rendered="#{not empty ivrPabxController.inputIvrPabx.pabxId}" />
+					</div>
+				</div>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.create']}" 
+												  action="#{ivrPabxController.create}"
+												  execute="ivrPabxCreateUpdatePanel" 
+												  rendered="#{empty ivrPabxController.inputIvrPabx.pabxId}" 
+												  render="ivrPabxPanel"
+												  oncomplete="#{rich:component('ivrPabxCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+												  
+					<a4j:commandButton value="#{msg['button.update']}" 
+												  action="#{ivrPabxController.update}"
+												  execute="ivrPabxCreateUpdatePanel" 
+												  rendered="#{not empty ivrPabxController.inputIvrPabx.pabxId}" 
+												  render="ivrPabxPanel"
+												  oncomplete="#{rich:component('ivrPabxCreateUpdatePanel')}.hide(); return false;"
+												  styleClass="btn primary"/>
+												  
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+										onclick="#{rich:component('ivrPabxCreateUpdatePanel')}.hide(); return false;" 
+										styleClass="btn"/>
+				</div>
+			</rich:popupPanel>
+			
+			<!-- Delete Panel -->
+			<rich:popupPanel id="ivrPabxDeletePanel" domElementAttachment="parent" autosized="true"
+								header="Pabx - Confirm Delete">
+				<f:facet name="controls">
+		            <h:outputLink value="#" onclick="#{rich:component('ivrPabxDeletePanel')}.hide(); return false;"> X </h:outputLink>
+		        </f:facet>
+		        <p><h:outputText value="Do you want to delete customer ?" /></p>
+			        <div class="actions">
+		        		<h:commandButton value="Submit" action="#{ivrPabxController.delete}" oncomplete="#{rich:component('ivrPabxDeletePanel')}.hide(); return false;" render="ivrPabxPanel" styleClass="btn danger" />
+		        		<a4j:commandButton value="Cancel" onclick="#{rich:component('ivrPabxDeletePanel')}.hide(); return false;" styleClass="btn" />
+	        		</div>
+			</rich:popupPanel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
