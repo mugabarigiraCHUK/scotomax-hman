@@ -21,9 +21,9 @@
 			<rich:panel id="agentSeatPanel" header="#{msg['agentseat.panel.input']} - #{msg['agentseat.panel.search']}">
 				<a4j:outputPanel id="agentSeatOutputPanel">
 					
-					<h:message infoClass="alert-message info" 
-						   warnClass="alert-message warning" 
-						   errorClass="alert-message info" />
+					<rich:messages	infoClass="alert-message info" 
+									warnClass="alert-message warning" 
+									errorClass="alert-message error" />
 					
 					<div class="actions">
 								<a4j:commandButton value="#{msg['button.create']}" 

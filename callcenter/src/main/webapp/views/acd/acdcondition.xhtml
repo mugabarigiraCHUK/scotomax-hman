@@ -15,9 +15,9 @@
 			<rich:panel id="acdConditionPanel" header="#{msg['acdcondition.inputpanel']} - #{msg['acdcondition.datatable.legend']}">
 				<a4j:outputPanel id="acdConditionOutputPanel">
 					
-						<h:message infoClass="alert-message info" 
-								   warnClass="alert-message warning" 
-								   errorClass="alert-message info" />
+						<rich:messages	infoClass="alert-message info" 
+										warnClass="alert-message warning" 
+										errorClass="alert-message error" />
 											
 						<rich:dataTable value="#{acdConditionController.acdConditionList}" 
 										var="data" 

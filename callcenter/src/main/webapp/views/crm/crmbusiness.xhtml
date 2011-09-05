@@ -12,9 +12,9 @@
 			<rich:panel id="crmBusinessPanel" header="#{msg['crmbusiness.inputpanel']} - #{msg['crmbusiness.datatable.legend']}">
 				<a4j:outputPanel id="crmBusinessOutputPanel">
 					
-						<h:message infoClass="alert-message info" 
-								   warnClass="alert-message warning" 
-								   errorClass="alert-message info" />
+						<rich:messages	infoClass="alert-message info" 
+										warnClass="alert-message warning" 
+										errorClass="alert-message error" />
 						
 							<rich:dataTable value="#{crmBusinessController.crmBusinessList}" 
 													var="data"

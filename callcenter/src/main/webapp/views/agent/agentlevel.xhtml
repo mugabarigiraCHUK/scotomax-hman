@@ -12,9 +12,9 @@
 			<rich:panel id="agentLevelPanel" header="#{msg['agentlevel.inputpanel']} - #{msg['agentlevel.datatable.legend']}">
 				<a4j:outputPanel id="agentLevelOutputPanel">
 					
-				<h:message infoClass="alert-message info" 
-						   warnClass="alert-message warning" 
-						   errorClass="alert-message info" />
+				<rich:messages	infoClass="alert-message info" 
+								warnClass="alert-message warning" 
+								errorClass="alert-message error" />
 				
 				<rich:dataTable value="#{agentLevelController.agentLevelList}" 
 										var="data"

@@ -12,9 +12,9 @@
 			<rich:panel id="jobStatusPanel" header="#{msg['jobstatus.inputpanel']} - #{msg['jobstatus.datatable.legend']}">
 				<a4j:outputPanel id="jobStatusOutputPanel">
 					
-						<h:message infoClass="alert-message info" 
-								   warnClass="alert-message warning" 
-								   errorClass="alert-message info" />
+						<rich:messages	infoClass="alert-message info" 
+										warnClass="alert-message warning" 
+										errorClass="alert-message error" />
 						
 							<rich:dataTable value="#{jobStatusController.jobStatusList}" 
 												var="data"
