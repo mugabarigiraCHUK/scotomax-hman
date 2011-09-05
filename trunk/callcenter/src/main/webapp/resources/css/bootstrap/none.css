@@ -10,7 +10,7 @@
     border-radius: 6px !important;
 }
 .rf-p-hdr, .rf-cp-hdr {
-	color: #aaa !important;
+	color: gray !important;
 	font-weight: bold !important;
 	padding: 5px !important;  
 	border-width: 1px !important;
