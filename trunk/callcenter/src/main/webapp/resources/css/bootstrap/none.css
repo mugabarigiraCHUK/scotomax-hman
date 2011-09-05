@@ -75,3 +75,6 @@
 .vtop {
 	vertical-align: top;
 }
+.labelCenter {
+	float: center !important;
+}

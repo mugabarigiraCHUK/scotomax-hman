@@ -19,7 +19,6 @@
 		<h:outputStylesheet library="css" name="bootstrap/bootstrap-1.1.0.css" />
 		<h:outputStylesheet library="css" name="bootstrap/none.css" />
 		
-		
 	</h:head>
 	
 <body>
@@ -295,11 +294,29 @@
 	  					<div class="clearfix">
 	  						<label>h:selectManyListbox</label>
 	  						<div class="input">
-		  							<h:selectManyListbox style="height: 100% !important">
-							   			<f:selectItem itemValue="Fry Checken" itemLabel="Food1 - Fry Checken" />
-							   			<f:selectItem itemValue="Tomyam Soup" itemLabel="Food1 - Tomyam Soup" />
-							   			<f:selectItem itemValue="Mixed Rice" itemLabel="Food1 - Mixed Rice" />
-							   		</h:selectManyListbox>
+	  							<h:selectManyListbox style="height: 100% !important">
+						   			<f:selectItem itemValue="Fry Checken" itemLabel="Food1 - Fry Checken" />
+						   			<f:selectItem itemValue="Tomyam Soup" itemLabel="Food1 - Tomyam Soup" />
+						   			<f:selectItem itemValue="Mixed Rice" itemLabel="Food1 - Mixed Rice" />
+						   		</h:selectManyListbox>
+	  						</div>
+	  					</div>
+	  					<div class="clearfix">
+	  						<label>h:selectManyCheckbox</label>
+	  						<div class="input">
+	  							<h:selectManyCheckbox layout="pageDirection" enabledClass="labelCenter" disabledClass="labelCenter" >
+									<f:selectItem itemLabel="yes"  />
+									<f:selectItem itemLabel="no" />
+								</h:selectManyCheckbox>
+	  						</div>
+	  					</div>
+	  					<div class="clearfix">
+	  						<label>h:selectOneRadio</label>
+	  						<div class="input">
+	  							<h:selectOneRadio layout="pageDirection" enabledClass="labelCenter" disabledClass="labelCenter" >
+									<f:selectItem itemLabel="yes"  />
+									<f:selectItem itemLabel="no" />
+								</h:selectOneRadio>
 	  						</div>
 	  					</div>
 	  					<div class="actions">
@@ -357,7 +374,7 @@
 					<h:message for="username" errorClass="alert-message info" />
 					<h:message id="msg" for="username" infoClass="alert-message info" 
 											  warnClass="alert-message warning" 
-											  errorClass="alert-message info" />
+											  errorClass="alert-message error" />
 					<h:messages infoClass="alert-message info" 
 								warnClass="alert-message warning" 
 								errorClass="alert-message info" />
