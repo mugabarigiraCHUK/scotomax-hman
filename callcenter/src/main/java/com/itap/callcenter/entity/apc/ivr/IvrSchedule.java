@@ -9,6 +9,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,6 +39,7 @@ public class IvrSchedule implements Serializable, DomainObject {
     
     @Id
     @Column(name = "schedule_id", length = 11, nullable = false)
+    @GeneratedValue
     @NotNull
     private Integer scheduleId;
     
