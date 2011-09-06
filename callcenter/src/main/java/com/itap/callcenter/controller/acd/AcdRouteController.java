@@ -58,10 +58,10 @@ public class AcdRouteController extends AcdRouteBean {
 			entry.setRouteCondition(routeCondition);
 			
 			acdRouteDao.save(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been created successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to insert the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -86,10 +86,10 @@ public class AcdRouteController extends AcdRouteBean {
 			entry.setRouteCondition(routeCondition);
 			
 			acdRouteDao.update(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been updated successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to update the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to update the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to update the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class AcdRouteController extends AcdRouteBean {
 				selectedRouteId = -1;
 			} catch (Exception ex) {
 				logger.error("Failed to fetch the element data from db, Cause: "+ex.getMessage(), ex);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetch the element data from db, Cause: "+ex.getMessage()));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to fetch the element data from db, Cause: "+ex.getMessage(), "Information"));
 			}
 		}
 	}
@@ -136,11 +136,11 @@ public class AcdRouteController extends AcdRouteBean {
 			if ( selectedRouteId != null ) {
 				acdRouteDao.deleteById(selectedRouteId);
 				selectedRouteId = -1;
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been deleted successfully.", "Information"));
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to delete the data, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -154,7 +154,7 @@ public class AcdRouteController extends AcdRouteBean {
 			rsList = acdRouteDao.findAll();
 		} catch ( Exception ex ) {
 			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,  "Failed to load the data, Cause: "+ex.getMessage(), "Information"));
 		}
 		return rsList;
 	}
