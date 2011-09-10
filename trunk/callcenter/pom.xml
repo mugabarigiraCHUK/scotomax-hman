@@ -185,22 +185,6 @@
 			</exclusions>
 		</dependency>
 
-		<!-- Spring context support framework <dependency> <groupId>org.springframework</groupId> 
-			<artifactId>org.springframework.context.support</artifactId> <version>${spring.version}</version> 
-			<exclusions> <exclusion> <artifactId>org.springframework.core</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> <exclusion> <artifactId>org.springframework.context</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> <exclusion> <artifactId>org.springframework.beans</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> </exclusions> </dependency> -->
-
-		<!-- Spring transaction framework <dependency> <groupId>org.springframework</groupId> 
-			<artifactId>org.springframework.transaction</artifactId> <version>${spring.version}</version> 
-			<exclusions> <exclusion> <artifactId>org.springframework.core</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> <exclusion> <artifactId>com.springsource.org.aopalliance</artifactId> 
-			<groupId>org.aopalliance</groupId> </exclusion> <exclusion> <artifactId>org.springframework.aop</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> <exclusion> <artifactId>org.springframework.beans</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> <exclusion> <artifactId>org.springframework.context</artifactId> 
-			<groupId>org.springframework</groupId> </exclusion> </exclusions> </dependency> -->
-
 		<!-- Spring web framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -230,7 +214,27 @@
 			</exclusions>
 		</dependency>
 
+		<!-- ##### Spring MVC RESTful #####-->
+		<!-- Spring Dispatch Servlet -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web.servlet</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
+		<!-- Spring Dispatch Servlet -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- xStream Object to XML -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>com.springsource.com.thoughtworks.xstream</artifactId>
+			<version>1.3.1</version>
+		</dependency>
 
 		<!--########## DAO JPA Hibernate ########## -->
 		<!-- AspectJ -->
@@ -317,7 +321,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- hibernate validate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
