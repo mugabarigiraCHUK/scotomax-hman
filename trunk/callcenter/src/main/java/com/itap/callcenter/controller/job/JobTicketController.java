@@ -54,7 +54,7 @@ public class JobTicketController extends JobTicketBean {
 			jobTicketList = jobTicketDao.findByCriteria(agentProfile, agentLevel, agentSeat, customer, status, jobName);
 		} catch (Exception ex) {
 			logger.error("Failed to search the data from database, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to search data from database, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to search data from database, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -90,10 +90,10 @@ public class JobTicketController extends JobTicketBean {
 			entry.setStatus(status);
 			
 			jobTicketDao.save(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been created successfully.", "information"));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to insert the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -128,10 +128,10 @@ public class JobTicketController extends JobTicketBean {
 			entry.setStatus(status);
 			
 			jobTicketDao.update(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been updated successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to update the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to update the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to update the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -183,7 +183,7 @@ public class JobTicketController extends JobTicketBean {
 				selectedJobId = -1;
 			} catch (Exception ex) {
 				logger.error("Failed to fetch the element data from db, Cause: "+ex.getMessage(), ex);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetch the element data from db, Cause: "+ex.getMessage()));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to fetch the element data from db, Cause: "+ex.getMessage(), "Information"));
 			}
 		}
 	}
@@ -197,11 +197,11 @@ public class JobTicketController extends JobTicketBean {
 			if ( selectedJobId != null ) {
 				jobTicketDao.deleteById(selectedJobId);
 				selectedJobId = -1;
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been deleted successfully.", "Information"));
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to delete the data, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	

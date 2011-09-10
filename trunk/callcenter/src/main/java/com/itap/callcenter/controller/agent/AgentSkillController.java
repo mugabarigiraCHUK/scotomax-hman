@@ -48,10 +48,10 @@ public class AgentSkillController extends AgentSkillBean {
 			entry.setSkillDescription(skillDescription);
 			entry.setSkillUpdateDate(new Date());
 			agentSkillDao.save(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been created successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to insert the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -67,10 +67,10 @@ public class AgentSkillController extends AgentSkillBean {
 			entry.setSkillDescription(skillDescription);
 			entry.setSkillUpdateDate(new Date());
 			agentSkillDao.update(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been updated successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to update the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to update the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to update the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -94,7 +94,7 @@ public class AgentSkillController extends AgentSkillBean {
 				selectedSkillId = -1;
 			} catch (Exception ex) {
 				logger.error("Failed to fetch the element data from db, Cause: "+ex.getMessage(), ex);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetch the element data from db, Cause: "+ex.getMessage()));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to fetch the element data from db, Cause: "+ex.getMessage(), "Information"));
 			}
 		}
 	}
@@ -108,11 +108,11 @@ public class AgentSkillController extends AgentSkillBean {
 			if ( selectedSkillId != null ) {
 				agentSkillDao.deleteById(selectedSkillId);
 				selectedSkillId = -1;
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been deleted successfully."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been deleted successfully.", "Information"));
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to delete the data, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -126,7 +126,7 @@ public class AgentSkillController extends AgentSkillBean {
 			rsList = agentSkillDao.findAll();
 		} catch ( Exception ex ) {
 			logger.error("Failed to load the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to load the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to load the data, Cause: "+ex.getMessage(), "Information"));
 		}
 		return rsList;
 	}
