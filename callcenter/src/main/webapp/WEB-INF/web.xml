@@ -132,5 +132,23 @@
         <exception-type>org.springframework.security.access.AccessDeniedException</exception-type>
         <location>/views/login.xhtml</location>
 	</error-page>
+	
+	<!-- START - SPRING MVC -->
+	<servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+			 <param-name>contextConfigLocation</param-name>
+			 <param-value></param-value>
+		</init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/service/*</url-pattern>
+    </servlet-mapping>
+    
+	<!-- END - STRING MVC -->
+	
 	<!-- ********** END SPRING FRAMEWORK 3.0.5 CONFIG ********** -->
 </web-app>
