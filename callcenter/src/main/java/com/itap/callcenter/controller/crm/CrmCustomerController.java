@@ -102,7 +102,7 @@ public class CrmCustomerController implements Serializable {
 			crmCustomerDao.save(crmCustomer);
 			inputCrmCustomer = new CrmCustomer();
 			logger.debug("The data have been created successfully.");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data have been created successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data have been created successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot create", "Failed to insert the data into db, Cause: "+ex.getMessage()));
@@ -116,7 +116,7 @@ public class CrmCustomerController implements Serializable {
 			crmCustomerDao.update(inputCrmCustomer);
 			inputCrmCustomer = new CrmCustomer();
 			logger.debug("The data have been updated successfully.");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data have been updated successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data have been updated successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot update", "Failed to insert the data into db, Cause: "+ex.getMessage()));
@@ -129,7 +129,7 @@ public class CrmCustomerController implements Serializable {
 			crmCustomerDao.deleteById(inputCrmCustomer.getCustomerId());
 			inputCrmCustomer = new CrmCustomer();
 			logger.debug("The data have been deleted successfully.");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data have been deleted successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data have been deleted successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "The data cannot delete", "Failed to delete the data, Cause: "+ex.getMessage()));

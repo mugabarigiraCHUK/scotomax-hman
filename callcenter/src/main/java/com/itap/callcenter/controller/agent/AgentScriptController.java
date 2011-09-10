@@ -46,7 +46,7 @@ public class AgentScriptController extends AgentScriptBean {
 			else logger.warn("System could not found business and topic objects are selected!");
 		} catch ( Exception ex ) {
 			logger.error("Failed to fetching the data from db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetching the data from db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to fetching the data from db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -89,14 +89,14 @@ public class AgentScriptController extends AgentScriptBean {
 				entry.setTopic(topic);
 				
 				agentScriptDao.save(entry);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been created successfully."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been created successfully.", "Information"));
 			} else {
 				logger.warn("System could not found business and topic are selected..");
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Please select business and topic data."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Please select business and topic data.", "Information"));
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to insert the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to insert the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to insert the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -113,10 +113,10 @@ public class AgentScriptController extends AgentScriptBean {
 			entry.setScriptMessage(scriptMessage);
 			entry.setScriptUpdateDate(new Date());
 			agentScriptDao.update(entry);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The data been updated successfully."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "The data been updated successfully.", "Information"));
 		} catch (Exception ex) {
 			logger.error("Failed to update the data into db, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to update the data into db, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to update the data into db, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
@@ -148,12 +148,12 @@ public class AgentScriptController extends AgentScriptBean {
 					selectedScriptId = -1;
 				} catch (Exception ex) {
 					logger.error("Failed to fetch the element data from db, Cause: "+ex.getMessage(), ex);
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to fetch the element data from db, Cause: "+ex.getMessage()));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to fetch the element data from db, Cause: "+ex.getMessage(), "Information"));
 				}
 			}
 		} else {
 			logger.warn("System could not found business and topic are selected..");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Please select business and topic data."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Please select business and topic data.", "Information"));
 		}
 	}
 	
@@ -170,7 +170,7 @@ public class AgentScriptController extends AgentScriptBean {
 			}
 		} catch (Exception ex) {
 			logger.error("Failed to delete the data, Cause: "+ex.getMessage(), ex);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Failed to delete the data, Cause: "+ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to delete the data, Cause: "+ex.getMessage(), "Information"));
 		}
 	}
 	
