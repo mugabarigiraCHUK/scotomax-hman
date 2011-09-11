@@ -42,8 +42,7 @@ public class KnwCategory implements Serializable, DomainObject {
     private Integer categoryId;
     
     @ManyToOne
-    @JoinColumn(name = "parent_category_id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "parent_category_id")
     private KnwCategory parentCategory;
     
     @Column(name = "category_name", length = 50, nullable = false)
