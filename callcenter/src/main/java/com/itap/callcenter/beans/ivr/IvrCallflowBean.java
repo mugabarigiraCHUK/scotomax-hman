@@ -9,6 +9,7 @@ import lombok.Data;
 import com.itap.callcenter.entity.apc.ivr.IvrCallflow;
 import com.itap.callcenter.entity.apc.ivr.IvrDtmf;
 import com.itap.callcenter.entity.apc.ivr.IvrVoiceprompt;
+import com.itap.callcenter.entity.apc.job.JobTrigger;
 
 /**
  * 
@@ -23,7 +24,7 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 	protected String callflowDescription;
 	protected Integer callflowStep;
 	protected Integer callflowTimeout;
-	protected Integer callflowVoiceRepeatEnable;
+	protected Boolean callflowVoiceRepeatEnable;
 	protected Date callflowCreateDate;
 	protected Date callflowUpdateDate;
 	
@@ -32,8 +33,9 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 	
 	protected IvrVoiceprompt ivrVoiceprompt;
 	protected IvrCallflow callflowBack;
+	protected JobTrigger correctJobTrigger;
+	protected JobTrigger inCorrectJobTrigger;
 	protected List<IvrDtmf> listIvrDtmf;
-	
 	
 	protected void reset() {
 		callflowId = null;
@@ -49,6 +51,8 @@ public @Data abstract class IvrCallflowBean implements Serializable {
 		ivrVoiceprompt = null;
 		callflowBack = null;
 		listIvrDtmf = null;
+		correctJobTrigger = null;
+		inCorrectJobTrigger = null;
 	}
 	
 }

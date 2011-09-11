@@ -20,9 +20,11 @@ import com.itap.callcenter.beans.ivr.IvrCallflowNode;
 import com.itap.callcenter.dao.apc.ivr.IvrCallflowDao;
 import com.itap.callcenter.dao.apc.ivr.IvrDtmfDao;
 import com.itap.callcenter.dao.apc.ivr.IvrVoicepromptDao;
+import com.itap.callcenter.dao.apc.job.JobTriggerDao;
 import com.itap.callcenter.entity.apc.ivr.IvrCallflow;
 import com.itap.callcenter.entity.apc.ivr.IvrDtmf;
 import com.itap.callcenter.entity.apc.ivr.IvrVoiceprompt;
+import com.itap.callcenter.entity.apc.job.JobTrigger;
 
 @ViewScoped
 @ManagedBean(name="ivrCallflowController")
@@ -40,6 +42,9 @@ public class IvrCallflowController extends IvrCallflowBean {
 	
 	@ManagedProperty(value="#{ivrDtmfDaoImpl}")
 	private IvrDtmfDao ivrDtmfDao;
+	
+	@ManagedProperty(value="#{jobTriggerDaoImpl}")
+	private JobTriggerDao jobTriggerDao;
 
 	private Integer selectedCallflowId;
 	private boolean editable;
@@ -47,6 +52,7 @@ public class IvrCallflowController extends IvrCallflowBean {
 	
 	private List<SelectItem> listIvrVoiceprompt = new ArrayList<SelectItem>();
 	private List<SelectItem> listIvrCallflow = new ArrayList<SelectItem>();
+	private List<SelectItem> listJobTrigger = new ArrayList<SelectItem>();
 	private List<IvrDtmf> listAllIvrDtmf = new ArrayList<IvrDtmf>();
 	private String[] dtmfs;
 	
@@ -64,6 +70,10 @@ public class IvrCallflowController extends IvrCallflowBean {
 			List<IvrCallflow> queryListIvrCallflow = ivrCallflowDao.findAll();
 			for (IvrCallflow ivrCallflow : queryListIvrCallflow) {
 				listIvrCallflow.add(new SelectItem(ivrCallflow, ivrCallflow.getCallflowName()));
+			}
+			List<JobTrigger> queryListJobTrigger = jobTriggerDao.findAll();
+			for (JobTrigger jobTrigger : queryListJobTrigger) {
+				listJobTrigger.add(new SelectItem(jobTrigger, jobTrigger.getTriggerName()));
 			}
 			listAllIvrDtmf = ivrDtmfDao.findAll();
 		} catch (Exception e) {
@@ -108,6 +118,8 @@ public class IvrCallflowController extends IvrCallflowBean {
 			ivrCallflow.setCallflowTimeout(callflowTimeout);
 			ivrCallflow.setCallflowBack(callflowBack == null ? null : ivrCallflowDao.findById(callflowBack.getCallflowId()));
 			ivrCallflow.setVoicePrompt(ivrVoicepromptDao.findById(ivrVoiceprompt.getVoiceId()));
+			ivrCallflow.setCorrectJobTrigger(correctJobTrigger);
+			ivrCallflow.setInCorrectJobTrigger(inCorrectJobTrigger);
 			ivrCallflow.setCallflowCreateDate(new Date());
 			if (dtmfs != null && dtmfs.length > 0) {
 				List<IvrDtmf> listIvrDtmf = new ArrayList<IvrDtmf>();
@@ -141,7 +153,9 @@ public class IvrCallflowController extends IvrCallflowBean {
 			ivrCallflow.setCallflowTimeout(callflowTimeout);
 			ivrCallflow.setCallflowVoiceRepeatEnable(callflowVoiceRepeatEnable);
 			ivrCallflow.setCallflowBack(callflowBack);
-			ivrCallflow.setVoicePrompt(ivrVoiceprompt);		
+			ivrCallflow.setVoicePrompt(ivrVoiceprompt);
+			ivrCallflow.setCorrectJobTrigger(correctJobTrigger);
+			ivrCallflow.setInCorrectJobTrigger(inCorrectJobTrigger);
 			ivrCallflow.setCallflowUpdateDate(new Date());
 			if (dtmfs != null && dtmfs.length > 0) {
 				List<IvrDtmf> listIvrDtmf = new ArrayList<IvrDtmf>();
@@ -211,8 +225,41 @@ public class IvrCallflowController extends IvrCallflowBean {
 		return createable;
 	}
 	
+	public void setSelectedCallflowId(Integer selectedCallflowId) {
+		logger.debug("selected callflow id: " + selectedCallflowId);
+		reset(); dtmfs = null;
+		this.selectedCallflowId = selectedCallflowId;
+		IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
+		this.callflowId = ivrCallflow.getCallflowId();
+		this.callflowName = ivrCallflow.getCallflowName();
+		this.callflowDescription = ivrCallflow.getCallflowDescription();
+		this.callflowStep = ivrCallflow.getCallflowStep();
+		this.callflowTimeout = ivrCallflow.getCallflowTimeout();
+		this.callflowVoiceRepeatEnable = ivrCallflow.getCallflowVoiceRepeatEnable();
+		this.callflowCreateDate = ivrCallflow.getCallflowCreateDate();
+		this.callflowUpdateDate = ivrCallflow.getCallflowUpdateDate();
+		if (ivrCallflow.getCallflowBack() != null) {
+			this.parentCallflowId = ivrCallflow.getCallflowBack().getCallflowId();
+			this.parentCallflowName = ivrCallflow.getCallflowBack().getCallflowName();
+		}
+		this.ivrVoiceprompt = ivrCallflow.getVoicePrompt();
+		this.callflowBack = ivrCallflow.getCallflowBack();
+		this.correctJobTrigger = ivrCallflow.getCorrectJobTrigger();
+		this.inCorrectJobTrigger = ivrCallflow.getInCorrectJobTrigger();
+		this.listIvrDtmf = ivrCallflow.getListDtmf();
+		if (ivrCallflow.getListDtmf() != null && !ivrCallflow.getListDtmf().isEmpty()) {
+			dtmfs = new String[ivrCallflow.getListDtmf().size()];
+			int i = 0;
+			for (IvrDtmf ivrDtmf : ivrCallflow.getListDtmf()) {
+				dtmfs[i++] = String.valueOf(ivrDtmf.getDtmfId());
+			}
+		}
+		editable = false;
+		createable = false;
+	}
 	
 
+	
 	// Getter & Setter
 	public void setIvrCallflowDao(IvrCallflowDao ivrCallflowDao) {
 		this.ivrCallflowDao = ivrCallflowDao;
@@ -236,38 +283,6 @@ public class IvrCallflowController extends IvrCallflowBean {
 		this.listIvrCallflow = listIvrCallflow;
 	}
 
-	public void setSelectedCallflowId(Integer selectedCallflowId) {
-		logger.debug("selected callflow id: " + selectedCallflowId);
-		reset(); dtmfs = null;
-		this.selectedCallflowId = selectedCallflowId;
-		IvrCallflow ivrCallflow = ivrCallflowDao.findById(selectedCallflowId);
-		this.callflowId = ivrCallflow.getCallflowId();
-		this.callflowName = ivrCallflow.getCallflowName();
-		this.callflowDescription = ivrCallflow.getCallflowDescription();
-		this.callflowStep = ivrCallflow.getCallflowStep();
-		this.callflowTimeout = ivrCallflow.getCallflowTimeout();
-		this.callflowVoiceRepeatEnable = ivrCallflow.getCallflowVoiceRepeatEnable();
-		this.callflowCreateDate = ivrCallflow.getCallflowCreateDate();
-		this.callflowUpdateDate = ivrCallflow.getCallflowUpdateDate();
-		if (ivrCallflow.getCallflowBack() != null) {
-			this.parentCallflowId = ivrCallflow.getCallflowBack().getCallflowId();
-			this.parentCallflowName = ivrCallflow.getCallflowBack().getCallflowName();
-		}
-		this.ivrVoiceprompt = ivrCallflow.getVoicePrompt();
-		this.callflowBack = ivrCallflow.getCallflowBack();
-		logger.debug("ivrCallflow.getListDtmf(): " + ivrCallflow.getListDtmf());
-		this.listIvrDtmf = ivrCallflow.getListDtmf();
-		if (ivrCallflow.getListDtmf() != null && !ivrCallflow.getListDtmf().isEmpty()) {
-			dtmfs = new String[ivrCallflow.getListDtmf().size()];
-			int i = 0;
-			for (IvrDtmf ivrDtmf : ivrCallflow.getListDtmf()) {
-				dtmfs[i++] = String.valueOf(ivrDtmf.getDtmfId());
-			}
-		}
-		editable = false;
-		createable = false;
-	}
-	
 	public Integer getSelectedCallflowId() {
 		return selectedCallflowId;
 	}
@@ -286,6 +301,22 @@ public class IvrCallflowController extends IvrCallflowBean {
 
 	public void setDtmfs(String[] dtmfs) {
 		this.dtmfs = dtmfs;
+	}
+
+	public JobTriggerDao getJobTriggerDao() {
+		return jobTriggerDao;
+	}
+
+	public void setJobTriggerDao(JobTriggerDao jobTriggerDao) {
+		this.jobTriggerDao = jobTriggerDao;
+	}
+
+	public List<SelectItem> getListJobTrigger() {
+		return listJobTrigger;
+	}
+
+	public void setListJobTrigger(List<SelectItem> listJobTrigger) {
+		this.listJobTrigger = listJobTrigger;
 	}
 
 	
