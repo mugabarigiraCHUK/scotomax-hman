@@ -51,10 +51,14 @@ public class IvrServicesController implements Serializable {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/auth/{username}/{passwd}")
 	@ResponseBody
-	public IvrResponseBean  authenticate(@PathVariable("username") String username, @PathVariable("passwd") String passwd, Model model) {
+	public IvrResponseBean  authenticate(@PathVariable("username") String username, 
+																						@PathVariable("passwd") String passwd, 
+																						Model model) {
 		
 		logger.debug("Look->PathVariable->username->" + username );
 		logger.debug("Look->PathVariable->passwd->" + passwd );
+		
+		logger.debug("Look->Model->" + model.toString());
 		
 		IvrResponseBean response = new IvrResponseBean();
 		
@@ -77,8 +81,10 @@ public class IvrServicesController implements Serializable {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/check")
 	@ResponseBody
-	public IvrResponseBean handcheck() {
+	public IvrResponseBean handcheck(Model model) {
 		logger.debug("Entering handcheck)() method...");
+		
+		logger.debug("Look->Model->" + model.toString());
 		
 		IvrResponseBean response = new IvrResponseBean();
 		response.setResponseCode( HTTP_CODE_OK );

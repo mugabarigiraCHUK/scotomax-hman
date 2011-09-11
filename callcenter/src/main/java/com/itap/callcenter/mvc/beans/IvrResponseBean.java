@@ -3,14 +3,8 @@ package com.itap.callcenter.mvc.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import lombok.Data;
 
-@XStreamAlias("ivr:response")
-@XmlRootElement(name="ivr:response")
 public @Data class IvrResponseBean implements Serializable {
 
 	/**
