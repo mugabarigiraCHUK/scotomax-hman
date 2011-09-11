@@ -18,6 +18,10 @@ public interface GenericDao <T extends DomainObject, ID extends Serializable> {
 	
 	public List<T> findAll();
 	
+	public List<T> findAll(int start, int end);
+	
+	public int countFindAll();
+	
 	public void save(T object);
 	
 	public void update(T object);
