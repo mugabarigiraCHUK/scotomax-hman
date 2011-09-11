@@ -2,14 +2,8 @@ package com.itap.callcenter.mvc.beans;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import lombok.Data;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-@XStreamAlias("ivr:param")
-@XmlRootElement(name="ivr:param")
 public @Data class IvrParamBean implements Serializable {
 
 	/**

@@ -75,7 +75,14 @@
 	
 	<!-- Spring RESTful Java2XML  -->
 	<!-- Define the OXM marshaller which is used to convert the Objects <-> XML. -->
-	<bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller" />
+	<bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller" >
+		<property name="aliases">
+            <util:map id="aliases">
+                <entry key="response" value="com.itap.callcenter.mvc.beans.IvrResponseBean"  />
+                <entry key="param" value="com.itap.callcenter.mvc.beans.IvrParamBean"  />
+            </util:map>
+        </property>
+	</bean>
 
 	<bean id="marshallingHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
 		<property name="marshaller" ref="oxmMarshaller" />
