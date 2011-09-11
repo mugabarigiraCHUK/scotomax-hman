@@ -7,16 +7,177 @@
 		template="/none_theme/template.xhtml"> 
 
 	<ui:define name="body">
-		<h:form id="ivrCallrouteForm">
-	
-			<div class="row">
-				<div class="span16">
-					<rich:panel id="ivrCallroutePanel" header="IvrCallroute - Data table">
+		<h:form id="callrouteForm">
+			<rich:panel id="callRoutePanel" header="#{msg['callroute.inputpanel']} - #{msg['callroute.datatable.legend']}">
+				<a4j:outputPanel id="callRouteOutputPanel">
+					
+						<rich:messages	infoClass="alert-message info" 
+										warnClass="alert-message warning" 
+										errorClass="alert-message error" />
 						
-					</rich:panel>
-				</div>
-			</div>
+							<rich:dataTable value="#{ivrCallrouteController.ivrCallrouteList}" 
+															var="data"
+															noDataLabel="#{msg['no.found.data.message']}"
+															styleClass="common-table table zebra-striped">
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.id']}" /></f:facet>
+									<h:outputText value="#{data.callrouteId}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.name']}" /></f:facet>
+									<h:outputText value="#{data.callrouteName}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.description']}" /></f:facet>
+									<h:outputText value="#{data.callrouteDescription}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.caller']}" /></f:facet>
+									<h:outputText value="#{data.callrouteCaller}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.called']}" /></f:facet>
+									<h:outputText value="#{data.callrouteCalled}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.createdate']}" /></f:facet>
+									<h:outputText value="#{data.callrouteCreateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.updatedate']}" /></f:facet>
+									<h:outputText value="#{data.callrouteUpdateDate}" />
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.edit']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.edit']}" 
+																 action="#{ivrCallrouteController.edit}" 
+																 render="callRouteCreateUpdatePanel" 
+																 execute="@this" 
+																 oncomplete="#{rich:component('callRouteCreateUpdatePanel')}.show()"
+																 rendered="#{not empty data.callrouteId}"
+																 styleClass="btn">
+										<a4j:param value="#{data.callrouteId}" assignTo="#{ivrCallrouteController.selectedCallrouteId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header"><h:outputText value="#{msg['callroute.table.delete']}" /></f:facet>
+									<a4j:commandButton value="#{msg['button.delete']}" 
+																  render="@none" 
+																  execute="@this" 
+																  oncomplete="#{rich:component('callRouteDeletePanel')}.show()"
+																  rendered="#{not empty data.callrouteId}"
+																  styleClass="btn">
+										<a4j:param value="#{data.callrouteId}" assignTo="#{ivrCallrouteController.selectedCallrouteId}"/>
+									</a4j:commandButton>
+								</rich:column>
+								
+								<f:facet name="footer">
+									<div class="actions">
+										<a4j:commandButton value="#{msg['button.create']}" 
+									                							action="#{ivrCallrouteController.edit}"
+																			 	render="callRouteCreateUpdatePanel" 
+																			 	execute="@this" 
+																			 	oncomplete="#{rich:component('callRouteCreateUpdatePanel')}.show()"
+																			 	styleClass="btn primary">
+														<a4j:param value="-1" assignTo="#{ivrCallrouteController.selectedCallrouteId}"/>
+										</a4j:commandButton>
+										<a4j:commandButton value="#{msg['button.refresh']}" 
+																			 	render="callRouteCreateUpdatePanel" 
+																			 	execute="@this"
+																			 	styleClass="btn"/>
+									</div>
+								</f:facet>
+								
+							</rich:dataTable>
+						
+				</a4j:outputPanel>
+			</rich:panel>
 		
+			<rich:popupPanel id="callRouteCreateUpdatePanel" domElementAttachment="parent" autosized="true">
+				<f:facet name="header">
+					<h:outputText value="#{msg['callroute.create.update.legend']}" />
+				</f:facet>
+					
+					<h:message infoClass="alert-message info" 
+							warnClass="alert-message warning" 
+							errorClass="alert-message info" />
+							
+							<div class="clearfix">		
+								<label><h:outputText value="#{msg['callroute.id']}" /></label>
+								<div class="input"><h:inputText value="#{ivrCallrouteController.callrouteId}" disabled="#{not empty ivrCallrouteController.callrouteId}"/></div>
+							</div>
+							
+							<div class="clearfix">		
+								<label><h:outputText value="#{msg['callroute.name']}"/></label>
+								<div class="input"><h:inputText value="#{ivrCallrouteController.callrouteName}" /></div>
+							</div>
+								
+							<div class="clearfix">
+								<label><h:outputText value="#{msg['callroute.description']}"/></label>
+								<div class="input"><h:inputTextarea value="#{ivrCallrouteController.callrouteDescription}" cols="30" rows="5" /></div>
+							</div>		
+									
+							<div class="clearfix">
+								<label><h:outputText value="#{msg['callroute.caller']}"/></label>
+								<div class="input"><h:inputText value="#{ivrCallrouteController.callrouteCaller}" /></div>
+							</div>
+									
+							<div class="clearfix">
+								<label><h:outputText value="#{msg['callroute.called']}"/></label>
+								<div class="input"><h:inputText value="#{ivrCallrouteController.callrouteCalled}" /></div>
+							</div>
+							
+							<div class="clearfix">
+								<label><h:outputText value="#{msg['callroute.createdate']}" rendered="#{not empty ivrCallrouteController.callrouteCreateDate}"/></label>
+								<div class="input"><h:inputText value="#{ivrCallrouteController.callrouteCreateDate}" rendered="#{not empty ivrCallrouteController.callrouteCreateDate}" disabled="true"/></div>
+							</div>
+									
+							<div class="clearfix">
+								<label><h:outputText value="#{msg['callroute.updatedate']}" rendered="#{not empty ivrCallrouteController.callrouteUpdateDate}"/></label>
+								<div class="input"><h:inputText value="#{ivrCallrouteController.callrouteUpdateDate}" rendered="#{not empty ivrCallrouteController.callrouteUpdateDate}" disabled="true"/></div>
+							</div>
+									
+							<div class="actions">
+								<a4j:commandButton value="#{msg['button.create']}" 
+															  action="#{ivrCallrouteController.create}"
+															  execute="callRouteCreateUpdatePanel" 
+															  rendered="#{empty ivrCallrouteController.callrouteId}" 
+															  render="callRouteOutputPanel"
+															  oncomplete="#{rich:component('callRouteCreateUpdatePanel')}.hide(); return false;"
+															  styleClass="btn primary"/>
+								<a4j:commandButton value="#{msg['button.update']}" 
+															  action="#{ivrCallrouteController.update}"
+															  execute="callRouteCreateUpdatePanel" 
+															  rendered="#{not empty ivrCallrouteController.callrouteId}" 
+															  render="callRouteOutputPanel"
+															  oncomplete="#{rich:component('callRouteCreateUpdatePanel')}.hide(); return false;"
+															  styleClass="btn primary"/>
+								<a4j:commandButton value="#{msg['button.cancel']}" 
+															  onclick="#{rich:component('callRouteCreateUpdatePanel')}.hide(); return false;" 
+															  styleClass="btn"/>
+							</div>
+									
+			</rich:popupPanel>
+			
+			<rich:popupPanel id="callRouteDeletePanel" domElementAttachment="parent" autosized="true">
+				<f:facet name="header">
+					<h:outputText value="#{msg['callroute.delete.legend']}" />
+				</f:facet>
+		
+				<p><h:outputText value="#{msg['callroute.delete.message']}" /></p>
+				<div class="actions">
+					<a4j:commandButton value="#{msg['button.delete']}" 
+												  action="#{ivrCallrouteController.delete}" 
+												  execute="callRouteDeletePanel"
+												  render="callRouteOutputPanel"
+												  oncomplete="#{rich:component('callRouteDeletePanel')}.hide(); return false;"
+												  styleClass="btn danger"/>
+					<a4j:commandButton value="#{msg['button.cancel']}" 
+												  onclick="#{rich:component('callRouteDeletePanel')}.hide(); return false;" 
+												  styleClass="btn"/>
+				</div>
+			</rich:popupPanel>
+			
 		</h:form>
 	</ui:define>
 	
