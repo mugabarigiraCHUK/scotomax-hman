@@ -137,7 +137,7 @@
 	        </f:facet>
 	        <p>Any content might be inside this panel.</p> 
 	        <p>The popup panel is open and closed from the javascript function of component client side object. The following code 
-	        	<a href="#" onclick="#{rich:component('popup')}.hide()">hide this panel</a>: 
+	        	<h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;"> hide this panel </h:outputLink> :
 	        	<f:verbatim>&#35;</f:verbatim>{rich:component('popup')}.hide()</p>
     	</rich:popupPanel>
 		
@@ -150,7 +150,7 @@
 					<p>column2</p><p>column2</p><p>column2</p><p>column2</p><p>column2</p>
 				</h:panelGroup>
 			</h:panelGrid>
-        	<a href="#" onclick="#{rich:component('popup2Cols')}.hide()">hide this panel</a>: 
+        	<h:outputLink value="#" onclick="#{rich:component('popup2Cols')}.hide(); return false;"> hide this panel </h:outputLink> : 
         	<f:verbatim>&#35;</f:verbatim>{rich:component('popup')}.hide()
     	</rich:popupPanel>
 		
@@ -185,6 +185,17 @@
 							<h:outputText value="#{data.dtmfUpdateDate}" />
 						</rich:column>
 					</rich:dataTable>
+					<div class="pagination">
+						<ul>
+							<li class="prev disabled"><a href="#">← Previous</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li class="next"><a href="#">Next →</a></li>
+						</ul>
+					</div>
 					<h:commandButton styleClass="btn" value="Create"/>
 					<h:commandButton styleClass="btn" value="Update"/>
 					<h:commandButton styleClass="btn" value="Delete"/> 
