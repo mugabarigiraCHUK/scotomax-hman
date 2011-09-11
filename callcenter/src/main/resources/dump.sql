@@ -776,7 +776,7 @@ DROP TABLE IF EXISTS `knw_category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `knw_category` (
   `category_id` int(11) NOT NULL DEFAULT '0',
-  `parent_category_id` int(11) NOT NULL DEFAULT '0',
+  `parent_category_id` int(11) DEFAULT '0',
   `category_name` varchar(50) NOT NULL DEFAULT '',
   `category_description` varchar(100) DEFAULT '',
   `category_create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
