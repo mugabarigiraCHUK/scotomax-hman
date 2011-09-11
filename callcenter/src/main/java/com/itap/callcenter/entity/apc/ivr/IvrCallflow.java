@@ -29,6 +29,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.itap.callcenter.entity.DomainObject;
+import com.itap.callcenter.entity.apc.job.JobTrigger;
 
 /**
  *
@@ -76,7 +77,7 @@ public class IvrCallflow implements Serializable, DomainObject {
     
     @Column(name = "callflow_voice_repeat_enable", length = 11, nullable = false)
     @NotNull
-    private int callflowVoiceRepeatEnable;
+    private Boolean callflowVoiceRepeatEnable;
     
     @Column(name = "callflow_create_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -86,6 +87,14 @@ public class IvrCallflow implements Serializable, DomainObject {
     @Column(name = "callflow_update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date callflowUpdateDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "correct_trigger_id")
+    private JobTrigger correctJobTrigger;
+    
+    @ManyToOne
+    @JoinColumn(name = "incorrect_trigger_id")
+    private JobTrigger inCorrectJobTrigger;
     
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
@@ -101,7 +110,7 @@ public class IvrCallflow implements Serializable, DomainObject {
         this.callflowId = callflowId;
     }
 
-    public IvrCallflow(Integer callflowId, IvrVoiceprompt voicePrompt, String callflowName, int callflowStep, int callflowTimeout, IvrCallflow callflowNext, IvrCallflow callflowBack, int callflowVoiceRepeatEnable, Date callflowCreateDate, Date callflowUpdateDate) {
+    public IvrCallflow(Integer callflowId, IvrVoiceprompt voicePrompt, String callflowName, int callflowStep, int callflowTimeout, IvrCallflow callflowNext, IvrCallflow callflowBack, Boolean callflowVoiceRepeatEnable, Date callflowCreateDate, Date callflowUpdateDate) {
         this.callflowId = callflowId;
         this.voicePrompt = voicePrompt;
         this.callflowName = callflowName;
@@ -164,11 +173,11 @@ public class IvrCallflow implements Serializable, DomainObject {
         this.callflowTimeout = callflowTimeout;
     }
 
-    public int getCallflowVoiceRepeatEnable() {
+    public Boolean getCallflowVoiceRepeatEnable() {
         return callflowVoiceRepeatEnable;
     }
 
-    public void setCallflowVoiceRepeatEnable(int callflowVoiceRepeatEnable) {
+    public void setCallflowVoiceRepeatEnable(Boolean callflowVoiceRepeatEnable) {
         this.callflowVoiceRepeatEnable = callflowVoiceRepeatEnable;
     }
 
@@ -210,6 +219,22 @@ public class IvrCallflow implements Serializable, DomainObject {
 
 	public void setCallflowBack(IvrCallflow callflowBack) {
 		this.callflowBack = callflowBack;
+	}
+
+	public JobTrigger getCorrectJobTrigger() {
+		return correctJobTrigger;
+	}
+
+	public void setCorrectJobTrigger(JobTrigger correctJobTrigger) {
+		this.correctJobTrigger = correctJobTrigger;
+	}
+
+	public JobTrigger getInCorrectJobTrigger() {
+		return inCorrectJobTrigger;
+	}
+
+	public void setInCorrectJobTrigger(JobTrigger inCorrectJobTrigger) {
+		this.inCorrectJobTrigger = inCorrectJobTrigger;
 	}
 
 	@Override
