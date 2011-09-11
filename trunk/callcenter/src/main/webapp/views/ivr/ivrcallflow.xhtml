@@ -9,7 +9,7 @@
 	
 	<div class="row">
 		<div class="span16">
-			<rich:messages	infoClass="alert-message info" 
+			<rich:messages 	infoClass="alert-message info" 
 							warnClass="alert-message warning" 
 							errorClass="alert-message error" />
 		</div>
@@ -22,9 +22,8 @@
 					<rich:treeModelRecursiveAdaptor 
 						roots="#{ivrCallflowController.root}"
 						nodes="#{item.childCallflow}">
-						<rich:treeNode>
-							<div style="margin-top:18px; margin-left:20px;" />
-							<h:form>
+						<rich:treeNode> 
+							<h:form style="margin-bottom: 0px; !important">
 								<a4j:commandLink value="#{item.callflowName}" render="callflowManage" style="color:#000; ">
 									<a4j:param value="#{item.callflowId}" assignTo="#{ivrCallflowController.selectedCallflowId}" />
 								</a4j:commandLink>
@@ -85,22 +84,29 @@
 					<div class="clearfix">
 						<label><h:outputText value="Timeout:" /></label>
 						<div class="input">
-	   						<h:inputText value="#{ivrCallflowController.callflowTimeout}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
+	   						<h:selectOneMenu value="#{ivrCallflowController.callflowTimeout}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+								<f:selectItem itemLabel=" 10 sec." itemValue="10"/>
+								<f:selectItem itemLabel=" 15 sec." itemValue="15"/>
+								<f:selectItem itemLabel=" 20 sec." itemValue="20"/>
+							</h:selectOneMenu>
 						</div>
 						<div class="output">
 							<h:outputText value="#{ivrCallflowController.callflowTimeout}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
 						</div>
 					</div>
-						
+					
 					<div class="clearfix">
 						<label><h:outputText value="Repeat enable:" /></label>
-						<div class="input">
-	   						<h:inputText value="#{ivrCallflowController.callflowVoiceRepeatEnable}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}" />
-						</div>
 						<div class="output">
-							<h:outputText value="#{ivrCallflowController.callflowVoiceRepeatEnable}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+	   						<h:selectBooleanCheckbox layout="pageDirection" enabledClass="labelCenter" disabledClass="labelCenter" 
+	   												value="#{ivrCallflowController.callflowVoiceRepeatEnable}"
+	   												disabled="#{!ivrCallflowController.editable and !ivrCallflowController.createable}"
+													rendered="#{ivrCallflowController.editable or ivrCallflowController.createable or ivrCallflowController.selectedCallflowId != null}">
+								<f:selectItem itemValue="1" itemLabel="enable" />
+							</h:selectBooleanCheckbox>
 						</div>
 					</div>
+					 
 					
 					<div class="clearfix">
 						<label><h:outputText value="Voice prompt:" /></label>
@@ -127,6 +133,32 @@
 												itemValue="#{dtmf.dtmfId}" />
 								<!-- <f:converter converterId="ivrDtmfConverter"/> -->
 					   		</h:selectManyListbox>
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<label><h:outputText value="Correct Trigger:" /></label>
+						<div class="input">
+	   						<h:selectOneMenu value="#{ivrCallflowController.correctJobTrigger}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+								<f:converter converterId="jobTriggerConverter"/>
+								<f:selectItems value="#{ivrCallflowController.listJobTrigger}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="output">
+							<h:outputText value="#{ivrCallflowController.correctJobTrigger.triggerName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<label><h:outputText value="InCorrect Trigger:" /></label>
+						<div class="input">
+	   						<h:selectOneMenu value="#{ivrCallflowController.inCorrectJobTrigger}" rendered="#{ivrCallflowController.editable or ivrCallflowController.createable}">
+								<f:converter converterId="jobTriggerConverter"/>
+								<f:selectItems value="#{ivrCallflowController.listJobTrigger}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="output">
+							<h:outputText value="#{ivrCallflowController.inCorrectJobTrigger.triggerName}" rendered="#{!ivrCallflowController.editable and !ivrCallflowController.createable}" />
 						</div>
 					</div>
 					
