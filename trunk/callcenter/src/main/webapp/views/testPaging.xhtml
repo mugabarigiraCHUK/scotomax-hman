@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		template="/none_theme/template.xhtml"> 
+
+	<ui:define name="body">
+		<h:form id="ivrCustomerForm">
+			<!-- Output Panel -->
+			<rich:panel id="crmCustomerPanel" header="Customer - Data table">
+				<h:outputText value="firstRow: #{mockupCrmCustomerController.firstRow}, lastRow: #{mockupCrmCustomerController.lastRow}" />
+				<h:outputText value=" rowsPerPage: #{mockupCrmCustomerController.rowsPerPage}, currentPage: #{mockupCrmCustomerController.currentPage} " />
+				<rich:dataTable value="#{mockupCrmCustomerController.listCrmCustomer}" 
+								var="data" 
+								noDataLabel="#{msg['no.found.data.message']}"
+								styleClass="common-table table zebra-striped">
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Fullname" /></f:facet>
+						<h:outputText value="#{data.customerFullname}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Gender" /></f:facet>
+						<h:outputText value="#{data.customerGender}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Address" /></f:facet>
+						<h:outputText value="#{data.customerAddress}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Phone" /></f:facet>
+						<h:outputText value="#{data.customerPhone}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Email" /></f:facet>
+						<h:outputText value="#{data.customerEmail}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Business" /></f:facet>
+						<h:outputText value="#{data.business.businessName}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header"><h:outputText value="Status" /></f:facet>
+						<h:outputText value="#{data.status.statusName}" />
+					</rich:column>
+				</rich:dataTable>
+				<!-- 
+				<div style="float: left; padding: 0 14px; line-height: 34px;">
+					<h:outputText value="#{mockupCrmCustomerController.firstRow} - #{mockupCrmCustomerController.lastRow} of #{mockupCrmCustomerController.totalRows}" />
+				</div>
+				 -->
+				<div class="pagination">
+					<ul>
+						<li class="#{mockupCrmCustomerController.enableFirstPage == 'true' ? '' : 'disabled'}" ><h:commandLink value="first" action="#{mockupCrmCustomerController.firstPage}" /></li>
+						<li class="#{mockupCrmCustomerController.enablePreviousPage == 'true' ? '' : 'disabled'}" ><h:commandLink value="previous" action="#{mockupCrmCustomerController.previousPage}" /></li>
+						<li class="#{mockupCrmCustomerController.enableNextPage == 'true' ? '' : 'disabled'}" ><h:commandLink value="next" action="#{mockupCrmCustomerController.nextPage}" /></li>
+						<li class="#{mockupCrmCustomerController.enableLastPage == 'true' ? '' : 'disabled'}" ><h:commandLink value="last" action="#{mockupCrmCustomerController.lastPage}" /></li>
+					</ul>
+					<div class="info">
+						<h:outputText value="#{mockupCrmCustomerController.firstRow} - #{mockupCrmCustomerController.lastRow} of #{mockupCrmCustomerController.totalRows}" />
+					</div>
+				</div>
+			</rich:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
