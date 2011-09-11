@@ -1,6 +1,7 @@
 package com.itap.callcenter.dao.impl;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -35,6 +36,26 @@ public class GenericDaoImpl<T extends DomainObject, ID extends Serializable> imp
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
         return em.createQuery("select o from " + type.getName() + " o").getResultList();
+    }
+    
+    /**
+     * Find all by first and last
+     */
+    @Override
+    @Transactional(readOnly = true)
+    @SuppressWarnings("unchecked")
+    public List<T> findAll(int start, int end) {
+    	return em.createQuery("select o from " + type.getName() + " o").setFirstResult(start).setMaxResults(end).getResultList();
+    }
+    
+    /**
+     * Count all objects
+     */
+    @Override
+    @Transactional(readOnly = true)
+    @SuppressWarnings("unchecked")
+    public int countFindAll() {
+    	return ((Long) em.createQuery("select count(o) from " + type.getName() + " o").getSingleResult()).intValue();
     }
 
     /**
