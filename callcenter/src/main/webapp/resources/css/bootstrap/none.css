@@ -72,6 +72,13 @@
 	padding: 5px 10px;
 }
 
+
+/* */
+.rf-trn-lbl {
+	padding: 10px 4px 10px 5px !important;
+} 
+
+/* other */
 .vtop {
 	vertical-align: top;
 }
