@@ -3,6 +3,7 @@ package com.itap.callcenter.service.impl;
 import java.io.Serializable;
 
 import javax.annotation.Resource;
+import javax.faces.bean.ManagedProperty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.itap.callcenter.dao.apc.agent.AgentProfileDao;
+import com.itap.callcenter.entity.apc.agent.AgentProfile;
 import com.itap.callcenter.service.AuthenticationService;
 
 /**
@@ -27,25 +30,29 @@ public class AuthenticationServiceImpl implements AuthenticationService, Seriali
 
 	final Logger logger = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
+	// AgentProfile DAO
+	@ManagedProperty(value="#{agentProfileDaoImpl}")
+	AgentProfileDao agentProfileDao;
+	
 	//From Spring Security
 	@Resource(name = "authenticationManager")
 	private AuthenticationManager authenticationManager;
 	
 	@Override
-	public boolean login(String username, String password) {
+	public AgentProfile login(String username, String password) {
 		try {
-			Authentication authentication = authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			AgentProfile entry = agentProfileDao.findBy(username, password);
+			
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 			if (authentication.isAuthenticated()) {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
-				
-				return true;
 			}
+			
+			return entry;
 		} catch (AuthenticationException e) {
 			logger.error(e.getMessage());
+			return null;
 		}
-		
-		return false;
 	}
 
 	@Override

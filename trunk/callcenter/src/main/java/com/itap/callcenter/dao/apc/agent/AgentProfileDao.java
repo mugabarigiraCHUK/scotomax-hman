@@ -10,4 +10,6 @@ import com.itap.callcenter.entity.apc.agent.AgentProfile;
  */
 public interface AgentProfileDao extends GenericDao<AgentProfile, Integer> {
 
+	AgentProfile findBy(String username, String password);
+	
 }
