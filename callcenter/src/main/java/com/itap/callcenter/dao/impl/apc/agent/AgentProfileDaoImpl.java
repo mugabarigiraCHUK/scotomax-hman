@@ -18,4 +18,12 @@ public class AgentProfileDaoImpl extends GenericDaoImpl<AgentProfile, Integer> i
 		super(AgentProfile.class);
 	}
 
+	@Override
+	public AgentProfile findBy(String username, String password) {
+		return (AgentProfile) em.createQuery("from AgentProfile ap where ap.agentUsername = :username and ap.agentPassword = :password")
+																			.setParameter("username", username)
+																			.setParameter("password", password)
+																			.getSingleResult();
+	}
+
 }
