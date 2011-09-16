@@ -1,0 +1,104 @@
+LicensePerInvoice
+	|
+	+--- DocumentHeaderType
+	| 		|
+	|		+--- DocumentReferenceType
+	|		|		|
+	|		|		+--- registrationID : String
+	|		|		+--- ischargePort : BigInteger
+	|		|		+--- loadPort : BigInteger
+	|		|
+	|		+--- LicenseInfoType
+	|				|
+	|				+--- licenseNo : String
+	|				+--- licenseName : String
+	|				+--- licenseType : String
+	|				+--- authorityID : String
+	|				+--- authorityName : String
+	|				+--- countryCode : String
+	|				+--- description : String
+	|				+--- inspectionLevel : String
+	|				+--- inspectionDesc : String
+	|				+--- taxReference : String
+	|
+	+--- List<DocumentDetailTransportType>
+	|			|
+	|			+--- DocumentDetailTransportType
+	|						|
+	|						+--- declarationLineNo : BigInteger
+	|						+--- countryCode : String
+	|						+--- remark : String
+	|						+--- InvoiceInfoType
+	|						|		|
+	|						|		+--- invoiceNumber : String
+	|						|		+--- invoiceItem : String
+	|						|		+--- description : String
+	|						|		+--- invoiceDate : XMLGregorianCalendar
+	|						+--- ProductInfo
+	|						|		|
+	|						|		+--- bodyNo : String
+	|						|		+--- brandName : String
+	|						|		+--- characteristic : String
+	|						|		+--- countryCode : String
+	|						|		+--- displacement : BigDecimal
+	|						|		+--- engineNo : String
+	|						|		+--- modelCode : String
+	|						|		+--- registrationNumber : String
+	|						|		+--- year : BigInteger
+	|						|		+--- QuantityType
+	|						|		|		|
+	|						|		|		+--- unitCode : String
+	|						|		|		+--- quantity : BigDecimal
+	|						|		|		+--- samplingUnitCode : String
+	|						|		|		+--- samplingQuantity : BigDecimal
+	|						|		+--- WeightInfo
+	|						|			|
+	|						|			+--- unitCode : String
+	|						|			+--- weight : BigDecimal
+	|						+--- CustomsTariffQuantityType
+	|								|
+	|								+--- classification : BigInteger
+	|								+--- statisticalCode : BigInteger																							
+	|
+	+--- List<Signature>
+			|
+			+--- Signature
+				|
+				+--- id : String
+				+--- KeyInfo
+				|	|
+				|	+--- id : String
+				|	+--- contents : List<Object>
+				|
+				+--- SignatureValue
+				|	|
+				|	+--- id : String
+				|	+--- value : byte[]
+				|
+				+--- SignatureInfo
+					|
+					+--- id : String
+					+--- references : List<Reference>
+					|				|
+					|				+--- id : String
+					|				+--- uri : String
+					|				+--- type : String
+					|				+--- digestValue : byte[]
+					|				+--- Transfroms
+					|				|	|
+					|				|	+--- transforms : List<Transform>
+					|				|					|
+					|				|					+--- algorithm : String
+					|				|					+--- content : List<Object>
+					|				+--- DigestMethod
+					|					|
+					|					+--- algorithm : String
+					|					+--- content : List<Object>
+					|
+					+--- CanonicalzationMethod
+					|		|
+					|		+--- algorithm : String
+					|		+--- contents : List<Object>
+					|		+--- SignatureMethod
+					|		+--- algorithm : String
+					+--- contents : List<Object>
