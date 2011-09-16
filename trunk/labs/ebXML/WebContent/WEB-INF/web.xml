@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>ebXMLWeb</display-name>
+  <servlet>
+		<description>
+		Servlet handle ebXML for license per invoice</description>
+		<display-name>LicensePerInvoiceServlet</display-name>
+		<servlet-name>LicensePerInvoiceServlet</servlet-name>
+		<servlet-class>
+		com.itap.servlet.LicensePerInvoiceServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>LicensePerInvoiceResponseServlet</display-name>
+		<servlet-name>LicensePerInvoiceResponseServlet</servlet-name>
+		<servlet-class>
+		com.itap.servlet.LicensePerInvoiceResponseServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>LicensePerInvoiceStatusServlet</display-name>
+		<servlet-name>LicensePerInvoiceStatusServlet</servlet-name>
+		<servlet-class>
+		com.itap.servlet.LicensePerInvoiceStatusServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LicensePerInvoiceServlet</servlet-name>
+		<url-pattern>/LicensePerInvoice</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LicensePerInvoiceResponseServlet</servlet-name>
+		<url-pattern>/LicensePerInvoiceResponse.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LicensePerInvoiceStatusServlet</servlet-name>
+		<url-pattern>/LicensePerInvoiceStatus</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- Configuration -->
+	<context-param>
+		<param-name>CONFIG_FILE</param-name>
+		<param-value>${catalina.base}/conf/conf.properties</param-value>
+	</context-param>
+
+	<!-- End Configuration -->
+	<!-- 
+	<context-param> 
+	 <param-name>contextConfigLocation</param-name>
+	 <param-value>classpath:/spring-beans.xml</param-value>
+    </context-param> 
+	  <listener> 
+	  	<description>Spring Listener</description>
+	  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	  </listener> -->
+</web-app>

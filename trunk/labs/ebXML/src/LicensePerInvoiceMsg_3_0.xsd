@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- create by The Thai Customs Department. - License per invoice message version 3.0 [22/01/2010]) -->
+<!-- adopt by คณะทำงานด้านเทคนิคและการออกแบบระบบงาน National Single Window - License per invoice message version 3.0 [09/06/2010]) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eLicense="http://ebxml.customs.go.th/schema/LicensePerInvoiceMsg_3_0" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ds1="http://www.ietf.org/rfc/rfc3369.txt#" targetNamespace="http://ebxml.customs.go.th/schema/LicensePerInvoiceMsg_3_0">
+	<!--
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	-->
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xsd:element name="LicensePerInvoice" type="eLicense:LicenseTypeInvoice"/>
+	<xsd:complexType name="LicenseTypeInvoice">
+		<xsd:sequence>
+			<xsd:element name="DocumentHeader" type="eLicense:DocumentHeaderType"/>
+			<xsd:element name="DocumentDetails" type="eLicense:DocumentDetailsTransportType" maxOccurs="5000"/>
+			<xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConsignmentInformationType">
+		<xsd:sequence>
+			<xsd:element name="CountryCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (6) - O - 2A - Consignment Country Code - รหัสประเทศต้นทางบรรทุกสำหรับนำเข้า</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TaxReference">
+				<xsd:annotation>
+					<xsd:documentation>Control (7) - M - 17A - Company Tax Number - เลขประจำตัวผู้เสียภาษีอากรของผู้ขออนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomsTariffQuantityType">
+		<xsd:sequence>
+			<xsd:element name="Classification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (5) - O - 12N - Tariff Classification - รหัสพิกัดศุลกากร</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="12"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="StatisticalCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (6) - O - 3N - Tariff Statistical Code - รหัสสถิติสินค้า ของกรมศุลกากร</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentDetailsTransportType">
+		<xsd:sequence>
+			<xsd:element name="InvoiceInfo" type="eLicense:InvoiceInfoType"/>
+			<xsd:element name="DeclarationLineNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (4) - O - 4N - Declaration Line No - ลำดับรายการในใบขนสินค้า</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TariffInfo" type="eLicense:CustomsTariffQuantityType" minOccurs="0"/>
+			<xsd:element name="ProductInfo" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WeightInfo" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Weight" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Detail (8) - O - 11 N DE 3 - Weight - น้ำหนักที่อนุญาต</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="11"/>
+												<xsd:fractionDigits value="3"/>
+												<xsd:maxInclusive value="99999999.999"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="UnitCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Detail (9) - O - 3A - Weight Unit - หน่วยของน้ำหนักที่อนุญาต</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="QuantityInfo" type="eLicense:QuantityType"/>
+						<xsd:element name="RegistrationNumber" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (12) - O - 35A - Registration Number - เลขทะเบียนของของหรือผลิตภัณฑ์ที่อนุญาตให้นำเข้า/ส่งออก</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="BodyNo" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (13) - O - 35A - Body No - หมายเลขตัวรถ/โครงคัสซึ</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="EngineNo" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (14) - O - 35A - Engine No - หมายเลขเครื่องยนต์</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Displacement" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (15) - O - 7 N DE 2 -  Displacement - ปริมาตรกระบอกสูบ (ลูกบาศก์เซนติเมตร:CC)</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="7"/>
+									<xsd:fractionDigits value="2"/>
+									<xsd:maxInclusive value="99999.99"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="ModelCode" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (16) - O - 35A - Model Code - รหัสแบบ (รุ่น)</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Year" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (17) - O - 4N - Product Year - ปีของสินค้า (ค.ศ.)</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+									<xsd:totalDigits value="4"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="BrandName" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (18) - O - 35A - Brand Name - เครื่องหมายการค้า</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="CountryCode" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (22) - O - 2A - Origin Country Code - รหัสประเทศกำเนิด สำหรับนำเข้า</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Characteristic" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Detail (23) - O - 256A - Characteristic - ลักษณะสินค้า</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="256"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CountryCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (21) - O - 2A - Purchase Country Code - รหัสประเทศผู้ซื้อ สำหรับส่งออก</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Remark" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (24) - O - 256A - Remark - หมายเหตุ</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="256"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentHeaderType">
+		<xsd:sequence>
+			<xsd:element name="LicenseInfo" type="eLicense:LicenseInfoType"/>
+			<xsd:element name="DocumentReference" type="eLicense:DocumentReferenceType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentReferenceType">
+		<xsd:sequence>
+			<xsd:element name="DischargePort" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (16) - O - 4N - Discharge Port - รหัสสถานที่นำเข้า ตรวจสอบกับแฟ้มข้อมูลรหัสสถานที่ของกรมฯ</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="LoadPort" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (17) - O - 4N - Load Port - รหัสสถานที่ส่งออก ตรวจสอบกับแฟ้มข้อมูลรหัสสถานที่ของกรมฯ</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="RegistrationID">
+				<xsd:annotation>
+					<xsd:documentation>Control (18) - M - 17A - Registration ID - รหัสผู้ส่งข้อมูล</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="17"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvoiceInfoType">
+		<xsd:sequence>
+			<xsd:element name="InvoiceNumber">
+				<xsd:annotation>
+					<xsd:documentation>Detail (1) - M - 35A - Invoice Number - เลขที่บัญชีราคาสินค้า</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="InvoiceDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Detail (2) - M - 8N - Invoice Date - วันที่บัญชีราคาสินค้า ปี ค.ศ. เดือน ปี (CCYYMMDD)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InvoiceItem">
+				<xsd:annotation>
+					<xsd:documentation>Detail (3) - M - 4N - Invoice Item - ลำดับรายการในบัญชีราคาสินค้าที่อนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Description">
+				<xsd:annotation>
+					<xsd:documentation>Detail (7) - M - 512A - English Description of Goods - ชนิดของ ภาษาอังกฤษ ตามบัญชีราคาสินค้า</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="512"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QuantityType">
+		<xsd:sequence>
+			<xsd:element name="Quantity">
+				<xsd:annotation>
+					<xsd:documentation>Detail (10) - M - 14 N DE 3 - Quantity - ปริมาณที่อนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="14"/>
+						<xsd:fractionDigits value="3"/>
+						<xsd:maxInclusive value="99999999999.999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="UnitCode">
+				<xsd:annotation>
+					<xsd:documentation>Detail (11) - M - 3A - Quantity Unit - หน่วยของปริมาณ</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SamplingQuantity" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (19) - O - 14 N DE 3 -  Sampling Quantity - ปริมาณชักตัวอย่าง (ต้องมีค่า ถ้า Field Inspection Level ในส่วนควบคุมมีค่าเท่ากับ 3)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="14"/>
+						<xsd:fractionDigits value="3"/>
+						<xsd:maxInclusive value="99999999999.999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SamplingUnitCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Detail (20) - O - 3A - Sampling Quantity Unit Code - รหัสหน่วยปริมาณการชักตัวอย่าง (ต้องมีค่า Field Inspection Level ในส่วนควบคุมมีค่าเท่ากับ 3)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LicenseInfoType">
+		<xsd:sequence>
+			<xsd:element name="LicenseNo">
+				<xsd:annotation>
+					<xsd:documentation>Control (1) - M - 35A - License No - เลขที่ใบอนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TaxReference">
+				<xsd:annotation>
+					<xsd:documentation>Control (2) - M - 17A - License Issue Authority - เลขประจำตัวผู้เสียภาษีอากรของหน่วยงานผู้ออกใบอนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="LicenseType">
+				<xsd:annotation>
+					<xsd:documentation>Control (3) - M - 1A - License Type - ใบอนุญาตสำหรับ 0-นำเข้า, 1-ส่งออก, 2-ผ่านแดน, 3-นำเข้าและส่งออก</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="IssueDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Control (4) - M - 8N - Issue Date - วันที่ออกใบอนุญาต ปี ค.ศ. เดือน วัน (CCYYMMDD)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CountryCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (5) - O - 2A - Destination Country Code - รหัสประเทศปลายทางสำหรับส่งออก</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ConsignmentInfo" type="eLicense:ConsignmentInformationType"/>
+			<xsd:element name="Description" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (8) - O - 256A - Description - รายละเอียดของใบอนุญาต</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="256"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="EffectiveDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Control (9) - M - 8N - Effective Date - วันที่มีผลบังคับใช้ ปี ค.ศ. เดือน วัน (CCYYMMDD)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExpireDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Control (10) - M - 8N - Expire Date - วันที่หมดอายุ ปี ค.ศ. เดือน วัน (CCYYMMDD)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AuthorityID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (11) - O - 17A - Authority ID - รหัสประจำตัวเจ้าหน้าที่ที่มีอำนาจลงนามใบอนุญาต (ถ้ามี)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AuthorityName" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (12) - O - 70A - Authority Name - ชื่อเจ้าหน้าที่ที่มีอำนาจลงนามใบอนุญาต (ถ้ามี)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="70"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="LicenseName">
+				<xsd:annotation>
+					<xsd:documentation>Control (13) - M - 70A - License Name - ชื่อใบอนุญาต เช่น ใบอนุญาตนำหรือสั่งอาหารเข้ามาในราชอาณาจักร อ.7 เป็นต้น</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="70"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="InspectionLevel" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (14) - O - 1A - Inspection Level - ต้องการให้เปิดตรวจหรือไม่
+1 – ไม่ต้องเปิดตรวจหรือชักตัวอย่าง
+2 – เปิดตรวจหรือนำส่งตัวอย่าง ให้หน่วยงานออกใบอนุญาต ภายหลังการตรวจปล่อย
+3 –  ต้องเปิดตรวจหรือชักตัวอย่างก่อนตรวจปล่อยเท่านั้น</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="InspectionDesc" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Control (15) - O - 256A - Inspection Description - เงื่อนไขการเปิดตรวจและชักตัวอย่าง</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="256"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
