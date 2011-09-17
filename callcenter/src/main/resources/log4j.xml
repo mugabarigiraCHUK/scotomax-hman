@@ -67,6 +67,12 @@
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
+	<logger name="org.springframework.oxm">
+		<level value="INFO"/>
+		<appender-ref ref="SYSTEM" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
 	<logger name="org.hibernate.cfg">
 		<level value="INFO"/>
 		<appender-ref ref="SYSTEM" />
