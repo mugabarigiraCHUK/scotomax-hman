@@ -1,16 +1,19 @@
 package com.itap.rest.client;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.Serializable;
+
+import lombok.Data;
 
 /**
  * 
  * @author scotomax
  *
  */
-public class UriRemote {
+public @Data class UriRemote implements Serializable {
 
-	Logger log4j = LoggerFactory.getLogger(UriRemote.class);
+	private static final long serialVersionUID = 7087135970560971814L;
 	
+	private String UriAuth;
+	private String UriCheck;
 	
 }
