@@ -19,6 +19,7 @@
 	<bean id="uriRemote" class="com.itap.rest.client.UriRemote">
 		<property name="uriAuth" value="http://localhost:8080/callcenter/service/auth/{usrname}/{passwd}"/>
 		<property name="uriCheck" value="http://localhost:8080/callcenter/service/check"/>
+		<property name="uriCallback" value="http://localhost:8080/callcenter/service/callback"/>
 	</bean>
 				
 	<bean id="httpClientParams" class="org.apache.commons.httpclient.params.HttpClientParams">
