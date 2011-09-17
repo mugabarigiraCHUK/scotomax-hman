@@ -1,7 +1,9 @@
 package com.itap.callcenter.mvc.controller;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.itap.callcenter.mvc.beans.IvrParamBean;
-import com.itap.callcenter.mvc.beans.IvrResponseBean;
+import com.itap.callcenter.mvc.bean.XmlIvrParam;
+import com.itap.callcenter.mvc.bean.XmlIvrParams;
+import com.itap.callcenter.mvc.bean.XmlIvrResponse;
+import com.itap.callcenter.mvc.bean.XmlIvrStatus;
 
 /**
  * 
@@ -36,22 +40,24 @@ public class IvrServicesController implements Serializable {
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
-	public IvrResponseBean exception(Exception ex, HttpServletRequest req, HttpServletResponse resp) {
+	public XmlIvrResponse exception(Exception ex, HttpServletRequest req, HttpServletResponse resp) {
 		
 		logger.debug("Look->Exception->Message->" + ex.getMessage());
 		logger.debug("Look->HttpServletRequest->" + req);
 		logger.debug("Look->HttpServletResponse->" + resp);
 		
-		IvrResponseBean response = new IvrResponseBean();
-		response.setResponseCode( HTTP_CODE_INTERNAL_ERROR );
-		response.setResponseDesc("System error, please contact admin.");
+		XmlIvrResponse response = new XmlIvrResponse();
+		XmlIvrStatus status = new XmlIvrStatus();
+		status.setResponseCode( HTTP_CODE_INTERNAL_ERROR );
+		status.setResponseDesc("System error, please contact admin.");
+		response.setStatus(status);
 		
 		return response;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/auth/{username}/{passwd}")
 	@ResponseBody
-	public IvrResponseBean  authenticate(@PathVariable("username") String username, 
+	public XmlIvrResponse  authenticate(@PathVariable("username") String username, 
 																						@PathVariable("passwd") String passwd, 
 																						Model model) {
 		
@@ -60,20 +66,32 @@ public class IvrServicesController implements Serializable {
 		
 		logger.debug("Look->Model->" + model.toString());
 		
-		IvrResponseBean response = new IvrResponseBean();
+		XmlIvrResponse response = new XmlIvrResponse();
 		
 		if ( "admin".equals(username) && "adminadmin".equals(passwd) ) {
-			List<IvrParamBean> params = new ArrayList<IvrParamBean>();
-			IvrParamBean param = new IvrParamBean();
+			
+			List<XmlIvrParam> paramList = new ArrayList<XmlIvrParam>();
+			XmlIvrParam param = new XmlIvrParam();
 			param.setName("token");
-			param.setValue("@#$@!@#$#%#$@!@#");
-			params.add(param);
+			param.setValue("84ksjdi82uo934iwoue8439oi93i0slxmcjew03");
+			paramList.add(param);
+			
+			
+			XmlIvrParams params = new XmlIvrParams();
+			params.setParam(paramList);
 			response.setParams(params);
-			response.setResponseCode( HTTP_CODE_OK );
-			response.setResponseDesc("authorize passed");
+			
+			XmlIvrStatus status = new XmlIvrStatus();
+			status.setResponseCode( HTTP_CODE_OK );
+			status.setResponseDesc("authorize passed");
+			response.setStatus(status);
+			
 		} else {
-			response.setResponseCode( HTTP_CODE_UNAUTH );
-			response.setResponseDesc("authorize failed");
+			XmlIvrStatus status = new XmlIvrStatus();
+			status.setResponseCode( HTTP_CODE_UNAUTH );
+			status.setResponseDesc("authorize failed");
+			response.setStatus(status);
+			
 		}
 		
 		return response;
@@ -81,14 +99,43 @@ public class IvrServicesController implements Serializable {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/check")
 	@ResponseBody
-	public IvrResponseBean handcheck(Model model) {
+	public XmlIvrResponse handcheck(Model model) {
 		logger.debug("Entering handcheck)() method...");
 		
 		logger.debug("Look->Model->" + model.toString());
 		
-		IvrResponseBean response = new IvrResponseBean();
-		response.setResponseCode( HTTP_CODE_OK );
-		response.setResponseDesc("Server still alive");
+		List<XmlIvrParam> paramList = new ArrayList<XmlIvrParam>();
+		
+		XmlIvrParam param = new XmlIvrParam();
+		param.setName("system");
+		param.setValue("iCallCenter");
+		paramList.add(param);
+		
+		param = new XmlIvrParam();
+		param.setName("config");
+		param.setValue("enabled");
+		paramList.add(param);
+		
+		param = new XmlIvrParam();
+		param.setName("setting");
+		param.setValue("enabled");
+		paramList.add(param);
+		
+		param = new XmlIvrParam();
+		param.setName("uptime");
+		param.setValue((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
+		paramList.add(param);
+		
+		XmlIvrResponse response = new XmlIvrResponse();
+		
+		XmlIvrParams params = new XmlIvrParams();
+		params.setParam(paramList);
+		response.setParams(params);
+		
+		XmlIvrStatus status = new XmlIvrStatus();
+		status.setResponseCode( HTTP_CODE_OK  );
+		status.setResponseDesc("Server still alive");
+		response.setStatus(status);
 		
 		return response;
 	}
