@@ -15,5 +15,6 @@ public @Data class UriRemote implements Serializable {
 	
 	private String UriAuth;
 	private String UriCheck;
+	private String UriCallback;
 	
 }
