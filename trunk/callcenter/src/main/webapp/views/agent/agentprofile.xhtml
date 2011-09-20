@@ -32,8 +32,8 @@
 						<div class="actions">			
 							<a4j:commandButton value="#{msg['button.search']}" 
 			                							action="#{agentProfileController.search}"
-													 	render="agentProfileCreateUpdatePanel" 
-													 	execute="agentProfileResultPanel"
+													 	render="agentProfileResultPanel" 
+													 	execute="agentProfileSearchPanel"
 													 	styleClass="btn">
 							</a4j:commandButton>
 							<a4j:commandButton value="#{msg['button.create']}" 
@@ -46,7 +46,7 @@
 							</a4j:commandButton>
 							<a4j:commandButton value="#{msg['button.refresh']}"
 														action="#{agentProfileController.clear}" 
-													 	render="agentProfileCreateUpdatePanel" 
+													 	render="agentProfileSearchPanel, agentProfileResultPanel" 
 													 	execute="@this"
 													 	styleClass="btn"/>
 						</div>

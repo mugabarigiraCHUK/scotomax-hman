@@ -47,6 +47,8 @@ public class IvrServicesController implements Serializable {
 	@ResponseBody
 	public XmlIvrResponse exception(Exception ex, HttpServletRequest req, HttpServletResponse resp) {
 		
+		logger.debug("Look->HttpServletRequest->" + req);
+		
 		logger.debug("Look->Exception->Message->" + ex.getMessage());
 		logger.debug("Look->HttpServletRequest->" + req);
 		logger.debug("Look->HttpServletResponse->" + resp);
@@ -65,7 +67,11 @@ public class IvrServicesController implements Serializable {
 	@ResponseBody
 	public XmlIvrResponse  authenticate(@PathVariable("username") String username, 
 																						@PathVariable("passwd") String passwd, 
-																						Model model) {
+																						Model model, 
+																						HttpServletRequest req, 
+																						HttpServletResponse resp) {
+		
+		logger.debug("Look->HttpServletRequest->" + req);
 		
 		logger.debug("Look->PathVariable->username->" + username );
 		logger.debug("Look->PathVariable->passwd->" + passwd );
@@ -106,9 +112,9 @@ public class IvrServicesController implements Serializable {
 	@RequestMapping(method=RequestMethod.GET, value="/check")
 	@ResponseStatus(HttpStatus.ALREADY_REPORTED)
 	@ResponseBody
-	public XmlIvrResponse handcheck(Model model) {
-		logger.debug("Entering handcheck)() method...");
+	public XmlIvrResponse handcheck(Model model, HttpServletRequest req, HttpServletResponse resp) {
 		
+		logger.debug("Look->HttpServletRequest->" + req);
 		logger.debug("Look->Model->" + model.toString());
 		
 		List<XmlIvrParam> paramList = new ArrayList<XmlIvrParam>();
@@ -150,7 +156,12 @@ public class IvrServicesController implements Serializable {
 	@RequestMapping(method=RequestMethod.POST, value="/callback")
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public XmlIvrResponse doPost(@RequestBody XmlIvrRequest request) {
+	public XmlIvrResponse doPost(@RequestBody XmlIvrRequest request, 
+																			Model model, 
+																			HttpServletRequest req, 
+																			HttpServletResponse resp) {
+		
+		logger.debug("Look->HttpServletRequest->" + req);
 		
 		XmlIvrResponse response = new XmlIvrResponse();
 		response.setParams(null);

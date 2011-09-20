@@ -37,12 +37,12 @@ public class UserController extends UserBean {
 	
 	public String login() {
 		profile = authenticationService.login(username, password);
-		userid = profile.getAgentId();
-		if ( userid != null ) {
+		if ( profile != null ) {
+			userid = profile.getAgentId();
 			authenticated = true;
 			return "welcome.faces";
 		} else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password incorrect."));			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or password incorrect.", "Information"));			
 			return "login.faces";
 		}
 	}

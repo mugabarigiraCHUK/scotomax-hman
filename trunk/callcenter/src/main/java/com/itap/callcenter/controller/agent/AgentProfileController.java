@@ -41,7 +41,9 @@ public class AgentProfileController extends AgentProfileBean {
 	public void search() {
 		logger.debug("Entering Agent profile searching method...");
 		try {
-			agentProfileList = agentProfileDao.findAll();
+			agentProfileList = agentProfileDao.searchBy(agentFullname, agentUsername);
+			if ( agentProfileList == null || agentProfileList.isEmpty() )
+				logger.warn(" *** No found agent profile entity data in the data table.");
 		} catch ( Exception ex ) {
 			logger.error("Failed to fetching the data from db, Cause: "+ex.getMessage(), ex);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to fetching the data from db, Cause: "+ex.getMessage(), "Information"));
