@@ -43,8 +43,9 @@ public class AgentProfile implements Serializable, DomainObject {
 	private Integer agentId;
 
 	@ManyToOne
-	@JoinColumn(name = "supervisor_id", nullable = false)
-	@NotNull
+	@JoinColumn(name = "supervisor_id", nullable = true)
+	//@JoinColumn(name = "supervisor_id", nullable = false)
+	//@NotNull
 	private AgentProfile supervisor;
 
 	@ManyToOne
@@ -53,13 +54,15 @@ public class AgentProfile implements Serializable, DomainObject {
 	private AgentLevel agentLevel;
 
 	@ManyToOne
-	@JoinColumn(name="skill_id", nullable = false)
-	@NotNull
+	@JoinColumn(name="skill_id", nullable = true)
+	//@JoinColumn(name="skill_id", nullable = false)
+	//@NotNull
 	private AgentSkill agentSkill;
 
 	@ManyToOne
-	@JoinColumn(name="workplan_id", nullable = false)
-	@NotNull
+	@JoinColumn(name="workplan_id", nullable = true)
+	//@JoinColumn(name="workplan_id", nullable = false)
+	//@NotNull
 	private WkfWorkplan workplan;
 
 	@ManyToOne

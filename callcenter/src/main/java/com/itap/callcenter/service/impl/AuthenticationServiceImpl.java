@@ -3,10 +3,10 @@ package com.itap.callcenter.service.impl;
 import java.io.Serializable;
 
 import javax.annotation.Resource;
-import javax.faces.bean.ManagedProperty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService, Seriali
 	final Logger logger = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
 	// AgentProfile DAO
-	@ManagedProperty(value="#{agentProfileDaoImpl}")
+	@Autowired
 	AgentProfileDao agentProfileDao;
 	
 	//From Spring Security
@@ -50,7 +50,10 @@ public class AuthenticationServiceImpl implements AuthenticationService, Seriali
 			
 			return entry;
 		} catch (AuthenticationException e) {
-			logger.error(e.getMessage());
+			logger.error("Authentication failed, " + e.getMessage(), e);
+			return null;
+		} catch (Exception ex) {
+			logger.error("Failed to proceed authentication, " + ex.getMessage(), ex);
 			return null;
 		}
 	}

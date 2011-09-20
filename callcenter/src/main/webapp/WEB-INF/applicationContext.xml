@@ -28,7 +28,8 @@
 
 	<sec:http auto-config="true" access-denied-page="/views/accessDenied.faces">
 		<sec:form-login login-page="/views/login.faces" />
-		<sec:intercept-url pattern="/views/welcome.faces" access="ROLE_SYSTEM, ROLE_ADMINISTRATOR, ROLE_USER" />	    
+		<sec:intercept-url pattern="/views/welcome.faces" access="ROLE_SYSTEM, ROLE_ADMINISTRATOR, ROLE_USER" />
+	    <sec:intercept-url pattern="/views/home.faces" access="ROLE_SYSTEM, ROLE_ADMINISTRATOR, ROLE_USER" />
 	</sec:http>
 
 	<sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" >
