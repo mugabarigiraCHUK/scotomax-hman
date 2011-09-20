@@ -62,6 +62,8 @@ public class ICallCenterClientTest {
 		param.setName("dollar");
 		param.setValue("120");
 		paramList.add(param);
+		
+		params.setParam(paramList);
 		request.setParams(params);
 		
 		XmlIvrResponse response = iCallCenterClient.callback(request);
