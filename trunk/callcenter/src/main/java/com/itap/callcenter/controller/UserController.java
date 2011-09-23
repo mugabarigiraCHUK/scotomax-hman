@@ -36,9 +36,9 @@ public class UserController extends UserBean {
 	}
 	
 	public String login() {
-		profile = authenticationService.login(username, password);
-		if ( profile != null ) {
-			userid = profile.getAgentId();
+		boolean valid = authenticationService.login(username, password);
+		if ( valid ) {
+			//userid = profile.getAgentId();
 			authenticated = true;
 			return "welcome.faces";
 		} else{
