@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.itap.callcenter.dao.apc.agent.AgentProfileDao;
 
 /**
  * 
@@ -31,6 +34,10 @@ public class UserDetailsServiceImpl implements UserDetailsService, Serializable 
 	final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 	
 	private HashMap<String, User> users = new HashMap<String, User>();
+	
+	// AgentProfile DAO
+	@Autowired
+	AgentProfileDao agentProfileDao;
 	
 	@PostConstruct
 	public void init() {

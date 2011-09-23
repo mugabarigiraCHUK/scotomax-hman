@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,8 +13,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.itap.callcenter.dao.apc.agent.AgentProfileDao;
-import com.itap.callcenter.entity.apc.agent.AgentProfile;
 import com.itap.callcenter.service.AuthenticationService;
 
 /**
@@ -29,32 +26,27 @@ public class AuthenticationServiceImpl implements AuthenticationService, Seriali
 	private static final long serialVersionUID = -6751241572564089715L;
 
 	final Logger logger = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
-
-	// AgentProfile DAO
-	@Autowired
-	AgentProfileDao agentProfileDao;
 	
 	//From Spring Security
 	@Resource(name = "authenticationManager")
 	private AuthenticationManager authenticationManager;
 	
 	@Override
-	public AgentProfile login(String username, String password) {
+	public boolean login(String username, String password) {
 		try {
-			AgentProfile entry = agentProfileDao.findBy(username, password);
 			
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 			if (authentication.isAuthenticated()) {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 			
-			return entry;
+			return true;
 		} catch (AuthenticationException e) {
 			logger.error("Authentication failed, " + e.getMessage(), e);
-			return null;
+			return false;
 		} catch (Exception ex) {
 			logger.error("Failed to proceed authentication, " + ex.getMessage(), ex);
-			return null;
+			return false;
 		}
 	}
 

@@ -3,8 +3,6 @@ package com.itap.callcenter.beans;
 import java.io.Serializable;
 import java.util.Locale;
 
-import com.itap.callcenter.entity.apc.agent.AgentProfile;
-
 import lombok.Data;
 
 /**
@@ -18,8 +16,6 @@ public @Data abstract class UserBean implements Serializable {
 	
 	protected String username;
 	protected String password;
-	
-	protected AgentProfile profile;
 	
 	protected Integer userid;
 	protected boolean authenticated;
