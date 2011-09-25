@@ -6,24 +6,72 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
-import lombok.Data;
-
 /**
  * 
  * @author sevenG.oo7
  *
  */
-public @Data abstract class KnwCategoryBean implements Serializable {
+public class KnwCategoryBean implements Serializable {
 
 	private static final long serialVersionUID = 1002200075598844615L;
 	
-	protected Integer categoryId;
-	protected Integer parentCategoryId;
-	protected String categoryName;
-	protected String categoryDescription;
-	protected Date categoryUpdateDate;
+	private Integer categoryId;
+	private Integer parentCategoryId;
+	private String categoryName;
+	private String categoryDescription;
+	private Date categoryCreateDate;
+	private Date categoryUpdateDate;
     
-	protected Integer selectedCategoryId;
-	protected List<SelectItem> selectItemCategoryList;
+	private Integer selectedCategoryId;
+	private List<SelectItem> selectItemCategoryList;
+	
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+	public Integer getParentCategoryId() {
+		return parentCategoryId;
+	}
+	public void setParentCategoryId(Integer parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getCategoryDescription() {
+		return categoryDescription;
+	}
+	public void setCategoryDescription(String categoryDescription) {
+		this.categoryDescription = categoryDescription;
+	}
+	public Date getCategoryCreateDate() {
+		return categoryCreateDate;
+	}
+	public void setCategoryCreateDate(Date categoryCreateDate) {
+		this.categoryCreateDate = categoryCreateDate;
+	}
+	public Date getCategoryUpdateDate() {
+		return categoryUpdateDate;
+	}
+	public void setCategoryUpdateDate(Date categoryUpdateDate) {
+		this.categoryUpdateDate = categoryUpdateDate;
+	}
+	public Integer getSelectedCategoryId() {
+		return selectedCategoryId;
+	}
+	public void setSelectedCategoryId(Integer selectedCategoryId) {
+		this.selectedCategoryId = selectedCategoryId;
+	}
+	public List<SelectItem> getSelectItemCategoryList() {
+		return selectItemCategoryList;
+	}
+	public void setSelectItemCategoryList(List<SelectItem> selectItemCategoryList) {
+		this.selectItemCategoryList = selectItemCategoryList;
+	}
 
 }
