@@ -23,6 +23,8 @@ public class AmqpServer implements Serializable {
 	private Thread worker;
 	
 	private QueueingConsumer rmqConsumer;
+	//private final long TIME_OUT = 60000;
+	private final boolean AUTO_ACK = false;
 	
 	/**
 	 * Constructor
@@ -61,10 +63,8 @@ public class AmqpServer implements Serializable {
 		    slf4j.debug("Registering consumer(subscriber) on defined queue.");
 		    // Register consumer to the queue
 		    String QUEUE_NAME = amqpUtil.getConfigures().get(AmqpUtil.RMQ_QUEUE);
-		    // Auto-acknowledgement is false
-		    boolean autoAck = true;
 		    // Register consumer exchange
-		    amqpUtil.getChannel().basicConsume( QUEUE_NAME, autoAck, rmqConsumer);
+		    amqpUtil.getChannel().basicConsume( QUEUE_NAME, AUTO_ACK, rmqConsumer);
 		    
 		    slf4j.debug("Initialing thread worker for fetching message delivery.");
 			worker = new Thread(new Runnable() {
@@ -72,15 +72,13 @@ public class AmqpServer implements Serializable {
 				public void run() {
 					while (true) {
 						try {
-					 
 							// Consume message when message arrived in the queue.
 							QueueingConsumer.Delivery delivery;
-							try {
-						        delivery = rmqConsumer.nextDelivery();
-						    } catch (InterruptedException ie) {
-						        continue;
-						    }
 							
+					        delivery = rmqConsumer.nextDelivery();
+					        // Acknowledgement message after processing
+							amqpUtil.getChannel().basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+					        
 							// Processing work for this message
 							String response = receiver.handleMessage( delivery );
 							// Properties for reply message back
@@ -91,9 +89,7 @@ public class AmqpServer implements Serializable {
 						                                     .build();
 						    // publish message back
 						    amqpUtil.getChannel().basicPublish( "", props.getReplyTo(), replyProps, response.getBytes());
-							// Acknowledgement message after processing
-							// amqpUtil.getChannel().basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-					    	
+						    
 						} catch (Exception ex) {
 							slf4j.warn("Failed to fetching message, "+ex.getMessage(), ex);
 							synchronized(AmqpServer.class){
