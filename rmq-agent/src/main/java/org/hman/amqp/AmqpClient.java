@@ -98,7 +98,10 @@ public class AmqpClient implements Serializable {
 		while (true) {
 	        // Fetching message
 			QueueingConsumer.Delivery delivery = consumer.nextDelivery(TIME_OUT);
-	        if (delivery.getProperties().getCorrelationId().equals(correlationId)) {
+			if ( delivery == null 
+					|| delivery.getProperties() == null ) {
+				throw new Exception("System timeout for waiting response message more than one minute.");
+			} else if (delivery.getProperties().getCorrelationId().equals(correlationId)) {
 	        	// Acknowledgement message after processing
 				amqpUtil.getChannel().basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 	            response = new String(delivery.getBody());
