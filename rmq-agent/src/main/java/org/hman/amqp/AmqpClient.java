@@ -27,6 +27,10 @@ public class AmqpClient implements Serializable {
 	private final QueueingConsumer consumer;
 	private String replyQueueName;
 	
+	// RabbitMQ parameters
+	private final long TIME_OUT = 60000;
+	private final boolean AUTO_ACK = false;
+	
 	/**
 	 * Constructor
 	 */
@@ -42,7 +46,7 @@ public class AmqpClient implements Serializable {
 			
 			slf4j.debug("Register consumer(subscriber) on individual queue");
 			// Register consumer above.
-			amqpUtil.getChannel().basicConsume(replyQueueName, true, consumer);
+			amqpUtil.getChannel().basicConsume(replyQueueName, AUTO_ACK, consumer);
 		} catch ( Exception ex ) {
 			slf4j.error("Failed to initial Amqp client RPC component, "+ex.getMessage(), ex);
 		}
@@ -90,17 +94,13 @@ public class AmqpClient implements Serializable {
 					   		 props, 
 					   		 messageText.getBytes(AmqpUtil.CHARSET));
 		
-		// Book time for checking timeout
-		long startToWait = System.currentTimeMillis();
-		
 		// Waiting for response message back from subscriber
 		while (true) {
-			// Timeout checking
-			if ( (System.currentTimeMillis() - startToWait) > 60000 )
-				throw new Exception("The response message return more than 1 minute, system timeout.");
 	        // Fetching message
-			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+			QueueingConsumer.Delivery delivery = consumer.nextDelivery(TIME_OUT);
 	        if (delivery.getProperties().getCorrelationId().equals(correlationId)) {
+	        	// Acknowledgement message after processing
+				amqpUtil.getChannel().basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 	            response = new String(delivery.getBody());
 	            break;
 	        }
