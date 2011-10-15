@@ -1,17 +1,25 @@
 package org.hman.vaadin.comp;
 
+import org.hman.vaadin.tabs.AboutusTab;
+import org.hman.vaadin.tabs.CareerTab;
+import org.hman.vaadin.tabs.HomeTab;
+import org.hman.vaadin.tabs.ProductTab;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.VerticalLayout;
 
-@SuppressWarnings("serial")
+/**
+ * 
+ * @author scotomax
+ *
+ */
+@SuppressWarnings({"serial", "unused"})
 public class TabbedMenuPanel extends VerticalLayout 
 								implements TabSheet.SelectedTabChangeListener, 
 										   TabSheet.CloseHandler {
@@ -28,39 +36,14 @@ public class TabbedMenuPanel extends VerticalLayout
 	public TabbedMenuPanel() {
 		slf4j.debug(" -> Entering -> Panel -> Constructor method.");
 		this.setSizeFull();
-		
-		// Tab 1 content
-        VerticalLayout l1 = new VerticalLayout();
-        l1.setSizeFull();
-        l1.setMargin(true);
-        l1.addComponent(new Label("Welcome to Hman-Vaadin application"));
-        
-        // Tab 2 content
-        VerticalLayout l2 = new VerticalLayout();
-        l2.setSizeFull();
-        l2.setMargin(true);
-        l2.addComponent(new Label("Page information for product"));
-        
-        // Tab 3 content
-        VerticalLayout l3 = new VerticalLayout();
-        l3.setSizeFull();
-        l3.setMargin(true);
-        l3.addComponent(new Label("Page information for Careers part"));
-        
-        // Tab 4 content
-        VerticalLayout l4 = new VerticalLayout();
-        l4.setSizeFull();
-        l4.setMargin(true);
-        l4.addComponent(new Label("Page information for About us"));
-        
 
         tabSheet = new TabSheet();
         tabSheet.setSizeFull();
 
-        home = tabSheet.addTab(l1, "Home", new ThemeResource("../runo/icons/16/arrow-right.png"));
-        products = tabSheet.addTab(l2, "Product", new ThemeResource("../runo/icons/16/folder.png"));
-        careers = tabSheet.addTab(l3, "Career", new ThemeResource("../runo/icons/16/users.png"));
-        aboutus = tabSheet.addTab(l4, "About us", new ThemeResource("../runo/icons/16/email.png"));
+        home = tabSheet.addTab(new HomeTab(), "Home", new ThemeResource("../runo/icons/16/arrow-right.png"));
+        products = tabSheet.addTab(new ProductTab(), "Product", new ThemeResource("../runo/icons/16/folder.png"));
+        careers = tabSheet.addTab(new CareerTab(), "Career", new ThemeResource("../runo/icons/16/users.png"));
+        aboutus = tabSheet.addTab(new AboutusTab(), "About us", new ThemeResource("../runo/icons/16/email.png"));
 
         tabSheet.addListener(this);
         tabSheet.setCloseHandler(this);
