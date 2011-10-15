@@ -25,6 +25,9 @@ import com.vaadin.ui.Window;
 
 /**
  * The Application's "main" class
+ * 
+ * @author scotomax
+ * 
  */
 @SuppressWarnings("serial")
 public class VaadinApplication extends Application {
@@ -35,7 +38,7 @@ public class VaadinApplication extends Application {
     @Override
     public void init() {
     	// Set Theme
-    	setTheme("reindeer");
+    	setTheme("hman");
     	
     	// Initial Window component
     	window = new Window("H-man Vaadin Application");

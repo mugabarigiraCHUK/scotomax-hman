@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.terminal.ThemeResource;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
@@ -21,7 +22,7 @@ public class HeaderToolbar extends VerticalLayout {
 
 	// Logging
 	private Logger slf4j = LoggerFactory.getLogger(HeaderToolbar.class);
-	// Componenets
+	// Components
 	private final MenuBar menubar = new MenuBar();
 	private final MenuBar.MenuItem account;
 	private final MenuBar.MenuItem profile;
@@ -29,11 +30,13 @@ public class HeaderToolbar extends VerticalLayout {
 
 	public HeaderToolbar() {
 		slf4j.debug(" -> Entering -> CssLayout -> Main Menu Bar -> Constructor method.");
-		this.setWidth(100, UNITS_PERCENTAGE);
-		this.setStyleName(Reindeer.LAYOUT_BLACK);
+		
+		setWidth(100, UNITS_PERCENTAGE);
+		setStyleName(Reindeer.LAYOUT_BLACK);
+		addStyleName("header-menu-bar");
 		
 		// Individual items so we can add sub-menu items to
-        // User name
+		// User name
 		account = menubar.addItem("developmax@gmail.com", null);
 		// Profile
 		profile = menubar.addItem("Profile", new ThemeResource("../runo/icons/16/user.png"), null);
@@ -46,6 +49,7 @@ public class HeaderToolbar extends VerticalLayout {
 		settings.addItem("Language", menuCommand);
 		settings.addItem("Picture", menuCommand);
 
+		menubar.setStyleName("header-menu-bar");
         addComponent(menubar);
 
 	}
