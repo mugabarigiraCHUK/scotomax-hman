@@ -3,14 +3,12 @@ package com.itap.callcenter.beans.ivr;
 import java.io.Serializable;
 import java.util.Date;
 
-import lombok.Data;
-
 /**
  * 
  * @author scotomax
  *
  */
-public @Data abstract class IvrProtocolBean implements Serializable {
+public abstract class IvrProtocolBean implements Serializable {
 
 	private static final long serialVersionUID = -4589285573648646788L;
 	
@@ -20,4 +18,46 @@ public @Data abstract class IvrProtocolBean implements Serializable {
 	protected Date protocolUpdateDate;
     
     protected Integer selectedProtocolId;
+
+	public Integer getProtocolId() {
+		return protocolId;
+	}
+
+	public void setProtocolId(Integer protocolId) {
+		this.protocolId = protocolId;
+	}
+
+	public String getProtocolName() {
+		return protocolName;
+	}
+
+	public void setProtocolName(String protocolName) {
+		this.protocolName = protocolName;
+	}
+
+	public String getProtocolDescription() {
+		return protocolDescription;
+	}
+
+	public void setProtocolDescription(String protocolDescription) {
+		this.protocolDescription = protocolDescription;
+	}
+
+	public Date getProtocolUpdateDate() {
+		return protocolUpdateDate;
+	}
+
+	public void setProtocolUpdateDate(Date protocolUpdateDate) {
+		this.protocolUpdateDate = protocolUpdateDate;
+	}
+
+	public Integer getSelectedProtocolId() {
+		return selectedProtocolId;
+	}
+
+	public void setSelectedProtocolId(Integer selectedProtocolId) {
+		this.selectedProtocolId = selectedProtocolId;
+	}
+    
+    
 }

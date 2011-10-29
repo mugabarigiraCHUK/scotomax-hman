@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import lombok.Data;
-
 /**
  * 
  * @author scotomax
@@ -18,11 +16,20 @@ import lombok.Data;
 @XmlRootElement(name="request")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType
-public @Data class XmlIvrRequest implements Serializable {
+public class XmlIvrRequest implements Serializable {
 
 	private static final long serialVersionUID = 6335280241428025529L;
 
 	@XmlElement(name="params")
 	private XmlIvrParams params;
+
+	public XmlIvrParams getParams() {
+		return params;
+	}
+
+	public void setParams(XmlIvrParams params) {
+		this.params = params;
+	}
+	
 	
 }
