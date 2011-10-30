@@ -61,12 +61,12 @@
 		</dependency>
 		
 		<!-- ProjectLombok -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>0.9.3</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 
