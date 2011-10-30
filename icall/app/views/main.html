@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/jquery-ui-1.8.16.flick.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.css'}">
+
+        #{get 'moreStyles' /}
+        
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery-ui-1.8.16.flick.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-alerts.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-dropdown.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-modal.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-popover.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-scrollspy.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-tabs.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap-twipsy.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
+        <style type="text/css">
+          body {
+            padding-top: 60px;
+          }
+          div.row {
+            height: 50px; 
+          }
+        </style>
+
+        #{get 'moreScripts' /}
+
+    </head>
+    <body>
+
+        <!-- Top header -->
+        <div class="topbar">
+          
+          <div class="topbar-inner">
+            <div class="container-fluid">
+              <a class="brand" href="#">iCallCenter</a>
+              <ul class="nav">
+                <li class="active"><a href="#agent">Agent</a></li>
+                <li><a href="#customer">Customer</a></li>
+                <li><a href="#knowledge">Knowledge</a></li>
+                <li><a href="#ivr">IVR</a></li>
+                <li><a href="#jobticket">Job Ticket</a></li>
+                <li><a href="#workflow">Work flow</a></li>
+              </ul>
+              <p class="pull-right">Logged in as <a href="#">Pollachet</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Body by side bar + content -->
+        <div class="container-fluid">
+          
+          <div class="sidebar">
+            <div class="well">
+              <h5>Sidebar</h5>
+              <ul>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+              </ul>
+              <h5>Sidebar</h5>
+              <ul>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+              </ul>
+              <h5>Sidebar</h5>
+              <ul>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="main-content" class="content">
+            
+            <!-- Navigation bar -->
+            <div id="navigation-bar" class="row">
+                <div class="span17">
+                    <ul class="breadcrumb">
+                      <li><a href="#">Home</a> <span class="divider">/</span></li>
+                      <li><a href="#">Middle page</a> <span class="divider">/</span></li>
+                      <li><a href="#">Another one</a> <span class="divider">/</span></li>
+                      <li class="active">You are here</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Notification message -->
+            <div id="error-message" class="row">
+                <div class="span17">                
+                    <div class="alert-message error">
+                      <a class="close" href="#">×</a>
+                      <p><strong>Error!</strong> You made system crash.</p>
+                    </div>
+                </div>
+            </div>    
+
+            <!-- Notification message -->
+            <div id="warn-message" class="row">
+                <div class="span17">
+                    <div class="alert-message warning">
+                      <a class="close" href="#">×</a>
+                      <p><strong>Warrning!</strong> You did something wrong, please verify.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification message -->
+            <div id="info-message" class="row">
+                <div class="span17">    
+                    <div class="alert-message info">
+                      <a class="close" href="#">×</a>
+                      <p><strong>Information!</strong> You did well, Thank you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main hero unit for a primary message or call to action -->
+            <div class="hero-unit">
+            
+                #{doLayout /}
+
+            </div>
+
+            <footer>
+              <p>&copy; Company 2011, play framework</p>
+            </footer>
+
+          </div>
+        </div>
+
+    </body>
+</html>
