@@ -28,7 +28,7 @@ public class AgentProfile extends Model {
     @ManyToOne
     public WkfStatus wkf_status_id;
     @ManyToOne
-    public WkfPlan wkf_plan_id;
+    public WkfWorkplan wkf_workplan_id;
     
  	public AgentProfile(Integer agent_id, 
  					String agent_fullname, 

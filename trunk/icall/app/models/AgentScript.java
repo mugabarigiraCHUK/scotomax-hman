@@ -26,7 +26,7 @@ public class AgentScript extends Model {
  	public AgentScript(Integer script_id, 
  					String script_name, 
  					String script_description,
- 					String script_step,
+ 					Integer script_step,
  					String script_message){
  		this.script_id = script_id;
  		this.script_name = script_name;

@@ -15,7 +15,7 @@ public class JobTicket extends Model {
     public String job_name;
     public String job_description;
     public String job_voice_record_file;
-    public Booleab job_alert_enable;
+    public Boolean job_alert_enable;
     public Date job_create_date;
     public Date job_update_date;
     public Date job_close_date;
@@ -38,7 +38,7 @@ public class JobTicket extends Model {
  					String job_name, 
  					String job_description,
  					String job_voice_record_file,
- 					String job_alert_enable){
+ 					Boolean job_alert_enable){
  		this.job_id = job_id;
  		this.priority = priority;
  		this.job_name = job_name;
