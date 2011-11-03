@@ -1,0 +1,44 @@
+package models;
+ 
+import java.util.*;
+import javax.persistence.*;
+ 
+import play.db.jpa.*;
+ 
+@Entity
+@Table(name="crm_customer")
+public class CrmCustomer extends Model {
+ 
+ 	@Id
+    public Integer customer_id;
+    public String customer_fullname;
+    public Integer customer_gender;
+    public String customer_address;
+    public Date customer_birthday;
+    public String customer_phone;
+    public String customer_email;
+    public Date customer_create_date;
+    public Date customer_update_date;
+
+    @ManyToOne
+    public CrmBusiness crm_business_id;
+    @ManyToOne
+    public CrmStatus crm_status_id;
+    
+ 	public CrmCustomer(Integer customer_id, 
+ 					String customer_fullname, 
+ 					Integer customer_gender,
+ 					String customer_address,
+ 					Date customer_birthday,
+ 					String customer_phone,
+ 					String customer_email){
+ 		this.customer_id = customer_id;
+ 		this.customer_fullname = customer_fullname;
+ 		this.customer_gender = customer_gender;
+ 		this.customer_address = customer_address;
+ 		this.customer_birthday = customer_birthday;
+ 		this.customer_phone = customer_phone;
+ 		this.customer_email = customer_email;
+ 		this.customer_update_date = new Date();
+ 	}
+}
