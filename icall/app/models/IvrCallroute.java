@@ -19,7 +19,7 @@ public class IvrCallroute extends Model {
     public Date callroute_update_date;
 
     @ManyToOne
-    public Ivrcallroute ivr_callroute_id;
+    public IvrCallflow ivr_callflow_id;
     
  	public IvrCallroute(Integer callroute_id, 
  					String callroute_name, 
