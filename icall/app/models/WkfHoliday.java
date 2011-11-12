@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="wkf_holiday")
-public class WkfHoliday extends Model {
+public class WkfHoliday extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer holiday_id;
     public String holiday_name;
     public String holiday_description;
@@ -17,6 +18,7 @@ public class WkfHoliday extends Model {
     public Date holiday_update_date;
 
     @ManyToOne
+    @JoinColumn(name="calendar_id")
     public WkfCalendar calendar_id;
     
  	public WkfHoliday(Integer holiday_id, 

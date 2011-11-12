@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="agent_seat")
-public class AgentSeat extends Model {
+public class AgentSeat extends GenericModel {
  
  	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer seat_id;
     public String seat_name;
     public String seat_description;
@@ -22,12 +23,20 @@ public class AgentSeat extends Model {
     public Date seat_update_date;
 
     @ManyToOne
+    @JoinColumn(name="agent_level_id")
     public AgentLevel agent_level_id;
+
     @ManyToOne
+    @JoinColumn(name="agent_skill_id")
     public AgentSkill agent_skill_id;
-    @ManyToOne
-    public WkfStatus wkf_status_id;
     
+    @ManyToOne
+    @JoinColumn(name="wkf_status_id")
+    public WkfStatus wkf_status_id;
+
+    @OneToMany(mappedBy="agent_seat_id")
+    public List<JobTicket> jobTickets;
+
  	public AgentSeat(Integer seat_id, 
  					String seat_name, 
  					String seat_description,

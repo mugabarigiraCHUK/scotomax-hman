@@ -7,21 +7,28 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="wkf_calendar")
-public class WkfCalendar extends Model {
+public class WkfCalendar extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer calendar_id;
     public String calendar_name;
     public String calendar_description;
-    public Boolean calendar_enable;
+    public Integer calendar_enable;
     public Date calendar_start_date;
     public Date calendar_end_date;
     public Date calendar_update_date;
+
+    @OneToMany(mappedBy="calendar_id")
+    public List<WkfHoliday> wkfHolidays;
+
+    @OneToMany(mappedBy="wkf_calendar_id")
+    public List<WkfWorkplan> wkfWorkplans;
     
  	public WkfCalendar(Integer calendar_id, 
  					String calendar_name, 
  					String calendar_description,
- 					Boolean calendar_enable,
+ 					Integer calendar_enable,
  					Date calendar_start_date,
  					Date calendar_end_date){
  		this.calendar_id = calendar_id;

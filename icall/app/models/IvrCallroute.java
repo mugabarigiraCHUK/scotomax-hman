@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="ivr_callroute")
-public class IvrCallroute extends Model {
+public class IvrCallroute extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer callroute_id;
     public String callroute_name;
     public String callroute_description;
@@ -19,12 +20,13 @@ public class IvrCallroute extends Model {
     public Date callroute_update_date;
 
     @ManyToOne
+    @JoinColumn(name="ivr_callflow_id")
     public IvrCallflow ivr_callflow_id;
     
  	public IvrCallroute(Integer callroute_id, 
  					String callroute_name, 
  					String callroute_description,
- 					String callroute_calller,
+ 					String callroute_caller,
  					String callroute_called){
  		this.callroute_id = callroute_id;
  		this.callroute_name = callroute_name;

@@ -7,13 +7,17 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="crm_status")
-public class CrmStatus extends Model {
+public class CrmStatus extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer status_id;
     public String status_name;
     public String status_description;
     public Date status_update_date;
+
+    @OneToMany(mappedBy="crm_status_id")
+    public List<CrmCustomer> crmCustomers;
     
  	public CrmStatus(Integer status_id, String status_name, String status_description){
  		this.status_id = status_id;

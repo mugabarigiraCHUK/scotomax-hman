@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="ivr_dtmf")
-public class IvrDtmf extends Model {
+public class IvrDtmf extends GenericModel {
  
  	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer dtmf_id;
     public String dtmf_name;
     public String dtmf_description;
@@ -18,8 +19,11 @@ public class IvrDtmf extends Model {
     public Date dtmf_update_date;
 
     @ManyToOne
+    @JoinColumn(name="ivr_callflow_id")
     public IvrCallflow ivr_callflow_id;
+
     @ManyToOne
+    @JoinColumn(name="ivr_action_id")
     public IvrAction ivr_action_id;
     
  	public IvrDtmf(Integer dtmf_id, 
