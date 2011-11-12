@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_dtmf")
@@ -12,16 +13,21 @@ public class IvrDtmf extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer dtmf_id;
+    @Required
     public String dtmf_name;
     public String dtmf_description;
+    @Required
     public String dtmf_digit;
+    @Required
     public Date dtmf_create_date;
     public Date dtmf_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_callflow_id")
     public IvrCallflow ivr_callflow_id;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_action_id")
     public IvrAction ivr_action_id;

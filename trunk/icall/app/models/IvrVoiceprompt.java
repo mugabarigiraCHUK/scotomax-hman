@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_voiceprompt")
@@ -12,10 +13,14 @@ public class IvrVoiceprompt extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer voice_id;
+    @Required
     public String voice_name;
     public String voice_description;
+    @Required
     public String voice_filename;
+    @Required
     public String voice_format;
+    @Required
     public Date voice_create_date;
     public Date voice_update_date;
 

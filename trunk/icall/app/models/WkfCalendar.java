@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="wkf_calendar")
@@ -12,10 +13,14 @@ public class WkfCalendar extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer calendar_id;
+    @Required
     public String calendar_name;
     public String calendar_description;
+    @Required
     public Integer calendar_enable;
+    @Required
     public Date calendar_start_date;
+    @Required
     public Date calendar_end_date;
     public Date calendar_update_date;
 

@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_channel")
@@ -12,8 +13,10 @@ public class IvrChannel extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer channel_id;
+    @Required
     public String channel_name;
     public String channel_description;
+    @Required
     public Date channel_update_date;
 
     @OneToMany(mappedBy="ivr_channel_id")

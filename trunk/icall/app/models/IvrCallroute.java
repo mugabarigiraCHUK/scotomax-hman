@@ -4,7 +4,8 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
- 
+import play.data.validation.*;
+
 @Entity
 @Table(name="ivr_callroute")
 public class IvrCallroute extends GenericModel {
@@ -12,13 +13,16 @@ public class IvrCallroute extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer callroute_id;
+    @Required
     public String callroute_name;
     public String callroute_description;
     public String callroute_caller;
     public String callroute_called;
+    @Required
     public Date callroute_create_date;
     public Date callroute_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_callflow_id")
     public IvrCallflow ivr_callflow_id;

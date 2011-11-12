@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="knw_topic")
@@ -12,20 +13,26 @@ public class KnwTopic extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer topic_id;
+    @Required
     public String topic_name;
     public String topic_description;
+    @Required
     public String topic_subject;
+    @Required
     public Date topic_create_date;
     public Date topic_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="agent_profile_id")
     public AgentProfile agent_profile_id;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="knw_category_id")
     public KnwCategory knw_category_id;
     
+    @Required
     @ManyToOne
     @JoinColumn(name="knw_status_id")
     public KnwStatus knw_status_id;

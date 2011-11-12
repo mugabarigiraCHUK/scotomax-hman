@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="knw_status")
@@ -12,8 +13,10 @@ public class KnwStatus extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer status_id;
+    @Required
     public String status_name;
     public String status_description;
+    @Required
     public Date status_update_date;
 
     @OneToMany(mappedBy="knw_status_id")

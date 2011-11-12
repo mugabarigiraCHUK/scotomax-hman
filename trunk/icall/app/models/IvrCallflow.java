@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_callflow")
@@ -12,14 +13,22 @@ public class IvrCallflow extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer callflow_id;
+    @Required
     public String callflow_name;
     public String callflow_description;
+    @Required
+    @Min(0)
     public Integer callflow_timeout;
+    @Required 
+    @Min(0)
     public Integer callflow_next_id;
+    @Required
     public Integer callflow_voice_repeat_enable;
+    @Required
     public Date callflow_create_date;
     public Date callflow_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_voiceprompt_id")
     public IvrVoiceprompt ivr_voiceprompt_id;

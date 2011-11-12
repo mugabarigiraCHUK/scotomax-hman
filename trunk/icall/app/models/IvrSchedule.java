@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_schedule")
@@ -12,19 +13,28 @@ public class IvrSchedule extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer schedule_id;
+    @Required
     public String schedule_name;
     public String schedule_description;
+    @Required
     public String schedule_caller;
+    @Required
     public String schedule_called;
+    @Required
     public Date schedule_activate_time;
+    @Required
+    @Min(0)
     public Integer schedule_retry_time;
+    @Required
     public Date schedule_create_date;
     public Date schedule_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_channel_id")
     public IvrChannel ivr_channel_id;
     
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_callflow_id")
     public IvrCallflow ivr_callflow_id;
