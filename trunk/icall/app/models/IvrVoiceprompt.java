@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="ivr_voiceprompt")
-public class IvrVoiceprompt extends Model {
+public class IvrVoiceprompt extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer voice_id;
     public String voice_name;
     public String voice_description;
@@ -17,6 +18,9 @@ public class IvrVoiceprompt extends Model {
     public String voice_format;
     public Date voice_create_date;
     public Date voice_update_date;
+
+    @OneToMany(mappedBy="ivr_voiceprompt_id")
+    public List<IvrCallflow> ivrCallflows;
     
  	public IvrVoiceprompt(Integer voice_id, 
  						String voice_name, 

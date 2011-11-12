@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="knw_solution")
-public class KnwSolution extends Model {
+public class KnwSolution extends GenericModel {
  
  	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer solution_id;
     public String solution_name;
     public String solution_description;
@@ -17,13 +18,23 @@ public class KnwSolution extends Model {
     public Date solution_update_date;
 
     @ManyToOne
+    @JoinColumn(name="knw_topic_id")
     public KnwTopic knw_topic_id;
+
     @ManyToOne
+    @JoinColumn(name="agent_profile_id")
     public AgentProfile agent_profile_id;
+    
     @ManyToOne
+    @JoinColumn(name="agent_profile_supervisor_id")
     public AgentProfile agent_profile_supervisor_id;
+    
     @ManyToOne
+    @JoinColumn(name="knw_status_id")
     public KnwStatus knw_status_id;
+
+    @OneToMany(mappedBy="knw_solution_id")
+    public List<JobTicket> jobTickets;
     
  	public KnwSolution(Integer solution_id, String solution_name, String solution_description){
  		this.solution_id = solution_id;

@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="ivr_schedule")
-public class IvrSchedule extends Model {
+public class IvrSchedule extends GenericModel {
  
  	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer schedule_id;
     public String schedule_name;
     public String schedule_description;
@@ -21,8 +22,11 @@ public class IvrSchedule extends Model {
     public Date schedule_update_date;
 
     @ManyToOne
+    @JoinColumn(name="ivr_channel_id")
     public IvrChannel ivr_channel_id;
+    
     @ManyToOne
+    @JoinColumn(name="ivr_callflow_id")
     public IvrCallflow ivr_callflow_id;
     
  	public IvrSchedule(Integer schedule_id, 

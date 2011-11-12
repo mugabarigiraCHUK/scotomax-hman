@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="acd_route")
-public class AcdRoute extends Model {
+public class AcdRoute extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer route_id;
     public String route_name;
     public String route_description;
@@ -19,6 +20,7 @@ public class AcdRoute extends Model {
     public Date route_update_date;
 
     @ManyToOne
+    @JoinColumn(name="acd_condition_id")
     public AcdCondition acd_condition_id;
     
  	public AcdRoute(Integer route_id, 

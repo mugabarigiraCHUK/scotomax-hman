@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="wkf_workplan")
-public class WkfWorkplan extends Model {
+public class WkfWorkplan extends GenericModel {
  
  	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer workplan_id;
     public String workplan_name;
     public String workplan_description;
@@ -21,7 +22,11 @@ public class WkfWorkplan extends Model {
     public Date workplan_update_date;
 
     @ManyToOne
+    @JoinColumn(name="wkf_calendar_id")
     public WkfCalendar wkf_calendar_id;
+
+    @OneToMany(mappedBy="wkf_workplan_id")
+    public List<AgentProfile> agentProfiles;
     
  	public WkfWorkplan(Integer workplan_id, 
  					String workplan_name, 

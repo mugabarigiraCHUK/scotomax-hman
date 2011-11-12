@@ -7,15 +7,17 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="ivr_pabx")
-public class IvrPabx extends Model {
+public class IvrPabx extends GenericModel {
  
  	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer pabx_id;
     public String pabx_name;
     public String pabx_description;
     public Date pabx_update_date;
 
     @ManyToOne
+    @JoinColumn(name="ivr_protocol_id")
     public IvrProtocol ivr_protocol_id;
     
  	public IvrPabx(Integer pabx_id, 

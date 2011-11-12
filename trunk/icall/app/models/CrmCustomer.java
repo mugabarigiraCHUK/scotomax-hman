@@ -7,9 +7,10 @@ import play.db.jpa.*;
  
 @Entity
 @Table(name="crm_customer")
-public class CrmCustomer extends Model {
+public class CrmCustomer extends GenericModel {
  
  	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer customer_id;
     public String customer_fullname;
     public Integer customer_gender;
@@ -21,10 +22,16 @@ public class CrmCustomer extends Model {
     public Date customer_update_date;
 
     @ManyToOne
+    @JoinColumn(name="crm_business_id")
     public CrmBusiness crm_business_id;
+
     @ManyToOne
+    @JoinColumn(name="crm_status_id")
     public CrmStatus crm_status_id;
-    
+
+    @OneToMany(mappedBy="crm_customer_id")
+    public List<JobTicket> jobTickets;
+
  	public CrmCustomer(Integer customer_id, 
  					String customer_fullname, 
  					Integer customer_gender,
