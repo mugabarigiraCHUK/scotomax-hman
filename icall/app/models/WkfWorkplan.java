@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="wkf_workplan")
@@ -12,15 +13,22 @@ public class WkfWorkplan extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer workplan_id;
+    @Required
     public String workplan_name;
     public String workplan_description;
+    @Required
     public Date workplan_start_date;
+    @Required
     public Date workplan_end_date;
+    @Required
     public Date workplan_start_time;
+    @Required
     public Date workplan_end_time;
+    @Required
     public Date workplan_create_date;
     public Date workplan_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="wkf_calendar_id")
     public WkfCalendar wkf_calendar_id;

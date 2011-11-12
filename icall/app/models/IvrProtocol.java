@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_protocol")
@@ -12,8 +13,10 @@ public class IvrProtocol extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer protocol_id;
+    @Required
     public String protocol_name;
     public String protocol_description;
+    @Required
     public Date protocol_update_date;
 
     @OneToMany(mappedBy="ivr_protocol_id")

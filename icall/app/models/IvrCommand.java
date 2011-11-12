@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_command")
@@ -12,6 +13,7 @@ public class IvrCommand extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer command_id;
+    @Required
     public String command_name;
     public String command_description;
     public Date command_create_date;

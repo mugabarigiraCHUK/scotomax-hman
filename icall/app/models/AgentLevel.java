@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="agent_level")
@@ -12,8 +13,10 @@ public class AgentLevel extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer level_id;
+    @Required
     public String level_name;
     public String level_description;
+    @Required
     public Date level_update_date;
 
     @OneToMany(mappedBy="agent_level_id")

@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="ivr_action")
@@ -12,13 +13,16 @@ public class IvrAction extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer action_id;
+    @Required
     public String action_name;
     public String action_description;
     public String action_script;
     public String action_parameter;
+    @Required
     public Date action_create_date;
     public Date action_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="ivr_command_id")
     public IvrCommand ivr_command_id;

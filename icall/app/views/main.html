@@ -59,27 +59,9 @@
           
           <div class="sidebar">
             <div class="well">
-              <h5>Sidebar</h5>
-              <ul>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-              </ul>
-              <h5>Sidebar</h5>
-              <ul>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-              </ul>
-              <h5>Sidebar</h5>
-              <ul>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-              </ul>
+              
+              #{get 'sidebar' /}
+              
             </div>
           </div>
 
@@ -89,10 +71,9 @@
             <div id="navigation-bar" class="row">
                 <div class="span17">
                     <ul class="breadcrumb">
-                      <li><a href="#">Home</a> <span class="divider">/</span></li>
-                      <li><a href="#">Middle page</a> <span class="divider">/</span></li>
-                      <li><a href="#">Another one</a> <span class="divider">/</span></li>
-                      <li class="active">You are here</li>
+                      
+                      #{get 'navigation' /}
+
                     </ul>
                 </div>
             </div>

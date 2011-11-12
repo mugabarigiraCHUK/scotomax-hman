@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="agent_profile")
@@ -12,30 +13,42 @@ public class AgentProfile extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer agent_id;
+    @Required
     public String agent_fullname;
+    @Required
     public String agent_username;
     public String agent_password;
+    @Required
+    @Min(0)
     public Integer agent_max_call;
+    @Required
+    @Min(0)
     public Integer agent_allow_outbound;
+    @Required
     public Date agent_create_date;
     public Date agent_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="supervisor_id")
     public AgentProfile supervisor_id;
     
+    @Required
     @ManyToOne
     @JoinColumn(name="agent_level_id")
     public AgentLevel agent_level_id;
     
+    @Required
     @ManyToOne
     @JoinColumn(name="agent_skill_id")
     public AgentSkill agent_skill_id;
     
+    @Required
     @ManyToOne
     @JoinColumn(name="wkf_status_id")
     public WkfStatus wkf_status_id;
     
+    @Required
     @ManyToOne
     @JoinColumn(name="wkf_workplan_id")
     public WkfWorkplan wkf_workplan_id;

@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="crm_customer")
@@ -12,19 +13,24 @@ public class CrmCustomer extends GenericModel {
  	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer customer_id;
+    @Required
     public String customer_fullname;
+    @Required
     public Integer customer_gender;
     public String customer_address;
     public Date customer_birthday;
     public String customer_phone;
     public String customer_email;
+    @Required
     public Date customer_create_date;
     public Date customer_update_date;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="crm_business_id")
     public CrmBusiness crm_business_id;
 
+    @Required
     @ManyToOne
     @JoinColumn(name="crm_status_id")
     public CrmStatus crm_status_id;

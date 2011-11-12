@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
  
 import play.db.jpa.*;
+import play.data.validation.*;
  
 @Entity
 @Table(name="crm_business")
@@ -12,8 +13,10 @@ public class CrmBusiness extends GenericModel {
  	@Id
  	@GeneratedValue(strategy = GenerationType.AUTO)
     public Integer business_id;
+    @Required
     public String business_name;
     public String business_description;
+    @Required
     public Date business_update_date;
 
     @OneToMany(mappedBy="crm_business_id")
