@@ -9,10 +9,10 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/jquery-ui-1.8.16.flick.css'}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 
         #{get 'moreStyles' /}
         
@@ -27,14 +27,7 @@
         <script src="@{'/public/javascripts/bootstrap-tabs.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/bootstrap-twipsy.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
-        <style type="text/css">
-          body {
-            padding-top: 60px;
-          }
-          div.row {
-            height: 50px; 
-          }
-        </style>
+        <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
         #{get 'moreScripts' /}
 
@@ -105,20 +98,24 @@
             </div>
 
             <!-- Notification message -->
-            <div id="error-message" class="row">
-                <div class="span17">                
-                    <div class="alert-message error">
-                      <a class="close" href="#">×</a>
-                      <p><strong>Error!</strong> You made system crash.</p>
+            #{ifErrors}
+              #{errors}
+                <div id="error-message" class="row">
+                    <div class="span17">                
+                        <div class="alert-message error">
+                          <a id="error-close" class="close" href="#">×</a>
+                          <p><strong>Error!</strong> ${error}</p>
+                        </div>
                     </div>
                 </div>
-            </div>    
+              #{/errors}
+            #{/ifErrors}
 
             <!-- Notification message -->
             <div id="warn-message" class="row">
                 <div class="span17">
                     <div class="alert-message warning">
-                      <a class="close" href="#">×</a>
+                      <a id="warn-close" class="close" href="#">×</a>
                       <p><strong>Warrning!</strong> You did something wrong, please verify.</p>
                     </div>
                 </div>
@@ -128,7 +125,7 @@
             <div id="info-message" class="row">
                 <div class="span17">    
                     <div class="alert-message info">
-                      <a class="close" href="#">×</a>
+                      <a id="info-close" class="close" href="#">×</a>
                       <p><strong>Information!</strong> You did well, Thank you.</p>
                     </div>
                 </div>
