@@ -26,6 +26,7 @@
         <script src="@{'/public/javascripts/bootstrap-scrollspy.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/bootstrap-tabs.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/bootstrap-twipsy.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery.tablesorter.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
         <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
@@ -41,7 +42,8 @@
             <div class="container-fluid">
               <a class="brand" href="#">iCallCenter</a>
               <ul class="nav">
-                <li class="active"><a href="#agent">Agent</a></li>
+                <li class="active"><a href="/autocalldistributors/index">ACD</a></li>
+                <li><a href="#agent">Agent</a></li>
                 <li><a href="#customer">Customer</a></li>
                 <li><a href="#knowledge">Knowledge</a></li>
                 <li><a href="#ivr">IVR</a></li>
@@ -78,39 +80,43 @@
                 </div>
             </div>
 
-            <!-- Notification message -->
+            <!-- Notification error message -->
+            #{if flash.error}
+              <div id="error-message" class="row">
+                  <div class="span17">                
+                      <div class="alert-message error">
+                        <a id="error-close" class="close" href="#">×</a>
+                        <p><strong>Error!</strong> ${flash.error}</p>
+                      </div>
+                  </div>
+              </div>
+            #{/if}
+
+            <!-- Notification warning message -->
             #{ifErrors}
               #{errors}
-                <div id="error-message" class="row">
-                    <div class="span17">                
-                        <div class="alert-message error">
-                          <a id="error-close" class="close" href="#">×</a>
-                          <p><strong>Error!</strong> ${error}</p>
+                <div id="warn-message" class="row">
+                    <div class="span17">
+                        <div class="alert-message warning">
+                          <a id="warn-close" class="close" href="#">×</a>
+                          <p><strong>Warrning!</strong> ${error}</p>
                         </div>
                     </div>
                 </div>
               #{/errors}
             #{/ifErrors}
 
-            <!-- Notification message -->
-            <div id="warn-message" class="row">
-                <div class="span17">
-                    <div class="alert-message warning">
-                      <a id="warn-close" class="close" href="#">×</a>
-                      <p><strong>Warrning!</strong> You did something wrong, please verify.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Notification message -->
-            <div id="info-message" class="row">
-                <div class="span17">    
-                    <div class="alert-message info">
-                      <a id="info-close" class="close" href="#">×</a>
-                      <p><strong>Information!</strong> You did well, Thank you.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- Notification information message -->
+            #{if flash.success}
+              <div id="info-message" class="row">
+                  <div class="span17">    
+                      <div class="alert-message info">
+                        <a id="info-close" class="close" href="#">×</a>
+                        <p><strong>Information!</strong> ${flash.success}</p>
+                      </div>
+                  </div>
+              </div>
+            #{/if}
 
             <!-- Main hero unit for a primary message or call to action -->
             <div class="hero-unit">

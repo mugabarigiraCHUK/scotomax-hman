@@ -1,18 +1,79 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{set 'sidebar'}
-			<h5>ACD</h5>
-              <ul>
-                <li><a href="condition">Condition</a></li>
-                <li><a href="route">Route</a></li>
-              </ul>
+#{set 'moreScripts'}
+	<script src="@{'/public/javascripts/acd.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{/set}
+
+#{include 'autocalldistributors/nav.html'/}
 
 #{set 'navigation'}
-					  <li><a href="/">Home</a><span class="divider">/</span></li>
-                      <li><a href="index">ACD</a><span class="divider">/</span></li>
-                      <li class="active">Condition</li>
+  <li><a href="/">Home</a><span class="divider">/</span></li>
+  <li><a href="index">ACD</a><span class="divider">/</span></li>
+  <li class="active">Condition</li>
 #{/set}
 
-<h1>Welcome To ACD Condition</h1>
+<table id="acd-condition" class="zebra-striped">
+  <thead>
+  	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Last update</th>
+		<th>Delete</th>
+		<th>Edit</th>
+	</tr>
+  </thead>
+  <tbody>
+  	#{list items:conditions, as:'cond'}
+		<tr>
+			<td>${cond.condition_id}</td>
+			<td>${cond.condition_name}</td>
+			<td>${cond.condition_description}</td>
+			<td>${cond.condition_update_date}</td>
+			<td><button class="btn danger">Delete</button></td>
+			<td><button class="btn">Edit</button></td>
+		</tr>
+	#{/list}
+	#{else}
+		<tr>
+			<td colspan="6">No data found</td>
+		</tr>
+	#{/else}
+  </tbody>
+  <tfoot>
+  	<tr>
+  		<td colspan="6"><button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn primary">Create New</button></td>
+  	</tr>
+  </tfoot>
+</table>
+
+<!-- sample modal content -->
+<div id="modal-from-dom" class="modal hide fade">
+	<div class="modal-header">
+		<a href="#" class="close">&times;</a>
+		<h3>ACD Condition</h3>
+	</div>
+	<div class="modal-body">
+	  
+		<form>
+			<div class="clearfix">
+            	<label for="cond.condition_name">Name</label>
+	            <div class="input">
+	            	<input class="xlarge" id="cond.condition_name" name="cond.condition_name" size="30" type="text" />
+	            </div>
+	        </div>
+	        <div class="clearfix">
+	            <label for="cond.condition_descriptio">Description</label>
+	            <div class="input">
+	            	<textarea class="xlarge" id="cond.condition_description" name="cond.condition_description" rows="3"></textarea>
+	            </div>
+	        </div>
+      	</form>
+	  
+	</div>
+	<div class="modal-footer">
+	  	<a href="#" class="btn primary">Create</a>
+	  	<a href="#" class="btn secondary" onclick="$('#modal-from-dom').modal('hide')">Cancel</a>
+	</div>
+</div>
