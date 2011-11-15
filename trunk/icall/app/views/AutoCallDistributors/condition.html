@@ -2,7 +2,38 @@
 #{set title:'Home' /}
 
 #{set 'moreScripts'}
-	<script src="@{'/public/javascripts/acd.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+	<!--// script src="@{'/public/javascripts/acd.js'}" type="text/javascript" charset="${_response_encoding}"></script //-->
+	<script type="text/javascript" charset="${_response_encoding}">
+		$(function(){
+			// Table sorter
+			$("table#acd-condition").tablesorter({ sortList: [[0,0], [1,0]], headers: { 2:{sorter: false}, 4:{sorter: false}, 5:{sorter: false}} });
+			// Modal panel
+			$("#modal-from-dom").modal({
+				keyboard: true
+			});
+		});
+
+		acd = {
+			funcDelete : function(cond_id) {
+				$('#delete_id').val(cond_id);
+				$('#acdForm').submit();
+			},
+			funcEdit : function(cond_id) {
+				var editCond = #{jsAction @AutoCallDistributors.editCond(':edit_id') /}
+				$.post(editCond({edit_id: cond_id}), function(cond){
+					if (cond) {
+						$('#condition_id')).val(cond.condition_id);
+						$('#condition_name')).val(cond.condition_name);
+						$('#condition_description')).val(cond.condition_description);
+						// Popup modal panel
+						$('#modal-from-dom').modal('toggle')
+					} else {
+						alert("Nothing is returned.");
+					}
+				});
+			}
+		};
+	</script>
 #{/set}
 
 #{include 'autocalldistributors/nav.html'/}
@@ -31,8 +62,8 @@
 			<td>${cond.condition_name}</td>
 			<td>${cond.condition_description}</td>
 			<td>${cond.condition_update_date}</td>
-			<td><button class="btn danger">Delete</button></td>
-			<td><button class="btn">Edit</button></td>
+			<td><button id="cmd-delete" class="btn danger" onclick="acd.funcDelete('${cond.condition_id}')">Delete</button></td>
+			<td><button id="cmd-edit" class="btn" onclick="acd.funcEdit('${cond.condition_id}')">Edit</button></td>
 		</tr>
 	#{/list}
 	#{else}
@@ -48,6 +79,10 @@
   </tfoot>
 </table>
 
+#{form @AutoCallDistributors.deleteCond(), method:'POST', id:'acdForm'}
+	<input type="hidden" name="delete_id" />
+#{/form}
+
 <!-- sample modal content -->
 <div id="modal-from-dom" class="modal hide fade">
 	<div class="modal-header">
@@ -56,24 +91,26 @@
 	</div>
 	<div class="modal-body">
 	  
-		<form>
+		#{form @AutoCallDistributors.saveCond(), method:'POST', id:'conditionForm' }
+
 			<div class="clearfix">
             	<label for="cond.condition_name">Name</label>
 	            <div class="input">
-	            	<input class="xlarge" id="cond.condition_name" name="cond.condition_name" size="30" type="text" />
+	            	<input class="xlarge" name="condition_name" size="30" type="text" />
 	            </div>
 	        </div>
 	        <div class="clearfix">
 	            <label for="cond.condition_descriptio">Description</label>
 	            <div class="input">
-	            	<textarea class="xlarge" id="cond.condition_description" name="cond.condition_description" rows="3"></textarea>
+	            	<textarea class="xlarge" name="condition_description" rows="3"></textarea>
 	            </div>
 	        </div>
-      	</form>
+	        <input type="hidden" name="condition_id" />
+      	#{/form}
 	  
 	</div>
 	<div class="modal-footer">
-	  	<a href="#" class="btn primary">Create</a>
+	  	<a href="#" class="btn primary" onclick="$('#conditionForm').submit()">Create</a>
 	  	<a href="#" class="btn secondary" onclick="$('#modal-from-dom').modal('hide')">Cancel</a>
 	</div>
 </div>
