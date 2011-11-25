@@ -1,0 +1,5 @@
+<request command="doService" function_id="100100992" app_user="load_rbt" app_password="load_rbt132" req_transaction_id="100100007001" channel="SBMTEST" service_no="0890000000">
+	<parameters>
+		<p k="promo_code" v="CP003"/>
+	</parameters>
+</request>
