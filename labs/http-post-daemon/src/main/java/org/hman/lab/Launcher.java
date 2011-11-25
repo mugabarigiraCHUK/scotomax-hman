@@ -165,6 +165,7 @@ public class Launcher implements Serializable {
 			}				
 		} catch ( Exception ex ) {
 			logger.error(ex.getMessage(), ex);
+			System.exit(0);
 		}
 	}
 	
@@ -183,6 +184,7 @@ public class Launcher implements Serializable {
 			// Execute data summary report when all tasks finish
 			if ( sample.intValue() == transaction.intValue() ) {
 				reporting();
+				System.exit(0);
 			}
 		}
 	}
