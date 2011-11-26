@@ -41,10 +41,7 @@ public class AutoCallDistributors extends Controller {
             // Write data into database.
             if (condition_id != null) {
                 AcdCondition obj = AcdCondition.findById(condition_id);
-                obj.condition_name = params.get("condition_name");
-                obj.condition_description = params.get("condition_description");
-                obj.condition_update_date = new Date();
-                obj.save();
+                obj.edit("obj", params.all());
                 flash.success("The data been updated.");
             } else {
                 AcdCondition obj = new AcdCondition(null,null,null);
