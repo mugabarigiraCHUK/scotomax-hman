@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set 'moreScripts'}
+	<script type="text/javascript" charset="${_response_encoding}">
+		<!--
+
+		-->
+	</script>
+	<script src="@{'/public/javascripts/workflow.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
+#{include 'workflow/nav.html'/}
+
+#{set 'navigation'}
+  <li><a href="/">Home</a><span class="divider">/</span></li>
+  <li><a href="index">Work flow</a><span class="divider">/</span></li>
+  <li class="active">Calendar</li>
+#{/set}
+
+<h1>Welcome To Work flow calendar.</h1>
