@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set 'moreScripts'}
+	<script type="text/javascript" charset="${_response_encoding}">
+		<!--
+
+		-->
+	</script>
+	<script src="@{'/public/javascripts/customer.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
+#{include 'customer/nav.html'/}
+
+#{set 'navigation'}
+  <li><a href="/">Home</a><span class="divider">/</span></li>
+  <li><a href="index">CRM</a><span class="divider">/</span></li>
+  <li class="active">Customer</li>
+#{/set}
+
+<h1>Welcome To Customer.</h1>
