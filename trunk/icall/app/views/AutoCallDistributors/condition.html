@@ -14,9 +14,16 @@
 				sortList: [[0,0], [1,0]], 
 				headers: { 2:{sorter: false}, 4:{sorter: false}, 5:{sorter: false}} 
 			});
-			// Modal panel
+			// Modal save/edit panel
 			$("#modal-from-dom").modal({
-				keyboard: true
+				keyboard: true,
+				backdrop: "static"
+			});
+			
+			// Modal delete panel
+			$("#modal-from-delete").modal({
+				keyboard: true,
+				backdrop: "static"
 			});
 		});
 		-->
@@ -50,8 +57,8 @@
 			<td>${cond.condition_name}</td>
 			<td>${cond.condition_description}</td>
 			<td>${cond.condition_update_date}</td>
-			<td><button id="cmd-delete" class="btn danger" onclick="ria.funcDelete('${cond.condition_id}')">Delete</button></td>
-			<td><button id="cmd-edit" class="btn" onclick="ria.funcEdit('${cond.condition_id}')">Edit</button></td>
+			<td><button id="cmd-delete" class="btn danger" onclick="ria.condDelete('${cond.condition_id}')">Delete</button></td>
+			<td><button id="cmd-edit" class="btn" onclick="ria.condEdit('${cond.condition_id}')">Edit</button></td>
 		</tr>
 	#{/list}
 	#{else}
@@ -119,7 +126,7 @@
 	</div>
 
 	<div class="modal-footer">
-	  	<a href="#" class="btn primary" onclick="$('#deleteForm').submit()">Create</a>
+	  	<a href="#" class="btn danger" onclick="$('#deleteForm').submit()">Delete</a>
 	  	<a href="#" class="btn secondary" onclick="$('#modal-from-delete').modal('hide')">Cancel</a>
 	</div>
 	
