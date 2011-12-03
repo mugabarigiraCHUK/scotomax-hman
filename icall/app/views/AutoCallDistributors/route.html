@@ -4,7 +4,28 @@
 #{set 'moreScripts'}
 	<script type="text/javascript" charset="${_response_encoding}">
 		<!--
-
+		// EL generate JS function for remote method on controller.
+		var editRoute = #{jsAction @AutoCallDistributors.editRoute(':edit_id') /};
+		
+		// On-loader page
+		$(function(){
+			// Table sorter
+			$("table#acd-route").tablesorter({ 
+				sortList: [[0,0], [1,0]], 
+				headers: { 2:{sorter: false}, 5:{sorter: false}, 6:{sorter: false}, 7:{sorter: false}} 
+			});
+			// Modal save/edit panel
+			$("#modal-route-save").modal({
+				keyboard: true,
+				backdrop: "static"
+			});
+			
+			// Modal delete panel
+			$("#modal-route-delete").modal({
+				keyboard: true,
+				backdrop: "static"
+			});
+		});
 		-->
 	</script>
 	<script src="@{'/public/javascripts/acd.js'}" type="text/javascript" charset="${_response_encoding}"></script>
@@ -18,4 +39,122 @@
   <li class="active">Route</li>
 #{/set}
 
-<h1>Welcome To ACD Route.</h1>
+<table id="acd-route" class="zebra-striped">
+  <thead>
+  	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Caller</th>
+		<th>Called</th>
+		<th>Last update</th>
+		<th>Delete</th>
+		<th>Edit</th>
+	</tr>
+  </thead>
+  <tbody>
+  	#{list items:routes, as:'route'}
+		<tr>
+			<td>${route.route_id}</td>
+			<td>${route.route_name}</td>
+			<td>${route.route_description}</td>
+			<td>${route.route_caller}</td>
+			<td>${route.route_called}</td>
+			<td>${route.acd_condition_id.condition_name}</td>
+			<td><button id="cmd-delete" class="btn danger" onclick="ria.routeDelete('${route.route_id}')">Delete</button></td>
+			<td><button id="cmd-edit" class="btn" onclick="ria.routeEdit('${route.route_id}')">Edit</button></td>
+		</tr>
+	#{/list}
+	#{else}
+		<tr>
+			<td colspan="8">No data found</td>
+		</tr>
+	#{/else}
+  </tbody>
+  <tfoot>
+  	<tr>
+  		<td colspan="6"><button data-controls-modal="modal-route-save" data-backdrop="true" data-keyboard="true" class="btn primary">Create New</button></td>
+  	</tr>
+  </tfoot>
+</table>
+
+<!-- sample modal content -->
+<div id="modal-route-save" class="modal hide fade">
+	<div class="modal-header">
+		<a href="#" class="close">&times;</a>
+		<h3>ACD Route</h3>
+	</div>
+	<div class="modal-body">
+	  
+		#{form @AutoCallDistributors.saveRoute(), method:'POST', id:'routeForm' }
+
+			<div class="clearfix">
+            	<label for="route_name">Name</label>
+	            <div class="input">
+	            	<input class="xlarge" id="route_name" name="route_name" size="30" type="text" />
+	            </div>
+	        </div>
+	        <div class="clearfix">
+	            <label for="route_description">Description</label>
+	            <div class="input">
+	            	<textarea class="xlarge" id="route_description" name="route_description" rows="3"></textarea>
+	            </div>
+	        </div>
+			<div class="clearfix">
+            	<label for="route_caller">Caller</label>
+	            <div class="input">
+	            	<input class="span2" id="route_caller" name="route_caller" size="20" type="text" />
+	            </div>
+	        </div>
+			<div class="clearfix">
+            	<label for="route_called">Called</label>
+	            <div class="input">
+	            	<input class="span2" id="route_called" name="route_called" size="20" type="text" />
+	            </div>
+	        </div>
+			<div class="clearfix">
+            	<label for="acd_condition_id">Condition</label>
+	            <div class="input">
+					<select id="acd_condition_id" name="acd_condition_id">
+						<option value=""> - Select - </option>
+						#{list items:conditions, as:'item'}
+							<option value="${item.condition_id}">${item.condition_name}</option>
+						#{/list}
+					</select>
+	            </div>
+	        </div>
+
+	        <input type="hidden" id="route_id" name="route_id" />
+
+      	#{/form}
+	  
+	</div>
+
+	<div class="modal-footer">
+	  	<a href="#" class="btn primary" onclick="$('#routeForm').submit()">Create</a>
+	  	<a href="#" class="btn secondary" onclick="$('#modal-route-save').modal('hide')">Cancel</a>
+	</div>
+
+</div>
+
+<!-- sample modal content -->
+<div id="modal-route-delete" class="modal hide fade">
+	<div class="modal-header">
+		<a href="#" class="close">&times;</a>
+		<h3>ACD Route</h3>
+	</div>
+	<div class="modal-body">
+	  
+		#{form @AutoCallDistributors.deleteRoute(), method:'POST', id:'deleteForm'}
+	  		<p>Do you want to delete this entity?</p>      
+	        <input type="hidden" id="delete_id" name="delete_id" />
+      	#{/form}
+	  
+	</div>
+
+	<div class="modal-footer">
+	  	<a href="#" class="btn danger" onclick="$('#deleteForm').submit()">Delete</a>
+	  	<a href="#" class="btn secondary" onclick="$('#modal-route-delete').modal('hide')">Cancel</a>
+	</div>
+	
+</div>
