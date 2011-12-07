@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.hman.lab.http.HttpUtil;
 import org.hman.lab.xml.XmlValidator;
 import org.slf4j.Logger;
@@ -149,11 +150,11 @@ public class Launcher implements Serializable {
 						logger.debug("Entering --> multi regex for replacement {"+line+"}");
 						String[] params = line.split(",");
 						for ( int i=0; i<params.length; i++ ) {
-							readyRequest = xmlRequest.replaceAll( "{"+(i+1)+"}", params[i] );
+							readyRequest = StringUtils.replace( xmlRequest, "{"+(i+1)+"}", params[i]);
 						}
 					} else {
 						logger.debug("Entering --> single regex for replacement {"+line+"}");
-						readyRequest = xmlRequest.replaceAll( "{1}", line );
+						readyRequest = StringUtils.replace( xmlRequest, "{1}", line);
 					}
 				} else {
 					readyRequest = xmlRequest;
