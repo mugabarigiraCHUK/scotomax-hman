@@ -144,17 +144,17 @@ public class Launcher implements Serializable {
 				String readyRequest = "";
 				// Rebuild XML request with the data replacement.
 				if ( paramLines != null && paramLines.size() > 0 ) {
-					logger.debug("Entering --> to string replacement process.");
+					//logger.debug("Entering --> to string replacement process.");
 					String line = paramLines.get(idx);
 					if ( line.indexOf(",") != -1 ) {
-						logger.debug("Entering --> multi regex for replacement {"+line+"}");
+						//logger.debug("Entering --> multi regex for replacement {"+line+"}");
 						String[] params = line.split(",");
 						for ( int i=0; i<params.length; i++ ) {
-							readyRequest = StringUtils.replace( xmlRequest, "{"+(i+1)+"}", params[i]);
+							readyRequest = StringUtils.replace( xmlRequest, "#{"+(i+1)+"}", params[i]);
 						}
 					} else {
-						logger.debug("Entering --> single regex for replacement {"+line+"}");
-						readyRequest = StringUtils.replace( xmlRequest, "{1}", line);
+						//logger.debug("Entering --> single regex for replacement {"+line+"}");
+						readyRequest = StringUtils.replace( xmlRequest, "#{1}", line);
 					}
 				} else {
 					readyRequest = xmlRequest;
