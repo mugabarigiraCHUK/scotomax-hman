@@ -38,6 +38,7 @@ public class Launcher implements Serializable {
 	private Configuration config;
 	private String url;
 	private String xmlRequest;
+	private String readyRequest;
 	private List<String> paramLines;
 	private ThreadPoolExecutor executor;
 	private Integer transaction;
@@ -133,23 +134,30 @@ public class Launcher implements Serializable {
 			// Stamp time to start.
 			timeSpends.clear();
 			sample = 0;
+			failed = 0;
 			startTime = System.currentTimeMillis();
 
 			// Start to load task
 			for ( int idx=0; idx < transaction; idx++ ) {
+				readyRequest = "";
 				// Rebuild XML request with the data replacement.
 				if ( paramLines != null && paramLines.size() > 0 ) {
+					logger.trace("Entering --> to string replacement process.");
 					for (String line : paramLines) {
 						if ( line.indexOf(",") != -1 ) {
+							logger.trace("Entering --> multi regex for replacement {"+line+"}");
 							String[] params = line.split(",");
 							for ( int i=0; i<params.length; i++ ) {
-								xmlRequest.replaceAll( "${"+(i+1)+"}", params[i] );
+								readyRequest = xmlRequest.replaceAll( "#{"+(i+1)+"}", params[i] );
 							}
 							
 						} else {
-							xmlRequest.replaceAll( "${1}", line );
+							logger.trace("Entering --> single regex for replacement {"+line+"}");
+							readyRequest = xmlRequest.replaceAll( "#{1}", line );
 						}
 					}
+				} else {
+					readyRequest = xmlRequest;
 				}
 				// Submit task into thread pool.
 				executor.execute(new Runnable() {
@@ -160,7 +168,7 @@ public class Launcher implements Serializable {
 						String responseBody = "";
 						try {	
 							// Execute HTTP POST
-							responseBody = HttpUtil.getInstance().doPost( url, xmlRequest );
+							responseBody = HttpUtil.getInstance().doPost( url, readyRequest );
 						} catch ( Exception ex ) {
 							logger.error(ex.getMessage(), ex);
 						} finally {
