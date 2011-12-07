@@ -65,12 +65,16 @@ public class HttpUtil {
         post.setRequestEntity(entity);
         // Execute request
         try {
+        	// Display request
+        	logger.debug(" ***** Request body: ");
+        	logger.debug(payload);
+        	// Execute HTTP POST.
             int result = httpclient.executeMethod(post);
             // Display status code
-            logger.debug("Response status code: " + result);
+            logger.debug(" ***** Response status code: " + result);
             // Display response
             respondBody = post.getResponseBodyAsString();
-            logger.debug("Response body: ");
+            logger.debug(" ***** Response body: ");
             logger.debug(respondBody);
         } finally {
             // Release current connection to the connection pool once you are done
