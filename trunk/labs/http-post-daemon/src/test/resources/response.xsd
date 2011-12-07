@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="request">
+  		<xsd:complexType>
+    		<xsd:sequence>
+      			<xsd:element name="parameters" maxOccurs="1" minOccurs="1">
+   					<xsd:complexType>
+    					<xsd:sequence>
+    						<xsd:element name="p" maxOccurs="1" minOccurs="1">
+    							<xsd:complexType>
+    								<xsd:attribute name="k" type="xsd:string" use="required" fixed="promo_code"/>
+    								<xsd:attribute name="v" type="xsd:string" use="required" fixed="CP003"/>
+    							</xsd:complexType>
+    						</xsd:element>
+    					</xsd:sequence>
+    				</xsd:complexType>   
+      			</xsd:element>
+    		</xsd:sequence>
+    		<xsd:attribute name="command" type="xsd:string" use="required" fixed="doService"/>
+  			<xsd:attribute name="function_id" type="xsd:string" use="required" fixed="100100992"/>
+  			<xsd:attribute name="app_user" type="xsd:string" use="required" fixed="load_rbt"/>
+  			<xsd:attribute name="app_password" type="xsd:string" use="required" fixed="load_rbt132"/>
+  			<xsd:attribute name="req_transaction_id" type="xsd:string" use="required" fixed="100100007001"/>
+  			<xsd:attribute name="channel" type="xsd:string" use="required" fixed="SBMTEST"/>
+  			<xsd:attribute name="service_no" type="xsd:string" use="required" fixed="0890000000"/>
+  		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
