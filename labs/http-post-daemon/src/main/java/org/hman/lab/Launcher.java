@@ -108,7 +108,7 @@ public class Launcher implements Serializable {
 			// Parameter to replace all agreement in each XML before send.
 			File paramfile = new File(config.getString("param.file"));
 			if ( paramfile.isFile() ) {
-				paramLines = FileUtils.readLines(paramfile);
+				paramLines = FileUtils.readLines(paramfile, "UTF-8");
 				if ( paramLines != null && paramLines.size() != transaction ) 
 					throw new RuntimeException("Data is missmatch, data is not equals with no. of transaction.");
 			} 
@@ -136,7 +136,7 @@ public class Launcher implements Serializable {
 			failed = 0;
 			startTime = System.currentTimeMillis();
 			
-			final String xmlRequest = FileUtils.readFileToString(new File(config.getString("xml.file")));
+			final String xmlRequest = FileUtils.readFileToString(new File(config.getString("xml.file")), "UTF-8");
 
 			// Start to load task
 			for ( int idx=0; idx < transaction; idx++ ) {
@@ -159,7 +159,7 @@ public class Launcher implements Serializable {
 					readyRequest = xmlRequest;
 				}
 				
-				final String payload = readyRequest;
+				final String payload = new String(readyRequest);
 				// Submit task into thread pool.
 				executor.execute(new Runnable() {
 					@Override
