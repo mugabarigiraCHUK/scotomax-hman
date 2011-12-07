@@ -37,8 +37,6 @@ public class Launcher implements Serializable {
 	// Component objects
 	private Configuration config;
 	private String url;
-	private String xmlRequest;
-	private String readyRequest;
 	private List<String> paramLines;
 	private ThreadPoolExecutor executor;
 	private Integer transaction;
@@ -104,8 +102,9 @@ public class Launcher implements Serializable {
 			
 			// XML request
 			File xmlfile = new File(config.getString("xml.file"));
-			xmlRequest = FileUtils.readFileToString(xmlfile);
-			
+			if ( ! xmlfile.isFile() )
+				throw new RuntimeException("System could not found XML request file.");
+				
 			// Parameter to replace all agreement in each XML before send.
 			File paramfile = new File(config.getString("param.file"));
 			if ( paramfile.isFile() ) {
@@ -136,29 +135,31 @@ public class Launcher implements Serializable {
 			sample = 0;
 			failed = 0;
 			startTime = System.currentTimeMillis();
+			
+			final String xmlRequest = FileUtils.readFileToString(new File(config.getString("xml.file")));
 
 			// Start to load task
 			for ( int idx=0; idx < transaction; idx++ ) {
-				readyRequest = "";
+				String readyRequest = "";
 				// Rebuild XML request with the data replacement.
 				if ( paramLines != null && paramLines.size() > 0 ) {
-					logger.trace("Entering --> to string replacement process.");
-					for (String line : paramLines) {
-						if ( line.indexOf(",") != -1 ) {
-							logger.trace("Entering --> multi regex for replacement {"+line+"}");
-							String[] params = line.split(",");
-							for ( int i=0; i<params.length; i++ ) {
-								readyRequest = xmlRequest.replaceAll( "#{"+(i+1)+"}", params[i] );
-							}
-							
-						} else {
-							logger.trace("Entering --> single regex for replacement {"+line+"}");
-							readyRequest = xmlRequest.replaceAll( "#{1}", line );
+					logger.debug("Entering --> to string replacement process.");
+					String line = paramLines.get(idx);
+					if ( line.indexOf(",") != -1 ) {
+						logger.debug("Entering --> multi regex for replacement {"+line+"}");
+						String[] params = line.split(",");
+						for ( int i=0; i<params.length; i++ ) {
+							readyRequest = xmlRequest.replaceAll( "{"+(i+1)+"}", params[i] );
 						}
+					} else {
+						logger.debug("Entering --> single regex for replacement {"+line+"}");
+						readyRequest = xmlRequest.replaceAll( "{1}", line );
 					}
 				} else {
 					readyRequest = xmlRequest;
 				}
+				
+				final String payload = readyRequest;
 				// Submit task into thread pool.
 				executor.execute(new Runnable() {
 					@Override
@@ -168,7 +169,7 @@ public class Launcher implements Serializable {
 						String responseBody = "";
 						try {	
 							// Execute HTTP POST
-							responseBody = HttpUtil.getInstance().doPost( url, readyRequest );
+							responseBody = HttpUtil.getInstance().doPost( url, payload );
 						} catch ( Exception ex ) {
 							logger.error(ex.getMessage(), ex);
 						} finally {
