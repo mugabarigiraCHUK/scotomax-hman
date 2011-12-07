@@ -17,6 +17,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.FileUtils;
 import org.hman.lab.http.HttpUtil;
+import org.hman.lab.xml.XmlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,12 +43,15 @@ public class Launcher implements Serializable {
 	private Integer transaction;
 	private Integer concurrency;
 	private Integer sample;
+	private Integer failed;
 	private Long startTime;
 	private Long endTime;
 	private final SortedSet<Long> timeSpends = new TreeSet<Long>();
 	
 	private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
 	private final DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
+	
+	private final XmlValidator xmlValidator = XmlValidator.getInstance();
 	
 	/**
 	 * Main-method
@@ -85,6 +89,7 @@ public class Launcher implements Serializable {
 	        logger.info(" # app.tasks="+config.getString("app.tasks"));
 	        logger.info(" # xml.file="+config.getString("xml.file"));
 	        logger.info(" # param.file="+config.getString("param.file"));
+	        logger.info(" # xsd.file="+config.getString("xsd.file"));
 	        
 	        // URL 
 			url = config.getString("ws.uri");
@@ -92,6 +97,9 @@ public class Launcher implements Serializable {
 			transaction = config.getInt("app.tasks");
 			// No. of thread concurrent
 			concurrency = config.getInt("app.threads");
+			// Load XSD for XML validation
+			if ( ! config.getString("xsd.file").isEmpty() ) 
+				xmlValidator.init(config.getString("xsd.file"));
 			
 			// XML request
 			File xmlfile = new File(config.getString("xml.file"));
@@ -147,18 +155,28 @@ public class Launcher implements Serializable {
 				executor.execute(new Runnable() {
 					@Override
 					public void run() {
-						try {
-							// Stamp time to start
-							long start = System.currentTimeMillis();
+						// Stamp time to start
+						long start = System.currentTimeMillis();
+						String responseBody = "";
+						try {	
 							// Execute HTTP POST
-							String responseBody = HttpUtil.getInstance().doPost( url, xmlRequest );
-							logger.debug(" >>>>>>>>>>>>>>>>>>>> HTTP response <<<<<<<<<<<<<<<<<<<< ");
-							logger.debug(responseBody);
-							// Stamp time to finish
-							long finish = System.currentTimeMillis() - start;
-							finish(finish);
+							responseBody = HttpUtil.getInstance().doPost( url, xmlRequest );
 						} catch ( Exception ex ) {
 							logger.error(ex.getMessage(), ex);
+						} finally {
+							// Stamp time to finish
+							long finish = System.currentTimeMillis() - start;
+							// Validate result;
+							if ( responseBody.isEmpty() ) {
+								finish(finish, false);
+							} else {
+								if ( config.getString("xsd.file").isEmpty() ) {
+									finish(finish, true);
+								} else {
+									// Validate XML result by XSD
+									finish(finish, xmlValidator.valid(responseBody) );									
+								}
+							}
 						}
 					}
 				});
@@ -173,14 +191,14 @@ public class Launcher implements Serializable {
 	 * All thread access to register finish task
 	 * until all task are finish then proceed data summary.
 	 */
-	private void finish(Long timeSpend) {
+	private void finish(Long timeSpend, Boolean good) {
 		synchronized(Launcher.class) {
 			// Stamp finish task.
 			timeSpends.add(timeSpend);
 			sample++;
-			
-			logger.debug("Look -> Transaction: " + transaction + " <-> Sample: " + sample);
-
+			if ( ! good ) failed++;
+			// Report process status currently by logging.
+			logger.info("Process = {Transaction: " + transaction + ", Sample: " + sample + ", Failed: " + failed);
 			// Execute data summary report when all tasks finish
 			if ( sample.intValue() == transaction.intValue() ) {
 				reporting();

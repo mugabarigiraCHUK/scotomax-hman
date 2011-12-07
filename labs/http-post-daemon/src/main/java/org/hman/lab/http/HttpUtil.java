@@ -64,6 +64,6 @@ public class HttpUtil {
             // Release current connection to the connection pool once you are done
             post.releaseConnection();
         }
-    	return respondBody;
+    	return (respondBody == null)?"":respondBody;
     }
 }
