@@ -4,6 +4,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,9 @@ public class HttpUtil {
     public HttpUtil() {
     	logger.debug("Entering HttpUtil initialize...");
     	// Get HTTP client
-        httpclient = new HttpClient();
+    	HttpClientParams httpParams = new HttpClientParams();
+    	httpParams.setConnectionManagerTimeout(300);
+        httpclient = new HttpClient(httpParams);
     }
     
     public static HttpUtil getInstance() {
