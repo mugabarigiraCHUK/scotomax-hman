@@ -98,7 +98,7 @@ public class Launcher implements Serializable {
 			// No. of thread concurrent
 			concurrency = config.getInt("app.threads");
 			// Load XSD for XML validation
-			if ( ! config.getString("xsd.file").isEmpty() ) 
+			if ( ! StringUtils.isBlank(config.getString("xsd.file")) ) 
 				xmlValidator.init(config.getString("xsd.file"));
 			
 			// XML request
@@ -177,10 +177,10 @@ public class Launcher implements Serializable {
 							// Stamp time to finish
 							long finish = System.currentTimeMillis() - start;
 							// Validate result;
-							if ( responseBody.isEmpty() ) {
+							if ( StringUtils.isBlank(responseBody) ) {
 								finish(finish, false);
 							} else {
-								if ( config.getString("xsd.file").isEmpty() ) {
+								if ( StringUtils.isBlank(config.getString("xsd.file")) ) {
 									finish(finish, true);
 								} else {
 									// Validate XML result by XSD
