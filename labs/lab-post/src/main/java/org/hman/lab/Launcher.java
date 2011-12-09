@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -36,7 +37,9 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.hman.lab.http.HttpUtil;
+import org.hman.lab.xml.XmlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,12 +48,12 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  *
  */
-public class App extends JFrame {
+public class Launcher extends JFrame {
 	
 	// Serializable
 	private static final long serialVersionUID = 6624372084287585828L;
 	// Logging
-	private static final Logger logger = LoggerFactory.getLogger(App.class);
+	private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
 
 	// Panel
 	private JPanel configurePanel;
@@ -59,7 +62,7 @@ public class App extends JFrame {
 	
 	// Configuration panel contents
 	private JLabel labelURL;
-	private JLabel labelXML;
+	//private JLabel labelXML;
 	private JLabel labelTHREAD;
 	private JLabel labelTRX;
 	//private JLabel labelDELAY;
@@ -74,8 +77,13 @@ public class App extends JFrame {
 	private JButton cmdSTOP;
 	private JProgressBar progressBar;
 	
+	private JTabbedPane tabbedPane;
+	
 	private JTextArea txtfieldXML;
 	private JScrollPane txtFieldScpnXML;
+	
+	private JTextArea txtfieldXSD;
+	private JScrollPane txtFieldScpnXSD;
 	
 	// Parameters panel contents
 	private JLabel labelParams;
@@ -98,6 +106,7 @@ public class App extends JFrame {
 			{"Start","-"},
 			{"Finish","-"},
 			{"Sample","-"},
+			{"Failed","-"},
 			{"Time spend","-"},
 			{"TPS","-"},
 			{"Max. time spend","-"},
@@ -110,17 +119,49 @@ public class App extends JFrame {
 	private ThreadPoolExecutor executor;
 	private Integer transaction;
 	private Integer sample;
+	private Integer failed;
 	private Long startTime;
 	private Long endTime;
 	private final SortedSet<Long> timeSpends = new TreeSet<Long>();
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
-	private DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
+	private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
+	private final DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
+	
+	private final XmlValidator xmlValidator = XmlValidator.getInstance();
+	
+	private final String xsdToolTip = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n"
+		+"<xsd:schema xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\">\r\n"
+		+"	<xsd:element name=\"request\">\r\n"
+		+" 		<xsd:complexType>\r\n"
+		+"    		<xsd:sequence>\r\n"
+		+"      			<xsd:element name=\"parameters\" maxOccurs=\"1\" minOccurs=\"1\">\r\n"
+		+"   					<xsd:complexType>\r\n"
+		+"    					<xsd:sequence>\r\n"
+		+"    						<xsd:element name=\"p\" maxOccurs=\"1\" minOccurs=\"1\">\r\n"
+		+"    							<xsd:complexType>\r\n"
+		+"    								<xsd:attribute name=\"k\" type=\"xsd:string\" use=\"required\" fixed=\"promo_code\"/>\r\n"
+		+"    								<xsd:attribute name=\"v\" type=\"xsd:string\" use=\"required\" fixed=\"CP003\"/>\r\n"
+		+"    							</xsd:complexType>\r\n"
+		+"    						</xsd:element>\r\n"
+		+"    					</xsd:sequence>\r\n"
+		+"    				</xsd:complexType>\r\n"
+		+"      			</xsd:element>\r\n"
+		+"    		</xsd:sequence>\r\n"
+		+"    		<xsd:attribute name=\"command\" type=\"xsd:string\" use=\"required\" fixed=\"doService\"/>\r\n"
+		+"  			<xsd:attribute name=\"function_id\" type=\"xsd:string\" use=\"required\" fixed=\"100100992\"/>\r\n"
+		+"  			<xsd:attribute name=\"app_user\" type=\"xsd:string\" use=\"required\" fixed=\"load_rbt\"/>\r\n"
+		+"  			<xsd:attribute name=\"app_password\" type=\"xsd:string\" use=\"required\" fixed=\"load_rbt132\"/>\r\n"
+		+"  			<xsd:attribute name=\"req_transaction_id\" type=\"xsd:string\" use=\"required\" fixed=\"100100007001\"/>\r\n"
+		+"  			<xsd:attribute name=\"channel\" type=\"xsd:string\" use=\"required\" fixed=\"SBMTEST\"/>\r\n"
+		+"  			<xsd:attribute name=\"service_no\" type=\"xsd:string\" use=\"required\" fixed=\"0890000000\"/>\r\n"
+		+"  		</xsd:complexType>\r\n"
+		+"	</xsd:element>\r\n"
+		+"</xsd:schema>";
 	
 	/*
 	 * Constructor-method
 	 */
-	public App() {
+	public Launcher() {
 		try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (UnsupportedLookAndFeelException e) {
@@ -214,9 +255,8 @@ public class App extends JFrame {
 		//labelDELAY.setFont(normal);
 		//labelMSunit = new JLabel("ms.");
 		//labelMSunit.setFont(normal);
-		
-		labelXML = new JLabel("XML Request");
-		labelXML.setFont(normal);
+		//labelXML = new JLabel("XML Request");
+		//labelXML.setFont(normal);
 		
 		txtURL = new JTextField("http://localhost:8080/");
 		txtURL.setFont(normal);
@@ -227,12 +267,26 @@ public class App extends JFrame {
 		//txtDELAY = new JTextField("0");
 		//txtDELAY.setFont(normal);
 		
+		tabbedPane = new JTabbedPane();
+		tabbedPane.setFont(normal);
+		
 		txtfieldXML = new JTextArea();
 		txtfieldXML.setFont(normal);
 		txtfieldXML.setTabSize(3);
 		txtFieldScpnXML = new JScrollPane(txtfieldXML);
 		txtFieldScpnXML.setVerticalScrollBarPolicy(VERTICAL_BAR_NEED);
 		txtFieldScpnXML.setHorizontalScrollBarPolicy(HORIZONTAL_BAR_AS_NEED);
+		
+		txtfieldXSD = new JTextArea();
+		txtfieldXSD.setFont(normal);
+		txtfieldXSD.setTabSize(3);
+		//txtfieldXSD.setToolTipText(xsdToolTip);
+		txtFieldScpnXSD = new JScrollPane(txtfieldXSD);
+		txtFieldScpnXSD.setVerticalScrollBarPolicy(VERTICAL_BAR_NEED);
+		txtFieldScpnXSD.setHorizontalScrollBarPolicy(HORIZONTAL_BAR_AS_NEED);
+		
+		tabbedPane.addTab("XML request", txtFieldScpnXML);
+		tabbedPane.addTab("XSD schema", txtFieldScpnXSD);
 		
 		cmdSTART = new JButton("Start");
 		cmdSTART.setFont(normal);
@@ -255,7 +309,7 @@ public class App extends JFrame {
 		//labelDELAY.setBounds(245, 55, 35, 25);
 		//labelMSunit.setBounds(357, 55, 35, 25);
 		labelTRX.setBounds(15, 85, 100, 25);
-		labelXML.setBounds(15, 115, 100, 25);
+		//labelXML.setBounds(15, 115, 100, 25);
 		
 		txtURL.setBounds(120, 25, 366, 25);
 		txtTHREAD.setBounds(120, 55, 90, 25);
@@ -264,19 +318,19 @@ public class App extends JFrame {
 		cmdSTART.setBounds(280, 85, 100, 25);
 		cmdSTOP.setBounds(385, 85, 100, 25);
 		progressBar.setBounds(120, 115, 366, 25);
-		txtFieldScpnXML.setBounds(15, 140, 470, 243);
+		tabbedPane.setBounds(15, 115, 470, 268);
 		
 		configurePanel.add(labelURL);
 		configurePanel.add(labelTHREAD);
 		//configurePanel.add(labelDELAY);
 		//configurePanel.add(labelMSunit);
 		configurePanel.add(labelTRX);
-		configurePanel.add(labelXML);
+		//configurePanel.add(labelXML);
 		configurePanel.add(txtURL);
 		configurePanel.add(txtTHREAD);
 		//configurePanel.add(txtDELAY);
 		configurePanel.add(txtTRX);
-		configurePanel.add(txtFieldScpnXML);
+		configurePanel.add(tabbedPane);
 		configurePanel.add(cmdSTART);
 		configurePanel.add(cmdSTOP);
 		configurePanel.add(progressBar);
@@ -379,11 +433,12 @@ public class App extends JFrame {
 	 * All thread access to register finish task
 	 * until all task are finish then proceed data summary.
 	 */
-	private void finish(Long timeSpend) {
-		synchronized(App.class) {
+	private void finish(Long timeSpend, boolean good) {
+		synchronized(Launcher.class) {
 			// Stamp finish task.
 			timeSpends.add(timeSpend);
 			sample++;
+			if ( ! good ) failed++;
 			progressBar.setValue(sample);
 			progressBar.updateUI();
 			
@@ -404,6 +459,7 @@ public class App extends JFrame {
 					logger.debug("Look -> Start -> " + sdf.format(new Date(startTime)));
 					logger.debug("Look -> Finish -> " + sdf.format(new Date(endTime)));
 					logger.debug("Look -> Sample -> " + sample);
+					logger.debug("Look -> Failed -> " + failed);
 					logger.debug("Look -> Time Spend -> " + df.format(timeUsage) + " ms.");
 					logger.debug("Look -> Max -> " + df.format(max) +" ms.");
 					logger.debug("Look -> Min -> " + df.format(min) + " ms.");
@@ -416,6 +472,7 @@ public class App extends JFrame {
 							{"Start", sdf.format(new Date(startTime))},
 							{"Finish", sdf.format(new Date(endTime))},
 							{"Sample", sample.toString()},
+							{"Failed", failed.toString()},
 							{"Time spend", df.format(timeUsage) + " ms."},
 							{"TPS", df.format(tps)},
 							{"Max. time spend", df.format(max) + " ms."},
@@ -443,7 +500,7 @@ public class App extends JFrame {
 	 */
     public static void main( String[] args ) {
     	// Application object
-    	App app = new App();
+    	Launcher app = new Launcher();
     	// Application launch
     	app.initial();
     }
@@ -487,6 +544,12 @@ public class App extends JFrame {
 				if ( xmlRequest.isEmpty() )
 					throw new RuntimeException("Please fill XML request into XML input.");
 				
+				// XSD validator
+				final String xsdSchema = txtfieldXSD.getText();
+				if ( ! StringUtils.isBlank(xsdSchema) ) {
+					xmlValidator.init(xsdSchema);
+				}
+				
 				// No. of sample data to test
 				transaction = Integer.parseInt(txtTRX.getText());
 				logger.debug("Look -> No. of transaction -> " + transaction);
@@ -510,6 +573,7 @@ public class App extends JFrame {
 				// Stamp time to start.
 				timeSpends.clear();
 				sample = 0;
+				failed = 0;
 				startTime = System.currentTimeMillis();
 				
 				// Switch to testing state
@@ -521,40 +585,56 @@ public class App extends JFrame {
 				// Start to load task
 				for ( int idx=0; idx < transaction; idx++ ) {
 					// Rebuild XML request with the data replacement.
-					if ( prmData != null ) {
-						if ( prmHeader.length > 1 ) {
-							for (int i=0; i < prmHeader.length; i++) {
-								xmlRequest.replaceAll( prmHeader[i], prmData[idx][i] );
+					String readyRequest = "";
+					// Rebuild XML request with the data replacement.
+					if ( prmData != null && prmData.length > 0 ) {
+						String[] params = prmData[idx];
+						if ( params.length > 1 ) {
+							for ( int i=0; i<params.length; i++ ) {
+								readyRequest = StringUtils.replace( xmlRequest, prmHeader[i], params[i]);
 							}
 						} else {
-							for (String col : prmData[idx]) {
-								xmlRequest.replaceAll( prmHeader[0], col );
-							}
+							readyRequest = StringUtils.replace( xmlRequest, prmHeader[0], params[0]);
 						}
+					} else {
+						readyRequest = xmlRequest;
 					}
+					
+					final String payload = new String(readyRequest);
+					
 					// Submit task into thread pool.
 					executor.execute(new Runnable() {
 						@Override
 						public void run() {
+							// Stamp time to start
+							long start = System.currentTimeMillis();
+							String responseBody = "";
 							try {
-								// Stamp time to start
-								long start = System.currentTimeMillis();
 								// Execute HTTP POST
-								String responseBody = HttpUtil.getInstance().doPost( url, xmlRequest );
-								logger.debug(" >>>>>>>>>>>>>>>>>>>> HTTP response <<<<<<<<<<<<<<<<<<<< ");
-								logger.debug(responseBody);
-								// Stamp time to finish
-								long finish = System.currentTimeMillis() - start;
-								finish(finish);
+								responseBody = HttpUtil.getInstance().doPost( url, payload );
 							} catch ( Exception ex ) {
 								logger.error(ex.getMessage(), ex);
+							} finally {
+								// Stamp time to finish
+								long finish = System.currentTimeMillis() - start;
+								// Validate result;
+								if ( StringUtils.isBlank(responseBody) ) {
+									finish(finish, false);
+								} else {
+									if ( StringUtils.isBlank(xsdSchema) ) {
+										finish(finish, true);
+									} else {
+										// Validate XML result by XSD
+										finish(finish, xmlValidator.valid(responseBody) );									
+									}
+								}
 							}
 						}
 					});
 				}				
 			} catch ( Exception ex ) {
 				logger.error(ex.getMessage(), ex);
-				JOptionPane.showMessageDialog(App.this, ex.getMessage(), "Exception", ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(Launcher.this, ex.getMessage(), "Exception", ERROR_MESSAGE);
 			}
 		}
 	}
@@ -576,7 +656,7 @@ public class App extends JFrame {
 				executor.purge();
 			} catch ( Exception ex ) {
 				logger.error(ex.getMessage(), ex);
-				JOptionPane.showMessageDialog(App.this, ex.getMessage(), "Exception", ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(Launcher.this, ex.getMessage(), "Exception", ERROR_MESSAGE);
 			} finally {
 				try {
 					endTime = System.currentTimeMillis();
@@ -636,7 +716,7 @@ public class App extends JFrame {
 				String params = txtParams.getText();
 				
 				if ( params.isEmpty() ) {
-					JOptionPane.showMessageDialog(App.this, "You must define a parameter first.", "Warning", WARN_MESSAGE);
+					JOptionPane.showMessageDialog(Launcher.this, "You must define a parameter first.", "Warning", WARN_MESSAGE);
 				} else {
 					
 					// File chooser and filter only text file.
@@ -679,7 +759,7 @@ public class App extends JFrame {
 				}
 			} catch ( Exception ex ) {
 				logger.error(ex.getMessage(), ex);
-				JOptionPane.showMessageDialog(App.this, ex.getMessage(), "Exception", ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(Launcher.this, ex.getMessage(), "Exception", ERROR_MESSAGE);
 			}
 		}
 	}
