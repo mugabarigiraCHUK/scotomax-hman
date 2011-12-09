@@ -24,7 +24,7 @@
 	</appender>
 
 	<logger name="org.hman.lab">
-		<level value="DEBUG" />
+		<level value="INFO" />
 		<appender-ref ref="SYSTEM" />
 		<appender-ref ref="CONSOLE" />
 	</logger>

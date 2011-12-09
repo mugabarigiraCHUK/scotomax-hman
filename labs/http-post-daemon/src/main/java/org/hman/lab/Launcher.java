@@ -201,7 +201,7 @@ public class Launcher implements Serializable {
 	 * All thread access to register finish task
 	 * until all task are finish then proceed data summary.
 	 */
-	private void finish(Long timeSpend, Boolean good) {
+	private void finish(Long timeSpend, boolean good) {
 		synchronized(Launcher.class) {
 			// Stamp finish task.
 			timeSpends.add(timeSpend);
