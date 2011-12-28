@@ -113,8 +113,8 @@
 		       								${asset.owner.firstName} ${asset.owner.familyName}
 		       							</g:if>
 		       						</td>
-		       						<td><g:formatDate date="${asset.dateCreated}/></td>
-		       						<td><g:formatDate date="${asset.lastUpdated}/></td>
+		       						<td><g:formatDate date="${asset.dateCreated}"/></td>
+		       						<td><g:formatDate date="${asset.lastUpdated}"/></td>
 		       						<g:if test="${session.privilege=='admin' || session.privilege=='asset'}">
 			       						<td><input type="button" id="assign" value="Assign" class="command" onclick="func.assign('${asset.id}')"/></td>
 			       						<td><input type="button" id="edit" value="Edit" class="command" onclick="func.edit('${asset.id}')"/></td>

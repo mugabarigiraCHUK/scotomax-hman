@@ -73,8 +73,8 @@
 			       						<td align="center">${i+1}.</td>
 			       						<td>${dept.name}</td>
 			       						<td style="white-space: normal">${dept.description}</td>
-			       						<td><g:formatDate date="${dept.dateCreated}/></td>
-			       						<td><g:formatDate date="${dept.lastUpdated}/></td>
+			       						<td><g:formatDate date="${dept.dateCreated}"/></td>
+			       						<td><g:formatDate date="${dept.lastUpdated}"/></td>
 			       						<td><input type="button" value="Edit" class="command" onclick="func.edit('${dept.id}')"/></td>
 			       						<td><input type="button" value="Delete" class="command" onclick="func.delete('${dept.id}')"/></td>
 			       					</tr>
