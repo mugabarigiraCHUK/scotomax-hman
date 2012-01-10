@@ -21,6 +21,7 @@ import com.vaadin.event.dd.acceptcriteria.ClientSideCriterion;
 import com.vaadin.event.dd.acceptcriteria.SourceIs;
 import com.vaadin.ui.AbstractSelect.AbstractSelectTargetDetails;
 import com.vaadin.ui.AbstractSelect.AcceptItem;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.TableDragMode;
 import com.vaadin.ui.Tree;
@@ -48,8 +49,10 @@ public class AboutusTab extends VerticalLayout {
     	slf4j.debug("Entering Aboutus tab initialize...");
     	
     	setSizeFull();
-        setMargin(true);
-        setSpacing(true);
+    	
+    	HorizontalLayout panel = new HorizontalLayout();
+    	panel.setMargin(true);
+    	panel.setSpacing(true);
 
         // First create the components to be able to refer to them as allowed
         // drag sources
@@ -64,8 +67,9 @@ public class AboutusTab extends VerticalLayout {
         initializeTable(new SourceIs(tree));
 
         // Add components
-        addComponent(tree);
-        addComponent(table);
+        panel.addComponent(tree);
+        panel.addComponent(table);
+        addComponent(panel);
     }
 
     private void initializeTree(final ClientSideCriterion acceptCriterion) {

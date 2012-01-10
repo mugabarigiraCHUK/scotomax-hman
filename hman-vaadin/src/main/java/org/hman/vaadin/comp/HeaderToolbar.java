@@ -4,12 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.terminal.ThemeResource;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
-import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Header Toolbar
@@ -33,7 +32,6 @@ public class HeaderToolbar extends VerticalLayout {
 		
 		setWidth(100, UNITS_PERCENTAGE);
 		setStyleName(Reindeer.LAYOUT_BLACK);
-		addStyleName("header-menu-bar");
 		
 		// Individual items so we can add sub-menu items to
 		// User name
@@ -48,7 +46,8 @@ public class HeaderToolbar extends VerticalLayout {
 		settings = menubar.addItem("Setting", new ThemeResource("../runo/icons/16/settings.png"), null);
 		settings.addItem("Language", menuCommand);
 		settings.addItem("Picture", menuCommand);
-
+		
+		menubar.setWidth(100, UNITS_PERCENTAGE);
 		menubar.setStyleName("header-menu-bar");
         addComponent(menubar);
 

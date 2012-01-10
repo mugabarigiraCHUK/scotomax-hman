@@ -15,6 +15,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Tree;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * 
@@ -22,7 +23,7 @@ import com.vaadin.ui.Tree;
  *
  */
 @SuppressWarnings("serial")
-public class ProductTab extends HorizontalLayout 
+public class ProductTab extends VerticalLayout 
 							implements Property.ValueChangeListener, 
 										Button.ClickListener, 
 										Action.Handler {
@@ -47,12 +48,14 @@ public class ProductTab extends HorizontalLayout
     	slf4j.debug("Entering Product tab initialize...");
     	
     	setSizeFull();
-        setMargin(true);
-        setSpacing(true);
+    	
+    	HorizontalLayout panel = new HorizontalLayout();
+    	panel.setMargin(true);
+    	panel.setSpacing(true);
 
         // Create the Tree,a dd to layout
         tree = new Tree("Hardware Inventory");
-        addComponent(tree);
+        panel.addComponent(tree);
 
         // Contents from a (prefilled example) hierarchical container:
         tree.setContainerDataSource(ExampleUtil.getHardwareContainer());
@@ -79,7 +82,7 @@ public class ProductTab extends HorizontalLayout
         editBar = new HorizontalLayout();
         editBar.setMargin(false, false, false, true);
         editBar.setEnabled(false);
-        addComponent(editBar);
+        panel.addComponent(editBar);
         // textfield
         editor = new TextField("Item name");
         editor.setImmediate(true);
@@ -88,6 +91,8 @@ public class ProductTab extends HorizontalLayout
         change = new Button("Apply", this, "buttonClick");
         editBar.addComponent(change);
         editBar.setComponentAlignment(change, Alignment.BOTTOM_LEFT);
+        
+        addComponent(panel);
     }
 
     public void valueChange(ValueChangeEvent event) {
