@@ -6,7 +6,7 @@
       <p><a class="btn" href="#">View details &raquo;</a></p>
     </div><!--/span-->
     <div class="span4">
-      <h2>PAT1 (วิขาคณิตศาสตร์)</h2>
+      <h2>PAT1 (วิชาคณิตศาสตร์)</h2>
       <p>Register for learn in PAT1</p>
       <p><a class="btn" href="#">View details &raquo;</a></p>
     </div><!--/span-->
