@@ -1,5 +1,5 @@
 <?php include 'config/configure.php'; ?>
-<?php include 'controller/profile_controller.php'; ?>
+<?php include 'controller/cbs_controller.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,16 +21,19 @@
 				<!--@Start ######### Navigation panel editor place ########## -->
 				
 		          <li class="nav-header">Menu</li>
-		          <li class="active"><a href="register.php">Profile</a></li>
-		          <li><a href="register.php">Register</a></li>
-		          <li><a href="courseopen.php">Course openning</a></li>
-		          <li><a href="#">Course plan</a></li>
-		          <li><a href="classroom.php">Class room</a></li>
+		          <li><a href="registering.php">Registering</a></li>
+		          <li><a href="examination.php">Examination</a></li>
+		          <li><a href="schedule.php">Course Schedule</a></li>
+		      	  <li><a href="course_trainer.php">Course Trainer</a></li>
+		      	  <li><a href="trainee_grade.php">Trainee Grade</a></li>
 		          
 		          <li class="nav-header">System</li>
-		          <li><a href="#">Administrator</a></li>
-		          <li><a href="#">Report</a></li>
-		          <li><a href="#">Logs</a></li>
+		          <li><a href="department.php">Department</a></li>
+		          <li class="active"><a href="cbs_dept.php">CBS Department</a></li>
+		          <li><a href="trainer.php">Trainer Profile</a></li>
+		          <li><a href="course.php">Course</a></li>
+		          <li><a href="class.php">Class Room</a></li>
+		          
 		
 				<!--@End ######### Navigation panel editor place ########## -->
 		
@@ -49,22 +52,9 @@
 	            
 				<h3>ข้อมูลส่วนตัว</h3>
 			    <p>
-	            	<form id="form1" class="form-horizontal" method="post">
+	            	<form class="form-horizontal" method="post">
 				    	<fieldset>
-						  
-						  <div class="control-group">
-				            <label class="control-label" for="username">ชื่อเข้าใช้</label>
-				            <div class="controls">
-				              <input type="text" class="input-large disabled" id="username" name="username" value="<?=$_SESSION['username']?>" disabled>
-				            </div>
-				          </div>
-
-				          <div class="control-group">
-				            <div class="controls">
-				              <a data-toggle="modal" href="#pwdmodal" class="btn btn-primary">เปลี่ยนรหัสผ่าน</a>
-				            </div>
-				          </div>
-
+				
 						  <div class="control-group">
 				            <label class="control-label" >คำนำหน้าชื่อ*</label>
 				            <div class="controls">
@@ -172,7 +162,7 @@
 				          </div>
 				
 				          <div class="form-actions">
-				            <button type="submit" class="btn btn-primary">ปรับปรุงข้อมูล</button>
+				            <button type="submit" class="btn btn-primary">เปลี่ยนแปลง</button>
 				          </div>
 				
 				        </fieldset>
@@ -204,14 +194,14 @@
 							            <td>A001</td>
 							            <td>คณิตศาสตร์</td>
 							            <td>อ.วิชา เรียนดี</td>
-							            <td><a href="#" class="btn btn-small btn-info">ตารางเรียน</a></td>
+							            <td><a href="#" class="btn">ตารางเรียน</a></td>
 							          </tr>
 							          <tr>
 							          	<td>2</td>
 							            <td>B02</td>
 							            <td>ชีววิทยา</td>
 							            <td>อ.อะไร เก่งจัง</td>
-							            <td><a href="#" class="btn btn-small btn-info">ตารางเรียน</a></td>
+							            <td><a href="#" class="btn">ตารางเรียน</a></td>
 							          </tr>
 							        </tbody>
 							      </table>
@@ -248,7 +238,6 @@
 							      </table>
 				            </p>
 				          </div>
-
 				        </div>
 				      </div> <!-- /tabbable -->
 	            </p>
@@ -267,49 +256,6 @@
 		</p>
       </footer>
     </div><!--/.fluid-container-->
-    <div id="pwdmodal" class="modal hide fade">
-      	
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3>เปลี่ยนแปลงรหัสผ่าน</h3>
-        </div>
-
-        <div class="modal-body">
-    		<form id="form2" class="form-horizontal" method="post">
-    			<fieldset>
-    				<div class="control-group">
-			            <label class="control-label" for="username">ชื่อเข้าใช้*</label>
-			            <div class="controls">
-			              <input type="text" class="input-large disabled" id="username" name="username" value="<?=$_SESSION['username']?>" disabled>
-			              <input type="hidden" name="changepwd" value="true" />
-			            </div>
-			          </div>
-
-			          <div class="control-group">
-			            <label class="control-label" for="password">รหัสผ่าน*</label>
-			            <div class="controls">
-			              <input type="password" class="input-large" id="password" name="password">
-			            </div>
-			          </div>
-
-			          <div class="control-group">
-			            <label class="control-label" for="confirmpwd">ยืนยันรหัสผ่าน*</label>
-			            <div class="controls">
-			              <input type="password" class="input-large" id="confirmpwd" name="confirmpwd">
-			              <div id="cfmnotify"></div>
-			            </div>
-			          </div>
-    			</fieldset>	
-    		</form>      
-        </div>
-
-        <div class="modal-footer">
-          <a href="#" class="btn" data-dismiss="modal" >ปิด</a>
-          <a href="#" id="cmdchange" class="btn btn-primary">บันทึก</a>
-        </div>
-    	
-      </div>
-
     <?php include 'layout/javascript.php'; ?>
 	<script>
 		$(function() {
@@ -323,35 +269,6 @@
 										, dayNames: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์"]
 										, dayNamesMin: ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."]
 										, dayNamesShort: ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."] });
-
-			// Password and confirmation box listener
-			$("#confirmpwd").blur(function(){
-				var pwd = $("#password").val();
-				var cfm = $(this).val();
-				if ( pwd != cfm ) {
-					$("#cfmnotify").text("เตือน! กรุณากรอกรหัสผ่านให้เหมือนเดิม");
-					$("#cfmnotify").addClass("alert");
-					$(this).val("");
-					$(this).focus();
-				} else {
-					$("#cfmnotify").text("");
-					$("#cfmnotify").removeClass("alert");
-				}
-			});
-
-			// Change password event listener
-			$("#cmdchange").click(function(){
-				var pwd = $("#password").val();
-				var cfm = $("#confirmpwd").val();
-				if ( pwd != '' && cfm != '' && pwd == cfm ) {
-					$("#form2").submit();
-				} else {
-					$("#cfmnotify").text("เตือน! กรุณากรอกรหัสผ่านให้เหมือนเดิม");
-					$("#cfmnotify").addClass("alert");
-					$(this).val("");
-					$(this).focus();
-				}
-			});
 		});
 	</script>
   </body>

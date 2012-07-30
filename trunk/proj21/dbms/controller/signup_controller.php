@@ -18,7 +18,7 @@
 		// Handle HTTP POST method
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
 
-			$uvalid_stmt = oci_parse($ora_conn, "select username from user_login where username=:username");
+			$uvalid_stmt = oci_parse($ora_conn, "SELECT username FROM user_login WHERE username=:username");
 			oci_bind_by_name($uvalid_stmt, ':username', iconv("UTF-8","TIS-620", $_POST["username"]));
 
 			oci_execute($uvalid_stmt);
@@ -34,8 +34,8 @@
 				list($second, $milli) = explode(".", microtime(true));
 
 				// OCI DML for register username
-				$user_stmt = oci_parse($ora_conn, "insert into user_login(id_code, username, passwd, last_login)"
-						." values(:id_code, :username, :passwd, sysdate)");
+				$user_stmt = oci_parse($ora_conn, "INSERT INTO user_login(id_code, username, passwd, last_login)"
+						." VALUES(:id_code, :username, :passwd, sysdate)");
 
 				// Binding parameter into DML
 				oci_bind_by_name($user_stmt, ':id_code', $second);
@@ -45,34 +45,34 @@
 				if (oci_execute($user_stmt, OCI_NO_AUTO_COMMIT)) {
 					
 					// OCI DML validate user authentication
-					$profile_stmt = oci_parse($ora_conn, "insert into std_profile(id_code"
-							.",firstname"
-							.",lastname"
-							.",title"
-							.",birthdate"
-							.",address"
-							.",province"
-							.",phone_no"
-							.",email"
-							.",institute_name"
-							.",edu_level"
-							.",gpa"
-							.",id_number"
-							.",registered_date)"
-							."	values(:id_code"
-							.",:firstname"
-							.",:lastname"
-							.",:title"
-							.",to_date(:birthdate, 'dd Mon yyyy hh24:mi:ss')"
-							.",:address"
-							.",:province"
-							.",:phone_no"
-							.",:email"
-							.",:institute_name"
-							.",:edu_level"
-							.",:gpa"
-							.",:id_number"
-							.",sysdate)");
+					$profile_stmt = oci_parse($ora_conn, "INSERT INTO std_profile( id_code"
+							.", firstname"
+							.", lastname"
+							.", title"
+							.", birthdate"
+							.", address"
+							.", province"
+							.", phone_no"
+							.", email"
+							.", institute_name"
+							.", edu_level"
+							.", gpa"
+							.", id_number"
+							.", registered_date)"
+							."	VALUES( :id_code"
+							.", :firstname"
+							.", :lastname"
+							.", :title"
+							.", TO_DATE(:birthdate, 'dd Mon yyyy hh24:mi:ss')"
+							.", :address"
+							.", :province"
+							.", :phone_no"
+							.", :email"
+							.", :institute_name"
+							.", :edu_level"
+							.", :gpa"
+							.", :id_number"
+							.", SYSDATE)");
 
 					// Binding parameter into DML
 					oci_bind_by_name($profile_stmt, ':id_code', $second);
@@ -102,7 +102,7 @@
 
 						// Keep user information on HTTP session
 						$_SESSION['id_code'] = $second;
-						$_SESSION['username'] = $_POST["firstname"];
+						$_SESSION['username'] = $_POST["username"];
 						
 						header( "Location: profile.php" );
 					} else {

@@ -22,7 +22,7 @@
 				
 		          <li class="nav-header">Menu</li>
 		          <li class="active"><a href="register.php">Register</a></li>
-		          <li class><a href="courseopen.php">Course openning</a></li>
+		          <li><a href="courseopen.php">Course openning</a></li>
 		          <li><a href="#">Course plan</a></li>
 		          <li><a href="classroom.php">Class room</a></li>
 		          <li class="nav-header">System</li>
