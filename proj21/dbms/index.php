@@ -37,12 +37,14 @@
 
 		  	<!--//Advertisement panel -->
 		  	<div class="hero-unit">
-			
-			<!--@Start ######### Body content editor place ########## -->
-            <h1>Hello,</h1>
-		    <p>สถาบันกวดวิชาสำหรับผู้สนใจสอบเข้าในระดับปริญญาตรี คณะพาณิชยศาสตร์และการบัญชี จุฬาลงกรณ์มหาวิทยาลัย.</p>
-		    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-          	<!--@End ######### Body content editor place ########## -->
+				<!--@notification message handle -->
+				<?php include 'layout/notification.php'; ?>
+				
+				<!--@Start ######### Body content editor place ########## -->
+	            <h1>Hello,</h1>
+			    <p>สถาบันกวดวิชาสำหรับผู้สนใจสอบเข้าในระดับปริญญาตรี คณะพาณิชยศาสตร์และการบัญชี จุฬาลงกรณ์มหาวิทยาลัย.</p>
+			    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+	          	<!--@End ######### Body content editor place ########## -->
 
 			</div>
 

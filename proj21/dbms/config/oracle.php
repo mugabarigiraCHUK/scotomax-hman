@@ -3,12 +3,13 @@
  * Class for initial OCI connection and disconnect after finish work.
  * @author malipen
  */
-class OciHandle {
+class oracle {
 
-	public $oci_url = "//10.211.55.4/mis";
-	public $oci_username = "dbm";
-	public $oci_password = "dbmit21";
-	public $oci_conn;
+	//$oci_url = "//10.211.55.4/mis";
+	private $oci_url = "//127.0.0.1/XE";
+	private $oci_username = "dbm";
+	private $oci_password = "dbmit21";
+	private $oci_conn;
 	
 	/**
 	 * Initial OCI connection

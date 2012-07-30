@@ -39,58 +39,60 @@
 
 		  	<!--//Advertisement panel -->
 		  	<div class="hero-unit">
-			
-			<!--@Start ######### Body content editor place ########## -->
-            
-			<h3>Course Opening</h3>
-		    <p>
-            	<table class="table">
-				 <thead>
-		          <tr>
-		            <th>No.</th>
-		            <th>Course Name</th>
-		            <th>Start date</th>
-		            <th>End date</th>
-		            <th>Time</th>
-		            <th>Trainer</th>
-		            <th>Seat</th>
-		            <th>Left</th>
-		          </tr>
-		        </thead>
-		        <tbody>
-		          <tr>
-		            <td>1</td>
-		            <td>Math</td>
-		            <td>1/7/2012</td>
-		            <td>31/7/2012</td>
-		            <td>13:00-17:00</td>
-		            <td>A</td>
-					<td>30</td>
-					<td>3</td>
-		          </tr>
-		          <tr>
-		            <td>2</td>
-		            <td>Eng</td>
-		            <td>15/7/2012</td>
-		            <td>15/8/2012</td>
-		            <td>10:00-12:00</td>
-		            <td>B</td>
-					<td>30</td>
-					<td>10</td>
-		          </tr>
-		          <tr>
-		            <td>3</td>
-		            <td>Physics</td>
-		            <td>1/8/2012</td>
-		            <td>20/8/2012</td>
-		            <td>09:00-12:00</td>
-		            <td>C</td>
-					<td>20</td>
-					<td>5</td>
-		          </tr>
-		        </tbody>
-		      </table>
-            </p>
+				<!--@notification message handle -->
+				<?php include 'layout/notification.php'; ?>
+				
+				<!--@Start ######### Body content editor place ########## -->
+	            
+				<h3>Course Opening</h3>
+			    <p>
+	            	<table class="table">
+					 <thead>
+			          <tr>
+			            <th>No.</th>
+			            <th>Course Name</th>
+			            <th>Start date</th>
+			            <th>End date</th>
+			            <th>Time</th>
+			            <th>Trainer</th>
+			            <th>Seat</th>
+			            <th>Left</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+			          <tr>
+			            <td>1</td>
+			            <td>Math</td>
+			            <td>1/7/2012</td>
+			            <td>31/7/2012</td>
+			            <td>13:00-17:00</td>
+			            <td>A</td>
+						<td>30</td>
+						<td>3</td>
+			          </tr>
+			          <tr>
+			            <td>2</td>
+			            <td>Eng</td>
+			            <td>15/7/2012</td>
+			            <td>15/8/2012</td>
+			            <td>10:00-12:00</td>
+			            <td>B</td>
+						<td>30</td>
+						<td>10</td>
+			          </tr>
+			          <tr>
+			            <td>3</td>
+			            <td>Physics</td>
+			            <td>1/8/2012</td>
+			            <td>20/8/2012</td>
+			            <td>09:00-12:00</td>
+			            <td>C</td>
+						<td>20</td>
+						<td>5</td>
+			          </tr>
+			        </tbody>
+			      </table>
+	            </p>
 
           	<!--@End ######### Body content editor place ########## -->
 

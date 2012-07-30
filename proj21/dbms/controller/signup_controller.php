@@ -3,75 +3,133 @@
 	// Required OCI class
 	include("./config/oracle.php");
 	include("./config/dropdownlist.php");
+	include("./config/utils.php");
 	
 	// Initial OCI objects and open connection
-	$oracle = new OciHandle;
+	$oracle = new oracle();
 	$ora_conn = $oracle->connection();
 	
 	// Dropdownlist
-	$deptlist = Dropdownlist::cbs_department($ora_conn);
-	$courselist = Dropdownlist::course($ora_conn);
+	$deptlist = dropdownlist::cbs_department($ora_conn);
+	$courselist = dropdownlist::course($ora_conn);
 	
 	if ( isset( $_SERVER['REQUEST_METHOD'] ) ) {
 		
 		// Handle HTTP POST method
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
-			
-			// OCI DML validate user authentication
-			$sql = oci_parse($ora_conn, "insert into std_profile(id_code"
-			.",firstname"
-			.",lastname"
-			.",title"
-			.",birthdate"
-			.",address"
-			.",province"
-			.",phone_no"
-			.",email"
-			.",institute_name"
-			.",edu_level"
-			.",gpa"
-			.",registered_date)"
-			."	values(:id_code"
-			.",:firstname"
-			.",:lastname"
-			.",:title"
-			.",:birthdate"
-			.",:address"
-			.",:province"
-			.",:phone_no"
-			.",:email"
-			.",:institute_name"
-			.",:edu_level"
-			.",:gpa"
-			.",sysdate)");
-			// Populate uuid by time second from system
-			list($second, $milli) = explode(".", microtime(true));
-			// Date parser
-			
-			if ( isset($_POST["birthdate"]) ) {
-				$birthdate = strtotime( $_POST["birthdate"] );
+
+			$uvalid_stmt = oci_parse($ora_conn, "select username from user_login where username=:username");
+			oci_bind_by_name($uvalid_stmt, ':username', iconv("UTF-8","TIS-620", $_POST["username"]));
+
+			oci_execute($uvalid_stmt);
+			//$nrows = oci_fetch_all($uvalid_stmt, $result, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+			$nrows = oci_fetch_all($uvalid_stmt, $result);
+
+			if ( $nrows > 0 ) {
+				$error = $result[0][0]." is already exists, please consider other.";
+
 			} else {
-				$birthdate = NULL;
+			
+				// Populate uuid by time second from system
+				list($second, $milli) = explode(".", microtime(true));
+
+				// OCI DML for register username
+				$user_stmt = oci_parse($ora_conn, "insert into user_login(id_code, username, passwd, last_login)"
+						." values(:id_code, :username, :passwd, sysdate)");
+
+				// Binding parameter into DML
+				oci_bind_by_name($user_stmt, ':id_code', $second);
+				oci_bind_by_name($user_stmt, ':username', iconv("UTF-8","TIS-620", $_POST["username"]));
+				oci_bind_by_name($user_stmt, ':passwd', iconv("UTF-8","TIS-620", $_POST["password"]));
+
+				if (oci_execute($user_stmt, OCI_NO_AUTO_COMMIT)) {
+					
+					// OCI DML validate user authentication
+					$profile_stmt = oci_parse($ora_conn, "insert into std_profile(id_code"
+							.",firstname"
+							.",lastname"
+							.",title"
+							.",birthdate"
+							.",address"
+							.",province"
+							.",phone_no"
+							.",email"
+							.",institute_name"
+							.",edu_level"
+							.",gpa"
+							.",id_number"
+							.",registered_date)"
+							."	values(:id_code"
+							.",:firstname"
+							.",:lastname"
+							.",:title"
+							.",to_date(:birthdate, 'dd Mon yyyy hh24:mi:ss')"
+							.",:address"
+							.",:province"
+							.",:phone_no"
+							.",:email"
+							.",:institute_name"
+							.",:edu_level"
+							.",:gpa"
+							.",:id_number"
+							.",sysdate)");
+
+					// Binding parameter into DML
+					oci_bind_by_name($profile_stmt, ':id_code', $second);
+					oci_bind_by_name($profile_stmt, ':firstname', iconv("UTF-8","TIS-620", $_POST["firstname"]));
+					oci_bind_by_name($profile_stmt, ':lastname', iconv("UTF-8","TIS-620", $_POST["lastname"]));
+					oci_bind_by_name($profile_stmt, ':title', iconv("UTF-8","TIS-620", $_POST["title"]));
+
+					if ( $_POST['birthdate'] ) {
+						$bdate = utils::text2date($_POST["birthdate"]);
+						if ( $bdate ) {
+							oci_bind_by_name($profile_stmt, ':birthdate', date( "d M Y H:i:s", $bdate) );
+						}
+					}
+					
+					oci_bind_by_name($profile_stmt, ':address', iconv("UTF-8","TIS-620", $_POST["address"]));
+					oci_bind_by_name($profile_stmt, ':province', iconv("UTF-8","TIS-620", $_POST["province"]));
+					oci_bind_by_name($profile_stmt, ':phone_no', iconv("UTF-8","TIS-620", $_POST["phone_no"]));
+					oci_bind_by_name($profile_stmt, ':email', iconv("UTF-8","TIS-620", $_POST["email"]));
+					oci_bind_by_name($profile_stmt, ':institute_name', iconv("UTF-8","TIS-620", $_POST["institute_name"]));
+					oci_bind_by_name($profile_stmt, ':edu_level', iconv("UTF-8","TIS-620", $_POST["edu_level"]));
+					oci_bind_by_name($profile_stmt, ':gpa', iconv("UTF-8","TIS-620", $_POST["gpa"]));
+					oci_bind_by_name($profile_stmt, ':id_number', iconv("UTF-8","TIS-620", $_POST["id_number"]));
+
+					// Oracle DML execution
+					if (oci_execute($profile_stmt, OCI_COMMIT_ON_SUCCESS)) {
+						$error = "Your registration is success.";
+
+						// Keep user information on HTTP session
+						$_SESSION['id_code'] = $second;
+						$_SESSION['username'] = $_POST["firstname"];
+						
+						header( "Location: profile.php" );
+					} else {
+						$ora_err = oci_error($ora_conn);
+						if ($ora_err) {
+							$error = "Your registration is failed, please try again later. Exception: ".$ora_err;
+						} else {
+							$error = "Your registration is failed, please try again later.";
+						}
+					}
+
+					oci_free_statement($profile_stmt);
+
+				} else {
+					// 
+					$ora_err = oci_error($ora_conn);
+					if ($ora_err) {
+						$error = "Your registration is failed, please try again later. Exception: ".$ora_err;
+					} else {
+						$error = "Your registration is failed, please try again later.";
+					}
+				}
+
+				oci_free_statement($user_stmt);
 			}
-			// Binding parameter into DML
-			oci_bind_by_name($sql, ':id_code', $second);
-			oci_bind_by_name($sql, ':firstname', iconv("UTF-8","TIS-620", $_POST["firstname"]));
-			oci_bind_by_name($sql, ':lastname', iconv("UTF-8","TIS-620", $_POST["lastname"]));
-			oci_bind_by_name($sql, ':title', iconv("UTF-8","TIS-620", $_POST["title"]));
-			oci_bind_by_name($sql, ':birthdate', $birthdate);
-			oci_bind_by_name($sql, ':address', iconv("UTF-8","TIS-620", $_POST["address"]));
-			oci_bind_by_name($sql, ':province', iconv("UTF-8","TIS-620", $_POST["province"]));
-			oci_bind_by_name($sql, ':phone_no', iconv("UTF-8","TIS-620", $_POST["phone_no"]));
-			oci_bind_by_name($sql, ':email', iconv("UTF-8","TIS-620", $_POST["email"]));
-			oci_bind_by_name($sql, ':institute_name', iconv("UTF-8","TIS-620", $_POST["institute_name"]));
-			oci_bind_by_name($sql, ':edu_level', iconv("UTF-8","TIS-620", $_POST["edu_level"]));
-			oci_bind_by_name($sql, ':gpa', iconv("UTF-8","TIS-620", $_POST["gpa"]));
-			// Oracle DML execution
-			if (oci_execute($sql, OCI_COMMIT_ON_SUCCESS)) {
-				$message = "Your registration is success.";
-			} else {
-				$message = "Your registration is failed, please try again later.";
-			}
+
+			oci_free_statement($uvalid_stmt);
 		}
 	}
 	

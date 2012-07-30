@@ -17,7 +17,7 @@
         <div class="span3">
           	<div class="well sidebar-nav">
 		        <ul class="nav nav-list">
-		
+					<!-- // No authorize for navigation -->
 		        </ul>
 		      </div><!--/.well -->
         </div><!--/span-->
@@ -26,34 +26,30 @@
 
 		  	<!--//Advertisement panel -->
 		  	<div class="hero-unit">
-			
-			<!--@Start ######### Body content editor place ########## -->
-				<?php if ( isset( $error ) ) { ?>
-					<div class="alert alert-error">
-					        <button type="button" class="close" data-dismiss="alert">&times;</button>
-					        <strong>Error!</strong> <?=$error?>
-					</div>
-				<?php } ?>
-            	<h3>Authentication</h3>
+		  		<!--@notification message handle -->
+				<?php include 'layout/notification.php'; ?>
+
+				<!--@Start ######### Body content editor place ########## -->
+            	<h3>เข้าสู่ระบบ</h3>
 				<form class="form-horizontal" method="post">
 			    	<fieldset>
 			          
 					 <div class="control-group">
-			            <label class="control-label" for="username">Username</label>
+			            <label class="control-label" for="username">ชื่อผู้ใช้</label>
 			            <div class="controls">
 			              <input type="text" class="input-xlarge" id="username" name="username">
 			            </div>
 			          </div>
 			
 			          <div class="control-group">
-			            <label class="control-label" for="password">Password</label>
+			            <label class="control-label" for="password">รหัสผ่าน</label>
 			            <div class="controls">
 			              <input type="password" class="input-xlarge" id="password" name="password">
 			            </div>
 			          </div>
 			
 			          <div class="form-actions">
-			            <button type="submit" class="btn btn-primary">Login</button>
+			            <button type="submit" class="btn btn-primary">เข้าระบบ</button>
 			          </div>
 			
 			        </fieldset>
