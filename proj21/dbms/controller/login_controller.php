@@ -17,7 +17,7 @@
 				$_SESSION['id_code'] = "13245768";
 				$_SESSION['username'] = "Administrator";
 				
-				header( "Location: index.php" );
+				header( "Location: department.php" );
 
 			} else {
 				// Initial OCI objects and open connection

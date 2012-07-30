@@ -166,7 +166,7 @@
 					
 					          <div class="form-actions">
 					            <button type="submit" class="btn btn-primary">สมัคร</button> &nbsp;&nbsp;
-					            <button type="reset" class="btn btn-primary">ยกเลิก</button>
+					            <button type="reset" class="btn btn-danger">ยกเลิก</button>
 					          </div>
 		
 				        </fieldset>
