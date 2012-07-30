@@ -39,36 +39,38 @@
 
 		  	<!--//Advertisement panel -->
 		  	<div class="hero-unit">
-			
-			<!--@Start ######### Body content editor place ########## -->
-            
-			<h3>Class room</h3>
-		    <p>
-		    	<table class="table">
-				 <thead>
-		          <tr>
-		            <th>No.</th>
-		            <th>Class Name</th>
-		            <th>Room</th>
-		            <th>Trainer</th>
-		          </tr>
-		        </thead>
-		        <tbody>
-		          <tr>
-		            <td>1</td>
-		            <td>Class A</td>
-		            <td>Room A</td>
-		            <td>A</td>
-		          </tr>
-		          <tr>
-		            <td>2</td>
-		            <td>Class B</td>
-		            <td>Room B</td>
-		            <td>B</td>
-		          </tr>
-		        </tbody>
-		      </table>
-		    </p>
+				<!--@notification message handle -->
+				<?php include 'layout/notification.php'; ?>
+				
+				<!--@Start ######### Body content editor place ########## -->
+	            
+				<h3>Class room</h3>
+			    <p>
+			    	<table class="table">
+					 <thead>
+			          <tr>
+			            <th>No.</th>
+			            <th>Class Name</th>
+			            <th>Room</th>
+			            <th>Trainer</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+			          <tr>
+			            <td>1</td>
+			            <td>Class A</td>
+			            <td>Room A</td>
+			            <td>A</td>
+			          </tr>
+			          <tr>
+			            <td>2</td>
+			            <td>Class B</td>
+			            <td>Room B</td>
+			            <td>B</td>
+			          </tr>
+			        </tbody>
+			      </table>
+			    </p>
 
           	<!--@End ######### Body content editor place ########## -->
 

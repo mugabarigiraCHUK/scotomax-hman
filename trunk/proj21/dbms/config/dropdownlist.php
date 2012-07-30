@@ -3,7 +3,7 @@
  * Class for getting list of configuration data by array object
  * @author malipen
  */
-class Dropdownlist {
+class dropdownlist {
 	
 	/**
 	 * CBS_DEPARTMENT
