@@ -32,7 +32,7 @@
 		          <li><a href="cbs_dept.php">CBS Department</a></li>
 		          <li class="active"><a href="trainer.php">Trainer Profile</a></li>
 		          <li><a href="course.php">Course</a></li>
-		          <li><a href="class.php">Class Room</a></li>
+		          <li><a href="classroom.php">Class Room</a></li>
 		          
 		
 				<!--@End ######### Navigation panel editor place ########## -->

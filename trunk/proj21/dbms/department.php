@@ -29,10 +29,10 @@
 		          
 		          <li class="nav-header">System</li>
 		          <li class="active"><a href="department.php">Department</a></li>
-		          <li><a href="cbs_department.php">CBS Department</a></li>
+		          <li><a href="cbs_dept.php">CBS Department</a></li>
 		          <li><a href="trainer.php">Trainer Profile</a></li>
 		          <li><a href="course.php">Course</a></li>
-		          <li><a href="class.php">Class Room</a></li>
+		          <li><a href="classroom.php">Class Room</a></li>
 		          
 		
 				<!--@End ######### Navigation panel editor place ########## -->
@@ -80,7 +80,7 @@
 					      	<?php } else { ?>
 					      	<button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button> &nbsp;&nbsp;
 					      	<?php } ?>
-					        <button type="reset" class="btn btn-danger">ยกเลิก</button>
+					        <a href="department.php" class="btn btn-danger">ยกเลิก</a>
 					      </div>
 				
 				        </fieldset>
