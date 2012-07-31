@@ -1,5 +1,5 @@
 <?php include 'config/configure.php'; ?>
-<?php include 'controller/cbs_controller.php'; ?>
+<?php include 'controller/classroom_controller.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,10 +29,10 @@
 		          
 		          <li class="nav-header">System</li>
 		          <li><a href="department.php">Department</a></li>
-		          <li class="active"><a href="cbs_dept.php">CBS Department</a></li>
+		          <li><a href="cbs_dept.php">CBS Department</a></li>
 		          <li><a href="trainer.php">Trainer Profile</a></li>
 		          <li><a href="course.php">Course</a></li>
-		          <li><a href="classroom.php">Class Room</a></li>
+		          <li class="active"><a href="classroom.php">Class Room</a></li>
 		          
 		
 				<!--@End ######### Navigation panel editor place ########## -->
@@ -56,31 +56,45 @@
 				    	<fieldset>
 						
 				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_id">รหัสภาควิชา*</label>
+				            <label class="control-label" for="n_classroom_id">รหัสห้องเรียน*</label>
 				            <div class="controls">
-				        	<?php if ( $cbs_id ) { ?>
-				              <input type="text" class="input-large disabled" id="n_cbs_id" name="n_cbs_id" value="<?=$cbs_id?>" disabled>
-				              <input type="hidden" name="cbs_id" value="<?=$cbs_id?>">
+				        	<?php if ( $classroom_id ) { ?>
+				              <input type="text" class="input-large disabled" id="n_classroom_id" name="n_classroom_id" value="<?=$classroom_id?>" disabled>
+				              <input type="hidden" name="classroom_id" value="<?=$classroom_id?>">
 				            <?php } else { ?>
-				              <input type="text" class="input-large" id="n_cbs_id" name="n_cbs_id">
+				              <input type="text" class="input-large" id="n_classroom_id" name="n_classroom_id">
 							<?php } ?>		            
 				            </div>
 				          </div>
 
 				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_department">ภาควิชา*</label>
+				            <label class="control-label" for="n_room_no">ห้องเรียนเลขที่*</label>
 				            <div class="controls">
-				              <input type="text" class="input-large" id="n_cbs_department" name="n_cbs_department" value="<?=$cbs_department?>">
+				              <input type="text" class="input-medium" id="n_room_no" name="n_room_no" value="<?=$room_no?>">
+				            </div>
+				          </div>
+
+				          <div class="control-group">
+				            <label class="control-label" for="n_max_seat">จำนวนที่นั้งทั้งหมด*</label>
+				            <div class="controls">
+				              <input type="text" class="input-small" id="n_max_seat" name="n_max_seat" value="<?=$max_seat?>">
+				            </div>
+				          </div>
+
+				          <div class="control-group">
+				            <label class="control-label" for="n_left_seat">จำนวนที่นั่งคงเหลือ*</label>
+				            <div class="controls">
+				              <input type="text" class="input-small" id="n_left_seat" name="n_left_seat" value="<?=$left_seat?>">
 				            </div>
 				          </div>
 				
 				          <div class="form-actions">
-				          	<?php if ( $cbs_id ) { ?>
+				          	<?php if ( $classroom_id ) { ?>
 					      	<button type="submit" class="btn btn-primary">ปรับปรุงข้อมูล</button> &nbsp;&nbsp;
 					      	<?php } else { ?>
 					      	<button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button> &nbsp;&nbsp;
 					      	<?php } ?>
-					        <a href="cbs_dept.php" class="btn btn-danger">ยกเลิก</a>
+					        <a href="classroom.php" class="btn btn-danger">ยกเลิก</a>
 					      </div>
 				
 				        </fieldset>
@@ -93,8 +107,10 @@
 				        <thead>
 				          <tr>
 				            <th>#</th>
-				            <th>รหัส CBS </th>
-				            <th>CBS ภาควิชา</th>
+				            <th>รหัสห้องเรียน</th>
+				            <th>ห้องเรียนเลขที่</th>
+				            <th>จำนวนที่นั้ง</th>
+				            <th>ที่นั่งเหลือว่าง</th>
 				            <th>&nbsp;</th>
 				            <th>&nbsp;</th>
 				          </tr>
@@ -108,10 +124,12 @@
 				          ?>
 					          <tr>
 					            <td><?=$idx?></td>
-					            <td><?=$value['CBS_ID']?></td>
-					            <td><?=iconv("TIS-620","UTF-8", $value['CBS_DEPARTMENT'])?></td>
-					            <td><a href="cbs_dept.php?cbs_id=<?=$value['CBS_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
-					            <td><a href="cbs_dept.php?remove_id=<?=$value['CBS_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
+					            <td><?=$value['CLASSROOM_ID']?></td>
+					            <td><?=iconv("TIS-620","UTF-8", $value['ROOM_NO'])?></td>
+					            <td><?=$value['MAX_SEAT']?></td>
+					            <td><?=$value['LEFT_SEAT']?></td>
+					            <td><a href="classroom.php?classroom_id=<?=$value['CLASSROOM_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
+					            <td><a href="classroom.php?remove_id=<?=$value['CLASSROOM_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
 					          </tr>
 				          <?php } ?>
 				        </tbody>

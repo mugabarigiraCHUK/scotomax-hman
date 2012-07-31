@@ -2,7 +2,6 @@
 
 	// Required OCI class
 	include("./config/oracle.php");
-	include("./config/utils.php");
 	
 	if ( $_SESSION['id_code'] != "13245768" ) {
 		header( "Location: index.php" );
