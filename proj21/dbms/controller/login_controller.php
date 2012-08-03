@@ -52,7 +52,7 @@
 						oci_execute($dml, OCI_COMMIT_ON_SUCCESS);
 						
 						$error = "You loged into system, welcome back.";
-						header( "Location: index.php" );
+						header( "Location: profile.php" );
 					} else {
 						$error = "Your username is not exist in system!";
 					}

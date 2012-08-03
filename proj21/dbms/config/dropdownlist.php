@@ -34,6 +34,21 @@ class dropdownlist {
 		}
 		return $list;
 	}
+
+	/**
+	 * DEPARTMENT
+	 * @param oci_connect
+	 * @return array of department list
+	 */
+	public static function department($ora_conn) {
+		$list = array();
+		$department_sql = oci_parse($ora_conn, "select dep_id, department_name from department");
+		oci_execute($department_sql);
+		while($rowtable = oci_fetch_array($department_sql)) {
+			$list[$rowtable['DEP_ID']] = iconv("TIS-620","UTF-8", $rowtable['DEPARTMENT_NAME']);
+		}
+		return $list;
+	}
 	
 }
 

@@ -19,9 +19,9 @@
 		        </a>
 		        <ul class="dropdown-menu">
 		          <?php if ( $_SESSION["id_code"] == "13245768" ) { ?>
-		            <li><a href="admin.php">Admin</a></li>
+		            <li><a href="admin.php">ผู้ดูแลระบบ</a></li>
 		          <?php } else { ?>
-		            <li><a href="profile.php">Profile</a></li>
+		            <li><a href="profile.php">ข้อมูลส่วนตัว</a></li>
 				  <?php } ?>		        
 		          <li class="divider"></li>
 		          <li><a href="controller/signout_controller.php">ออกจากระบบ</a></li>
