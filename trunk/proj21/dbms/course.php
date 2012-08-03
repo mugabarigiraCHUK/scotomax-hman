@@ -21,18 +21,19 @@
 				<!--@Start ######### Navigation panel editor place ########## -->
 				
 		          <li class="nav-header">Menu</li>
-		          <li><a href="registering.php">Registering</a></li>
-		          <li><a href="examination.php">Examination</a></li>
-		          <li><a href="schedule.php">Course Schedule</a></li>
-		      	  <li><a href="course_trainer.php">Course Trainer</a></li>
-		      	  <li><a href="trainee_grade.php">Trainee Grade</a></li>
+		          <li><a href="trainee_grade.php">นักเรียน</a></li>
+		          <li><a href="class.php">ตารางเรียน</a></li>
+		          <li><a href="cbs_course.php">แผนเรียนภาคพาณิชฯ</a></li>
+		      	  <li><a href="course_trainer.php">แผนการสอน</a></li>
+		      	  <li><a href="course_schedule.php">แผนการเรียน</a></li>
+		      	  <li><a href="exam_series.php">แบบทดสอบ</a></li>
 		          
 		          <li class="nav-header">System</li>
-		          <li><a href="department.php">Department</a></li>
-		          <li><a href="cbs_dept.php">CBS Department</a></li>
-		          <li><a href="trainer.php">Trainer Profile</a></li>
-		          <li class="active"><a href="course.php">Course</a></li>
-		          <li><a href="classroom.php">Class Room</a></li>
+		          <li><a href="department.php">ภาค</a></li>
+		          <li><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
+		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
+		          <li class="active"><a href="course.php">วิชา</a></li>
+		          <li><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
 				<!--@End ######### Navigation panel editor place ########## -->
@@ -84,14 +85,20 @@
 				          <div class="control-group">
 				            <label class="control-label" for="n_course_start">เริ่มเมื่อ*</label>
 				            <div class="controls">
-				              <input type="text" class="input-small" id="n_course_start" name="n_course_start" value="<?=$course_start?>">
+				              <div class="input-prepend">
+							    <span class="add-on"><i class="icon-calendar"></i></span>
+								<input class="datepick input-large" type="text" id="n_course_start" name="n_course_start" value="<?=$course_start?>">
+							  </div>
 				            </div>
 				          </div>
 
 				          <div class="control-group">
 				            <label class="control-label" for="n_course_end">เสร็จสิ้น*</label>
 				            <div class="controls">
-				              <input type="text" class="input-small" id="n_course_end" name="n_course_end" value="<?=$course_end?>">
+				              <div class="input-prepend">
+							    <span class="add-on"><i class="icon-calendar"></i></span>
+								<input class="datepick input-large" type="text" id="n_course_end" name="n_course_end" value="<?=$course_end?>">
+							  </div>
 				            </div>
 				          </div>
 				
@@ -135,8 +142,8 @@
 					            <td><?=$value['COURSE_ID']?></td>
 					            <td><?=iconv("TIS-620","UTF-8", $value['COURSE_NAME'])?></td>
 					            <td><?=$value['COURSE_FEE']?></td>
-					            <td><?=$value['COURSE_START']?></td>
-					            <td><?=$value['COURSE_END']?></td>
+					            <td><?=utils::oradate2text($value['COURSE_START'])?></td>
+					            <td><?=utils::oradate2text($value['COURSE_END'])?></td>
 					            <td><a href="course.php?course_id=<?=$value['COURSE_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
 					            <td><a href="course.php?remove_id=<?=$value['COURSE_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
 					          </tr>
@@ -162,5 +169,19 @@
       </footer>
     </div><!--/.fluid-container-->
     <?php include 'layout/javascript.php'; ?>
+    <script type="text/javascript">
+    	$(function(){
+    		// Datepicker
+			$(".datepick").datepicker({ dateFormat: "dd MM yy"
+										, changeYear: true
+										, changeMonth: true
+										, yearRange: "1970:2015"
+										, monthNames: ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"]
+										, monthNamesShort: ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ย.","พ.ย.","ธ.ค."]
+										, dayNames: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์"]
+										, dayNamesMin: ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."]
+										, dayNamesShort: ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."] });
+    	});
+    </script>
   </body>
 </html>

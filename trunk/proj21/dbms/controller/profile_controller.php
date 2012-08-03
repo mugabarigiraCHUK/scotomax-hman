@@ -84,12 +84,14 @@
 	
 	if ( isset( $_SESSION['id_code'] ) ) {
 		// SQL
-		$sql = "select id_code"
+		$sql = "SELECT id_code"
 				.", firstname"
 				.", lastname"
-				.", pic"
+				.", pic_name"
+				.", pic_size"
+				.", pic_type"
 				.", title"
-				.", to_char(birthdate, 'dd MM yyyy') as birthdate"
+				.", TO_CHAR(birthdate, 'dd MM yyyy') as birthdate"
 				.", address"
 				.", province"
 				.", phone_no"
@@ -98,9 +100,9 @@
 				.", edu_level"
 				.", gpa"
 				.", id_number"
-				.", to_char(registered_date, 'dd MM yyyy') as registered_date"
-				." from std_profile"
-				." where id_code = :id_code";
+				.", TO_CHAR(registered_date, 'dd MM yyyy') as registered_date"
+				." FROM std_profile"
+				." WHERE id_code = :id_code";
 		// SQL statement
 		$stmt = oci_parse($ora_conn, $sql);
 		oci_bind_by_name($stmt, ":id_code", $_SESSION['id_code']);
@@ -112,7 +114,9 @@
 			$id_number = oci_result($stmt, 'ID_NUMBER');
 			$firstname = iconv("TIS-620","UTF-8", oci_result($stmt, 'FIRSTNAME'));
 			$lastname = iconv("TIS-620","UTF-8", oci_result($stmt, 'LASTNAME'));
-			$pic = iconv("TIS-620","UTF-8", oci_result($stmt, 'PIC'));
+			$pic_name = iconv("TIS-620","UTF-8", oci_result($stmt, 'PIC_NAME'));
+			$pic_size = oci_result($stmt, 'PIC_SIZE');
+			$pic_type = oci_result($stmt, 'PIC_TYPE');
 			$title = iconv("TIS-620","UTF-8", oci_result($stmt, 'TITLE'));
 			
 			$oradate = oci_result($stmt, 'BIRTHDATE');

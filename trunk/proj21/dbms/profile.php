@@ -6,6 +6,34 @@
 	<meta charset="utf-8">
     <title>DBMS PHP Index</title>
     <?php include 'layout/header.php'; ?>
+    <style type="text/css">
+    	#drop_zone {
+			border: 3px dashed #BBB;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			padding: 50px;
+			text-align: center;
+			color: #BBB;
+			border-image: initial;
+		}
+		.thumbSmall { 
+			width: 100px;
+			border: 4px solid #FFF;
+			box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			-moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			-webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			margin: 10px 10px 0 10px;
+		}
+		.thumb {
+			width: 100%;
+			height: auto;
+			border: 4px solid #FFF;
+			box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			-moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			-webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+		}
+    </style>
   </head>
 
   <body>
@@ -21,16 +49,10 @@
 				<!--@Start ######### Navigation panel editor place ########## -->
 				
 		          <li class="nav-header">Menu</li>
-		          <li class="active"><a href="register.php">Profile</a></li>
-		          <li><a href="register.php">Register</a></li>
-		          <li><a href="courseopen.php">Course openning</a></li>
-		          <li><a href="#">Course plan</a></li>
-		          <li><a href="classroom.php">Class room</a></li>
-		          
-		          <li class="nav-header">System</li>
-		          <li><a href="#">Administrator</a></li>
-		          <li><a href="#">Report</a></li>
-		          <li><a href="#">Logs</a></li>
+		          <li class="active"><a href="profile.php">ข้อมูลส่วนตัว</a></li>
+		          <li><a href="register.php">ลงทะเบียน</a></li>
+		          <li><a href="courserunning.php">กำลังศึกษา</a></li>
+		          <li><a href="#">ประวัติการลงทะเบียน</a></li>
 		
 				<!--@End ######### Navigation panel editor place ########## -->
 		
@@ -61,9 +83,23 @@
 
 				          <div class="control-group">
 				            <div class="controls">
-				              <a data-toggle="modal" href="#pwdmodal" class="btn btn-primary">เปลี่ยนรหัสผ่าน</a>
+				              <a data-toggle="modal" href="#pwdmodal" class="btn btn-small btn-info">เปลี่ยนรหัสผ่าน</a>
+				              <!-- a data-toggle="modal" href="#imgmodal" class="btn btn-small btn-info">upload ไฟล์รูป</a -->
 				            </div>
 				          </div>
+
+				          <!--
+				          <div class="control-group">
+				            <label class="control-label" >รูป</label>
+				            <div class="controls">
+								<?php /* if ( $pic_name && $pic_size && $pic_type ) { */ ?>
+									<span>
+										<img class="thumbSmall" src="controller/image_extract.php?type=profile&id=<?php /* echo $_SESSION['id_code']; */ ?>"/>
+									</span>
+								<?php /* } */ ?>
+				            </div>
+				          </div>
+						  -->
 
 						  <div class="control-group">
 				            <label class="control-label" >คำนำหน้าชื่อ*</label>
@@ -103,7 +139,7 @@
 				            <div class="controls">
 							  <div class="input-prepend">
 							    <span class="add-on"><i class="icon-calendar"></i></span>
-								<input class="input-large birthdate" id="inputIcon" type="text" id="birthdate" name="birthdate" value="<?=$birthdate?>">
+								<input class="input-large birthdate" type="text" id="birthdate" name="birthdate" value="<?=$birthdate?>">
 							  </div>
 				            </div>
 				          </div>
@@ -134,7 +170,7 @@
 				            <div class="controls">
 							  <div class="input-prepend">
 							    <span class="add-on"><i class="icon-envelope"></i></span>
-								<input class="input-xlarge" id="inputIcon" type="text" id="email" name="email" value="<?=$email?>">
+								<input class="input-xlarge" type="text" id="email" name="email" value="<?=$email?>">
 							  </div>
 				            </div>
 				          </div>
@@ -179,6 +215,8 @@
 				      </form>
 
 	            </p>
+	            
+	            <!--
 	            <p>
 	            	  <div class="tabbable" style="margin-bottom: 18px;">
 				        <ul class="nav nav-tabs">
@@ -250,8 +288,9 @@
 				          </div>
 
 				        </div>
-				      </div> <!-- /tabbable -->
+				      </div> 
 	            </p>
+	        	-->
 
           	<!--@End ######### Body content editor place ########## -->
 
@@ -267,6 +306,9 @@
 		</p>
       </footer>
     </div><!--/.fluid-container-->
+
+
+    <!-- ######################## Model for user change password #########################  -->
     <div id="pwdmodal" class="modal hide fade">
       	
         <div class="modal-header">
@@ -308,9 +350,43 @@
           <a href="#" id="cmdchange" class="btn btn-primary">บันทึก</a>
         </div>
     	
-      </div>
+    </div>
+
+    <!-- ######################## Model for user change password #########################  -->
+    <div id="imgmodal" class="modal hide fade">
+      	
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3>Upload รูปภาพของคุณ</h3>
+        </div>
+
+        <div class="modal-body">
+
+			<div id="drop_zone">
+				เลือก หรือ drag & drop ไฟล์รูปภาพที่นี้
+				<input type="file" id="file" name="file" />
+			</div> 
+			<p id="imagepanel">
+				<output id="listUploadImage">	
+			</output>
+
+			<!-- progress bar event handle -->
+			<div class="progress progress-info progress-striped active">
+				<div id="progress" class="bar" style="width: 0%"></div>
+			</div>
+
+        </div>
+
+        <div class="modal-footer">
+          <a href="#" class="btn" data-dismiss="modal" >ปิด</a>
+          <a href="#" id="cmdupload" class="btn btn-primary">uploading</a>
+        </div>
+    	
+    </div>
 
     <?php include 'layout/javascript.php'; ?>
+    <script src="js/profile.js"></script>
+
 	<script>
 		$(function() {
 			// Datepicker
@@ -352,6 +428,7 @@
 					$(this).focus();
 				}
 			});
+
 		});
 	</script>
   </body>

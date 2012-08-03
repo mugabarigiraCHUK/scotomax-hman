@@ -21,18 +21,19 @@
 				<!--@Start ######### Navigation panel editor place ########## -->
 				
 		          <li class="nav-header">Menu</li>
-		          <li><a href="registering.php">Registering</a></li>
-		          <li><a href="examination.php">Examination</a></li>
-		          <li><a href="schedule.php">Course Schedule</a></li>
-		      	  <li><a href="course_trainer.php">Course Trainer</a></li>
-		      	  <li><a href="trainee_grade.php">Trainee Grade</a></li>
+		          <li><a href="trainee_grade.php">นักเรียน</a></li>
+		          <li><a href="class.php">ตารางเรียน</a></li>
+		          <li><a href="cbs_course.php">แผนเรียนภาคพาณิชฯ</a></li>
+		      	  <li><a href="course_trainer.php">แผนการสอน</a></li>
+		      	  <li><a href="course_schedule.php">แผนการเรียน</a></li>
+		      	  <li><a href="exam_series.php">แบบทดสอบ</a></li>
 		          
 		          <li class="nav-header">System</li>
-		          <li><a href="department.php">Department</a></li>
-		          <li class="active"><a href="cbs_dept.php">CBS Department</a></li>
-		          <li><a href="trainer.php">Trainer Profile</a></li>
-		          <li><a href="course.php">Course</a></li>
-		          <li><a href="classroom.php">Class Room</a></li>
+		          <li><a href="department.php">ภาค</a></li>
+		          <li class="active"><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
+		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
+		          <li><a href="course.php">วิชา</a></li>
+		          <li><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
 				<!--@End ######### Navigation panel editor place ########## -->
@@ -56,7 +57,7 @@
 				    	<fieldset>
 						
 				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_id">รหัสภาควิชา*</label>
+				            <label class="control-label" for="n_cbs_id">รหัสภาคพาณิชยศาสตร์การบัญชี*</label>
 				            <div class="controls">
 				        	<?php if ( $cbs_id ) { ?>
 				              <input type="text" class="input-large disabled" id="n_cbs_id" name="n_cbs_id" value="<?=$cbs_id?>" disabled>
@@ -68,7 +69,7 @@
 				          </div>
 
 				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_department">ภาควิชา*</label>
+				            <label class="control-label" for="n_cbs_department">ภาคพาณิชยศาสตร์การบัญชีวิชา*</label>
 				            <div class="controls">
 				              <input type="text" class="input-large" id="n_cbs_department" name="n_cbs_department" value="<?=$cbs_department?>">
 				            </div>
@@ -93,8 +94,8 @@
 				        <thead>
 				          <tr>
 				            <th>#</th>
-				            <th>รหัส CBS </th>
-				            <th>CBS ภาควิชา</th>
+				            <th>รหัสพาณิชยศาสตร์การบัญชี </th>
+				            <th>ภาคพาณิชยศาสตร์การบัญชีวิชา</th>
 				            <th>&nbsp;</th>
 				            <th>&nbsp;</th>
 				          </tr>
