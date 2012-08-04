@@ -2,7 +2,10 @@
 
 	// Required OCI class
 	include("./config/oracle.php");
+	include("./config/dropdownlist.php");
 	include("./config/utils.php");
+	include("./domain/coursedom.php");
+	include("./domain/schedule.php");
 
 	if ( $_SESSION['id_code'] != "13245768" ) {
 		header( "Location: index.php" );
@@ -112,6 +115,13 @@
 				}
 			} 
 			oci_free_statement($gstmt);
+
+			// Dropdownlist
+			$cbsdeps = dropdownlist::cbs_department($ora_conn);
+			$classrooms = dropdownlist::classroom($ora_conn);
+			$trainers = dropdownlist::trainer($ora_conn);
+			$schedules = schedule::findall($ora_conn, $_GET['course_id']);
+
 		} else if ( $_GET['remove_id'] ) {
 			$gsql = "DELETE FROM course WHERE course_id=:course_id";
 			$gstmt = oci_parse($ora_conn, $gsql);

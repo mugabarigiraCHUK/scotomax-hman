@@ -1,5 +1,5 @@
 <?php include 'config/configure.php'; ?>
-<?php include 'controller/cbs_controller.php'; ?>
+<?php include 'controller/course_controller.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,9 +30,9 @@
 		          
 		          <li class="nav-header">System</li>
 		          <li><a href="department.php">ภาค</a></li>
-		          <li class="active"><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
+		          <li><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
 		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
-		          <li><a href="courselist.php">วิชา</a></li>
+		          <li class="active"><a href="courselist.php">วิชา</a></li>
 		          <li><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
@@ -53,40 +53,11 @@
 	            
 				<h3>ข้อมูลภาควิชา</h3>
 			    <p>
-	            	<form class="form-horizontal" method="post">
-				    	<fieldset>
-						
-				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_id">รหัสภาคพาณิชยศาสตร์การบัญชี*</label>
-				            <div class="controls">
-				        	<?php if ( $cbs_id ) { ?>
-				              <input type="text" class="input-large disabled" id="n_cbs_id" name="n_cbs_id" value="<?=$cbs_id?>" disabled>
-				              <input type="hidden" name="cbs_id" value="<?=$cbs_id?>">
-				            <?php } else { ?>
-				              <input type="text" class="input-large" id="n_cbs_id" name="n_cbs_id">
-							<?php } ?>		            
-				            </div>
-				          </div>
-
-				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_department">ภาคพาณิชยศาสตร์การบัญชีวิชา*</label>
-				            <div class="controls">
-				              <input type="text" class="input-large" id="n_cbs_department" name="n_cbs_department" value="<?=$cbs_department?>">
-				            </div>
-				          </div>
-				
-				          <div class="form-actions">
-				          	<?php if ( $cbs_id ) { ?>
-					      	<button type="submit" class="btn btn-primary">ปรับปรุงข้อมูล</button> &nbsp;&nbsp;
-					      	<?php } else { ?>
-					      	<button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button> &nbsp;&nbsp;
-					      	<?php } ?>
-					        <a href="cbs_dept.php" class="btn btn-danger">ยกเลิก</a>
-					      </div>
-				
-				        </fieldset>
-				      </form>
-
+	            	<fieldset>
+				    	<div class="form-actions">
+				    		<a href="course.php" class="btn">เปิดสอน</a>      
+					    </div>
+				    </fieldset>
 	            </p>
 	            <p>
 	            	  
@@ -94,8 +65,11 @@
 				        <thead>
 				          <tr>
 				            <th>#</th>
-				            <th>รหัสพาณิชยศาสตร์การบัญชี </th>
-				            <th>ภาคพาณิชยศาสตร์การบัญชีวิชา</th>
+				            <th>รหัสวิชา</th>
+				            <th>วิชา</th>
+				            <th>ค่าลงทะเบียน</th>
+				            <th>เริ่มเมื่อ</th>
+				            <th>เสร็จสิ้น</th>
 				            <th>&nbsp;</th>
 				            <th>&nbsp;</th>
 				          </tr>
@@ -109,10 +83,13 @@
 				          ?>
 					          <tr>
 					            <td><?=$idx?></td>
-					            <td><?=$value['CBS_ID']?></td>
-					            <td><?=iconv("TIS-620","UTF-8", $value['CBS_DEPARTMENT'])?></td>
-					            <td><a href="cbs_dept.php?cbs_id=<?=$value['CBS_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
-					            <td><a href="cbs_dept.php?remove_id=<?=$value['CBS_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
+					            <td><?=$value['COURSE_ID']?></td>
+					            <td><?=iconv("TIS-620","UTF-8", $value['COURSE_NAME'])?></td>
+					            <td><?=$value['COURSE_FEE']?></td>
+					            <td><?=utils::oradate2text($value['COURSE_START'])?></td>
+					            <td><?=utils::oradate2text($value['COURSE_END'])?></td>
+					            <td><a href="course.php?course_id=<?=$value['COURSE_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
+					            <td><a href="courselist.php?remove_id=<?=$value['COURSE_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
 					          </tr>
 				          <?php } ?>
 				        </tbody>
@@ -120,7 +97,7 @@
 				      </table>
 				            
 	            </p>
-
+	            
           	<!--@End ######### Body content editor place ########## -->
 
 			</div>

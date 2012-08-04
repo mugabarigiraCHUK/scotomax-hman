@@ -19,6 +19,7 @@
 			
 				<!--@Start ######### Navigation panel editor place ########## -->
 		          <li class="nav-header">Menu</li>
+		          <!--//[CDATA]
 		          <li><a href="register.php">Course register</a></li>
 		          <li><a href="courseopen.php">Course openning</a></li>
 		          <li><a href="#">Course plan</a></li>
@@ -27,6 +28,7 @@
 		          <li><a href="#">Administrator</a></li>
 		          <li><a href="#">Report</a></li>
 		          <li><a href="#">Logs</a></li>
+		          //-->
 				<!--@End ######### Navigation panel editor place ########## -->
 		
 		        </ul>
@@ -41,9 +43,9 @@
 				<?php include 'layout/notification.php'; ?>
 				
 				<!--@Start ######### Body content editor place ########## -->
-	            <h1>Hello,</h1>
+	            <h1>ยินดีต้อนรับ,</h1>
 			    <p>สถาบันกวดวิชาสำหรับผู้สนใจสอบเข้าในระดับปริญญาตรี คณะพาณิชยศาสตร์และการบัญชี จุฬาลงกรณ์มหาวิทยาลัย.</p>
-			    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+			    <p><a class="btn btn-primary btn-large">รายละเอียด &raquo;</a></p>
 	          	<!--@End ######### Body content editor place ########## -->
 
 			</div>
