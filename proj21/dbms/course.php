@@ -32,7 +32,7 @@
 		          <li><a href="department.php">ภาค</a></li>
 		          <li><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
 		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
-		          <li class="active"><a href="course.php">วิชา</a></li>
+		          <li class="active"><a href="courselist.php">วิชา</a></li>
 		          <li><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
@@ -53,7 +53,7 @@
 	            
 				<h3>ข้อมูลภาควิชา</h3>
 			    <p>
-	            	<form class="form-horizontal" method="post">
+	            	<form id="form1" class="form-horizontal" method="post">
 				    	<fieldset>
 						
 				          <div class="control-group">
@@ -108,51 +108,203 @@
 					      	<?php } else { ?>
 					      	<button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button> &nbsp;&nbsp;
 					      	<?php } ?>
-					        <a href="course.php" class="btn btn-danger">ยกเลิก</a>
+					        <a href="courselist.php" class="btn btn-danger">ยกเลิก</a>
 					      </div>
 				
 				        </fieldset>
 				      </form>
 
 	            </p>
+	            
+	            <?php if ( isset( $course_id ) ) { ?>
+	            <!-- ############################## Tab menus #################################### -->
 	            <p>
-	            	  
-	            	<table class="table table-bordered">
-				        <thead>
-				          <tr>
-				            <th>#</th>
-				            <th>รหัสวิชา</th>
-				            <th>วิชา</th>
-				            <th>ค่าลงทะเบียน</th>
-				            <th>เริ่มเมื่อ</th>
-				            <th>เสร็จสิ้น</th>
-				            <th>&nbsp;</th>
-				            <th>&nbsp;</th>
-				          </tr>
-				        </thead>
-				        <?php if ( $nrows > 0 ) { ?>
-				        <tbody>
-				          <?php 
-				          	$idx = 0;
-				          	foreach ($result as $key => $value) { 
-				          		$idx++;
-				          ?>
-					          <tr>
-					            <td><?=$idx?></td>
-					            <td><?=$value['COURSE_ID']?></td>
-					            <td><?=iconv("TIS-620","UTF-8", $value['COURSE_NAME'])?></td>
-					            <td><?=$value['COURSE_FEE']?></td>
-					            <td><?=utils::oradate2text($value['COURSE_START'])?></td>
-					            <td><?=utils::oradate2text($value['COURSE_END'])?></td>
-					            <td><a href="course.php?course_id=<?=$value['COURSE_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
-					            <td><a href="course.php?remove_id=<?=$value['COURSE_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
-					          </tr>
-				          <?php } ?>
-				        </tbody>
-				        <?php } ?>
-				      </table>
-				            
+	            	  <div class="tabbable" style="margin-bottom: 18px;">
+				        <ul class="nav nav-tabs">
+				          <li class="active"><a href="#tab1" data-toggle="tab">ห้องเรียน</a></li>
+				          <li><a href="#tab2" data-toggle="tab">ตารางเรียน</a></li>
+				          <li><a href="#tab3" data-toggle="tab">ผู้สอน</a></li>
+				          <li><a href="#tab4" data-toggle="tab">ภาควิชาพาณิชฯ</a></li>
+				        </ul>
+				        <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+				          <div class="tab-pane active" id="tab1">
+				            <p>
+				            	<form id="form2" method="POST" action="course.php">
+				            	  <table class="table table-bordered">
+							        <thead>
+							          <tr>
+							            <th>#</th>
+							            <th>รหัสห้อง</th>
+							            <th>เลขที่ห้อง</th>
+							            <th>ที่นั่งทั้งหมด</th>
+							          </tr>
+							        </thead>
+							        <tbody>
+							        <?php 
+							        	if ( $classrooms ) {
+							        		foreach ( $classrooms as $key => $value ) {
+							        ?>
+							          <tr>
+							            <td><input type="checkbox" name="classroom_id" value="<?=$key?>"/></td>
+							            <td><?=$key?></td>
+							            <td><?=$value['ROOM_NO']?></td>
+							            <td><?=$value['MAX_SEAT']?></td>
+							          </tr>
+							         <?php
+							         		}
+							         	}
+							         ?>
+							        </tbody>
+							        <tfoot>
+							        	<tr>
+							        		<td colspan="4">
+							        			<input type="submit" name="class" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info"/>
+							        			<input type="hidden" name="course_id" value="<?=$course_id?>" />
+							        		</td>
+							        	</tr>
+							        </tfoot>
+							      </table>
+							   	</form>
+				            </p>
+				          </div>
+				          <div class="tab-pane" id="tab2">
+				            <p>
+				              <form id="form3" method="POST" action="course.php">
+				            	<table class="table table-bordered">
+							        <thead>
+							          <tr>
+							            <th>#</th>
+							            <th>วันที่</th>
+							            <th>เริ่มเวลา</th>
+							            <th>เลิกเวลา</th>
+							            <th>จำนวนชั่วโมง</th>
+							            <th>&nbsp;</th>
+							          </tr>
+							        </thead>
+							        <tbody>
+							        <?php
+							        	if ( $schedules ) {
+							        		$idx = 0;
+							        		foreach ( $schedules as $key => $value ) {
+							        			$idx++;
+							        ?>
+							          <tr>
+							            <td><?=$idx?></td>
+							            <td><?=$value['DAY']?></td>
+							            <td><?=$value['BEGIN_TIME']?></td>
+							            <td><?=$value['END_TIME']?></td>
+							            <td><?=$value['HOURS']?></td>
+							            <td><a href="course.php?course_id=<?=$course_id?>&remove_id=<?=$key?>" 
+							            	   class="btn btn-small btn-danger" 
+							            	   onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
+							          </tr>
+							        <?php
+							        		} 
+							        	}
+							        ?>
+							          <tr>
+							          	<td>&nbsp;</td>
+							            <td><input type="text" class="input-mini" name="day" /></td>
+							            <td>
+							            	<input type="text" class="input-mini" name="begin_time" />
+							            </td>
+							            <td>
+							            	<input type="text" class="input-mini" name="end_time" />
+							            </td>
+							            <td>&nbsp;</td>
+							            <td>
+							            	<input type="submit" name="schedule" value="เพิ่ม" class="btn btn-small btn-info" />
+							            	<input type="hidden" name="course_id" value="<?=$course_id?>" />
+							            </td>
+							          </tr>
+
+							        </tbody>
+							      </table>
+							    </form>
+				            </p>
+				          </div>
+				          <div class="tab-pane" id="tab3">
+				            <p>
+				            	<form id="form3" method="POST" action="course.php">
+				            	  <table class="table table-bordered">
+							        <thead>
+							          <tr>
+							            <th>#</th>
+							            <th>รหัสผู้สอน</th>
+							            <th>ชื่อผู้สอน</th>
+							          </tr>
+							        </thead>
+							        <tbody>
+							        <?php 
+							        	if ( $trainers ) {
+							        		foreach ( $trainers as $key => $value ) {
+							        ?>
+							          <tr>
+							            <td><input type="checkbox" name="trainer_id" value="<?=$key?>"/></td>
+							            <td><?=$key?></td>
+							            <td><?=$value['FIRSTNAME']?> <?=$value['LASTNAME']?></td>
+							          </tr>
+							         <?php
+							         		}
+							         	}
+							         ?>
+							        </tbody>
+							        <tfoot>
+							        	<tr>
+							        		<td colspan="3">
+							        			<input type="submit" name="class" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
+							        			<input type="hidden" name="course_id" value="<?=$course_id?>" />
+							        		</td>
+							        	</tr>
+							        </tfoot>
+							      </table>
+							   	</form>
+				            </p>
+				          </div>
+				          <div class="tab-pane" id="tab4">
+				            <p>
+				            	<form id="form4" method="POST" action="course.php">
+				            	  <table class="table table-bordered">
+							        <thead>
+							          <tr>
+							            <th>#</th>
+							            <th>รหัสวิชาภาคพาณิชฯ</th>
+							            <th>ชื่อวิชาภาคพาณิชฯ</th>
+							          </tr>
+							        </thead>
+							        <tbody>
+							        <?php 
+							        	if ( $cbsdeps ) {
+							        		foreach ( $cbsdeps as $key => $value ) {
+							        ?>
+							          <tr>
+							            <td><input type="checkbox" name="cbs_id" value="<?=$key?>"/></td>
+							            <td><?=$key?></td>
+							            <td><?=$value?></td>
+							          </tr>
+							         <?php
+							         		}
+							         	}
+							         ?>
+							        </tbody>
+							        <tfoot>
+							        	<tr>
+							        		<td colspan="3">
+							        			<input type="submit" name="class" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
+							        			<input type="hidden" name="course_id" value="<?=$course_id?>" />
+							        		</td>
+							        	</tr>
+							        </tfoot>
+							      </table>
+							   	</form>
+				            </p>
+				          </div>
+
+				        </div>
+				      </div> 
 	            </p>
+	        	
+	            <?php } ?>
 
           	<!--@End ######### Body content editor place ########## -->
 

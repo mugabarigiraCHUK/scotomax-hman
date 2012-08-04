@@ -32,7 +32,7 @@
 		          <li><a href="department.php">ภาค</a></li>
 		          <li><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
 		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
-		          <li><a href="course.php">วิชา</a></li>
+		          <li><a href="courselist.php">วิชา</a></li>
 		          <li class="active"><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
