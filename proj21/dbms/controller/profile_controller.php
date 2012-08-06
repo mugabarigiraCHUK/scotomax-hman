@@ -9,10 +9,6 @@
 	$oracle = new oracle;
 	$ora_conn = $oracle->connection();
 	
-	// Dropdownlist
-	$deptlist = dropdownlist::cbs_department($ora_conn);
-	$courselist = dropdownlist::course($ora_conn);
-	
 	if ( isset( $_SERVER['REQUEST_METHOD'] ) ) {
 		// Handle HTTP POST method
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {

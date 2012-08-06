@@ -22,17 +22,13 @@
 				
 		          <li class="nav-header">Menu</li>
 		          <li><a href="trainee_grade.php">นักเรียน</a></li>
-		          <li><a href="class.php">ตารางเรียน</a></li>
-		          <li><a href="cbs_course.php">แผนเรียนภาคพาณิชฯ</a></li>
-		      	  <li><a href="course_trainer.php">แผนการสอน</a></li>
-		      	  <li><a href="course_schedule.php">แผนการเรียน</a></li>
+		          <li><a href="courselist.php">เปิดสอน</a></li>
 		      	  <li><a href="exam_series.php">แบบทดสอบ</a></li>
 		          
 		          <li class="nav-header">System</li>
-		          <li><a href="department.php">ภาค</a></li>
-		          <li><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
+		          <li><a href="department.php">ภาควิชา</a></li>
+		          <li><a href="cbs_dept.php">ภาควิชาพาณิชฯ</a></li>
 		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
-		          <li><a href="courselist.php">วิชา</a></li>
 		          <li class="active"><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
