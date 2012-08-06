@@ -1,5 +1,5 @@
 <?php include 'config/configure.php'; ?>
-<?php include 'controller/cbs_controller.php'; ?>
+<?php include 'controller/series_controller.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,11 +23,11 @@
 		          <li class="nav-header">Menu</li>
 		          <li><a href="trainee_grade.php">นักเรียน</a></li>
 		          <li><a href="courselist.php">เปิดสอน</a></li>
-		      	  <li><a href="series.php">แบบทดสอบ</a></li>
+		      	  <li class="active"><a href="series.php">แบบทดสอบ</a></li>
 		          
 		          <li class="nav-header">System</li>
 		          <li><a href="department.php">ภาควิชา</a></li>
-		          <li class="active"><a href="cbs_dept.php">ภาควิชาพาณิชฯ</a></li>
+		          <li><a href="cbs_dept.php">ภาควิชาพาณิชฯ</a></li>
 		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
 		          <li><a href="classroom.php">ห้องเรียน</a></li>
 		          
@@ -47,41 +47,68 @@
 				
 				<!--@Start ######### Body content editor place ########## -->
 	            
-				<h3>ข้อมูลภาควิชา</h3>
+				<h3>แบบทดสอบ</h3>
 			    <p>
-	            	<form class="form-horizontal" method="post">
+	            	<form id="form1" class="form-horizontal" method="post">
 				    	<fieldset>
 						
 				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_id">รหัสภาคพาณิชยศาสตร์การบัญชี*</label>
+				            <label class="control-label" for="n_exam_no">แบบทดสอบ*</label>
 				            <div class="controls">
-				        	<?php if ( $cbs_id ) { ?>
-				              <input type="text" class="input-large disabled" id="n_cbs_id" name="n_cbs_id" value="<?=$cbs_id?>" disabled>
-				              <input type="hidden" name="cbs_id" value="<?=$cbs_id?>">
+				        	<?php if ( $exam_no ) { ?>
+				              <input type="text" class="input-large disabled" id="n_exam_no" name="n_exam_no" value="<?=$exam_no?>" disabled>
+				              <input type="hidden" name="exam_no" value="<?=$exam_no?>">
 				            <?php } else { ?>
-				              <input type="text" class="input-large" id="n_cbs_id" name="n_cbs_id">
+				              <input type="text" class="input-large" id="n_exam_no" name="n_exam_no">
 							<?php } ?>		            
 				            </div>
 				          </div>
 
 				          <div class="control-group">
-				            <label class="control-label" for="n_cbs_department">ภาคพาณิชยศาสตร์การบัญชีวิชา*</label>
+				          	<label class="control-label" for="n_course_id">วิชา*</label>
+				          	<div class="controls">
+				          		<select class="input-large" id="n_course_id" name="n_course_id">
+				          			<option value=""> - โปรดเลือก - </option>
+				          			<?php 
+					              		if ( isset($courses) ) {
+					              			foreach ($courses as $key => $value) { 
+					              				if ( $key == $course_id ) { 
+					              					echo '<option value="'.$key.'" selected>'.$value['COURSE_NAME'].'</option>';
+					              				} else {
+					              					echo '<option value="'.$key.'">'.$value['COURSE_NAME'].'</option>';
+					              				}
+								    		}
+								    	}
+								    ?>
+				          		</select>
+				          	</div>
+				          </div>
+
+				          <div class="control-group">
+				            <label class="control-label" for="n_full_score">คะแนนเต็ม*</label>
 				            <div class="controls">
-				              <input type="text" class="input-large" id="n_cbs_department" name="n_cbs_department" value="<?=$cbs_department?>">
+				              <input type="text" class="input-small" id="n_full_score" name="n_full_score" value="<?=$full_score?>">
+				            </div>
+				          </div>
+
+				          <div class="control-group">
+				            <label class="control-label" for="n_exam_desc">รายละเอียด</label>
+				            <div class="controls">
+				              <textarea class="input-xlarge" id="n_exam_desc" name="n_exam_desc" rows="3"><?=$exam_desc?></textarea>
 				            </div>
 				          </div>
 				
 				          <div class="form-actions">
-				          	<?php if ( $cbs_id ) { ?>
+				          	<?php if ( $exam_no ) { ?>
 					      	<button type="submit" class="btn btn-primary">ปรับปรุงข้อมูล</button> &nbsp;&nbsp;
 					      	<?php } else { ?>
 					      	<button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button> &nbsp;&nbsp;
 					      	<?php } ?>
-					        <a href="cbs_dept.php" class="btn btn-danger">ยกเลิก</a>
+					        <a href="series.php" class="btn btn-danger">ยกเลิก</a>
 					      </div>
 				
 				        </fieldset>
-				      </form>
+				    </form>
 
 	            </p>
 	            <p>
@@ -90,8 +117,10 @@
 				        <thead>
 				          <tr>
 				            <th>#</th>
-				            <th>รหัสพาณิชยศาสตร์การบัญชี </th>
-				            <th>ภาคพาณิชยศาสตร์การบัญชีวิชา</th>
+				            <th>วิชา</th>
+				            <th>รหัสแบบทดสอบ</th>
+				            <th>คะแนนเต็ม</th>
+				            <th>&nbsp;</th>
 				            <th>&nbsp;</th>
 				            <th>&nbsp;</th>
 				          </tr>
@@ -105,10 +134,12 @@
 				          ?>
 					          <tr>
 					            <td><?=$idx?></td>
-					            <td><?=$value['CBS_ID']?></td>
-					            <td><?=iconv("TIS-620","UTF-8", $value['CBS_DEPARTMENT'])?></td>
-					            <td><a href="cbs_dept.php?cbs_id=<?=$value['CBS_ID']?>" class="btn btn-small btn-info">แก้ไข</a></td>
-					            <td><a href="cbs_dept.php?remove_id=<?=$value['CBS_ID']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
+					            <td><?=iconv("TIS-620","UTF-8", $value['COURSE_NAME'])?></td>
+					            <td><?=$value['EXAM_NO']?></td>
+					            <td><?=$value['FULL_SCORE']?></td>
+					            <td><a href="exam.php?exam_no=<?=$value['EXAM_NO']?>" class="btn btn-small btn-info">แบบทดสอบ</a></td>
+					            <td><a href="series.php?exam_no=<?=$value['EXAM_NO']?>" class="btn btn-small btn-info">แก้ไข</a></td>
+					            <td><a href="series.php?remove_id=<?=$value['EXAM_NO']?>" class="btn btn-small btn-danger" onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
 					          </tr>
 				          <?php } ?>
 				        </tbody>
@@ -131,6 +162,7 @@
 		</p>
       </footer>
     </div><!--/.fluid-container-->
+
     <?php include 'layout/javascript.php'; ?>
   </body>
 </html>

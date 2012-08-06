@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>DBMS PHP application</title>
+		<title>PHP Test Suite</title>
 		<link href="css/flick/jquery-ui-1.8.21.flick.css" rel="stylesheet">
 	</head>
 	<body>
