@@ -1,1 +1,1 @@
-&copy; Malipen 2012
+&copy; Malipen 2012 | Technology by PHP 5 and Twitter Bootstrap 2

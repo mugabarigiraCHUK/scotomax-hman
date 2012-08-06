@@ -23,7 +23,7 @@
 		          <li class="nav-header">Menu</li>
 		          <li><a href="trainee_grade.php">นักเรียน</a></li>
 		          <li><a href="courselist.php">เปิดสอน</a></li>
-		      	  <li><a href="exam_series.php">แบบทดสอบ</a></li>
+		      	  <li><a href="series.php">แบบทดสอบ</a></li>
 		          
 		          <li class="nav-header">System</li>
 		          <li><a href="department.php">ภาควิชา</a></li>

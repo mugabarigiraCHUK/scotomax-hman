@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
 	<meta charset="utf-8">
-    <title>DBMS PHP Index</title>
+    <title>Training Center เราเปิดสอนฯ</title>
     <?php include 'layout/header.php'; ?>
   </head>
 
