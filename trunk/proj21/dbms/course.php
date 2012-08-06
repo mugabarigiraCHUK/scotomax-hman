@@ -22,17 +22,13 @@
 				
 		          <li class="nav-header">Menu</li>
 		          <li><a href="trainee_grade.php">นักเรียน</a></li>
-		          <li><a href="class.php">ตารางเรียน</a></li>
-		          <li><a href="cbs_course.php">แผนเรียนภาคพาณิชฯ</a></li>
-		      	  <li><a href="course_trainer.php">แผนการสอน</a></li>
-		      	  <li><a href="course_schedule.php">แผนการเรียน</a></li>
+		          <li class="active"><a href="courselist.php">เปิดสอน</a></li>
 		      	  <li><a href="exam_series.php">แบบทดสอบ</a></li>
 		          
 		          <li class="nav-header">System</li>
-		          <li><a href="department.php">ภาค</a></li>
-		          <li><a href="cbs_dept.php">ภาคพาณิชฯ</a></li>
+		          <li><a href="department.php">ภาควิชา</a></li>
+		          <li><a href="cbs_dept.php">ภาควิชาพาณิชฯ</a></li>
 		          <li><a href="trainer.php">ข้อมูลผู้สอน</a></li>
-		          <li class="active"><a href="courselist.php">วิชา</a></li>
 		          <li><a href="classroom.php">ห้องเรียน</a></li>
 		          
 		
@@ -104,9 +100,9 @@
 				
 				          <div class="form-actions">
 				          	<?php if ( $course_id ) { ?>
-					      	<button type="submit" class="btn btn-primary">ปรับปรุงข้อมูล</button> &nbsp;&nbsp;
+				          	<input type="submit" name="course" value="ปรับปรุงข้อมูล" class="btn btn-primary" />&nbsp;&nbsp;
 					      	<?php } else { ?>
-					      	<button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button> &nbsp;&nbsp;
+					      	<input type="submit" name="course" value="เพิ่มข้อมูล" class="btn btn-primary" />&nbsp;&nbsp;
 					      	<?php } ?>
 					        <a href="courselist.php" class="btn btn-danger">ยกเลิก</a>
 					      </div>
@@ -145,7 +141,7 @@
 							        		foreach ( $classrooms as $key => $value ) {
 							        ?>
 							          <tr>
-							            <td><input type="checkbox" name="classroom_id" value="<?=$key?>"/></td>
+							            <td><input type="checkbox" name="classroom_id[]" value="<?=$key?>" <?php if ($selectedClass[$key]) printf('checked'); ?>/></td>
 							            <td><?=$key?></td>
 							            <td><?=$value['ROOM_NO']?></td>
 							            <td><?=$value['MAX_SEAT']?></td>
@@ -194,7 +190,7 @@
 							            <td><?=$value['BEGIN_TIME']?></td>
 							            <td><?=$value['END_TIME']?></td>
 							            <td><?=$value['HOURS']?></td>
-							            <td><a href="course.php?course_id=<?=$course_id?>&remove_id=<?=$key?>" 
+							            <td><a href="course.php?course_id=<?=$course_id?>&reschedule_id=<?=$key?>" 
 							            	   class="btn btn-small btn-danger" 
 							            	   onclick="if (!confirm('คุณต้องการลบข้อมูลดังกล่าว?')) { return false; } ">ลบข้อมูล</a></td>
 							          </tr>
@@ -204,7 +200,12 @@
 							        ?>
 							          <tr>
 							          	<td>&nbsp;</td>
-							            <td><input type="text" class="input-mini" name="day" /></td>
+							            <td>
+							            	<div class="input-prepend">
+											    <span class="add-on"><i class="icon-calendar"></i></span>
+												<input class="datepick input-medium" type="text" id="day" name="day">
+											</div>
+							            </td>
 							            <td>
 							            	<input type="text" class="input-mini" name="begin_time" />
 							            </td>
@@ -240,7 +241,7 @@
 							        		foreach ( $trainers as $key => $value ) {
 							        ?>
 							          <tr>
-							            <td><input type="checkbox" name="trainer_id" value="<?=$key?>"/></td>
+							            <td><input type="checkbox" name="trainer_id[]" value="<?=$key?>" <?php if ($selectedTrainer[$key]) printf('checked'); ?>/></td>
 							            <td><?=$key?></td>
 							            <td><?=$value['FIRSTNAME']?> <?=$value['LASTNAME']?></td>
 							          </tr>
@@ -252,7 +253,7 @@
 							        <tfoot>
 							        	<tr>
 							        		<td colspan="3">
-							        			<input type="submit" name="class" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
+							        			<input type="submit" name="trainer" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
 							        			<input type="hidden" name="course_id" value="<?=$course_id?>" />
 							        		</td>
 							        	</tr>
@@ -278,9 +279,9 @@
 							        		foreach ( $cbsdeps as $key => $value ) {
 							        ?>
 							          <tr>
-							            <td><input type="checkbox" name="cbs_id" value="<?=$key?>"/></td>
+							            <td><input type="checkbox" name="cbs_id[]" value="<?=$key?>" <?php if ($selectedCbs[$key]) printf('checked'); ?>/></td>
 							            <td><?=$key?></td>
-							            <td><?=$value?></td>
+							            <td><?=$value['CBS_DEPARTMENT']?></td>
 							          </tr>
 							         <?php
 							         		}
@@ -290,7 +291,7 @@
 							        <tfoot>
 							        	<tr>
 							        		<td colspan="3">
-							        			<input type="submit" name="class" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
+							        			<input type="submit" name="cbs" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
 							        			<input type="hidden" name="course_id" value="<?=$course_id?>" />
 							        		</td>
 							        	</tr>
@@ -325,8 +326,6 @@
     	$(function(){
     		// Datepicker
 			$(".datepick").datepicker({ dateFormat: "dd MM yy"
-										, changeYear: true
-										, changeMonth: true
 										, yearRange: "1970:2015"
 										, monthNames: ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"]
 										, monthNamesShort: ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ย.","พ.ย.","ธ.ค."]

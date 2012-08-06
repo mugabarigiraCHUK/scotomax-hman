@@ -51,7 +51,7 @@
 			oci_bind_by_name($gstmt, ":classroom_id", $_GET['classroom_id']);
 			if (oci_execute($gstmt)) {
 				while(oci_fetch($gstmt)) {
-					$classroom_id = oci_result($gstmt, 'CBS_ID');
+					$classroom_id = oci_result($gstmt, 'CLASSROOM_ID');
 					$room_no = iconv("TIS-620","UTF-8", oci_result($gstmt, 'ROOM_NO'));
 					$max_seat = oci_result($gstmt, 'MAX_SEAT');
 					$left_seat = oci_result($gstmt, 'LEFT_SEAT');
