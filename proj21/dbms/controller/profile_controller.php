@@ -4,6 +4,7 @@
 	include("./config/oracle.php");
 	include("./config/dropdownlist.php");
 	include("./config/utils.php");
+	include("./domain/profiledom.php");
 	
 	// Initial OCI objects and open connection
 	$oracle = new oracle;
@@ -26,6 +27,23 @@
 				}
 				oci_free_statement($pstmt);
 
+			} else if ( $_POST['cbs'] ) {
+				/*
+				 * Update cbs_department data entry as mapping with course
+				 */
+				$cbs_ids = array();
+				if ( $_POST['cbs_id'] ) {
+					if ( is_array( $_POST['cbs_id'] ) ) {
+						foreach ($_POST['cbs_id'] as $key => $value) {
+							$cbs_ids[] = $value;	
+						}
+					} else {
+						$cbs_ids[] = $_POST['cbs_id'];
+					}
+				}
+				// Update cbs department mapped
+				profiledom::profile_cbs( $ora_conn, $_SESSION['id_code'], $cbs_ids);
+				$error = "Prefer CBS department is updated successfully.";
 			} else {
 				// Update profile
 				// OCI DML validate user authentication
@@ -135,6 +153,12 @@
 		}
 
 		oci_free_statement($stmt);
+
+		// Dropdownlist
+		$cbsdeps = dropdownlist::cbs_department($ora_conn);
+
+		// Selected
+		$preferedCbs = profiledom::perferedCbs($ora_conn, $_SESSION['id_code']);
 
 	} else {
 		$error = "You have unauthorize access on this page.";
