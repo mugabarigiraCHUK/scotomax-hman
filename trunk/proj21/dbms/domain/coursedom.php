@@ -79,14 +79,24 @@ class coursedom {
 	 * Find all selected CLASSROOM be mapped with COURSE
 	 * @param oci_conn
 	 * @param course_id
-	 * @return array of classroom_id mapped
+	 * @return array of classroom mapped
 	 */
 	public static function selectedClass($ora_conn, $course_id) {
 		$list = array();
-		$stmt = oci_parse($ora_conn, "SELECT classroom_id, course_id FROM class WHERE course_id=:course_id");
+		$sql = "SELECT t2.classroom_id, t2.room_no, t2.max_seat, t2.left_seat, t1.course_id"
+				." FROM class t1"
+				."	INNER JOIN classroom t2 ON t1.classroom_id=t2.classroom_id"
+				." WHERE t1.course_id=:course_id";
+		$stmt = oci_parse($ora_conn, $sql);
 		oci_bind_by_name($stmt, ":course_id", $course_id);
 		oci_execute($stmt);
 		while($rowtable = oci_fetch_array($stmt)) {
+			$column = array();
+			$column['CLASSROOM'] = $rowtable['CLASSROOM_ID'];
+			$column['ROOM_NO'] = $rowtable['ROOM_NO'];
+			$column['MAX_SEAT'] = $rowtable['MAX_SEAT'];
+			$column['LEFT_SEAT'] = $rowtable['LEFT_SEAT'];
+			$column['COURSE_ID'] = $rowtable['COURSE_ID'];
 			$list[$rowtable['CLASSROOM_ID']] = $rowtable['COURSE_ID'];
 		}
 		oci_free_statement($stmt);
@@ -97,15 +107,23 @@ class coursedom {
 	 * Find all selected CBS_DEPARTMENT be mapped with COURSE
 	 * @param oci_conn
 	 * @param course_id
-	 * @return array of cbs_id mapped
+	 * @return array of cbs_department mapped
 	 */
 	public static function selectedCbs($ora_conn, $course_id) {
 		$list = array();
-		$stmt = oci_parse($ora_conn, "SELECT cbs_id, course_id FROM cbs_course WHERE course_id=:course_id");
+		$sql = "SELECT t2.cbs_id, t2.cbs_department, t1.course_id"
+				." FROM cbs_course t1"
+				."	INNER JOIN cbs_departments t2 ON t1.cbs_id=t2.cbs_id"
+				." WHERE t1.course_id=:course_id";
+		$stmt = oci_parse($ora_conn, $sql);
 		oci_bind_by_name($stmt, ":course_id", $course_id);
 		oci_execute($stmt);
 		while($rowtable = oci_fetch_array($stmt)) {
-			$list[$rowtable['CBS_ID']] = $rowtable['COURSE_ID'];
+			$column = array();
+			$column['CBS_ID'] = $rowtable['CBS_ID'];
+			$column['CBS_DEPARTMENT'] = iconv("TIS-620","UTF-8", $rowtable['CBS_DEPARTMENT']);
+			$column['COURSE_ID'] = $rowtable['COURSE_ID'];
+			$list[$rowtable['CBS_ID']] = $column;
 		}
 		oci_free_statement($stmt);
 		return $list;
@@ -115,15 +133,59 @@ class coursedom {
 	 * Find all selected TRAINER be mapped with COURSE
 	 * @param oci_conn
 	 * @param course_id
-	 * @return array of trainer_id mapped
+	 * @return array of trainer_profile mapped
 	 */
 	public static function selectedTrainer($ora_conn, $course_id) {
 		$list = array();
-		$stmt = oci_parse($ora_conn, "SELECT trainer_id, course_id FROM course_trainer WHERE course_id=:course_id");
+		$sql = "SELECT t2.trainer_id "
+				.", t2.firstname "
+				.", t2.lastname "
+				.", t3.department_name "
+				.", t1.course_id "
+				."FROM course_trainer t1 "
+				."	INNER JOIN trainer_profile t2 ON t1.trainer_id=t2.trainer_id "
+				."	LEFT OUTER JOIN department t3 ON t2.dep_id=t3.dep_id "
+				."WHERE course_id=:course_id";
+		$stmt = oci_parse($ora_conn, $sql);
 		oci_bind_by_name($stmt, ":course_id", $course_id);
 		oci_execute($stmt);
 		while($rowtable = oci_fetch_array($stmt)) {
-			$list[$rowtable['TRAINER_ID']] = $rowtable['COURSE_ID'];
+			$column = array();
+			$column['TRAINER_ID'] = $rowtable['TRAINER_ID'];
+			$column['FIRSTNAME'] = iconv("TIS-620","UTF-8", $rowtable['FIRSTNAME']);
+			$column['LASTNAME'] = iconv("TIS-620","UTF-8", $rowtable['LASTNAME']);
+			$column['DEPARTMENT_NAME'] = iconv("TIS-620","UTF-8", $rowtable['DEPARTMENT_NAME']);
+			$column['COURSE_ID'] = $rowtable['COURSE_ID'];
+			$list[$rowtable['TRAINER_ID']] = $column;
+		}
+		oci_free_statement($stmt);
+		return $list;
+	}
+
+	/**
+	 * Find all selected EXAM_SERIES be mapped with COURSE
+	 * @param oci_conn
+	 * @param course_id
+	 * @return array of exam_series mapped
+	 */
+	public static function selectedExam($ora_conn, $course_id) {
+		$list = array();
+		$sql = "SELECT exam_no "
+				.", exam_description "
+				.", full_score "
+				.", course_id "
+				."FROM exam_series "
+				."WHERE course_id=:course_id";
+		$stmt = oci_parse($ora_conn, $sql);
+		oci_bind_by_name($stmt, ":course_id", $course_id);
+		oci_execute($stmt);
+		while($rowtable = oci_fetch_array($stmt)) {
+			$column = array();
+			$column['EXAM_NO'] = $rowtable['EXAM_NO'];
+			$column['EXAM_DESCRIPTION'] = iconv("TIS-620","UTF-8", $rowtable['EXAM_DESCRIPTION']);
+			$column['FULL_SCORE'] = $rowtable['FULL_SCORE'];
+			$column['COURSE_ID'] = $rowtable['COURSE_ID'];
+			$list[$rowtable['EXAM_NO']] = $column;
 		}
 		oci_free_statement($stmt);
 		return $list;

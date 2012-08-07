@@ -52,7 +52,7 @@
 		          <li class="active"><a href="profile.php">ข้อมูลส่วนตัว</a></li>
 		          <li><a href="register.php">ลงทะเบียน</a></li>
 		          <li><a href="courserunning.php">กำลังศึกษา</a></li>
-		          <li><a href="#">ประวัติการลงทะเบียน</a></li>
+		          <li><a href="std_exam.php">ทำแบบทดสอบ</a></li>
 		
 				<!--@End ######### Navigation panel editor place ########## -->
 		
@@ -215,6 +215,53 @@
 				      </form>
 
 	            </p>
+	            <!-- ############################## Tab menus #################################### -->
+	            <p>
+            	  <div class="tabbable" style="margin-bottom: 18px;">
+			        <ul class="nav nav-tabs">
+			          <li class="active"><a href="#tab1" data-toggle="tab">ภาควิชาพาณิชฯ ที่ต้องการ</a></li>
+			        </ul>
+			        <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+			          <div class="tab-pane active" id="tab1">
+			            <p>
+			            	<form id="form2" method="POST">
+			            	  <table class="table table-bordered">
+						        <thead>
+						          <tr>
+						            <th>#</th>
+						            <th>รหัสวิชาภาคพาณิชฯ</th>
+						            <th>ชื่อวิชาภาคพาณิชฯ</th>
+						          </tr>
+						        </thead>
+						        <tbody>
+						        <?php 
+						        	if ( $cbsdeps ) {
+						        		foreach ( $cbsdeps as $key => $value ) {
+						        ?>
+						          <tr>
+						            <td><input type="checkbox" name="cbs_id[]" value="<?=$key?>" <?php if ($preferedCbs[$key]) printf('checked'); ?>/></td>
+						            <td><?=$key?></td>
+						            <td><?=$value['CBS_DEPARTMENT']?></td>
+						          </tr>
+						         <?php
+						         		}
+						         	}
+						         ?>
+						        </tbody>
+						        <tfoot>
+						        	<tr>
+						        		<td colspan="3">
+						        			<input type="submit" name="cbs" value="ปรับปรุงข้อมูล" class="btn btn-small btn-info" />
+						        		</td>
+						        	</tr>
+						        </tfoot>
+						      </table>
+						   	</form>
+			            </p>
+			          </div>
+			        </div>
+			      </div>
+				</p>
 	            
           	<!--@End ######### Body content editor place ########## -->
 
