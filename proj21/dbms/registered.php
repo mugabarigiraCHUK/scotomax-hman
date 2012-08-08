@@ -1,5 +1,5 @@
 <?php include 'config/configure.php'; ?>
-<?php include 'controller/register_controller.php'; ?>
+<?php include 'controller/registered_controller.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,8 +22,8 @@
 				
 		          <li class="nav-header">Menu</li>
 		          <li><a href="profile.php">ข้อมูลส่วนตัว</a></li>
-		          <li class="active"><a href="register.php">ลงทะเบียน</a></li>
-		          <li><a href="registered.php">กำลังศึกษา</a></li>
+		          <li><a href="register.php">ลงทะเบียน</a></li>
+		          <li class="active"><a href="registered.php">กำลังศึกษา</a></li>
 		          <li><a href="std_exam.php">ทำแบบทดสอบ</a></li>
 		
 				<!--@End ######### Navigation panel editor place ########## -->
@@ -40,7 +40,7 @@
 		  	  <div class="row">
 				<div class="span3">
 					<form id="form1" class="well" method="post">
-						<label>รายวิชาที่เปิดสอน</label>
+						<label>รายวิชาที่ลงทะเบียน</label>
   						<select size="10" id="course_id" name="course_id" style="width: 150px;">
   							<?php 
   								if ( $courselist ) {
@@ -230,10 +230,11 @@
 									            	<table class="table table-bordered">
 												        <thead>
 												          <tr>
-												          	<th>เลือก</th>
 												            <th>รหัสแบบทดสอบ</th>
 												            <th>รายละเอียด</th>
 												            <th>คะแนนเต็ม</th>
+												            <th>Pre-test</th>
+												            <th>Post-test</th>
 												          </tr>
 												        </thead>
 												        <tbody>
@@ -242,10 +243,11 @@
 												        		foreach ( $examlist as $key => $value ) {
 												        ?>
 												          <tr>
-												            <td><input type="radio" name="exam_no" value="<?=$key?>" /></td>
 												            <td><?=$value['EXAM_NO']?></td>
 												            <td style="word-wrap: break-word"><?=$value['EXAM_DESCRIPTION']?></td>
 												            <td><?=$value['FULL_SCORE']?></td>
+												            <td><?=$value['PRETEST_SCORE']?></td>
+												            <td><?=$value['POSTTEST_SCORE']?></td>
 												          </tr>
 												         <?php
 												         		}
@@ -261,11 +263,6 @@
 						            </p>
 						            </div>
 						        </div>
-						
-						        <div class="form-actions">
-						        	<input type="submit" name="course" value="ลงทะเบียน" class="btn btn-primary" />
-							    	<input type="hidden" name="course_id" value="<?=$course_id?>" />  	
-							    </div>
 
 				    		</fieldset>
 				    	</form>

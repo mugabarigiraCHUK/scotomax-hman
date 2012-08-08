@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class for update data entify component course.
+ * Class for update data entity component course.
  * @author malipen
  */
 class coursedom {

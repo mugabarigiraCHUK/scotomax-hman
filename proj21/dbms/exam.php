@@ -21,7 +21,7 @@
 				<!--@Start ######### Navigation panel editor place ########## -->
 				
 		          <li class="nav-header">Menu</li>
-		          <li><a href="trainee_grade.php">นักเรียน</a></li>
+		          <li><a href="trainee.php">นักเรียน</a></li>
 		          <li><a href="courselist.php">เปิดสอน</a></li>
 		      	  <li class="active"><a href="series.php">แบบทดสอบ</a></li>
 		          

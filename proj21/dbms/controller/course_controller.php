@@ -48,9 +48,9 @@
 				}
 
 				if (oci_execute($ustmt, OCI_COMMIT_ON_SUCCESS)) {
-					$error = "Your information is updated successfully.";
+					$error = "ข้อมูลของคุณถูกปรับปรุงเรียบร้อยแล้ว";
 				} else {
-					$error = "System is corrupted, please try again later.";
+					$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 				}
 				oci_free_statement($ustmt);
 			} else {
@@ -84,9 +84,9 @@
 				}
 
 				if (oci_execute($ustmt, OCI_COMMIT_ON_SUCCESS)) {
-					$error = "Your information is inserted successfully.";
+					$error = "ข้อมูลของคุณถูกเพิ่มเข้าในระบบเรียบร้อยแล้ว";
 				} else {
-					$error = "System is corrupted, please try again later.";
+					$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 				}
 				oci_free_statement($ustmt);
 			}
@@ -109,7 +109,7 @@
 			}
 			// Update classroom mapped
 			coursedom::classroom( $ora_conn, $course_id, $classrooms);
-			$error = "Class room is updated successfully.";
+			$error = "ข้อมูลห้องเรียนถูกปรับปรุงแล้วเรียบร้อย";
 
 		} else if ( $_POST['schedule'] ) {
 			/*
@@ -123,15 +123,15 @@
 				if ( $begin_time && (count(explode(":", $begin_time)) == 2) ) {
 					if ( $end_time && (count(explode(":", $end_time)) == 2) ) {
 						schedule::create($ora_conn, $course_id, $day, $begin_time, $end_time);
-						$error = "The schedule is created successfully.";
+						$error = "ตารางเวลาถูกปรับปรุ่งแล้วเรียบร้อย";
 					} else {
-						$error = "Your input time for end is wrong format";
+						$error = "ข้อมูลเวลาเสร็จสิ้นของคุณไม่ถูกต้อง";
 					}
 				} else {
-					$error = "Your input time for begin is wrong format";
+					$error = "ข้อมูลเวลาเริ่มของคุณไม่ถูกต้อง";
 				}
 			} else {
-				$error = "Your input day is wrong format";
+				$error = "ขอ้มูลวันที่ของคุณไม่ถูกต้อง";
 			}
 
 		} else if ( $_POST['trainer'] ) {
@@ -150,7 +150,7 @@
 			}
 			// Update classroom mapped
 			coursedom::coursetrainer($ora_conn, $course_id, $trainers);
-			$error = "Trainer is updated successfully.";
+			$error = "ข้อมูลผู้สอนถูกปรับปรุงเรียบร้อย";
 
 		} else if ( $_POST['cbs'] ) {
 			/*
@@ -168,7 +168,7 @@
 			}
 			// Update cbs department mapped
 			coursedom::cbscourse( $ora_conn, $course_id, $cbscourses);
-			$error = "CBS department is updated successfully.";
+			$error = "ข้อมูลภาควิชาพาณิชฯ ถูกปรับปรุงเรียบร้อย";
 		}
 	} else {
 		$course_id = $_GET['course_id'];
@@ -177,7 +177,7 @@
 			 * Remove schedule data entry as mapping with course
 			 */
 			schedule::remove($ora_conn, $course_id, $_GET['reschedule_id']);
-			$error = "The schedule is removed successfully.";
+			$error = "ข้อมูลตารางเวลาถูกลบเรียบร้อย";
 		}
 	}
 
