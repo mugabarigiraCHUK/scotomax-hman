@@ -17,9 +17,9 @@
 		$gstmt = oci_parse($ora_conn, $gsql);
 		oci_bind_by_name($gstmt, ":course_id", $_GET['remove_id']);
 		if (oci_execute($gstmt, OCI_COMMIT_ON_SUCCESS)) {
-			$error = "Your information is removed successfully.";
+			$error = "ข้อมูลของคุณถูกลบออกจากระบบเรียบร้อยแล้ว";
 		} else {
-			$error = "System is corrupted, please try again later.";
+			$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 		}
 		oci_free_statement($gstmt);
 	}

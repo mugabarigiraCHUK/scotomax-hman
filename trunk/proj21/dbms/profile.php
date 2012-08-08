@@ -51,7 +51,7 @@
 		          <li class="nav-header">Menu</li>
 		          <li class="active"><a href="profile.php">ข้อมูลส่วนตัว</a></li>
 		          <li><a href="register.php">ลงทะเบียน</a></li>
-		          <li><a href="courserunning.php">กำลังศึกษา</a></li>
+		          <li><a href="registered.php">กำลังศึกษา</a></li>
 		          <li><a href="std_exam.php">ทำแบบทดสอบ</a></li>
 		
 				<!--@End ######### Navigation panel editor place ########## -->

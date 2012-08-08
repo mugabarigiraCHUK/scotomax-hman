@@ -51,10 +51,9 @@
 						oci_bind_by_name($dml, ':idcode', $id_code);
 						oci_execute($dml, OCI_COMMIT_ON_SUCCESS);
 						
-						$error = "You loged into system, welcome back.";
 						header( "Location: profile.php" );
 					} else {
-						$error = "Your username is not exist in system!";
+						$error = "ชื่อเข้าสู้ระบบของคุณไม่ถูกต้อง หรือไม่ก็ไม่มีอยู่ในระบบ กรุณาตรวจสอบ";
 					}
 					
 					// OCI disconnect

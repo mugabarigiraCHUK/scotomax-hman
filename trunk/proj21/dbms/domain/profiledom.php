@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class for update data entify component profile.
+ * Class for update data entity component profile.
  * @author malipen
  */
 class profiledom {

@@ -10,51 +10,19 @@
 	if ( ! isset( $_SESSION['id_code'] ) ) {
 		header( "Location: signup.php" );
 	}
-
+	
 	// Initial OCI objects and open connection
 	$oracle = new oracle;
 	$ora_conn = $oracle->connection();
 	
 	// Dropdownlist
-	$courselist = registerdom::free_course($ora_conn, $_SESSION['id_code']);
+	$courselist = registerdom::course($ora_conn, $_SESSION['id_code']);
 	
 	if ( $_GET['course_id'] ) {
 		$course_id = $_GET['course_id'];
 	} else if ( $_POST['course_id'] ) {
 		$course_id = $_POST['course_id'];
 	}
-
-	// Handle HTTP POST method
-	if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
-		// TODO
-		if ( $_POST['course'] ) {
-			if ( ! $_POST['exam_no'] ) {
-				$error = "คุณจำเป็นต้องเลือกแบบทดสอบด้วยครับ.";
-			} else {
-				$id_code = $_SESSION['id_code'];
-				$exam_no = $_POST['exam_no'];
-
-				$usql = "INSERT INTO trainee_grade( id_code"
-						.", course_id"
-						.", exam_no)"
-						." VALUES( :id_code"
-						.", :course_id"
-						.", :exam_no)";
-				$ustmt = oci_parse($ora_conn, $usql);
-				oci_bind_by_name($ustmt, ":id_code", $id_code);
-				oci_bind_by_name($ustmt, ":course_id", $course_id);
-				oci_bind_by_name($ustmt, ":exam_no", $exam_no);
-
-				if (oci_execute($ustmt, OCI_COMMIT_ON_SUCCESS)) {
-					$error = "ระบบได้ทำการลงทะเบียนให้คุณเรียบร้อยแล้ว";
-				} else {
-					$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
-				}
-				oci_free_statement($ustmt);
-			}
-		} 
-	}
-	
 
 	if ( $course_id ) {
 
@@ -85,7 +53,7 @@
 				$schedulelist = schedule::findall($ora_conn, $course_id);
 				$cbslist = coursedom::selectedCbs($ora_conn, $course_id);
 				$trainerlist = coursedom::selectedTrainer($ora_conn, $course_id);
-				$examlist = coursedom::selectedExam($ora_conn, $course_id);
+				$examlist = registerdom::selectedExam($ora_conn, $course_id, $_SESSION['id_code']);
 			}
 		} 
 		oci_free_statement($cstmt);

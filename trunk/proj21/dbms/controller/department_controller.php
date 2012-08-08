@@ -19,9 +19,9 @@
 			oci_bind_by_name($ustmt, ":department_name", iconv("UTF-8","TIS-620", $_POST["n_department_name"]));
 			oci_bind_by_name($ustmt, ":dep_id", $_POST['dep_id']);
 			if (oci_execute($ustmt, OCI_COMMIT_ON_SUCCESS)) {
-				$error = "Your information is updated successfully.";
+				$error = "ข้อมูลของคุณถูกปรับปรุงเรียบร้อยแล้ว";
 			} else {
-				$error = "System is corrupted, please try again later.";
+				$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 			}
 			oci_free_statement($ustmt);
 		} else {
@@ -30,9 +30,9 @@
 			oci_bind_by_name($ustmt, ":dep_id", $_POST['n_dep_id']);
 			oci_bind_by_name($ustmt, ":department_name", iconv("UTF-8","TIS-620", $_POST["n_department_name"]));
 			if (oci_execute($ustmt, OCI_COMMIT_ON_SUCCESS)) {
-				$error = "Your information is inserted successfully.";
+				$error = "ข้อมูลของคุณถูกเพิ่มเข้าในระบบเรียบร้อยแล้ว";
 			} else {
-				$error = "System is corrupted, please try again later.";
+				$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 			}
 			oci_free_statement($ustmt);
 		}
@@ -53,9 +53,9 @@
 			$gstmt = oci_parse($ora_conn, $gsql);
 			oci_bind_by_name($gstmt, ":dep_id", $_GET['remove_id']);
 			if (oci_execute($gstmt, OCI_COMMIT_ON_SUCCESS)) {
-				$error = "Your information is removed successfully.";
+				$error = "ข้อมูลของคุณถูกลบออกจากระบบเรียบร้อยแล้ว";
 			} else {
-				$error = "System is corrupted, please try again later.";
+				$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 			}
 			oci_free_statement($gstmt);
 		}

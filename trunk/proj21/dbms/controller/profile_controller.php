@@ -5,6 +5,10 @@
 	include("./config/dropdownlist.php");
 	include("./config/utils.php");
 	include("./domain/profiledom.php");
+
+	if ( ! isset( $_SESSION['id_code'] ) ) {
+		header( "Location: signup.php" );
+	}
 	
 	// Initial OCI objects and open connection
 	$oracle = new oracle;
@@ -21,9 +25,9 @@
 				oci_bind_by_name($pstmt, ':id_code', $_SESSION['id_code']);
 				// Oracle DML execution
 				if (oci_execute($pstmt, OCI_COMMIT_ON_SUCCESS)) {
-					$error = "Your password is changed successfully.";
+					$error = "รหัสผ่านของคุณถูกเปลี่ยนแปลงเรียบร้อย";
 				} else {
-					$error = "System is corrupted, please try again later.";
+					$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 				}
 				oci_free_statement($pstmt);
 
@@ -43,7 +47,7 @@
 				}
 				// Update cbs department mapped
 				profiledom::profile_cbs( $ora_conn, $_SESSION['id_code'], $cbs_ids);
-				$error = "Prefer CBS department is updated successfully.";
+				$error = "ข้อมูลภาควิชาพาณิชฯ ถูกปรับปรุงเรียบร้อย";
 			} else {
 				// Update profile
 				// OCI DML validate user authentication
@@ -87,9 +91,9 @@
 
 				// Oracle DML execution
 				if (oci_execute($pstmt, OCI_COMMIT_ON_SUCCESS)) {
-					$error = "Your information is updated successfully.";
+					$error = "ข้อมูลของคุณถูกปรับปรุงเรียบร้อยแล้ว";
 				} else {
-					$error = "System is corrupted, please try again later.";
+					$error = "ระบบทำงานผิดพลาด กรุณาลองใหม่อีกครั้งและตรวจสอบข้อมูลให้ถูกต้อง";
 				}
 				oci_free_statement($pstmt);
 			}
@@ -160,9 +164,6 @@
 		// Selected
 		$preferedCbs = profiledom::perferedCbs($ora_conn, $_SESSION['id_code']);
 
-	} else {
-		$error = "You have unauthorize access on this page.";
-		header( "Location: signup.php" );
 	}
 	
 	// OCI disconnect

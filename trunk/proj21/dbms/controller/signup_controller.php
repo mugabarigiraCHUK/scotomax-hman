@@ -22,7 +22,7 @@
 			$nrows = oci_fetch_all($uvalid_stmt, $result);
 
 			if ( $nrows > 0 ) {
-				$error = $result[0][0]." is already exists, please consider other.";
+				$error = $result[0][0]." มีอยู่ในระบบแล้ว, กรุณาใช้ชื่ออื่น";
 
 			} else {
 			
@@ -94,7 +94,6 @@
 
 					// Oracle DML execution
 					if (oci_execute($profile_stmt, OCI_COMMIT_ON_SUCCESS)) {
-						$error = "Your registration is success.";
 
 						// Keep user information on HTTP session
 						$_SESSION['id_code'] = $second;
@@ -104,21 +103,20 @@
 					} else {
 						$ora_err = oci_error($ora_conn);
 						if ($ora_err) {
-							$error = "Your registration is failed, please try again later. Exception: ".$ora_err;
+							$error = "ระบบทำงานผิดพลาดในการลงทะเบียนของคุณ กรุณาลองใหม่ภายหลัง, error: ".$ora_err;
 						} else {
-							$error = "Your registration is failed, please try again later.";
+							$error = "ระบบทำงานผิดพลาดในการลงทะเบียนของคุณ กรุณาลองใหม่ภายหลัง";
 						}
 					}
 
 					oci_free_statement($profile_stmt);
 
-				} else {
-					// 
+				} else { 
 					$ora_err = oci_error($ora_conn);
 					if ($ora_err) {
-						$error = "Your registration is failed, please try again later. Exception: ".$ora_err;
+						$error = "ระบบทำงานผิดพลาดในการลงทะเบียนของคุณ กรุณาลองใหม่ภายหลัง, error: ".$ora_err;
 					} else {
-						$error = "Your registration is failed, please try again later.";
+						$error = "ระบบทำงานผิดพลาดในการลงทะเบียนของคุณ กรุณาลองใหม่ภายหลัง";
 					}
 				}
 
