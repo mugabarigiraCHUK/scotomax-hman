@@ -27,7 +27,7 @@
 
 	<logger name="com.mt.sample.jsf2if2">
 		<level value="DEBUG" />
-		<appender-ref ref="SYSTEM" />
+		<!-- appender-ref ref="SYSTEM" /-->
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	

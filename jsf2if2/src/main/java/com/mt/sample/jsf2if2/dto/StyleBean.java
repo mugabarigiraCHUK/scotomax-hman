@@ -1,9 +1,16 @@
 package com.mt.sample.jsf2if2.dto;
 
-import lombok.Data;
 
-public @Data abstract class StyleBean {
+public abstract class StyleBean {
 
 	protected String currentStyle;
+
+	public String getCurrentStyle() {
+		return currentStyle;
+	}
+
+	public void setCurrentStyle(String currentStyle) {
+		this.currentStyle = currentStyle;
+	}
 	
 }
