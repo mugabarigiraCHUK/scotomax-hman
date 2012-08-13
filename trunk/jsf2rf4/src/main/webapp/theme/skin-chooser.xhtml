@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition>
+
+	<ul id="skin-menu" class="layout">
+		
+			<li class="current-skin">
+				<h:link includeViewParams="true">
+					<a4j:outputPanel>classic</a4j:outputPanel>
+					<f:param name="skin" value="classic" />
+				</h:link>
+			</li>
+			
+			<li class="">
+				<h:link includeViewParams="true">
+					<a4j:outputPanel>yellow</a4j:outputPanel>
+					<f:param name="skin" value="yellow" />
+				</h:link>
+			</li>
+			
+			<li class="">
+				<h:link includeViewParams="true">
+					<a4j:outputPanel>black</a4j:outputPanel>
+					<f:param name="skin" value="black" />
+				</h:link>
+			</li>
+		
+			<li class="label"><span>Select Skin:</span></li>
+	</ul>
+</ui:composition>
+
+</html>
