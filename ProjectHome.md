@@ -1,0 +1,1 @@
+Web application for HR management human resource locally, It's developed by Grails technology.
